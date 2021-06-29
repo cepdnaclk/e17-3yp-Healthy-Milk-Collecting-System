@@ -2,16 +2,16 @@
 [//]: # (Please refer the instructions in below URL for the configurations)
 [//]: # (https://projects.ce.pdn.ac.lk/docs/how-to-add-a-project)
 
-# Project Name
+# Healthy-Milk-Collecting-System
 
 ## Description
 
 This is a short desciption of the project. This section should be around 3 sentences.
 
 ## Team Members
-1. E/15/XXX Student Name [[Website](http://www.ce.pdn.ac.lk/e15-batch/), [Email](mailto:e5001@eng.pdn.ac.lk)]
-2. E/15/XXX Student Name [[Website](http://www.ce.pdn.ac.lk/e15-batch/), [Email](mailto:e5001@eng.pdn.ac.lk)]
-3. E/15/XXX Student Name [[Website](http://www.ce.pdn.ac.lk/e15-batch/), [Email](mailto:e5001@eng.pdn.ac.lk)]
+1. E/17/012 Amarasinghe R A A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17012@eng.pdn.ac.lk)]
+2. E/17/038 Chandrasekara C M A [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17038@eng.pdn.ac.lk)]
+3. E/17/101 Gunathilaka S P A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17101@eng.pdn.ac.lk)]
 
 
 ## Supervisors
@@ -21,8 +21,8 @@ This is a short desciption of the project. This section should be around 3 sente
 
 ## Links
 
-1. [Project page](https://cepdnaclk.github.io/e15-4yp-minimal-template)
-2. [Github repo](https://github.com/cepdnaclk/e15-4yp-minimal-template)
+1. [Project page](https://cepdnaclk.github.io/e17-3yp-Healthy-Milk-Collecting-System/)
+2. [Github repo](https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System)
 3. [Department of computer engineering](http://ce.pdn.ac.lk)
 
 
