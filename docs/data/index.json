@@ -1,7 +1,7 @@
 {
     "team": [
         {
-            "name": "Aminda Amarasinghe",
+            "name": "Amarasinghe R.A.A.U.",
             "email": "e17012@eng.pdn.ac.lk",
             "eNumber": "E/17/012",
             "github_profile":"https://github.com/AmindaAmarasinghe",
@@ -9,7 +9,7 @@
             "website": "https://www.amindaamarasinghe.me/"
         },
         {
-            "name": "Anuruddha Chandrasekara",
+            "name": "Chandrasekara C.M.A.",
             "email": "e17038@eng.pdn.ac.lk",
             "eNumber": "E/17/038",
             "github_profile":"https://github.com/Anuruddhacha",
@@ -25,18 +25,19 @@
             "website": "#"
         }
     ],
+    
     "supervisors": [
         {
-            "name": "Dr. Supervisor 1",
-            "email": "email@eng.pdn.ac.lk",
-            "linkedin_profile":"#",
+            "name": "Dr. Isuru Nawinne",
+            "email": "isurunawinne@eng.pdn.ac.lk",
+            "linkedin_profile":"https://lk.linkedin.com/in/isuru-nawinne-73302833",
             "researchgate_profile":"#",
             "website": "#"
         },
         {
-            "name": "Supervisor 2",
-            "email": "email@eng.pdn.ac.lk",
-            "linkedin_profile":"#",
+            "name": "Dr. Mahanama Wickramasinghe",
+            "email": "mahanamaw@eng.pdn.ac.lk",
+            "linkedin_profile":"https://www.linkedin.com/in/mahanama",
             "researchgate_profile":"#",
             "website": "#"
         }
