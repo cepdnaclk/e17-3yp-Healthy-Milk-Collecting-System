@@ -6,7 +6,9 @@
 
 ## Description
 
-This is a short desciption of the project. This section should be around 3 sentences.
+Quality is very important in diary related products.
+Currently diary collectors measure only few parameters using technology while small scale manufacturers just use organoleptic tests for checking the milk quality. Also the financial deals are happening in a traditional way.
+Our Healthy Milk Collecting System can be used to measure important quality parameters of milk when the deal happens between diary collector and farmer to ensure the milk is healthy and also it can be used to calculate financial value of milk according to those parameters and manage the financial system in a cloud based system.
 
 ## Team Members
 1. E/17/012 Amarasinghe R A A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17012@eng.pdn.ac.lk)]
