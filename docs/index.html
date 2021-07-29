@@ -12,6 +12,15 @@
 </head>
 
 <body>
+    <style type="text/css">
+        body{
+            overflow-x: hidden;
+            background: #2193b0;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+    </style>
     <div class="container">
         <header class="blog-header pt-3 pb-2 mb-0">
             <div class="row flex-nowrap justify-content-between align-items-center">
@@ -27,7 +36,7 @@
             </div>
         </header>
     </div>
-    <hr>
+    <hr/>
     <div class="content" style="margin-left: 10vw; margin-right: 10vw;">
         <div><h2>Healthy-Milk-Collecting-System</h2>
         	<hr>
@@ -60,7 +69,7 @@
                 </div>
         	</div>
         </nav>-->
-        <div id="intro">
+        <div id="intro" class="p-3 ftco-animate">
         <h3>Introduction</h3>
 	<p>In diary industry, diary collectors measure only few parameters when buying milk from diary farmers.
 	But, they usually don't measure quality parameters like fat content, acidity etc of milk at that spot.
@@ -78,20 +87,74 @@
     	<div id="design">
         <h3>Hardware & Software Designs</h3>
         	<h4>Mobile Application User interfaces</h4>
-             <img src="images/AppUi/login.PNG" class="img img-fluid " alt="architecture" style="max-width: 30%">
-             <img src="images/AppUi/home.PNG" class="img img-fluid pt-4 "  alt="data_flow" style="max-width: 30%">
-             <img src="images/AppUi/overalldetails.PNG" class="img img-fluid" alt="architecture" style="max-width: 30%">
-             <img src="images/AppUi/dailyData.PNG" class="img img-fluid pt-4"  alt="data_flow" style="max-width: 30%">
+             <img src="images/AppUi/login.PNG" class="img img-fluid p-4" alt="architecture" style="max-width: 30%">
+             <img src="images/AppUi/home.PNG" class="img img-fluid p-4"  alt="data_flow" style="max-width: 30%">
+             <img src="images/AppUi/overalldetails.PNG" class="img img-fluid p-4" alt="architecture" style="max-width: 30%">
+             <img src="images/AppUi/dailyData.PNG" class="img img-fluid p-4"  alt="data_flow" style="max-width: 30%">
              <h4>3D Designs of model</h4>
-             	<img src="images/3d_design/model.jpeg" class="img img-fluid" alt="model" style="max-width: 40%">
+             	<img src="images/3d_design/model.jpeg" class="img img-fluid p-4" alt="model" style="max-width: 40%">
     	</div>
     	<div id="testing">
         <h3>Testing</h3>
     	</div>
         <div id="budget">
         <h3>Detailed budget</h3>
+        <table class="table table-dark table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">item</th>
+                  <th scope="col">quantity</th>
+                  <th scope="col">price(LKR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>ATmega328p</td>
+                  <td>1</td>
+                  <td>1700</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Bluetooth module</td>
+                  <td>1</td>
+                  <td>8</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>PH sensor</td>
+                  <td>1</td>
+                  <td>3000</td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Ultrasonic sensor</td>
+                  <td>1</td>
+                  <td>800</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>20x4 LCD display</td>
+                  <td>1</td>
+                  <td>700</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>10 V power supply</td>
+                  <td>1</td>
+                  <td>1000</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td>DS18B20</td>
+                  <td>1</td>
+                  <td>400</td>
+                </tr>
+            </tbody>
+        </table>
         </div>
-        <div id="cnclusion"> 
+        <div id="conclusion"> 
         <h3>Conclusion</h3>
     	</div>
       	<div id="team">
@@ -118,12 +181,31 @@
     		.icon-img{
     				width: 20px;
     		}
+            #btn-back-to-top {
+              position: fixed;
+              width: 60px;
+              height: 60px;
+              border-radius: 30px;
+              bottom: 20px;
+              right: 20px;
+              display: none;
+            }
     		.card{
-    			background: #525252;  /* fallback for old browsers */
-				background: -webkit-linear-gradient(to top, #3d72b4, #525252);  /* Chrome 10-25, Safari 5.1-6 */
-				background: linear-gradient(to top, #3d72b4, #525252); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+        		cursor: pointer;
+                background: #4e54c8;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to top, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to top, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                box-shadow: 0 1px 1px rgba(0, 0, 0,, 0.5);
+                border-left: 1px solid rgba(0, 0, 0,, 0.5);
+                border-top: 1px solid rgba(0, 0, 0, 0.5);
+                border-radius: 5px;
+                transform-style: preserve-3d;
+                
     		}
+            .card:hover{
+                transform: scale(1.05);
+                transition: 1.6s all;
+            }
     		@media(max-width: 800px){
     			
     			.card{
@@ -131,6 +213,10 @@
     			}
     		}
     	</style>
+        
+        <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+          <i class="fa fa-arrow-up"></i>
+        </button>
         <div class="row">
         	<div class="col-12 col-md-6">
         		<div class="row d-flex justify-content-center">
@@ -187,5 +273,34 @@
        
    		</div>
     </div>
+    <!-- Back to top button -->
+    <script type="text/javascript">
+            //Get the button
+            let mybutton = document.getElementById("btn-back-to-top");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+              scrollFunction();
+            };
+
+            function scrollFunction() {
+              if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+              ) {
+                mybutton.style.display = "block";
+              } else {
+                mybutton.style.display = "none";
+              }
+            }
+            // When the user clicks on the button, scroll to the top of the document
+            mybutton.addEventListener("click", backToTop);
+
+            function backToTop() {
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+            }
+        </script>
 </body>
+
 </html>
