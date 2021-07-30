@@ -3,12 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <title>Healthy-Milk-Collecting-System</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 </head>
 
 <body>
@@ -18,11 +24,42 @@
             background: #2193b0;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to bottom, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to bottom, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            padding-top: 100px;
+        }
+        nav{
+            background: #4B79A1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #283E51, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #283E51, #4B79A1); 
 
         }
+        .section:target {
+            padding-top: 100px;
+        }
+
     </style>
-    <div class="container">
-        <header class="blog-header pt-3 pb-2 mb-0">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light fixed-top" id="ftco-navbar">
+    <a href="#" class="text-white text-decoration-none">Brand name</a>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+
+    <ul class="navbar-nav ml-auto d-none d-md-flex align-items-center navigation">
+        <li class="nav-item m-3"><a class="text-white text-decoration-none" href="#intro">Introduction</a></li>
+        <li class="nav-item m-3"><a class="text-white text-decoration-none" href="#solution">Solution Architecture</a></li>
+        <li class="nav-item m-3"><a class="text-white text-decoration-none" href="#design">Hardware & Software Designs</a></li>
+        <li class="nav-item m-3"><a class="text-white text-decoration-none" href="#conclusion">Conclusion</a></li>
+        <!-- <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li> -->
+        <li class="nav-item m-3"><a class="text-white text-decoration-none" href="#team">Team</a></li>
+        <li class="nav-item m-3"><a class="btn btn-secondary text-decoration-none" href="https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System" target="_blank">Git Repository</a></li>
+    </ul>
+
+    </div>
+  
+
+</nav>
+<div class="content">
+  <!--<div class="container">
+
+        <div class="pt-3 pb-2 mb-0">
             <div class="row flex-nowrap justify-content-between align-items-center">
                 <div class="d-none d-sm-block col-md-2 col-sm-3 pt-1">
                     <img class="mx-auto d-block img-fluid img-logo" src="images/favicon.png" alt="Logo" style="width: 100px;height: 100px; object-fit: cover;">
@@ -34,14 +71,14 @@
                     </a>
                 </div>
             </div>
-        </header>
+        </div>
     </div>
-    <hr/>
-    <div class="content" style="margin-left: 10vw; margin-right: 10vw;">
-        <div><h2>Healthy-Milk-Collecting-System</h2>
+    <hr/>-->
+    <div class="content-body" style="margin-left: 10vw; margin-right: 10vw;">
+        <div style="margin-top: 2vw;"><h2>Healthy-Milk-Collecting-System</h2>
         	<hr>
         </div>
-        <div class="d-none d-md-block navigation">
+        <!--<div class="d-none d-md-block navigation">
         	<a class="btn btn-primary pb-2" href="#intro">Introduction</a>
         	<a class="btn btn-primary pb-2" href="#solution">Solution Architecture</a>
         	<a class="btn btn-primary pb-2" href="#design">Hardware & Software Designs</a>
@@ -50,26 +87,9 @@
         	<a class="btn btn-primary pb-2" href="#conclusion">Conclusion</a>
         	<a class="btn btn-primary pb-2" href="#team">Team</a>
         	<a class="btn btn-secondary" href="https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System" target="_blank">Git Repository</a>
-        </div>
- 		<!--<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-            <div class="container">
-		        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars ml-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#introduction">introduction</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#architecture">Architecture</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#design">Design</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Team</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#budget">budget</a></li>
-                    </ul>
-                </div>
-        	</div>
-        </nav>-->
-        <div id="intro" class="p-3 ftco-animate">
+        </div>-->
+ 		
+        <div id="intro" class="section">
         <h3>Introduction</h3>
 	<p>In diary industry, diary collectors measure only few parameters when buying milk from diary farmers.
 	But, they usually don't measure quality parameters like fat content, acidity etc of milk at that spot.
@@ -79,12 +99,12 @@
 	They just use organoleptic tests such as smell and visual observation for that.</p>
 	<p>Our targeted system can be used to measure and keep the records of important quality parameters of milk when the deal happens between the dairy collector and farmer to ensure milk is healthy and also it can be used to calculate financial value according to those parameters and manage the payment system in a cloud based system</p>
     	</div>
-        <div id="solution">
+        <div id="solution" class="section">
         <h3>Solution Architecture</h3>
         <img src="images/diagrams/architecture.jpg" class="img img-fluid" alt="architecture">
         <img src="images/diagrams/Data_flow.jpg" class="img img-fluid pt-4"  alt="data_flow">
     	</div>
-    	<div id="design">
+    	<div id="design" class="section">
         <h3>Hardware & Software Designs</h3>
         	<h4>Mobile Application User interfaces</h4>
              <img src="images/AppUi/login.PNG" class="img img-fluid p-4" alt="architecture" style="max-width: 30%">
@@ -94,7 +114,7 @@
              <h4>3D Designs of model</h4>
              	<img src="images/3d_design/model.jpeg" class="img img-fluid p-4" alt="model" style="max-width: 40%">
     	</div>
-    	<div id="testing">
+    	<div id="testing" class="section">
         <h3>Testing</h3>
     	</div>
         <div id="budget">
@@ -154,10 +174,10 @@
             </tbody>
         </table>
         </div>
-        <div id="conclusion"> 
+        <div id="conclusion" class="section"> 
         <h3>Conclusion</h3>
     	</div>
-      	<div id="team">
+      	<div id="team" class="section">
         <h3>Team</h3>
                 <ul>
                     <li>E/17/012, Aminda Amarasinghe, e17012@eng.pdn.ac.lk</li>
@@ -214,8 +234,8 @@
     		}
     	</style>
         
-        <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
-          <i class="fa fa-arrow-up"></i>
+        <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top" style="z-index: 5">
+          <i class="fas fa-arrow-up"></i>
         </button>
         <div class="row">
         	<div class="col-12 col-md-6">
@@ -273,6 +293,7 @@
        
    		</div>
     </div>
+</div>
     <!-- Back to top button -->
     <script type="text/javascript">
             //Get the button
@@ -300,6 +321,7 @@
               document.body.scrollTop = 0;
               document.documentElement.scrollTop = 0;
             }
+            
         </script>
 </body>
 
