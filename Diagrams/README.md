@@ -17,8 +17,8 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 
 
 ## Supervisors
-1. Dr. Isuru Nawinne [[Website](http://www.ce.pdn.ac.lk/academic-staff/isuru-nawinne/), [Email](mailto:isurunawinne@eng.pdn.ac.lk)]
-2. Dr. Mahanama Wickramasinghe [[Website](http://www.ce.pdn.ac.lk/2021/05/02/dr-mahanama-wickramasinghe/), [Email](mailto:mahanamaw@eng.pdn.ac.lk)]
+1. Supervisor1 [[Website](http://www.ce.pdn.ac.lk/academic-staff/), [Email](mailto:lecturer@ce.pdn.ac.lk)]
+2. Supervisor2 [[Website](http://www.ce.pdn.ac.lk/academic-staff/), [Email](mailto:lecturer@ce.pdn.ac.lk)]
 
 
 ## Links
