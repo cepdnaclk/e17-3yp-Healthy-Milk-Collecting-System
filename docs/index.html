@@ -82,7 +82,7 @@
         width: 30px;
         height: 4px;
         border-radius: 4px;
-        background-color: #666;
+        background-color: white;
         transform: translate(0, 0);
         transition: all 0.3s;
         }
@@ -93,7 +93,7 @@
         width: 30px;
         height: 4px;
         border-radius: 4px;
-        background-color: #666;
+        background-color: white;
         transform: translate(0, 0);
         transition: all 0.3s;
         }
@@ -329,7 +329,7 @@
 
 </nav> -->
 <nav class="nav fixed-top">
-    <a class="nav__logo" href="#"><img src="https://via.placeholder.com/120x34?text=''"></a>
+    <a class="nav__logo text-white" href="#">Healthy-Milk-Collecting-System</a>
     
     <button id="burger" class="nav__burger-button">
       <div class="nav__burger">
@@ -699,13 +699,21 @@
             
 
             var $button = $('#burger');
-var $navLinkWrapper = $('.nav__link-wrapper');
+            var $navLinkWrapper = $('.nav__link-wrapper');
+            var $navlinks = $('.nav__link');
 
-$button.on('click', function(e) {
-  e.preventDefault();
-  $button.find('.nav__burger-inner').toggleClass('active');
-  $navLinkWrapper.toggleClass('expanded');
-})
+
+            $button.on('click', function(e) {
+            e.preventDefault();
+            $button.find('.nav__burger-inner').toggleClass('active');
+            $navLinkWrapper.toggleClass('expanded');
+            })
+
+            $navlinks.on('click', function(f) {
+                $button.find('.nav__burger-inner').toggleClass('active');
+                $navLinkWrapper.toggleClass('expanded');
+            })
+
         </script>
 </body>
 
