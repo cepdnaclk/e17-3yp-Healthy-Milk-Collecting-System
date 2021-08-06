@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/x-icon" href="images/favicon.png">
     <title>Healthy-Milk-Collecting-System</title>
+    
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -41,13 +43,16 @@
         img{
             box-sizing: border-box;
         }
+        li{
+          list-style: none;
+        }
         .nav{
             background: #4B79A1;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #283E51, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #283E51, #4B79A1); 
 
         display: flex;
-        height: 90px;
+        height: 80px;
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
@@ -311,13 +316,109 @@
         .main-timeline .timeline-content:after,.main-timeline .timeline:nth-child(2n) .timeline-content:after{left:65px}
         }
 
+
+        .carousel-indicators{
+          
+          margin-bottom: -30px;
+        }
+        .carousel-indicators [data-bs-target]{
+          background-color: blue !important;
+          
+          height: 4px !important;
+         
+        }
+        @media only screen and (max-width:500px){
+          .carousel-control-next-icon{
+            width: 1.5rem!important;
+            margin-right: 20px !important;
+          }
+          .carousel-control-prev-icon{
+            width: 1.5rem!important;
+            margin-left: 20px !important;
+          }
+        }
+        .teamcards{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+        .cardbox{
+          margin: 5px;
+          position: relative;
+          width: 200px;
+          height: 250px;
+          background: rgba(255, 255, 255, 0.05);
+          /*background: turquoise;*/
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+          border-radius: 15px;
+          justify-content: center;
+          
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          
+        }
+        .contentcard{
+          
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          opacity: 1;
+        }
+        .imgbox{
+          position: absolute;
+          top: 15%;
+          height: 120px;
+          width: 120px;
+          overflow: hidden;
+          border-radius: 50%;
+        }
+        .imgbox img{
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 2;
+          object-fit: cover;
+          opacity: 1;
+        }
+        .contentbox{
+          position: absolute;
+          top:70%;
+        }
+        .contentbox h6{
+          color: #fff;
+         
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 11px;
+          
+        }
+        .sci{
+         
+          position: absolute;
+          bottom: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+        }
+        .sci li a i{
+          color:#fff;
+          font-size:20px;
+        }
+        .cardbox:hover{
+          transform: scale(1.05);
+          transition: 1.6s all;
+        }
     </style>
     
     
     </div>
-  
 
-</nav> -->
 <nav class="nav fixed-top">
     <a class="nav__logo text-white" href="#">Healthy-Milk-Collecting-System</a>
     
@@ -414,8 +515,7 @@
 
 
                 </div>
-              <div class="p-4 flex-1 flex flex-col"
-        >
+              <div class="p-4 flex-1 flex flex-col">
                 <h3 class="mb-4 text-2xl">Laravel</h3>
                 <div class="mb-4 text-grey-darker text-sm flex-1">
 
@@ -454,22 +554,46 @@
 
     	</div>
     	
+
+
     	
 
     	<div id="design" class="section">
         <h3 class="container">Hardware & Software Designs</h3>
         	<h4 class="container">Mobile Application User interfaces</h4>
-            <div class="container justify-content-center">
-                <img src="images/AppUi/login.PNG" class="img img-fluid p-1 p-md-3 col-12 col-md-3" alt="architecture">
-                <img src="images/AppUi/home.PNG" class="img img-fluid p-1 p-md-3 col-12 col-md-3"  alt="data_flow">
-                <img src="images/AppUi/overalldetails.PNG" class="img img-fluid p-1 p-md-3 col-12 col-md-3" alt="architecture" >
-                <img src="images/AppUi/dailyData.PNG" class="img img-fluid p-1 p-md-3 col-12 col-md-3"  alt="data_flow" >
-                
+          <div id="carouselExampleIndicators" class="carousel slide container mb-5" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active indicator" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" class="indicator"></button>
+              
             </div>
+            <div class="carousel-inner text-center bg-primary">
+              <div class="carousel-item active">
+                <img src="images/AppUi/login.PNG" class="p-md-3 w-25" alt="...">
+                <img src="images/AppUi/home.PNG" class="p-md-3 w-25" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="images/AppUi/overalldetails.PNG" class="p-md-3 w-25" alt="...">
+                <img src="images/AppUi/dailyData.PNG" class="p-md-3 w-25" alt="...">
+              </div>
+              
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+            
+            
             <h4 class="container">3D Designs of model</h4>
             <div class="container">
-                <img src="images/3d_design/model.jpeg" class="img img-fluid p-4 col-12 col-md-3" alt="model">
-
+                <img src="images/3d_design/model.jpeg" class="img img-fluid p-4 col-12 col-md-4" alt="model">
+                <img src="images/3d_design/m2.png" class="img img-fluid p-4 col-12 col-md-4" alt="model">
             </div>
     	</div><br>
     	<div id="testing" class="section">
@@ -673,6 +797,7 @@
                     <li>E/17/101, Anjalee Gunathilaka, e17101@eng.pdn.ac.lk</li>
                 </ul>
                </div>
+               
                 
         </div>
         <div class="container">
@@ -703,16 +828,18 @@
               right: 20px;
               display: none;
             }
-    		.card{
+    		/* .card{
         		cursor: pointer;
-                background:darkturquoise;  /* fallback for old browsers */
-                /* background: -webkit-linear-gradient(to top, #8f94fb, #4e54c8); 
-                background: linear-gradient(to top, #8f94fb, #4e54c8);  */
-                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+                background: turquoise;fallback for old browsers 
+                background: -webkit-linear-gradient(to top, #8f94fb, #4e54c8); 
+                background: linear-gradient(to top, #8f94fb, #4e54c8); 
+                box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
                 border-left: 1px solid rgba(0, 0, 0, 0.5);
                 border-top: 1px solid rgba(0, 0, 0, 0.5);
                 border-radius: 5px;
                 transform-style: preserve-3d;
+                max-height:300px;
+                height: auto;
                 
     		}
             .card:hover{
@@ -723,52 +850,113 @@
     			
     			.card{
     				max-width: 50%;
+            max-height: 350px;
     			}
-    		}
+    		} */
     	</style>
         
         <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top" style="z-index: 5">
           <i class="fas fa-arrow-up"></i>
         </button>
         <div class="row">
-        	<div class="col-12 col-md-6">
-        		<div class="row d-flex justify-content-center">
-        			<div class="card col-12 col-md-3 m-1 pb-1 rounded-3">
+        	<div class="col-12 col-md-6 d-flex justify-content-center">
+            <div class="teamcards">
+              <div class="cardbox">
+                <div class="contentcard">
+                  <div class="imgbox"><img src="images/team/012v1.jpg"></div>
+                  <div class="contentbox">
+                    <h6>Aminda Amarasinghe</h6>
+                  </div>
+                </div>
+                <ul class="sci">
+                  <li style="--i:1">
+                    <a href="http://www.linkedin.com/in/aminda-amarasinghe-30b4591a8" target="_blank" class="col-2 m-1"><i class="fab fa-linkedin"></i></a></li>
+                  <li style="--i:2">
+		        				<a href="https://github.com/AmindaAmarasinghe" target="_blank" class="col-2 m-1"><i class="fab fa-github"></i></a>
+                  </li>
+                  <li style="--i:3">
+		        				<a href="mailto:e17012@eng.pdn.ac.lk" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="cardbox">
+                <div class="contentcard">
+                  <div class="imgbox"><img src="images/team/038v1.jpg"></div>
+                  <div class="contentbox">
+                    <h6>Anuruddha Chandrasekara</h6>
+                  </div>
+                </div>
+                <ul class="sci">
+                  <li style="--i:1">
+	        					<a href="https://www.linkedin.com/in/anuruddha-chandrasekara-a150801a9/" target="_blank" class="col-2 m-1"><i class="fab fa-linkedin"></i></a>
+                  </li>
+                  <li style="--i:2">
+		        				<a href="https://github.com/Anuruddhacha" target="_blank" class="col-2 m-1"><i class="fab fa-github"></i></a>
+                  </li>
+                  <li style="--i:3">
+		        				<a href="mailto:e17038@eng.pdn.ac.lk" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="cardbox">
+                <div class="contentcard">
+                  <div class="imgbox"><img src="images/icons/profile.png"></div>
+                  <div class="contentbox">
+                    <h6>Anjalee Gunathilaka</h6>
+                  </div>
+                </div>
+                <ul class="sci">
+                  <li style="--i:1">
+	        					<a href="" class="col-2 m-1"><i class="fab fa-linkedin"></i></a>
+                  </li>
+                  <li style="--i:2">
+		        				<a href="" class="col-2 m-1"><i class="fab fa-github"></i></a>
+                  </li>
+                  <li style="--i:3">
+		        				<a href="mailto:e17101@eng.pdn.ac.lk" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
+                  </li>
+                </ul>
+              </div>
+  
+            </div>
+            
+        		<!-- <div class="row d-flex justify-content-center">
+        			<div class="card col-12 col-md-3 m-1 pb-1 rounded-3 text-center">
 
         				<img src="images/team/012v1.jpg" class="rounded-3 pt-1" style="object-fit: cover; height: 60%">
         				<h6 class="col-12 mt-2" style="max-height: 40px;">Aminda Amarasinghe</h6>
-        				<div class="col-12 d-flex align-items-center justify-content-between" style="max-height: 40px;">
-        					<div class="row justify-content-center">
-	        					<a href="http://www.linkedin.com/in/aminda-amarasinghe-30b4591a8" target="_blank" class="col-2 mr-1"><img class="icon-img" src="images/icons/in.png"></a>
-		        				<a href="https://github.com/AmindaAmarasinghe" target="_blank" class="col-2 mr-1"><img class="icon-img" src="images/icons/github.png"></a>
-		        				<a href="mailto:e17012@eng.pdn.ac.lk" class="col-2"><img class="icon-img" src="images/icons/mail.png"></a>
+        				<div class="col-12 d-flex align-items-center justify-content-center" style="max-height: 40px;">
+        					<div class="row d-flex justify-content-center">
+	        					<a href="http://www.linkedin.com/in/aminda-amarasinghe-30b4591a8" target="_blank" class="col-2 m-1"><img class="icon-img" src="images/icons/in.png"></a>
+		        				<a href="https://github.com/AmindaAmarasinghe" target="_blank" class="col-2 m-1"><img class="icon-img" src="images/icons/github.png"></a>
+		        				<a href="mailto:e17012@eng.pdn.ac.lk" class="col-2 m-1"><img class="icon-img" src="images/icons/mail.png"></a>
 	        				</div>
         				</div>
         				
         			</div>
-        			<div class="card col-12 col-md-3 m-1 rounded-3 pb-1">
+        			<div class="card col-12 col-md-3 m-1 rounded-3 pb-1 text-center">
         				<img src="images/team/038v1.jpg" class="rounded-3 pt-1" style="object-fit: cover;height: 60%">
         				<h6 class="col-12 mt-2" style="max-height: 40px;">Anuruddha Chandrasekara</h6>
-        				<div class="col-12 d-flex justify-content-between align-items-center" style="max-height: 40px;">
-        					<div class="row justify-content-center">
-	        					<a href="https://www.linkedin.com/in/anuruddha-chandrasekara-a150801a9/" target="_blank" class="col-2 mr-1"><img class="icon-img" src="images/icons/in.png"></a>
-		        				<a href="https://github.com/Anuruddhacha" target="_blank" class="col-2 mr-1"><img class="icon-img" src="images/icons/github.png"></a>
-		        				<a href="mailto:e17038@eng.pdn.ac.lk" class="col-2"><img class="icon-img" src="images/icons/mail.png"></a>
+        				<div class="col-12 d-flex justify-content-center align-items-center" style="max-height: 40px;">
+        					<div class="row d-flex justify-content-center">
+	        					<a href="https://www.linkedin.com/in/anuruddha-chandrasekara-a150801a9/" target="_blank" class="col-2 m-1"><img class="icon-img" src="images/icons/in.png"></a>
+		        				<a href="https://github.com/Anuruddhacha" target="_blank" class="col-2 m-1"><img class="icon-img" src="images/icons/github.png"></a>
+		        				<a href="mailto:e17038@eng.pdn.ac.lk" class="col-2 m-1"><img class="icon-img" src="images/icons/mail.png"></a>
 	        				</div>
         				</div>
         			</div>
-        			<div class="card col-12 col-md-3 m-1 rounded-3 pb-1">
+        			<div class="card col-12 col-md-3 m-1 rounded-3 pb-1 text-center">
         				<img src="images/icons/profile.png" class="rounded-3 pt-1" style="object-fit: cover;height: 60%">
         				<h6 class="col-12 mt-2" style="max-height: 40px;">Anjalee Gunathilaka</h6>
-        				<div class="col-12 d-flex align-items-center justify-content-between" style="max-height: 40px;">
-        					<div class="row justify-content-center">
-	        					<a href="" class="col-2 mr-1"><img class="icon-img" src="images/icons/in.png"></a>
-		        				<a href="" class="col-2 mr-1"><img class="icon-img" src="images/icons/github.png"></a>
-		        				<a href="mailto:e17101@eng.pdn.ac.lk" class="col-2"><img class="icon-img" src="images/icons/mail.png"></a>
+        				<div class="col-12 d-flex align-items-center justify-content-center" style="max-height: 40px;">
+        					<div class="row d-flex justify-content-center">
+	        					<a href="" class="col-2 m-1"><img class="icon-img" src="images/icons/in.png"></a>
+		        				<a href="" class="col-2 m-1"><img class="icon-img" src="images/icons/github.png"></a>
+		        				<a href="mailto:e17101@eng.pdn.ac.lk" class="col-2 m-1"><img class="icon-img" src="images/icons/mail.png"></a>
 	        				</div>
         				</div>
         			</div>
-        		</div>
+        		</div> -->
         	</div>
         	<div class="col-12 col-md-6 d-flex justify-content-center">
         		 <ul style="list-style: none">
@@ -831,6 +1019,8 @@
                 $button.find('.nav__burger-inner').toggleClass('active');
                 $navLinkWrapper.toggleClass('expanded');
             })
+
+		
 
         </script>
 </body>
