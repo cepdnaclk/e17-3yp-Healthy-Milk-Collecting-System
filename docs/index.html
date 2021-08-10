@@ -391,7 +391,6 @@
         }
         .contentbox h6{
           color: #fff;
-         
           text-transform: uppercase;
           text-align: center;
           font-size: 11px;
@@ -414,6 +413,58 @@
           transform: scale(1.05);
           transition: 1.6s all;
         }
+        .super_cards{
+          
+          width: 400px;
+          height: 60px;
+          margin: 5px;
+          border-radius: 5px;
+          margin-inline: 20px;
+          margin-bottom: 10px;
+          background: rgba(255, 255, 255, 0.05);
+          /*background: turquoise;*/
+          box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+        }
+        .super_sci a i{
+          
+          color:#000;
+          font-size:20px;
+        }
+        .super_cards h6{
+          width: 80%;
+          color: #000;
+          text-transform: uppercase;
+          text-align: center;
+        }
+        .super_cards:hover{
+          transform: scale(1.05);
+          transition: 1.6s all;
+        }
+        .super_img{
+          position: relative;
+          width: 20%;
+          height: 100%;
+          margin-left: -25px;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+        }
+        .super_img img{
+          position: relative;
+          width: 70px;
+          height: 70px;
+          border-radius: 50%;
+          border: #fff solid 1px;
+        }
+        .super_sci{
+          width: 20%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+        }
+        figcaption{
+          text-align: center;
+        }
     </style>
     
     
@@ -431,9 +482,9 @@
     <ul class="nav__link-wrapper">
       <li class="nav__link"><a class="text-white " href="#intro">Introduction</a></li>
       <li class="nav__link"><a class="text-white " href="#solution">Solution Architecture</a></li>
-      <li class="nav__link"><a class="text-white " href="#design">Hardware & Software Designs</a></li>
+      <li class="nav__link"><a class="text-white " href="#design">Designs</a></li>
       <li class="nav__link"><a class="text-white " href="#team">Team</a></li>
-      <a class="btn btn-secondary" href="https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System" target="_blank">Git Repository</a>
+      <a class="btn btn-secondary d-flex align-items-center" href="https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System" target="_blank">Git Repository</a>
     </ul>
   </nav>
 <div class="row m-0 p-0">
@@ -457,7 +508,7 @@
     <div class="row mr-0" style="margin-top: 100px;">
        
         <div id="intro" class="section">
-        <h3 class="container">Introduction</h3>
+        <h2 class="container">Introduction</h2>
 	<p class="container">In dairy industry, dairy collectors measure only few parameters when buying milk from dairy farmers.
 	But, they usually don't measure quality parameters like fat content, acidity etc of milk at that spot.
 	Also the financial deals are happening in a traditional way.
@@ -467,12 +518,57 @@
 	<p class="container">Our targeted system can be used to measure and keep the records of important quality parameters of milk when the deal happens between the dairy collector and farmer to ensure milk is healthy and also it can be used to calculate financial value according to those parameters and manage the financial system in a cloud based system</p>
     	</div>
         <div id="solution" class="section">
-        <h3 class="container">Solution Architecture</h3>
+        <h2 class="container">Solution Architecture</h2>
         <div class="container">
             <img src="images/diagrams/architecture.jpg" class="img img-fluid" alt="architecture">
         <img src="images/diagrams/Data_flow.jpg" class="img img-fluid pt-4"  alt="data_flow">
         </div>
-        
+        <div class="container mt-4">
+          <h5>Measurements</h5>
+          <p>
+            Using our hardware unit following measurements of milk can be taken.
+            <ul>
+              <li>1.PH value</li>
+              <li>2.Fat rate</li>
+              <li>3.Volume</li>
+              <li>4.Weight</li>
+              <li>5.Temperature</li>
+            </ul>
+            Using these measurements as primary measuremrnts, Quality parameters which are focused on software
+            sector are calculated.
+            <ul>
+              <li>1.PH value</li>
+              <li>2.Fat rate</li>
+              <li>3.Corrected density</li>
+            </ul>
+            Density can be calculated using weight and volume at measured temperature.
+            Then, that value is converted to the parameter 'corrected density' considering temperature deviation
+            from room temperature. Simply, density is mapped for room temperature.
+          </p>
+          <h6>PH value</h6>
+          <h6>Fat rate</h6>
+          <p>
+            A high intensity LED is used as a light source.
+            A LDR is placed to detect the amount of light passing through milk.
+            The more the fat content in the milk, more will be the amount of light scattered by milk.
+            The circuit  is  calibrated  using  standards  with  sample  of  known  fat  values 
+            <div class="d-flex">
+              <img src="images/assets/items/161-504.jpg" class="col-2">
+              <img src="images/assets/items/LDR-Resistor.png" class="col-2">
+            </div>
+            
+            <ul>
+              <li style="list-style: circle;">cow's milk fat should be in range of 3.5 to 4.5 percent</li>
+              <li style="list-style: circle;">buffalo's it is 6-7 percent.</li>
+            </ul>
+          </p>
+          <h6>Corrected density</h6>
+          <div class="d-flex">
+            <img src="images/assets/items/13330-01.jpg" class="col-2">
+            <img src="images/assets/items/arduino-compatible-hc-sr04-ultrasonic-sonar-distance-sensor-original-imafnumzhdr5dzhn.jpeg" class="col-2">
+            
+          </div>
+        </div>
     	</div>
 
         <div id="technologies" class="section">
@@ -559,7 +655,7 @@
     	
 
     	<div id="design" class="section">
-        <h3 class="container">Hardware & Software Designs</h3>
+        <h2 class="container">Hardware & Software Designs</h2>
         	<h4 class="container">Mobile Application User interfaces</h4>
           <div id="carouselExampleIndicators" class="carousel slide container mb-5" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -591,17 +687,23 @@
             
             
             <h4 class="container">3D Designs of model</h4>
-            <div class="container">
-                <img src="images/3d_design/model.jpeg" class="img img-fluid p-4 col-12 col-md-4" alt="model">
-                <img src="images/3d_design/m2.png" class="img img-fluid p-4 col-12 col-md-4" alt="model">
+            <div class="container d-flex align-items-center">
+              <figure class="col-12 col-md-4">
+                <img src="images/3d_design/model.jpeg" class="img img-fluid p-4" alt="model">
+                <figcaption>Milk container</figcaption>
+              </figure>
+              <figure class=" col-12 col-md-4">
+                <img src="images/3d_design/m2.png" class="img img-fluid p-4" alt="model">
+                <figcaption>Main unit</figcaption>
+              </figure>
             </div>
     	</div><br>
     	<div id="testing" class="section">
         <h3 class="container">Testing</h3>
     	</div>
 
-        <div id="budget col-10 col-offset-1">
-        <h3 class="container">Detailed budget</h3>
+      <div id="budget col-10 col-offset-1">
+        <h3 class="container">Estimated budget</h3>
         <div class="container">
         <table class="table table-dark table-bordered table-hover">
             <thead class="thead-light">
@@ -789,7 +891,7 @@
         <h3 class="container">Conclusion</h3>
     	</div>
       	<div id="team" class="section">
-        <h3 class="container">Team</h3>
+        <h2 class="container">Team</h2>
                <div class="container">
                 <ul>
                     <li>E/17/012, Aminda Amarasinghe, e17012@eng.pdn.ac.lk</li>
@@ -802,12 +904,37 @@
         </div>
         <div class="container">
             <h3 class="container">Project Supervisors</h3>
-        	<div class="container">
-            <ul class="container">
-        		<li>Dr. Isuru Nawinne<a href="https://lk.linkedin.com/in/isuru-nawinne-73302833" target="_blank"></a></li>
-        		<li>Dr. Mahanama Wickramasinghe<a href="https://www.linkedin.com/in/mahanama" target="_blank"></a></li>
-        	</ul>
+          <div class="row">
+            <!-- <div class="container col-md-4 col-md-offset-2">
+              <ul class="container">
+                <li>Dr. Isuru Nawinne<a href="https://lk.linkedin.com/in/isuru-nawinne-73302833" target="_blank"></a></li>
+                <li>Dr. Mahanama Wickramasinghe<a href="https://www.linkedin.com/in/mahanama" target="_blank"></a></li>
+              </ul>
+            </div> -->
+            <div class="row d-flex justify-content-center">
+              <div class="super_cards col-12 col-md-6 d-flex align-items-center ">
+                <div class="super_img">
+                  <img src="images/team/me-1-e1561020588549.png" class="">
+                </div>
+                <h6 class="text-center m-1">Dr. Isuru Nawinne</h6>
+                <div class="super_sci">
+                <a href="https://lk.linkedin.com/in/isuru-nawinne-73302833" target="_blank" class=""><i class="fab fa-linkedin"></i></a></li>
+                <a href="mailto:isurunawinne@eng.pdn.ac.lk" target="_blank" class=""><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
+              <div class="super_cards col-12 col-md-6 d-flex align-items-center ">
+                <div class="super_img">
+                <img src="images/team/IMG_5804-500x500.jpg" class="">
+                </div>
+                <h6 class="text-center m-1">Dr. Mahanama Wickramasinghe</h6>
+                <div class="super_sci">
+                  <a href="https://www.linkedin.com/in/mahanama" target="_blank" class=""><i class="fab fa-linkedin"></i></a></li>
+                  <a href="mailto:mahanamaw@eng.pdn.ac.lk" target="_blank" class=""><i class="fas fa-envelope"></i></a>
+                </div>
+              </div>
             </div>
+          </div>
+        	
         </div> 
                 
     </div>
@@ -816,9 +943,9 @@
 	background: linear-gradient(to left, #283E51, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	">
     	<style type="text/css">
-    		.icon-img{
+    		/* .icon-img{
     			width: 20px;
-    		}
+    		} */
             #btn-back-to-top {
               position: fixed;
               width: 60px;
@@ -875,7 +1002,7 @@
 		        				<a href="https://github.com/AmindaAmarasinghe" target="_blank" class="col-2 m-1"><i class="fab fa-github"></i></a>
                   </li>
                   <li style="--i:3">
-		        				<a href="mailto:e17012@eng.pdn.ac.lk" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
+		        				<a href="mailto:e17012@eng.pdn.ac.lk" target="_blank" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
                   </li>
                 </ul>
               </div>
@@ -894,7 +1021,7 @@
 		        				<a href="https://github.com/Anuruddhacha" target="_blank" class="col-2 m-1"><i class="fab fa-github"></i></a>
                   </li>
                   <li style="--i:3">
-		        				<a href="mailto:e17038@eng.pdn.ac.lk" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
+		        				<a href="mailto:e17038@eng.pdn.ac.lk" target="_blank" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
                   </li>
                 </ul>
               </div>
@@ -913,7 +1040,7 @@
 		        				<a href="" class="col-2 m-1"><i class="fab fa-github"></i></a>
                   </li>
                   <li style="--i:3">
-		        				<a href="mailto:e17101@eng.pdn.ac.lk" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
+		        				<a href="mailto:e17101@eng.pdn.ac.lk" target="_blank" class="col-2 m-1"><i class="fas fa-envelope"></i></a>
                   </li>
                 </ul>
               </div>
