@@ -148,7 +148,7 @@
             right: 0;
             bottom: 0;
             left: 0;
-            background-color:#283E51;
+            background-color:#4B79A1;
             z-index: -1;
             animation: fadeIn 0.3s 1;
         }
@@ -179,10 +179,17 @@
             animation-delay: 0.2s;
             animation-fill-mode: forwards;
             animation-timing-function: ease-out;
+            display: none;
         }
         .nav__link-wrapper.expanded li:nth-child(5) {
             animation: slideFadeIn 0.15s 1;
             animation-delay: 0.25s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
+        .nav__link-wrapper.expanded li:nth-child(6) {
+            animation: slideFadeIn 0.15s 1;
+            animation-delay: 0.27s;
             animation-fill-mode: forwards;
             animation-timing-function: ease-out;
         }
@@ -224,6 +231,12 @@
         .nav__link-wrapper li:nth-child(5) {
             animation: slideFadeInAlt 0.15s 1;
             animation-delay: -0.10s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
+        .nav__link-wrapper li:nth-child(6) {
+            animation: slideFadeInAlt 0.15s 1;
+            animation-delay: -0.12s;
             animation-fill-mode: forwards;
             animation-timing-function: ease-out;
         }
@@ -494,15 +507,15 @@
     <ul class="nav__link-wrapper">
       <li class="nav__link"><a class="text-white " href="#intro">Introduction</a></li>
       <li class="nav__link"><a class="text-white " href="#solution">Solution Architecture</a></li>
-      <!-- <li class="nav__link"><a class="text-white " href="#design">Designs</a></li> -->
+      <li class="nav__link d-xs-block d-md-none"><a class="text-white " href="#design">Designs</a></li>
       
-          <li class="nav__link dropdown">
+          <li class="nav__link dropdown ">
             <a class="text-white  dropdown-toggle" href="#design" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Designs
             </a>
-            <div class="dropdown-menu dropdown-menu-end animate slideIn bg-primary"
-              aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu dropdown-menu-end animate slideIn"
+              aria-labelledby="navbarDropdown" style="background-color: deepskyblue;">
               <a class="dropdown-item " id="data-gen-link" href="#ui-design">Mobile User interfaces</a>
               <a class="dropdown-item " id="data-flow-link" href="#h-design">Hardware Designs</a>
             </div>
@@ -572,10 +585,10 @@
     </div> -->
     <section class="hero-wrap p-md-5" style="background-image: url('images/assets/backgrounds/wallpaper2you_107675.jpg');background-size: cover; height: auto; margin-top: 80px;" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
-      <div class="container text-white p-5">
+      <div class="container text-white p-4">
         <div class="row no-gutters slider-text align-items-center">
-          <div class="col-lg-7 col-md-6 ftco-animate d-flex align-items-end">
-            <div class="text">
+          <div class="col-lg-7 col-md-6 ftco-animate d-flex align-items-end p-2">
+            <div class="text p-3" style="background-color: rgba(0, 0, 0, 0.23); backdrop-filter: blur(35px);">
               <h1 class="mb-4 font-weight-bolder">Healthy-Milk-Collecting-System</h1>
               <p style="font-size: 18px; text-align: justify;">Our targeted system can be used to measure 
                 and keep the records of important quality parameters of milk when the deal happens between 
@@ -586,7 +599,7 @@
                   <li><i class="fas fa-caret-right px-3"></i>Low cost</li>
                   <li><i class="fas fa-caret-right px-3"></i>Reachargable & Low power consumption</li>
                 </ul></p>
-              <p class="text-center"><a href="#intro" class="btn btn-success py-3 px-5"> Get Started <i class="fas fa-play px-2"></i></a></p>
+              <p class="text-center"><a href="#intro" class="btn btn-success py-2 px-3"> Get Started <i class="fas fa-play px-2"></i></a></p>
             </div>
           </div>
         </div>
