@@ -14,7 +14,7 @@ class CreateSubRecordsTable extends Migration
     public function up()
     {
         Schema::create('sub_records', function (Blueprint $table) {
-            $table->id('subrecord_id');
+            $table->id('id');
             $table->timestamps();
             $table->float('ph_value');
             $table->float('density');
@@ -30,7 +30,7 @@ class CreateSubRecordsTable extends Migration
 
 
             $table->unsignedBigInteger('device_id');
-            $table->foreign('device_id')->references('device_id')->on('devices');
+            $table->foreign('device_id')->references('id')->on('devices');
 
         });
     }

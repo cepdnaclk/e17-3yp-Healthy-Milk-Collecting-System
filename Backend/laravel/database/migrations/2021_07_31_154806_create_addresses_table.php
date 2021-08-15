@@ -14,7 +14,7 @@ class CreateAddressesTable extends Migration
     public function up()
     {
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id('address_id');
+            $table->id('id');
             $table->timestamps();
             $table->string('addressline1');
             $table->string('addressline2');
