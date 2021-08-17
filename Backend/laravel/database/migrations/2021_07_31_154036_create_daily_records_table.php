@@ -16,6 +16,14 @@ class CreateDailyRecordsTable extends Migration
         Schema::create('daily_records', function (Blueprint $table) {
             $table->id('id');
             $table->timestamps();
+            $table->float('ph_value');
+            $table->float('density');
+            $table->float('volume');
+            $table->integer('fat_rate');
+            $table->float('temperature');
+            $table->dateTime('added_date');
+            $table->string('grade');
+            $table->float('price_rate');
         });
     }
 

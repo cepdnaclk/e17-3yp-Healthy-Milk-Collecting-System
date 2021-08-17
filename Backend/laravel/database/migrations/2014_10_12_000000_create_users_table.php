@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
 
-            $table->unsignedBigInteger('farmer_id');
+            $table->unsignedBigInteger('farmer_id')->nullable();
            // $table->foreign('farmer_id')->references('farmer_id')->on('farmers');
 
         });
