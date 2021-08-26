@@ -10,6 +10,18 @@ Quality is very important in diary related products.
 Currently diary collectors measure only few parameters using technology while small scale manufacturers just use organoleptic tests for checking the milk quality. Also the financial deals are happening in a traditional way.
 Our Healthy Milk Collecting System can be used to measure important quality parameters of milk when the deal happens between diary collector and farmer to ensure the milk is healthy and also it can be used to calculate financial value of milk according to those parameters and manage the financial system in a cloud based system.
 
+## Our solution
+<img src="./docs/images/logo.png">
+```
+- Easy usage
+- portable
+- Low cost
+- Reachargable & Low power consumption
+```
+## Solution Architecture
+<img src="./Diagrams/architecture.jpg">
+<img src="./Diagrams/Data_flow.jpg">
+
 ## Team Members
 1. E/17/012 Amarasinghe R A A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17012@eng.pdn.ac.lk)]
 2. E/17/038 Chandrasekara C M A [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17038@eng.pdn.ac.lk)]
@@ -17,8 +29,8 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 
 
 ## Supervisors
-1. Supervisor1 [[Website](http://www.ce.pdn.ac.lk/academic-staff/), [Email](mailto:lecturer@ce.pdn.ac.lk)]
-2. Supervisor2 [[Website](http://www.ce.pdn.ac.lk/academic-staff/), [Email](mailto:lecturer@ce.pdn.ac.lk)]
+1. Dr. Isuru Nawinne [[Website](http://www.ce.pdn.ac.lk/academic-staff/isuru-nawinne/), [Email](mailto:isurunawinne@eng.pdn.ac.lk)]
+2. Dr. Mahanama Wickramasinghe [[Website](http://www.ce.pdn.ac.lk/2021/05/02/dr-mahanama-wickramasinghe/), [Email](mailto:mahanamaw@eng.pdn.ac.lk)]
 
 
 ## Links
