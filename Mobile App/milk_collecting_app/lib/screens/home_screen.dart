@@ -7,6 +7,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:milk_collecting_app/screens/current_collection.dart';
 import 'package:milk_collecting_app/screens/daily_page.dart';
 import 'package:milk_collecting_app/screens/map_page.dart';
+import 'package:milk_collecting_app/screens/profile_screen.dart';
 import 'package:milk_collecting_app/screens/stats_page.dart';
 
 import 'colors.dart';
@@ -34,8 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
     HomePage(),
     DailyPage(),
     MapPage(),
-    Scaffold(),
-    Scaffold()
+    ProfileScreen(),
+    
   ];
 
 
@@ -116,7 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     border: Border.all(color: Colors.purple,width: 3)
                   ),
                     child: Icon(Icons.shopping_cart,color: Colors.purple,)),
-              )
+              ),
+              SizedBox(width: 5,),
+              Icon(Icons.notifications,color: Colors.purple,size: 30,)
 
 
 
