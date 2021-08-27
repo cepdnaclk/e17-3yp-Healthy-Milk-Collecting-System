@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:milk_collecting_app/screens/colors.dart';
 import 'package:milk_collecting_app/screens/signInScreen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
 
+import 'details.dart';
 import 'home_screen.dart';
 
 
@@ -126,7 +128,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen()));
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -179,6 +181,82 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+
+
+Widget _buildTypeSelector() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Select The Type',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+
+           GestureDetector(
+             onTap: (){
+               setState(() {
+                 selectedUser = "Collector";
+               });
+             },
+             child: Container(
+               height: 50,
+               width: MediaQuery.of(context).size.width*0.3,
+               decoration: BoxDecoration(
+                 color: (selectedUser == "Collector") ? Colors.blue : Colors.white,
+                 borderRadius: BorderRadius.circular(10),
+               ),
+               child: Center(
+                 child: Text("Collector",
+                  style: TextStyle(
+              color: (selectedUser == "Collector") ? Colors.white : Color(0xFF527DAA),
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+                     ),),),
+             ),
+           ),
+
+            GestureDetector(
+             onTap: (){
+               setState(() {
+                 selectedUser = "Farmer";
+               });
+             },
+             child: Container(
+               height: 50,
+               width: MediaQuery.of(context).size.width*0.3,
+               decoration: BoxDecoration(
+                 color: (selectedUser == "Farmer") ? Colors.blue : Colors.white,
+                 borderRadius: BorderRadius.circular(10),
+               ),
+               child: Center(
+                 child: Text("Farmer",
+                  style: TextStyle(
+              color: (selectedUser == "Farmer") ? Colors.white : Color(0xFF527DAA),
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+                     ),),),
+             ),
+           ),
+
+
+
+
+        ],)
+      ],
+    );
+  }
+
+  final List<String> user_types = ["Farmer","Collector"];
+  String selectedUser = "Collector";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -200,10 +278,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                      // Color(0xFF61A4F1),
                      // Color(0xFF478DE0),
                      // Color(0xFF398AE5),
-                      Colors.pink.withOpacity(0.8),
-                      Colors.purpleAccent.withOpacity(0.7),
-                      Colors.purpleAccent,
-                      Colors.purple
+                     // Colors.pink.withOpacity(0.8),
+                      //Colors.purpleAccent.withOpacity(0.7),
+                      //Colors.purpleAccent,
+                      //Colors.purple
+                      Colors.purple,
+                      Colors.pinkAccent
                     ],
                     //stops: [0.1, 0.4, 0.7, 0.9],
                   ),
@@ -230,6 +310,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       SizedBox(height: 30.0),
+
+                      _buildTypeSelector(),
+ 
+                       SizedBox(
+                        height: 30.0,
+                      ),
                       _buildEmailTF(),
                       SizedBox(
                         height: 30.0,

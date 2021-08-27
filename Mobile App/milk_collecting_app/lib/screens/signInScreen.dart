@@ -189,14 +189,15 @@ class _SignInScreenState extends State<SignInScreen> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                     // Color(0xFF73AEF5),
-                     // Color(0xFF61A4F1),
+                      //Color(0xFF73AEF5),
+                      //Color(0xFF61A4F1),
                      // Color(0xFF478DE0),
                      // Color(0xFF398AE5),
                      // Colors.pink.withOpacity(0.8),
-                      Colors.purpleAccent.withOpacity(0.7),
-                      Colors.purpleAccent,
-                      Colors.purple
+                     // Colors.purpleAccent.withOpacity(0.7),
+                     // Colors.purpleAccent,
+                      Colors.purple,
+                      Colors.pinkAccent
                     ],
                    // stops: [0.1, 0.4, 0.7, 0.9],
                   ),

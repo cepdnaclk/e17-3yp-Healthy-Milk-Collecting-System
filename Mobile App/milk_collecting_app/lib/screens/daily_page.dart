@@ -15,6 +15,7 @@ class DailyPage extends StatefulWidget {
 class _DailyPageState extends State<DailyPage> {
 
   int selectedDay = 0;
+  int selectedFarmer = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +82,9 @@ class _DailyPageState extends State<DailyPage> {
              ),
            ),
          ),
+
+         //list column
+         
             Column(
            children: List.generate((daily.length)+1, (index){
 
@@ -131,6 +135,33 @@ class _DailyPageState extends State<DailyPage> {
                       ],
                     ),
                     SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                      GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            if(selectedFarmer == index){
+                              selectedFarmer = -1;
+                            }
+                            selectedFarmer = index;
+                          });
+                        },
+                        child: (selectedFarmer == index) ? Icon(Icons.arrow_drop_up,size: 30,color: Colors.purple,):
+                           Icon(Icons.arrow_drop_down,size: 30,color: Colors.purple,)
+                        )
+                    ],),
+                   (selectedFarmer == index) ? Column(
+                      children: [
+                        Text("Fat Rate : XXXX"),
+                        SizedBox(height: 10,),
+                        Text("Volume : XXXX"),
+                        SizedBox(height: 10,),
+                        Text("Temperature : XXXX"),
+                        SizedBox(height: 10,),
+
+                      ],
+                    ):SizedBox.shrink(),
                     Divider(
                       color: grey.withOpacity(0.5),
                     )
