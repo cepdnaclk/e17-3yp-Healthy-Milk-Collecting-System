@@ -94,7 +94,7 @@ Widget _buildEmailTF() {
             Spacer(),
             GestureDetector(
               onTap: (){
-               // Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNameScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNameScreen()));
               },
               child: Icon(Icons.edit,color: white,size: 40,))
 
@@ -141,7 +141,7 @@ Widget _buildEmailTF() {
             Spacer(),
             GestureDetector(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeContactScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNameScreen()));
               },
               child: Icon(Icons.edit,color: white,size: 40,))
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:milk_collecting_app/json/daily_json.dart';
 import 'package:milk_collecting_app/json/day_month.dart';
+import 'package:milk_collecting_app/screens/sub_details_screen.dart';
 
 import 'colors.dart';
 
@@ -127,41 +128,28 @@ class _DailyPageState extends State<DailyPage> {
                             ],
                           ),
                         ],),
-                        Text(daily[index]['price'],
+                       Row(children:[
+                          
+                           Text(daily[index]['price'],
                           style: TextStyle(
                               color: Colors.green,
                               fontWeight: FontWeight.bold
-                          ),)
+                          ),),
+                         SizedBox(width: 5,),
+                       GestureDetector(
+                         onTap: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => SubDetailsScreen())); 
+                         },
+                         child: Icon(Icons.arrow_right,size: 40,))
+
+
+
+                       ])
+
                       ],
                     ),
                     SizedBox(height: 5,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                      GestureDetector(
-                        onTap: (){
-                          setState(() {
-                            if(selectedFarmer == index){
-                              selectedFarmer = -1;
-                            }
-                            selectedFarmer = index;
-                          });
-                        },
-                        child: (selectedFarmer == index) ? Icon(Icons.arrow_drop_up,size: 30,color: Colors.purple,):
-                           Icon(Icons.arrow_drop_down,size: 30,color: Colors.purple,)
-                        )
-                    ],),
-                   (selectedFarmer == index) ? Column(
-                      children: [
-                        Text("Fat Rate : XXXX"),
-                        SizedBox(height: 10,),
-                        Text("Volume : XXXX"),
-                        SizedBox(height: 10,),
-                        Text("Temperature : XXXX"),
-                        SizedBox(height: 10,),
-
-                      ],
-                    ):SizedBox.shrink(),
+                  
                     Divider(
                       color: grey.withOpacity(0.5),
                     )
@@ -198,7 +186,7 @@ class _DailyPageState extends State<DailyPage> {
                           ],
                         ),
                       ],),
-                      Text("\$1270.00",
+                      Text("1270.00lkr",
                         style: TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold
