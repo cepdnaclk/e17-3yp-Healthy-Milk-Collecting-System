@@ -23,7 +23,7 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
 
     return Scaffold(
       body: getBody(),
-      backgroundColor: grey.withOpacity(.3),
+      backgroundColor: white,
       
     
     );
@@ -37,7 +37,7 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
 
           Container(
             decoration: BoxDecoration(
-                color: Colors.purpleAccent,
+              color: grey.withOpacity(0.9),
                 boxShadow: [
                   BoxShadow(
                       color: grey.withOpacity(0.01),
@@ -51,24 +51,26 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
               child: Column(
                 children: [
 
-                  Row(
+                  Container(
+                    child: Row(
              
-                    children: [
-                      GestureDetector(
-                        onTap: (){ Navigator.pop(context);},
-                        child: Icon(Icons.arrow_back_ios)),
-                      SizedBox(width: 20,),
-                      Text("Change Username",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black
-                        ),),
+                      children: [
+                        GestureDetector(
+                          onTap: (){ Navigator.pop(context);},
+                          child: Icon(Icons.arrow_back_ios)),
+                        SizedBox(width: 20,),
+                        Text("Change User Details",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black
+                          ),),
 
-                       
+                         
 
 
-                    ],
+                      ],
+                    ),
                   ),
 
 
@@ -81,7 +83,7 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
 
 
         
-          SizedBox(height: 20,),
+          
 
          
 
@@ -97,7 +99,7 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-             Text("New Username",style: TextStyle(color: white,fontFamily: 'OpenSans',),),
+             Text("First Name",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
              SizedBox(height: 5,),
               Container(
               alignment: Alignment.centerLeft,
@@ -115,11 +117,132 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
                     Icons.adjust_sharp,
                     color: Colors.white,
                   ),
-                  hintText: 'Enter the New Username',
+                  hintText: 'Enter the First Name',
                   hintStyle: kHintTextStyle_Home,
                 ),
                 autofocus: false,
-                obscureText: true,
+                
+              ),
+            ),
+
+
+              ],
+            )
+          ),
+
+          SizedBox(height: 20,),
+         
+        
+             
+          Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+             Text("Last Name",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+             SizedBox(height: 5,),
+              Container(
+              alignment: Alignment.centerLeft,
+              decoration: kBoxDecorationStyle_HomePage,
+              height: 60.0,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OpenSans',
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14.0),
+                  prefixIcon: Icon(
+                    Icons.adjust_sharp,
+                    color: Colors.white,
+                  ),
+                  hintText: 'Enter the Last Name',
+                  hintStyle: kHintTextStyle_Home,
+                ),
+                autofocus: false,
+               
+              ),
+            ),
+
+
+              ],
+            )
+          ),
+               SizedBox(height:20),
+           Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+             Text("Change Email",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+             SizedBox(height: 5,),
+              Container(
+              alignment: Alignment.centerLeft,
+              decoration: kBoxDecorationStyle_HomePage,
+              height: 60.0,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OpenSans',
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14.0),
+                  prefixIcon: Icon(
+                    Icons.adjust_sharp,
+                    color: Colors.white,
+                  ),
+                  hintText: 'Change Email',
+                  hintStyle: kHintTextStyle_Home,
+                ),
+                autofocus: false,
+               
+                controller: TextEditingController(
+                  text: "abc@gmail.com"
+                ),
+              ),
+            ),
+
+
+              ],
+            )
+          ),
+
+          SizedBox(height: 20,),
+         
+        
+             
+          Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+             Text("Change Contact Number",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+             SizedBox(height: 5,),
+              Container(
+              alignment: Alignment.centerLeft,
+              decoration: kBoxDecorationStyle_HomePage,
+              height: 60.0,
+              child: TextField(
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OpenSans',
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14.0),
+                  prefixIcon: Icon(
+                    Icons.adjust_sharp,
+                    color: Colors.white,
+                  ),
+                  hintText: 'Enter the New Phone Number',
+                  hintStyle: kHintTextStyle_Home,
+                ),
+                autofocus: false,
+                controller: TextEditingController(
+                  text: "0717114523"
+                ),
               ),
             ),
 
@@ -151,7 +274,7 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
                  ),
                  child: Center(
                    child: Text(
-                     "Change Username",
+                     "Save",
                      style: TextStyle(
                          color: Colors.white,
                          fontSize: 20,
@@ -170,6 +293,13 @@ class _ChangeNameScreenState extends State<ChangeNameScreen> {
 
 
           SizedBox(height: 20,),
+
+          
+          SizedBox(height: 20,),
+         
+        
+             
+         
 
 
         ],

@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:milk_collecting_app/screens/change_price_screen.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 import 'colors.dart';
 
@@ -292,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                            SizedBox(height: 10,),
 
-                         _IndicationBar(50,100)
+                         //_IndicationBar(50,100)
 
                          
 
@@ -304,7 +305,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     width: ((size.width)/2)-40,
-                    height: 170,
+                    height: 180,
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -364,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                            SizedBox(height: 10,),
-                           _IndicationBar(5,6.6)
+                          // _IndicationBar(5,6.6)
 
 
 
@@ -374,7 +375,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     width: ((size.width)/2)-40,
-                    height: 150,
+                    height: 180,
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -502,7 +503,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                            SizedBox(height: 10,),
-                           _IndicationBar(5,6.6)
+                          // _IndicationBar(5,6.6)
 
 
 
@@ -517,7 +518,7 @@ class _HomePageState extends State<HomePage> {
 
 
                     Container(
-                    width: ((size.width)*0.6),
+                    width: ((size.width)/2)-40,
                     height: 180,
                     decoration: BoxDecoration(
                         color: white,
@@ -591,6 +592,7 @@ class _HomePageState extends State<HomePage> {
 
     ]),
               ),
+             
 
           SizedBox(height: 20,),
          
@@ -619,6 +621,143 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+            SizedBox(height:10),
+           ////arcs
+           Text("Fat Rate",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
+           Container(
+             height: 200,
+             width: 200,
+             child: SfRadialGauge(
+               
+              axes: <RadialAxis>[
+                        RadialAxis(
+                         minimum: 0,
+                         maximum: 100,
+                         showLabels: false,
+                         showTicks: false,
+                  
+                          axisLineStyle: AxisLineStyle(
+                          thickness: 0.2,
+                          cornerStyle: CornerStyle.bothCurve,
+                          ///color: Color.fromARGB(30, 0, 169, 181),
+                          color: Colors.grey.withOpacity(0.9),
+                          thicknessUnit: GaugeSizeUnit.factor,
+                       ),
+                       pointers: <GaugePointer>[
+                   RangePointer(value: 90,
+                   color: Colors.purple ), 
+                                      
+],
+annotations: [
+   GaugeAnnotation(
+ positionFactor: 0.1,
+ angle: 90,
+ widget: Text(
+ "90%",
+ style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,)
+ ))
+]
+                      )
+                 ],
+                 
+
+
+             )
+             
+             ),
+
+
+
+
+             Text("pH",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
+           Container(
+             height: 200,
+             width: 200,
+             child: SfRadialGauge(
+               
+              axes: <RadialAxis>[
+                        RadialAxis(
+                         minimum: 6.2,
+                         maximum: 7.2,
+                         showLabels: false,
+                         showTicks: false,
+                  
+                          axisLineStyle: AxisLineStyle(
+                          thickness: 0.2,
+                          cornerStyle: CornerStyle.bothCurve,
+                          ///color: Color.fromARGB(30, 0, 169, 181),
+                          color: Colors.grey.withOpacity(0.9),
+                          thicknessUnit: GaugeSizeUnit.factor,
+                       ),
+                       pointers: <GaugePointer>[
+                   RangePointer(value: 6.6,
+                   color: Colors.purple ), 
+                                      
+],
+annotations: [
+   GaugeAnnotation(
+ positionFactor: 0.1,
+ angle: 90,
+ widget: Text(
+ "6.6",
+ style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,)
+ ))
+]
+                      )
+                 ],
+                 
+
+
+             )
+             
+             ),
+      
+      
+
+      
+             Text("Density",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
+           Container(
+             height: 200,
+             width: 200,
+             child: SfRadialGauge(
+               
+              axes: <RadialAxis>[
+                        RadialAxis(
+                         minimum: 1.026,
+                         maximum: 1.032,
+                         showLabels: false,
+                         showTicks: false,
+                  
+                          axisLineStyle: AxisLineStyle(
+                          thickness: 0.2,
+                          cornerStyle: CornerStyle.bothCurve,
+                          ///color: Color.fromARGB(30, 0, 169, 181),
+                          color: Colors.grey.withOpacity(0.9),
+                          thicknessUnit: GaugeSizeUnit.factor,
+                       ),
+                       pointers: <GaugePointer>[
+                   RangePointer(value: 1.030,
+                   color: Colors.purple ), 
+                                      
+],
+annotations: [
+   GaugeAnnotation(
+ positionFactor: 0.1,
+ angle: 90,
+ widget: Text(
+ "1.030",
+ style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,)
+ ))
+]
+                      )
+                 ],
+                 
+
+
+             )
+             
+             ),
+      
            
 
           SizedBox(height: 20,),
@@ -702,7 +841,7 @@ class _HomePageState extends State<HomePage> {
      double _valueCount = (50/totalValue) * indicatedValue;
 
 
-return  Container(
+             return  Container(
                             width: 120,
                             height: 20,
                             decoration: BoxDecoration(
@@ -713,7 +852,7 @@ return  Container(
                                scrollDirection: Axis.horizontal,
                               itemBuilder: (context,index){
                                 return Padding(
-                                  padding: const EdgeInsets.only(left: 0.6,right: 0.6),
+                                  padding: const EdgeInsets.only(left: 0.0,right: 0.0),
                                   child: Container(
                                   height: 20,
                                   width: 1.2,
