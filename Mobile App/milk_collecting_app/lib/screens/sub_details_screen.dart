@@ -140,7 +140,7 @@ class _SubDetailsScreenState extends State<SubDetailsScreen> {
             padding: const EdgeInsets.only(left: 20,right: 20),
             child: Row(
               children: [
-        Text("Average Density : 1.1gcm-3",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+        Text("Average Density : 1.1 gcm-3",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
              ],
             )
           ),
@@ -164,7 +164,7 @@ class _SubDetailsScreenState extends State<SubDetailsScreen> {
             padding: const EdgeInsets.only(left: 20,right: 20),
             child: Row(
               children: [
-        Text("Totla volume : 10Liters",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+        Text("Totla volume : 10 Litres",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
              ],
             )
           ),
@@ -222,9 +222,9 @@ class _SubDetailsScreenState extends State<SubDetailsScreen> {
 
 
                        Text("Fat Rate : 80%",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
-                       Text("Density : 1.2gcm-3",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+                       Text("Density : 1.2 gcm-3",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
                       Text("pH : 6.6",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
-                      Text("Volume : 1Liter",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
+                      Text("Volume : 1 Litre",style: TextStyle(color: black,fontFamily: 'OpenSans',fontWeight: FontWeight.bold),),
              
 
 
