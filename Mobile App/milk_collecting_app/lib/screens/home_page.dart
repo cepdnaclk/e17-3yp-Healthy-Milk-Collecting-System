@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: getBody(),
       backgroundColor: grey.withOpacity(.3),
+     
       
     
     );
@@ -622,6 +623,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
             SizedBox(height:10),
+
            ////arcs
            Text("Fat Rate",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
            Container(
@@ -645,7 +647,7 @@ class _HomePageState extends State<HomePage> {
                        ),
                        pointers: <GaugePointer>[
                    RangePointer(value: 90,
-                   color: Colors.purple ), 
+                   color: Colors.red ), 
                                       
 ],
 annotations: [
@@ -691,7 +693,7 @@ annotations: [
                        ),
                        pointers: <GaugePointer>[
                    RangePointer(value: 6.6,
-                   color: Colors.purple ), 
+                   color: Colors.cyan ), 
                                       
 ],
 annotations: [
@@ -737,7 +739,7 @@ annotations: [
                        ),
                        pointers: <GaugePointer>[
                    RangePointer(value: 1.030,
-                   color: Colors.purple ), 
+                   color: Colors.amber ), 
                                       
 ],
 annotations: [

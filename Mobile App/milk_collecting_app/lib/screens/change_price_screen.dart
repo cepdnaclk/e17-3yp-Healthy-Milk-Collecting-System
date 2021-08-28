@@ -146,7 +146,7 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
                         children: [
                         Text("100.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
                         Spacer(),
-                        Icon(Icons.trending_up,size: 30,)
+                        Icon(Icons.change_circle_rounded,size: 30,color: white,)
 
                         ],
                       ),
@@ -182,9 +182,9 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                        Text("80.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Text("98.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
                         Spacer(),
-                        Icon(Icons.trending_up,size: 30,)
+                        Icon(Icons.change_circle_rounded,size: 30,color: white,)
 
                         ],
                       ),
@@ -220,9 +220,9 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                        Text("70.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Text("95.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
                         Spacer(),
-                        Icon(Icons.trending_up,size: 30,)
+                        Icon(Icons.change_circle_rounded,size: 30,color: white,)
 
                         ],
                       ),
@@ -259,9 +259,9 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                        Text("60.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Text("92.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
                         Spacer(),
-                        Icon(Icons.trending_up,size: 30,)
+                        Icon(Icons.change_circle_rounded,size: 30,color: white,)
 
                         ],
                       ),
@@ -271,11 +271,11 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
                    
 
                      ],
-                   )
+                   ),
                  
             
           
-
+                       SizedBox(height: 20,)
 
 
                             ],
