@@ -23,7 +23,7 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
 
     return Scaffold(
       body: getBody(),
-      backgroundColor: grey.withOpacity(.3),
+      backgroundColor: white,
       
     
     );
@@ -37,7 +37,7 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
 
           Container(
             decoration: BoxDecoration(
-                color: Colors.purpleAccent,
+                color: white,
                 boxShadow: [
                   BoxShadow(
                       color: grey.withOpacity(0.01),
@@ -87,9 +87,9 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
             padding: const EdgeInsets.only(left: 20,right: 20),
             child: Container(
               width: double.infinity,
-              height: 120,
+              
               decoration: BoxDecoration(
-                  color: white,
+                  color: grey.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(
@@ -120,24 +120,146 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15
                                 ),),
-                              SizedBox(height: 10,),
+                              SizedBox(height: 20,),
 
                    Row(
                      children: [
+
+                      Text("Grade A",style: TextStyle(color: black),),
+                      SizedBox(width: 10,),
 
                       Container(
                     width: 120,
                     height: 60,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.purpleAccent,
-                      borderRadius: BorderRadius.circular(10)
+                      color: Colors.pinkAccent,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        Colors.pinkAccent,
+                        Colors.purple
+                      ])
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
                         Text("100.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Spacer(),
+                        Icon(Icons.trending_up,size: 30,)
+
+                        ],
+                      ),
+                    )
+                    
+                  ),
+                   
+
+                     ],
+                   ),
+                    SizedBox(height:20),
+
+                    Row(
+                     children: [
+
+                      Text("Grade B",style: TextStyle(color: black),),
+                      SizedBox(width: 10,),
+
+                      Container(
+                    width: 120,
+                    height: 60,
+                    alignment: Alignment.center,
+                     
+                    decoration: BoxDecoration(
+                      color: Colors.pinkAccent,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        Colors.pinkAccent,
+                        Colors.purple
+                      ])
+                    ),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                        Text("80.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Spacer(),
+                        Icon(Icons.trending_up,size: 30,)
+
+                        ],
+                      ),
+                    )
+                    
+                  ),
+                   
+
+                     ],
+                   ),
+                        SizedBox(height:20),
+
+                     Row(
+                     children: [
+
+                      Text("Grade C",style: TextStyle(color: black),),
+                      SizedBox(width: 10,),
+
+                      Container(
+                    width: 120,
+                    height: 60,
+                    alignment: Alignment.center,
+                     
+                    decoration: BoxDecoration(
+                      color: Colors.pinkAccent,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        Colors.pinkAccent,
+                        Colors.purple
+                      ])
+                    ),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                        Text("70.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Spacer(),
+                        Icon(Icons.trending_up,size: 30,)
+
+                        ],
+                      ),
+                    )
+                    
+                  ),
+                   
+
+                     ],
+                   ),
+
+                    SizedBox(height:20),
+
+                     Row(
+                     children: [
+
+                      Text("Grade D",style: TextStyle(color: black),),
+                      SizedBox(width: 10,),
+
+                      Container(
+                    width: 120,
+                    height: 60,
+                    alignment: Alignment.center,
+                     
+                    decoration: BoxDecoration(
+                      color: Colors.pinkAccent,
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(colors: [
+                        Colors.pinkAccent,
+                        Colors.purple
+                      ])
+                    ),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                        Text("60.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
                         Spacer(),
                         Icon(Icons.trending_up,size: 30,)
 
@@ -182,34 +304,7 @@ class _ChangePriceScreenState extends State<ChangePriceScreen> {
           SizedBox(height: 20,),
          
         
-             
-          Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: Container(
-              alignment: Alignment.centerLeft,
-              decoration: kBoxDecorationStyle_HomePage,
-              height: 60.0,
-              child: TextField(
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'OpenSans',
-                ),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.only(top: 14.0),
-                  prefixIcon: Icon(
-                    Icons.adjust_sharp,
-                    color: Colors.white,
-                  ),
-                  hintText: 'Enter the new price per liter',
-                  hintStyle: kHintTextStyle_Home,
-                ),
-                autofocus: false,
-              ),
-            ),
-          ),
 
-          SizedBox(height: 20,),
 
          Row(
            mainAxisAlignment: MainAxisAlignment.center,
