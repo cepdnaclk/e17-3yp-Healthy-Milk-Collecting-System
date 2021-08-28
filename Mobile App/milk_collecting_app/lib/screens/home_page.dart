@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:milk_collecting_app/screens/change_price_screen.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
 
@@ -24,6 +27,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: getBody(),
       backgroundColor: grey.withOpacity(.3),
+      
+    
     );
   }
   getBody(){
@@ -35,7 +40,7 @@ class _HomePageState extends State<HomePage> {
 
           Container(
             decoration: BoxDecoration(
-                color: white,
+                color: Colors.purpleAccent,
                 boxShadow: [
                   BoxShadow(
                       color: grey.withOpacity(0.01),
@@ -59,6 +64,8 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.black
                         ),),
 
+                       
+
 
                     ],
                   ),
@@ -71,13 +78,15 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
 
+
+        
           SizedBox(height: 20,),
 
           Padding(
             padding: const EdgeInsets.only(left: 20,right: 20),
             child: Container(
               width: double.infinity,
-              height: 100,
+              height: 120,
               decoration: BoxDecoration(
                   color: white,
                   borderRadius: BorderRadius.circular(12),
@@ -111,12 +120,45 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text("\100.00lkr",
-                                style: TextStyle(
-                                    color: black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20
-                                ),),
+
+                   Row(
+                     children: [
+
+                      Container(
+                    width: 120,
+                    height: 60,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.purpleAccent,
+                      borderRadius: BorderRadius.circular(10)
+                    ),
+                    child:Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                        Text("100.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
+                        Spacer(),
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePriceScreen()));
+                          },
+                          child: Icon(Icons.edit))
+
+                        ],
+                      ),
+                    )
+                    
+                  ),
+                   
+
+                     ],
+                   )
+                 
+            
+          
+
+
+
                             ],
                           ),
 
@@ -187,8 +229,8 @@ class _HomePageState extends State<HomePage> {
                 runSpacing: 20,
                 children: [
                   Container(
-                    width: ((size.width)/2)-30,
-                    height: 200,
+                    width: ((size.width)/2)-40,
+                    height: 180,
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -247,7 +289,12 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 20
                                 ),),
                             ],
-                          )
+                          ),
+                           SizedBox(height: 10,),
+
+                         _IndicationBar(50,100)
+
+                         
 
 
 
@@ -256,8 +303,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(
-                    width: ((size.width)/2)-30,
-                    height: 200,
+                    width: ((size.width)/2)-40,
+                    height: 170,
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -315,7 +362,9 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 20
                                 ),),
                             ],
-                          )
+                          ),
+                           SizedBox(height: 10,),
+                           _IndicationBar(5,6.6)
 
 
 
@@ -324,8 +373,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(
-                    width: ((size.width)/2)-30,
-                    height: 200,
+                    width: ((size.width)/2)-40,
+                    height: 150,
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -392,8 +441,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(
-                    width: ((size.width)/2)-30,
-                    height: 200,
+                    width: ((size.width)/2)-40,
+                    height: 180,
                     decoration: BoxDecoration(
                         color: white,
                         borderRadius: BorderRadius.circular(12),
@@ -452,6 +501,82 @@ class _HomePageState extends State<HomePage> {
                                 ),),
                             ],
                           ),
+                           SizedBox(height: 10,),
+                           _IndicationBar(5,6.6)
+
+
+
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+
+
+
+
+                    Container(
+                    width: ((size.width)*0.6),
+                    height: 180,
+                    decoration: BoxDecoration(
+                        color: white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                              color: grey.withOpacity(0.01),
+                              spreadRadius: 10,
+                              blurRadius: 3
+                          )
+                        ]
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                    colors: [
+                                      primary,
+                                      Colors.purple,
+                                    ]
+                                ),
+                                shape: BoxShape.circle
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Ionicons.md_stats,
+                                color: white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5,),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              Text("Temperature(Celcious)",
+                                style: TextStyle(
+                                    color: black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15
+                                ),),
+                              SizedBox(height: 10,),
+                              Text("20.0",
+                                style: TextStyle(
+                                    color: black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20
+                                ),),
+                            ],
+                          ),
 
 
 
@@ -468,7 +593,7 @@ class _HomePageState extends State<HomePage> {
               ),
 
           SizedBox(height: 20,),
-
+         
           Padding(
             padding: const EdgeInsets.only(left: 20,right: 20),
             child: Container(
@@ -494,13 +619,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+           
 
           SizedBox(height: 20,),
 
          Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-
 
              Padding(
                padding: const EdgeInsets.only(left: 20,right: 20),
@@ -559,10 +684,6 @@ class _HomePageState extends State<HomePage> {
                ),
              ),
 
-
-
-
-
            ],
          ),
 
@@ -573,6 +694,40 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+
+  }
+
+  _IndicationBar(double indicatedValue, double totalValue) {
+
+     double _valueCount = (50/totalValue) * indicatedValue;
+
+
+return  Container(
+                            width: 120,
+                            height: 20,
+                            decoration: BoxDecoration(
+                               color: Colors.grey.withOpacity(0.1)
+                            ),
+                            child: ListView.builder(
+                              itemCount: _valueCount.toInt(),
+                               scrollDirection: Axis.horizontal,
+                              itemBuilder: (context,index){
+                                return Padding(
+                                  padding: const EdgeInsets.only(left: 0.6,right: 0.6),
+                                  child: Container(
+                                  height: 20,
+                                  width: 1.2,
+                                  decoration: BoxDecoration(
+                                    color: Colors.purple),
+                                  ),
+                                );
+                            }
+                            
+                            ),
+                          );
+
+
+
 
   }
 }

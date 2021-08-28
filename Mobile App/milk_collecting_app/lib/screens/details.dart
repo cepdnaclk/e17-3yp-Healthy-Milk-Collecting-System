@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:milk_collecting_app/screens/signUpScreen.dart';
+import 'package:milk_collecting_app/screens/colors.dart';
+import 'package:milk_collecting_app/screens/signInScreen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
 
 import 'home_screen.dart';
 
 
-class SignInScreen extends StatefulWidget {
+class DetailsScreen extends StatefulWidget {
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  _DetailsScreenState createState() => _DetailsScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _DetailsScreenState extends State<DetailsScreen> {
 
 
-  Widget _buildEmailTF() {
+  Widget _buildContactTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email',
+          'Contact',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -37,10 +38,10 @@ class _SignInScreenState extends State<SignInScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.email,
+                Icons.phone,
                 color: Colors.white,
               ),
-              hintText: 'Enter your Email',
+              hintText: 'Enter your Contact Number',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -49,12 +50,12 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _buildPasswordTF() {
+  Widget _buildAddressTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Password',
+          'Address',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -72,10 +73,10 @@ class _SignInScreenState extends State<SignInScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.lock,
+                Icons.location_history,
                 color: Colors.white,
               ),
-              hintText: 'Enter your password',
+              hintText: 'Enter your Address',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -84,67 +85,42 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget _buildLoginBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-      },
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+  Widget _buildBusinessTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Business Type',
+          style: kLabelStyle,
         ),
-        color: Colors.white,
-        child: Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            obscureText: true,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.business,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your business type',
+              hintStyle: kHintTextStyle,
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 
-  Widget _buildSignupBtn() {
-    return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context) => SignUpScreen()
-        ));
-      },
-      child: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'Don\'t have an Account? ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            TextSpan(
-              text: 'Sign Up',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLoginAsGuestBtn() {
+  Widget _buildSubmitBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -159,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
         color: Colors.white,
         child: Text(
-          'GO AS A GUEST',
+          'Submit',
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 1.5,
@@ -171,6 +147,43 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
+  Widget _buildSkipBtn() {
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) => HomeScreen()
+        ));
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Fill later? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Skip This',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+  final List<String> user_types = ["Farmer","Collector"];
+  String selectedUser = "Collector";
 
   @override
   Widget build(BuildContext context) {
@@ -189,17 +202,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      //Color(0xFF73AEF5),
-                      //Color(0xFF61A4F1),
-                     // Color(0xFF478DE0),
-                     // Color(0xFF398AE5),
-                     // Colors.pink.withOpacity(0.8),
-                     // Colors.purpleAccent.withOpacity(0.7),
-                     // Colors.purpleAccent,
+                  
                       Colors.purple,
                       Colors.pinkAccent
                     ],
-                   // stops: [0.1, 0.4, 0.7, 0.9],
+                    //stops: [0.1, 0.4, 0.7, 0.9],
                   ),
                 ),
               ),
@@ -215,7 +222,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Sign In',
+                        'ALMOST DONE!',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
@@ -224,14 +231,19 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      _buildEmailTF(),
+
+                     SizedBox(
+                        height: 30.0,
+                      ),
+                      _buildContactTF(),
                       SizedBox(
                         height: 30.0,
                       ),
-                      _buildPasswordTF(),
-                      _buildLoginBtn(),
-                      _buildSignupBtn(),
-                      _buildLoginAsGuestBtn()
+                      _buildAddressTF(),
+                      SizedBox(height: 30,),
+                      _buildBusinessTF(),
+                      _buildSubmitBtn(),
+                      _buildSkipBtn(),
                     ],
                   ),
                 ),
