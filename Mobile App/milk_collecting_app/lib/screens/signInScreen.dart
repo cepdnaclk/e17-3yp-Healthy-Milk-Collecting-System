@@ -1,8 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:milk_collecting_app/screens/colors.dart';
+import 'package:milk_collecting_app/screens/home_page.dart';
 import 'package:milk_collecting_app/screens/signUpScreen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart';
 
 
@@ -12,6 +18,12 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+
+  bool isLoading = false;
+
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+
 
 
   Widget _buildEmailTF() {
@@ -29,6 +41,7 @@ class _SignInScreenState extends State<SignInScreen> {
           height: 60.0,
           child: TextField(
             keyboardType: TextInputType.emailAddress,
+            controller: _emailController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -64,6 +77,7 @@ class _SignInScreenState extends State<SignInScreen> {
           height: 60.0,
           child: TextField(
             obscureText: true,
+            controller:_passwordController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -90,9 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: (){
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-      },
+        onPressed: isLoading ? null : login,
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -174,6 +186,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -203,6 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                 ),
               ),
+             
               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
@@ -235,11 +251,129 @@ class _SignInScreenState extends State<SignInScreen> {
                     ],
                   ),
                 ),
-              )
+              ),
+
+
+           (isLoading) ? Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.black.withOpacity(0.5),
+                  child: Center(
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                      //  color: Colors.white,
+                         borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: CircularProgressIndicator(color: Colors.white,),
+                      )),
+                  ),
+                )
+                ) : SizedBox.shrink(),
+
+
+
+
             ],
           ),
         ),
       ),
     );
+  }
+
+  void login() async{
+
+    setState(() {
+      isLoading = true;
+    });
+   
+   if(_emailController.text.isEmpty){
+    setState(() {
+      isLoading = false;
+    });
+     showSnack("Please enter the email");
+   }else if(_passwordController.text.isEmpty){
+     setState(() {
+      isLoading = false;
+    });
+    showSnack("Please enter the password");
+   }else{
+
+
+   var client = http.Client();
+
+try {
+  var uriResponse = await client.post(Uri.parse('http://192.168.1.101:80/api/login'),
+      body: {'email': _emailController.text, 'password': _passwordController.text});
+
+  var jsonString = uriResponse.body;
+ 
+  var body_ = jsonDecode(jsonString);
+  if(body_["success"]){
+    setState(() {
+      isLoading = false;
+    });
+
+     showSnack('Login Success');
+  
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setBool("isLoggedIn", true);
+    sharedPreferences.setString("name", body_["user"]["name"]);
+    sharedPreferences.setString("email", body_["user"]["email"]);
+    sharedPreferences.setInt("id", body_["user"]["id"]);
+    sharedPreferences.setString("token", body_["token"]);
+
+    var tokn  =sharedPreferences.getString("token");
+    print(tokn);
+    Timer(Duration(seconds: 2), () {
+ Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+});
+    
+
+
+  }else{
+    setState(() {
+      isLoading = false;
+    });
+
+  showSnack('Login Failed');
+  }
+  
+
+} finally {
+  client.close();
+}
+
+
+
+
+   }
+
+
+
+
+
+  }
+
+  void showSnack(String message) {
+
+     final snackBar = SnackBar(
+            content:  Text(message),
+            backgroundColor: (Colors.black.withOpacity(0.6)),
+            action: SnackBarAction(
+              label: 'dismiss',
+              onPressed: () {
+              },
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+
   }
 }

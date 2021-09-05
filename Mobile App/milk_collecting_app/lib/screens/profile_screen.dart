@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:milk_collecting_app/screens/change_contact.dart';
@@ -7,6 +9,9 @@ import 'package:milk_collecting_app/screens/change_price_screen.dart';
 import 'package:milk_collecting_app/screens/colors.dart';
 import 'package:milk_collecting_app/screens/signInScreen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'details.dart';
 import 'home_screen.dart';
@@ -18,6 +23,28 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+   String name = "Loading....";
+   String email = "Loading....";
+   String contact = "Loading....";
+ 
+
+   
+
+   @override
+initState() {
+  super.initState();
+  loadData();
+}
+  loadData()async{
+SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+setState(() {
+  name = sharedPreferences.getString("name").toString();
+  email = sharedPreferences.getString("email").toString();
+   contact = sharedPreferences.getString("contact").toString();
+});
+
+
+  }
 
 
   Widget _buildNameTF() {
@@ -35,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               children: [
        Text(
-              'Anuruddha chandrasekara',
+            name,
               style: TextStyle(
                  color: Colors.white,
                  fontWeight: FontWeight.bold,
@@ -83,7 +110,7 @@ Widget _buildEmailTF() {
             child: Row(
               children: [
        Text(
-              'abc@gmail.com',
+              email,
               style: TextStyle(
                  color: Colors.white,
                  fontWeight: FontWeight.bold,
@@ -130,7 +157,7 @@ Widget _buildEmailTF() {
             child: Row(
               children: [
        Text(
-              '0715446734',
+              contact,
               style: TextStyle(
                  color: Colors.white,
                  fontWeight: FontWeight.bold,
@@ -266,7 +293,12 @@ Widget _buildEmailTF() {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+         // Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
+
+          logout();
+
+
+
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -364,5 +396,67 @@ Widget _buildEmailTF() {
         ),
       ),
     );
+  }
+
+  void logout() async{
+
+SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  sharedPreferences = await SharedPreferences.getInstance();
+  var token = sharedPreferences.getString("token");
+
+   Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: "application/json", 
+      HttpHeaders.authorizationHeader: "Bearer $token",
+    };
+
+var client = http.Client();
+    
+try {
+  var uriResponse = await client.get(Uri.parse('http://192.168.1.101:80/api/logout'),
+      headers: headers);
+
+  var jsonString = uriResponse.body;
+ 
+  var body_ = jsonDecode(jsonString);
+ 
+if(body_["success"]){
+
+
+sharedPreferences.setBool("isLoggedIn",false);
+
+
+
+showSnack(body_["message"]);
+Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignInScreen()), (route) => false);
+
+}else{
+
+showSnack("Logout faild!");
+}
+  
+  
+
+} finally {
+  client.close();
+}
+
+
+
+  }
+
+  void showSnack(String message) {
+
+  final snackBar = SnackBar(
+            content:  Text(message),
+            backgroundColor: (Colors.black.withOpacity(0.6)),
+            action: SnackBarAction(
+              label: 'dismiss',
+              onPressed: () {
+              },
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
   }
 }
