@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
+    
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
@@ -193,6 +193,25 @@
             animation-fill-mode: forwards;
             animation-timing-function: ease-out;
         }
+        .nav__link-wrapper.expanded li:nth-child(7) {
+            animation: slideFadeIn 0.15s 1;
+            animation-delay: 0.29s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+            display: none;
+        }
+        .nav__link-wrapper.expanded li:nth-child(8) {
+            animation: slideFadeIn 0.15s 1;
+            animation-delay: 0.31s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
+        .nav__link-wrapper.expanded li:nth-child(9) {
+            animation: slideFadeIn 0.15s 1;
+            animation-delay: 0.32s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
         }
         @media (min-width: 768px) {
         .nav__link-wrapper {
@@ -240,6 +259,24 @@
             animation-fill-mode: forwards;
             animation-timing-function: ease-out;
         }
+        .nav__link-wrapper li:nth-child(7) {
+            animation: slideFadeInAlt 0.15s 1;
+            animation-delay: -0.14s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
+        .nav__link-wrapper li:nth-child(8) {
+            animation: slideFadeInAlt 0.15s 1;
+            animation-delay: -0.16s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
+        .nav__link-wrapper li:nth-child(9) {
+            animation: slideFadeInAlt 0.15s 1;
+            animation-delay: -0.18s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-out;
+        }
         .nav__burger-button {
             display: none;
         }
@@ -282,7 +319,7 @@
         a{text-decoration:none}
 
         .main-timeline{position:relative}
-        .main-timeline:before{content:"";width:5px;height:100%;border-radius:20px;margin:0 auto;background:#242922;position:absolute;top:0;left:0;right:0}
+        .main-timeline:before{content:"";width:5px;height:100%;border-radius:20px;margin:0 auto;background:#0b4999;position:absolute;top:0;left:0;right:0}
         .main-timeline .timeline{display:inline-block;margin-bottom:50px;position:relative}
         .main-timeline .timeline:before{content:"";width:20px;height:20px;border-radius:50%;border:4px solid lightskyblue;background:#ec496e;position:absolute;top:50%;left:50%;z-index:1;transform:translate(-50%,-50%)}
         .main-timeline .timeline-icon{display:inline-block;width:130px;height:130px;border-radius:50%;border:3px solid #ec496e;padding:13px;text-align:center;position:absolute;top:50%;left:30%;transform:translateY(-50%)}
@@ -308,10 +345,10 @@
         .main-timeline .timeline:nth-child(3n) .timeline-icon{border-color:blue}
         .main-timeline .timeline:nth-child(3n) .title{color:blue}
         .main-timeline .timeline:nth-child(3n) .timeline-content:before{border-left-color:blue;border-bottom-color:blue}
-        .main-timeline .timeline:nth-child(4n) .timeline-content:after,.main-timeline .timeline:nth-child(4n) .timeline-icon i,.main-timeline .timeline:nth-child(4n) .timeline-icon:before,.main-timeline .timeline:nth-child(4n):before{background: limegreen;}
-        .main-timeline .timeline:nth-child(4n) .timeline-icon{border-color:limegreen}
-        .main-timeline .timeline:nth-child(4n) .title{color:limegreen}
-        .main-timeline .timeline:nth-child(4n) .timeline-content:before{border-left-color:#2fcea5;border-bottom-color:limegreen}
+        .main-timeline .timeline:nth-child(4n) .timeline-content:after,.main-timeline .timeline:nth-child(4n) .timeline-icon i,.main-timeline .timeline:nth-child(4n) .timeline-icon:before,.main-timeline .timeline:nth-child(4n):before{background: rgb(39, 189, 19);}
+        .main-timeline .timeline:nth-child(4n) .timeline-icon{border-color: rgb(39, 189, 19);}
+        .main-timeline .timeline:nth-child(4n) .title{color:rgb(39, 189, 19);}
+        .main-timeline .timeline:nth-child(4n) .timeline-content:before{border-left-color:rgb(39, 189, 19);border-bottom-color:rgb(39, 189, 19);}
         @media only screen and (max-width:1200px){.main-timeline .timeline-icon:before{width:50px;right:-50px}
         .main-timeline .timeline:nth-child(even) .timeline-icon:before{right:auto;left:-50px}
         .main-timeline .timeline-content{margin-top:75px}
@@ -394,9 +431,9 @@
         }
         .imgbox{
           position: absolute;
-          top: 15%;
-          height: 120px;
-          width: 120px;
+          top: 8%;
+          height: 150px;
+          width: 150px;
           overflow: hidden;
           border-radius: 50%;
         }
@@ -418,7 +455,7 @@
           color: #fff;
           text-transform: uppercase;
           text-align: center;
-          font-size: 11px;
+          font-size: 12px;
 
         }
         .sci{
@@ -446,18 +483,18 @@
           border-radius: 5px;
           margin-inline: 20px;
           margin-bottom: 10px;
-          background: rgba(255, 255, 255, 0.05);
+          /* background: rgba(255, 255, 255, 0.05); */
           /*background: turquoise;*/
           box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
         }
         .super_sci a i{
 
-          color:#000;
+          color:#fff;
           font-size:20px;
         }
         .super_cards h6{
           width: 80%;
-          color: #000;
+          color: #fff;
           text-transform: uppercase;
           text-align: center;
         }
@@ -583,6 +620,152 @@
         .w-container {
           max-width: 1040px;
         }
+
+        .loader{
+          position: relative;
+          
+          display: flex;
+          align-items: center;
+          justify-content: center; 
+          margin-top: 30px; 
+          width: 100%;
+        }
+        /* Creating the dots */
+        .dots{
+          height: 15px;
+          width: 15px;
+          margin:2%;
+          border-radius: 50%;
+          background-color: royalblue;
+          animation: loading 1s linear infinite;
+        }
+        /* Creating the loading animation*/
+        @keyframes loading {
+          0%{
+            transform: translateX(0);
+          }
+          25%{
+            transform: translateX(35px);
+          }
+          50%{
+            transform: translateX(-35px);
+          }
+          100%{
+            transform: translateX(0);
+          }
+            
+        }
+        .dots:nth-child(1){
+          animation-delay: 1s;
+        }
+        .dots:nth-child(2){
+          animation-delay: 2s;
+        }
+        .dots:nth-child(3){
+          animation-delay: 3s;
+        }
+        .dots:nth-child(4){
+          animation-delay: 4s;
+        }
+        .dots:nth-child(5){
+          animation-delay: 5s;
+        }
+        .techcard{
+          height: 550px;
+        }
+        @media (max-width:991px) {
+          .techcard{
+            height: 900px;
+          }
+        }
+        @media (max-width:760px) {
+          .techcard{
+            height: auto;
+          }
+        }
+
+        .slideshow{
+          margin: 0 auto;
+          padding-top: 20px;
+          padding-bottom: 20px;
+          height: 500px;
+          display: flex;
+          align-items: center;
+          perspective: 1000px;
+          overflow: hidden;
+          background: #bdc3c7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #2c3e50, #bdc3c7);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #2c3e50, #bdc3c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+        .content{
+          margin: auto;
+          width: 300px;
+          perspective: 1000px;
+          position:relative;
+          transform-style: preserve-3d;
+        }
+        .slider-content{
+          width: 100%;
+          position:absolute;
+          float:right;
+          display: flex;
+          align-items: center;
+          animation: rotate 15s infinite linear;
+          transform-style: preserve-3d;
+        }
+        .slider-content:hover{
+          cursor: pointer;
+          animation-play-state: paused;
+        }
+        .slider-content figure{
+          width:200px;
+          height:300px;
+      
+          border:1px solid #555;
+          overflow: hidden;
+          position:absolute;
+        }
+        .slider-content img{
+          image-rendering: auto;
+          transition: all 400ms;
+          width: 100%;
+          height: auto;
+        }
+        .slider-content img:hover{
+          transform: scale(1.2); 
+          transition: all 300ms; 
+        }
+        
+        .shadow{ 
+          position: absolute; 
+          box-shadow: 0px 0px 0px #000; 
+        }
+        .slider-content figure:nth-child(1){
+          transform:translateX(-500px);
+        }
+        
+        .slider-content figure:nth-child(2){
+          transform:translateX(-250px);
+        }
+        .slider-content figure:nth-child(3){
+          transform:translateX(0px);
+        }
+        .slider-content figure:nth-child(4){
+          transform:translateX(250px);
+        }
+        
+
+        @keyframes rotate {
+          from{
+            transform: translateX(-200px);
+            
+          }
+          to{
+              transform: translateX(600px);
+              
+          }
+        }
     </style>
 
 
@@ -613,8 +796,21 @@
               <a class="dropdown-item " id="data-flow-link" href="#h-design">Hardware Designs</a>
             </div>
           </li>
+          <li class="nav__link"><a class="text-white " href="#testing">Testing</a></li>
+          <li class="nav__link d-xs-block d-md-none"><a class="text-white " href="#design">Others</a></li>
 
-      <li class="nav__link"><a class="text-white " href="#timeline">Timeline</a></li>
+          <li class="nav__link dropdown ">
+            <a class="text-white  dropdown-toggle" href="#timeline" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Others
+            </a>
+            <div class="dropdown-menu dropdown-menu-end animate slideIn"
+              aria-labelledby="navbarDropdown" style="background-color: deepskyblue;">
+              <a class="dropdown-item " id="data-gen-link" href="#timeline">Timeline</a>
+              <a class="dropdown-item " id="data-flow-link" href="#budget">Budget</a>
+            </div>
+          </li>
+      
       <li class="nav__link"><a class="text-white " href="#team">Team</a></li>
       <a class="btn btn-secondary d-flex align-items-center justify-content-center" href="https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System" target="_blank"><i class="fab fa-github px-2"></i>Git Repository</a>
     </ul>
@@ -706,7 +902,7 @@
     <div id="intro" class="section" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
       <div class="row">
         <h2 class="container col-12 col-md-4">Introduction</h2>
-        <a href="https://youtu.be/fWLwAiwr81Q" target="_blank" class="container col-12 col-md-4 col-md-offset-4 btn px-3" style="width: auto; background-color: rgb(248, 248, 248);">View Introduction video<i class="fab fa-youtube px-2" style="color: red;font-size: 20px;"></i></a>
+        <a href="https://youtu.be/fWLwAiwr81Q" target="_blank" class="container col-12 col-md-4 col-md-offset-4 btn px-3" style="width: auto; background-color: rgb(248, 248, 248);"><b>View Introduction video</b><i class="fab fa-youtube px-2" style="color: red;font-size: 20px;"></i></a>
 
       </div>
         
@@ -721,7 +917,7 @@
     Good-quality milk products can be produced only from good-quality raw milk.
     Milk testing and quality control should be carried out at all stages of the dairy chain</p>
     <div class="container">
-      <section class="ftco-section ftco-no-pb ftco-no-pt text-white" style="background: rgb(241, 60, 84);">
+      <section class="ftco-section p-2 text-white " style="background: rgba(253, 90, 112, 0.986);">
         <div class="container">
           <div class="row d-flex no-gutters">
             <h2 class="col-12 text-center mt-3">Milk Adulterants</h2>
@@ -765,17 +961,17 @@
     
     
     <div class="container py-4">
-      <section class="ftco-section ftco-no-pb ftco-no-pt text-white" style="background: rgb(241, 60, 187);">
+      <section class="ftco-section p-3 text-grey-darker" style="background: rgb(252, 90, 252);">
         <div class="container">
           <div class="row d-flex no-gutters">
             <div class="icons_foods d-flex justify-content-center">
-              <i class="fas fa-ice-cream m-4" style="font-size: 30px; color: #fff;"></i>
-              <h2 class="text-center mt-3">Food Industry</h2>
+              <i class="fas fa-utensils m-4" style="font-size: 30px; color: #fff;"></i>
+              <h2 class="text-center mt-3 text-white">Food Industry</h2>
               <i class="fas fa-utensils m-4" style="font-size: 30px; color: #fff;"></i>
             
             </div>
             
-            <p class="container">
+            <p class="container" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
             
               When considering about food industry, quality is an important thing. Due to bio-chemical activities, there are changes in food time to time.
               Preservation is so impotant in food industry. Further, there can be some wastage due to expiration or any condition. This case is considerable 
@@ -788,21 +984,23 @@
               other countries such as Australia and New Zeeland since the domestic milk
               production has not sufficient. This is an opportunity for small scale processors to supply
               dairy products to fil the demand.</p>
-              <div class="d-flex justify-content-center  m-3 p-3 ">
-                <img src="../Diagrams/sl_chart_dairy_white.png" class="chart_sl col-9">
+              <button onclick="expand1()" class=" btn btn-info m-2 " style="width: auto;">Primary supply chain in Dairy industry</button>
+              <div class="d-none justify-content-center  m-3 p-3 " id="schart1">
+                <img src="images/diagrams/supplychain.PNG" class="chart_sl col-9">
                 
               </div>
-              <div class="d-flex justify-content-center m-3 p-3">
-                <img src="../Diagrams/sl_chain.png" class="chart_sl col-9">
-              </div>
-              <br>
+              <!-- <button onclick="expand2()" class=" btn btn-info m-2" style="width: auto;">Raw milk distribution diagram</button>
+              <div class="d-none justify-content-center m-3 p-3"  id="schart2">
+                <img src="" class="chart_sl col-9">
+              </div> -->
+              <p>
               When we talk about restrictions for starting dairy related production
               <ul class="container px-5">
                 <li style="list-style: square;">Not having an easy method to test the quality </li>
                 <li style="list-style: square;">Not having knowledge of quality parameters and testing</li>
                 <li style="list-style: square;">inability to buy laboratory equipments for testing.</li>
               </ul>
-              
+              </p>
             
             <a href="http://www.fao.org/3/i0588e/i0588e08.htm" target="_blank" class="text-white"><i class="fas fa-external-link-alt px-4"></i>find more details here on 'Opportunities for dairy sector growth in Sri Lanka' </a>
           </div>
@@ -819,11 +1017,11 @@
       <h5 class="container">Whom we target?</h5>
     <div class="container">
       <div class="card-group row d-flex justify-content-center align-items-center">
-        <div class="card px-1 m-3 col-10 col-md-2 d-flex text-center shadow-lg" style="background: rgb(44, 230, 38); ">MILK COLLECTORS</div>
-        <div class="card px-2 m-3 col-10 col-md-2 d-flex text-center shadow-lg" style="background: rgb(44, 230, 38);">LIQUID MILK SALES OUTLETS</div>
+        <div class="card px-1 m-3 col-10 col-md-2 d-flex text-center shadow-lg bg-white"><b>MILK COLLECTORS</b></div>
+        <div class="card px-2 m-3 col-10 col-md-2 d-flex text-center shadow-lg bg-white"><b>LIQUID MILK SALES OUTLETS</b></div>
         
-        <div class="card px-2 m-3 col-10 col-md-2 d-flex text-center shadow-lg" style="background: rgb(44, 230, 38);">HOTELS & RESTAURANTS</div>
-        <div class="card px-2 m-3 col-10 col-md-2 d-flex text-center shadow-lg" style="background: rgb(44, 230, 38);">SMALL SCALE PROCESSORS</div>
+        <div class="card px-2 m-3 col-10 col-md-2 d-flex text-center shadow-lg bg-white"><b>HOTELS & RESTAURANTS</b></div>
+        <div class="card px-2 m-3 col-10 col-md-2 d-flex text-center shadow-lg bg-white"><b>SMALL SCALE PROCESSORS</b></div>
       </div>
 
       <section class="ftco-section ftco-no-pb ftco-no-pt bg-primary text-white">
@@ -836,7 +1034,7 @@
               <ul class="bg-info text-dark col-offset-1 col-10 col-md-offset-4 col-md-4 shadow-lg p-2" style="border-radius: 5px;">
                 <li>pH : 6.5 - 6.7</li>
                 <li>Density : 1.026-1.032 grams per ml</li>
-                <li>Fat Cntent :
+                <li>Fat Content :
                   <ul>
                     <li style="list-style: circle;">cow's milk (3.5-4.5)%</li>
                     <li style="list-style: circle;">buffalo's milk (6-7)%</li>
@@ -898,9 +1096,9 @@
       <section class="ftco-section ftco-no-pb ftco-no-pt text-white">
         <div class="container">
           <div class="row d-flex no-gutters justify-content-center">
-            <img src="images/diagrams/outcomes.png" class="p-1 w-75">
-            <!-- <h2 class="col-12 text-center mt-3 text-dark">Advantages for Users</h2>
-            <div class="col-md-6 d-flex align-items-stretch ftco-animate " style="background-color: rgb(213, 36, 230);">
+            <!-- <img src="images/diagrams/outcomes.png" class="p-1 w-75"> -->
+            <h2 class="col-12 text-center mt-3 text-dark">Expected outcomes</h2>
+            <div class="col-md-6 d-flex align-items-stretch ftco-animate " style="background-color: rgb(243, 32, 148);">
 
               <div class="media block-6 services services-bg d-block text-center px-4 py-5">
                 <div class="icon d-flex justify-content-center align-items-center">
@@ -909,14 +1107,17 @@
                 <div class="media-body py-md-4">
                   <h3>Collectors/Producers</h3>
                   <ul style="text-align: left; margin-left: 10%;">
-                    <li style="list-style: disc;">Ability to expand production level</li>
-                    <li style="list-style: disc;">Promote productions using mobile application</li>
-                    <li style="list-style: disc;">Test milk at any stage of processing</li>
+                    <li style="list-style: disc;">Reducing wastage</li>
+                    <li style="list-style: disc;">Get rid of traditional methods </li>
+                    <li style="list-style: disc;">
+                      Reducing need of high level laboratory testing
+                      </li>
+                      <li style="list-style: disc;">Easy to expand production level</li>
                   </ul>
                 </div>
               </div>
-            </div> -->
-            <!-- <div class="col-md-6 d-flex align-items-stretch ftco-animate" style="background-color: rgb(33, 199, 144);">
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch ftco-animate" style="background-color: rgb(3, 131, 182);">
               <div class="media block-6 services services-bg services-darken d-block text-center px-4 py-5">
                 <div class="icon d-flex justify-content-center align-items-center">
                   <img src="images/assets/icons/icons8-man-farmer-48.png" style="width: 60px;">
@@ -925,25 +1126,37 @@
                 <div class="media-body py-md-4">
                   <h3>Farmers</h3>
                   <ul style="text-align: left; margin-left: 10%;">
-                    <li style="list-style: disc;">Ability Get higher value for good milk</li>
-                    <li style="list-style: disc;">Ability to get high demand</li>
-                    <li style="list-style: disc;">Having a smart way to access financial records</li>
+                    <li style="list-style: disc;">Ability to get higher value & demand for good milk</li>
+                    <li style="list-style: disc;">A smart way to access financial records</li>
+                    
                   </ul>
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
+        <div class="row d-flex justify-content-center">
+          <div class="loader">
+            <span class="dots"></span>
+            <span class="dots" ></span>
+            <span class="dots" ></span>
+            <span class="dots" ></span>
+            <span class="dots"></span>
+            <span class="dots"></span>
+          </div>
+        </div>
+        
       </section>
     </div>
-
-    	</div>
+    
+    </div>
         <div id="solution" class="section">
         <h2 class="container">Solution Architecture</h2>
         <div class="container">
-            <img src="images/diagrams/architecture.jpg" class="img img-fluid" alt="architecture">
+            <img src="images/diagrams/fullchart.PNG" class="img img-fluid "  alt="data_flow">
+            <img src="images/diagrams/architecture.jpg" class="img img-fluid pt-4" alt="architecture">
             <img src="images/diagrams/Data_flow.jpg" class="img img-fluid pt-4"  alt="data_flow">
-            <img src="images/diagrams/fullchart.PNG" class="img img-fluid pt-4"  alt="data_flow">
+            
         </div>
         <div class="container mt-4">
           <h5>Measurements</h5>
@@ -976,18 +1189,18 @@
             The more the fat content in the milk, more will be the amount of light scattered by milk.
             The circuit  is  calibrated  using  standards  with  sample  of  known  fat  values
             <div class="d-flex">
-              <img src="images/assets/items/161-504.jpg" class="col-2">
-              <img src="images/assets/items/LDR-Resistor.png" class="col-2">
+              <img src="images/assets/items/161-504.jpg" class="col-6 col-md-3 m-2">
+              <img src="images/assets/items/LDR-Resistor.png" class="col-6 col-md-3 m-2">
             </div>
 
           </p>
           <h6>Corrected density</h6>
           <div class="d-flex">
-            <img src="images/assets/items/13330-01.jpg" class="col-2">
-            <img src="images/assets/items/arduino-compatible-hc-sr04-ultrasonic-sonar-distance-sensor-original-imafnumzhdr5dzhn.jpeg" class="col-2">
+            <img src="images/assets/items/13330-01.jpg" class="col-6 col-md-3 m-2">
+            <img src="images/assets/items/arduino-compatible-hc-sr04-ultrasonic-sonar-distance-sensor-original-imafnumzhdr5dzhn.jpeg" class="col-6 col-md-3 m-2">
 
           </div>
-          <img src="../Diagrams/measurement.png" class="p-3 col-12 col-md-8 ">
+          <img src="images/diagrams/calibration.PNG" class="p-3 col-12 col-md-10 ">
         </div>
         <div class="container">
           <h4>Milk Grading System</h4>
@@ -1002,15 +1215,15 @@
 
       <!--   <p class="text-grey-darker text-xs mb-8">Responsive cards (1 / 2 / 3 cols); card footer; css flex properties for equal heights. Unsplash photos.</p> -->
       <div class="container">
-      <div class="flex flex-wrap -m-3">
+      <div class="m-3 row">
 
 
 
 
-          <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3 container">
-            <div class="bg-info rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+          <div class="col-12 col-md-4 p-3 container">
+            <div class="rounded-lg shadow-lg overflow-hidden techcard" style="background-color: rgb(25, 223, 213);">
               <div class="bg-cover h-48">
-               <img src="images/technologies/flutterv1.jfif" class="img img-fluid pt-4"  alt="data_flow">
+               <img src="images/technologies/flutterv1.png" class="img img-fluid pt-4 px-3"  alt="data_flow">
 
 
 
@@ -1028,10 +1241,10 @@
           </div>
 
 
-             <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3 container">
-            <div class="bg-info rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+          <div class="col-12 col-md-4 p-3 container">
+            <div class=" rounded-lg shadow-lg overflow-hidden techcard" style="background-color: lightpink;">
               <div class="bg-cover h-48">
-               <img src="images/technologies/laravel.jfif" class="img img-fluid pt-4"  alt="data_flow">
+               <img src="images/technologies/laravelv3.png" class="img img-fluid pt-4 px-3"  alt="data_flow">
 
 
 
@@ -1049,10 +1262,10 @@
           </div>
 
 
-             <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3 container">
-            <div class="bg-info rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+          <div class="col-12 col-md-4 p-3 container">
+            <div class="rounded-lg shadow-lg overflow-hidden techcard" style="background-color: rgb(255, 203, 126);">
               <div class="bg-cover h-48">
-               <img src="images/technologies/aws.jfif" class="img img-fluid pt-4"  alt="data_flow">
+               <img src="images/technologies/awsv1.png" class="img img-fluid pt-4 px-3"  alt="data_flow">
 
 
 
@@ -1074,7 +1287,16 @@
         </div>
 
     	</div>
-
+      <div class="row d-flex justify-content-center">
+        <div class="loader">
+          <span class="dots"></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+        </div>
+      </div>
 
 
 
@@ -1123,25 +1345,29 @@
 
 
             <h4 class="container d-flex justify-content-center section" id="h-design">3D Designs of model</h4>
-            <div class="row d-flex align-items-center">
-              <figure class="col-sm-12 col-md-4">
-                <img src="images/3d_design/can.PNG" class="img img-fluid p-4" alt="model">
-                <figcaption>Milk container</figcaption>
-              </figure>
-              <figure class="col-sm-12 col-md-4">
-                <img src="images/3d_design/m1.png" class="img img-fluid p-4" alt="model">
-                <figcaption>Main unit</figcaption>
-              </figure>
-              
             
-              <figure class="col-sm-12 col-md-4">
-                <img src="images/3d_design/model1.png" class="img img-fluid p-4" alt="model">
-                <figcaption>Sensor holder</figcaption>
-              </figure>
-              <figure class="col-sm-12 col-md-4">
-                <img src="images/3d_design/can_with_main.PNG" class="img img-fluid p-4" alt="model">
-                <figcaption>Container with main unit</figcaption>
-              </figure>
+            <div class="row d-flex align-items-center">
+              <section class="slideshow">
+                <div class="content">
+                  <div class="slider-content text-white">
+                    <figure class="col-sm-12 col-md-4 shadow ">
+                      <img src="images/3d_design/can.PNG" class="img img-fluid p-4" alt="model">
+                      <figcaption>Milk container</figcaption>
+                    </figure>
+                    <figure class="col-sm-12 col-md-4 shadow">
+                      <img src="images/3d_design/m1.png" class="img img-fluid px-4 py-2" alt="model">
+                      <figcaption>Main unit</figcaption>
+                      <img src="images/3d_design/model1.PNG" class="img img-fluid px-4 py-2" alt="model">
+                      <figcaption>Sensor holder</figcaption>
+                    </figure>
+                    <figure class="col-sm-12 col-md-4 shadow">
+                      <img src="images/3d_design/can_with_main.PNG" class="img img-fluid p-4" alt="model">
+                      <figcaption>Container with main unit</figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </section>
+              
             </div>
             
     	</div><br>
@@ -1176,6 +1402,16 @@
                 </div>
               </div>
       </div>
+      <div class="row d-flex justify-content-center">
+        <div class="loader">
+          <span class="dots"></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+        </div>
+      </div>
     	<div id="testing" class="section">
         <h3 class="container">Testing</h3>
         <div class="container">
@@ -1183,6 +1419,7 @@
         </div>
         <div class="container p-2">
           <h5>Testing tools</h5>
+          
           <div class="container row">
             <h5>Postman</h5>
             <img src="images/technologies/postman.png" class="col-12 col-md-3">
@@ -1193,122 +1430,17 @@
           </div>
         </div>
     	</div>
-
-      <div id="budget col-10 col-offset-1">
-        <h3 class="container">Estimated budget</h3>
-        <div class="container">
-        <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
-            <thead class="thead-light">
-                <tr>
-                  <th scope="col" class="bg-primary">#</th>
-                  <th scope="col" class="bg-primary">item</th>
-                  <th scope="col" class="bg-primary">quantity</th>
-                  <th scope="col" class="bg-primary">price(LKR)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>ATmega328p</td>
-                  <td>1</td>
-                  <td>350</td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Bluetooth module</td>
-                  <td>1</td>
-                  <td>850</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>PH sensor</td>
-                  <td>1</td>
-                  <td>3800</td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>Ultrasonic sensor</td>
-                  <td>1</td>
-                  <td>300</td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td>20x4 LCD display</td>
-                  <td>1</td>
-                  <td>900</td>
-                </tr>
-                <tr>
-                  <th scope="row">6</th>
-                  <td>10 V power supply</td>
-                  <td>1</td>
-                  <td>1000</td>
-                </tr>
-                <tr>
-                  <th scope="row">7</th>
-                  <td>Temperature sensor</td>
-                  <td>1</td>
-                  <td>400</td>
-                </tr>
-                <tr>
-                    <th scope="row">8</th>
-                    <td>Resistors</td>
-                    <td>10</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <th scope="row">9</th>
-                    <td>Load cell</td>
-                    <td>1</td>
-                    <td>700</td>
-                </tr>
-                <tr>
-                    <th scope="row">10</th>
-                    <td>LDR</td>
-                    <td>1</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <th scope="row">11</th>
-                    <td>LED</td>
-                    <td>5</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                  <th scope="row">12</th>
-                  <td>Piezo Buzzer</td>
-                  <td>1</td>
-                  <td>100</td>
-                </tr>
-                <tr>
-                  <th scope="row">13</th>
-                  <td>HX711 converter</td>
-                  <td>1</td>
-                  <td>200</td>
-                </tr>
-                <tr>
-                    <th scope="row">14</th>
-                    <td>cost for model</td>
-                    <td>1</td>
-                    <td>2000</td>
-                </tr>
-                <tr>
-                    <th scope="row">15</th>
-                    <td colspan="2">wires and others</td>
-
-                    <td>300</td>
-                </tr>
-                <tr>
-                    <th scope="row" colspan="3" class="bg-primary">Total</th>
-
-
-                    <td class="bg-primary">10920</td>
-                </tr>
-            </tbody>
-        </table>
+      <div class="row d-flex justify-content-center">
+        <div class="loader">
+          <span class="dots"></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
         </div>
-
-        </div>
-        <div>
+      </div>
+      <div>
 
         <div class="container section" id="timeline">
         <h4 class="text-center">Timeline</h4>
@@ -1392,9 +1524,143 @@
         </div>
 
         </div>
+        <div class="row d-flex justify-content-center">
+          <div id="budget" class="section">
+            <h3 class="container text-center">Estimated budget</h3>
+            <div class="container col-8 col-offset-2">
+            <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
+                <thead class="thead-light">
+                    <tr>
+                      <th scope="col" class="bg-primary">#</th>
+                      <th scope="col" class="bg-primary">item</th>
+                      <th scope="col" class="bg-primary">quantity</th>
+                      <th scope="col" class="bg-primary">price(LKR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>ATmega328p</td>
+                      <td>1</td>
+                      <td>750</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Bluetooth module</td>
+                      <td>1</td>
+                      <td>850</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>PH sensor</td>
+                      <td>1</td>
+                      <td>3800</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>Ultrasonic sensor</td>
+                      <td>1</td>
+                      <td>200</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>20x4 LCD display</td>
+                      <td>1</td>
+                      <td>950</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">6</th>
+                      <td>3.7 V power supply</td>
+                      <td>2</td>
+                      <td>900</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">7</th>
+                      <td>Temperature sensor</td>
+                      <td>1</td>
+                      <td>250</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>Resistors</td>
+                        <td>10</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td>Load cell 5 kg</td>
+                        <td>1</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10</th>
+                        <td>LDR</td>
+                        <td>1</td>
+                        <td>55</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">11</th>
+                        <td>LED</td>
+                        <td>5</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">12</th>
+                      <td>Piezo Buzzer</td>
+                      <td>1</td>
+                      <td>100</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">13</th>
+                      <td>HX711 converter</td>
+                      <td>1</td>
+                      <td>200</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">14</th>
+                      <td>Battery charger</td>
+                      <td>1</td>
+                      <td>450</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">15</th>
+                        <td>cost for model</td>
+                        <td>1</td>
+                        <td>2000</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">16</th>
+                        <td colspan="2">wires and others</td>
+    
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="3" class="bg-primary">Total</th>
+    
+    
+                        <td class="bg-primary">10555</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+    
+            </div>
+        </div>
+      
+        
         <div id="conclusion" class="section">
-        <h3 class="container">Conclusion</h3>
-    	</div>
+          <h3 class="container">Conclusion</h3>
+    	  </div>
+      <div class="row d-flex justify-content-center">
+        <div class="loader">
+          <span class="dots"></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots" ></span>
+          <span class="dots"></span>
+          <span class="dots"></span>
+        </div>
+      </div>
       	<div id="team" class="section">
         <h2 class="container">Team</h2>
                <div class="container">
@@ -1417,7 +1683,11 @@
               </ul>
             </div> -->
             <div class="row d-flex justify-content-center">
-              <div class="super_cards col-12 col-md-6 d-flex align-items-center ">
+              <div class="super_cards col-12 col-md-6 d-flex align-items-center "
+              style="background: #4B79A1;  /* fallback for old browsers */
+              background: -webkit-linear-gradient(to right, #408dcf, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to right, #408dcf, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+              ">
                 <div class="super_img">
                   <img src="images/team/me-1-e1561020588549.png" class="">
                 </div>
@@ -1427,7 +1697,11 @@
                 <a href="mailto:isurunawinne@eng.pdn.ac.lk" target="_blank" class=""><i class="fas fa-envelope"></i></a>
                 </div>
               </div>
-              <div class="super_cards col-12 col-md-6 d-flex align-items-center ">
+              <div class="super_cards col-12 col-md-6 d-flex align-items-center "
+              style="background: #4B79A1;  /* fallback for old browsers */
+              background: -webkit-linear-gradient(to right, #408dcf, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to right, #408dcf, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+              ">
                 <div class="super_img">
                 <img src="images/team/IMG_5804-500x500.jpg" class="">
                 </div>
@@ -1495,7 +1769,7 @@
             <div class="teamcards" style="position:relative;">
               <div class="cardbox">
                 <div class="contentcard">
-                  <div class="imgbox"><img src="images/team/012v2.jpg"></div>
+                  <div class="imgbox"><img src="images/team/012v3.png"></div>
                   <div class="contentbox">
                     <h6>Aminda Amarasinghe</h6>
                   </div>
@@ -1601,7 +1875,9 @@
 		            <li class="mt-3">
 		            	<img src="images/favicon.png" style="width: 10%">
 		            	<a href="https://projects.ce.pdn.ac.lk/" target="_blank" style="color: white; text-decoration: none;">Department Projects</a></li>
+                <li class="mt-3"><p class="text-white">Copyright © 2021 All rights reserved | MilkTab</p></li>
 		        </ul>
+            
         	</div>
 
    		</div>
@@ -1652,7 +1928,24 @@
                 $navLinkWrapper.toggleClass('expanded');
             })
 
-
+            function expand1() {
+              let chart1= document.getElementById("schart1");
+              if(chart1.classList.contains('d-none')){
+                chart1.classList.replace('d-none','d-flex');
+              }else{
+                chart1.classList.replace('d-flex','d-none');
+              }
+              
+            }
+            function expand2() {
+              let chart1= document.getElementById("schart2");
+              if(chart1.classList.contains('d-none')){
+                chart1.classList.replace('d-none','d-flex');
+              }else{
+                chart1.classList.replace('d-flex','d-none');
+              }
+              
+            }
 
         </script>
 </body>
