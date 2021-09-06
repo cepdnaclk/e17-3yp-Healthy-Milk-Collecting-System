@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Farmer;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Notifications\ResetPasswordNotification;
 
-class User extends Authenticatable implements JWTSubject
+
+class User extends Authenticatable implements JWTSubject,MustVerifyEmail
 { 
     use HasFactory, Notifiable;
 
@@ -22,6 +24,12 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'firstname',
+        'lastname',
+        'address',
+        'contact',
+        'type',
+        'businesstype',
     ];
 
     /**
@@ -65,6 +73,14 @@ public function getJWTIdentifier()
     {
         return [];
     }
+
+
+    public function sendPasswordResetNotification($token)
+{
+    $url = 'https://example.com/reset-password?token='.$token;
+
+    $this->notify(new ResetPasswordNotification($url));
+}
 
 
     

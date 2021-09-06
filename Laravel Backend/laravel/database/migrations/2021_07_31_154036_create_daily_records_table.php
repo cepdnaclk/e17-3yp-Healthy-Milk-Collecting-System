@@ -24,6 +24,9 @@ class CreateDailyRecordsTable extends Migration
             $table->dateTime('added_date');
             $table->string('grade');
             $table->float('price_rate');
+
+            $table->unsignedBigInteger('collector_id');
+            $table->unsignedBigInteger('farmer_id');
         });
     }
 

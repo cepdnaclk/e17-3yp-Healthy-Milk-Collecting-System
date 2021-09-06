@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RecordController;
+use App\Http\Controllers\NewPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,15 @@ use App\Http\Controllers\AuthController;
 //});
 
 
-
+//Authentication
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 Route::get('/logout',[AuthController::class,'logout']);
+
+
+
+Route::post('/add_daily_record',[RecordController::class,'addDailyRecord']);
+
+Route::post('/test1',[RecordController::class,'test1']); 
+
+Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
