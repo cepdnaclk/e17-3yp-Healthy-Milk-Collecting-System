@@ -11,14 +11,18 @@ Currently diary collectors measure only few parameters using technology while sm
 Our Healthy Milk Collecting System can be used to measure important quality parameters of milk when the deal happens between diary collector and farmer to ensure the milk is healthy and also it can be used to calculate financial value of milk according to those parameters and manage the financial system in a cloud based system.
 
 ## Our solution
-<img src="./docs/images/logo.png">
+<img src="./docs/images/logo.png" style="width:100px;">
+<br>
+<img src="./docs/images/3d_design/can_with_main.PNG" style="width:300px;">
+
 ```
 - Easy usage
 - portable
-- Low cost
+- User friendly
 - Reachargable & Low power consumption
 ```
 ## Solution Architecture
+<img src="docs/images/diagrams/overall.png">
 <img src="./Diagrams/architecture.jpg">
 <img src="./Diagrams/Data_flow.jpg">
 
