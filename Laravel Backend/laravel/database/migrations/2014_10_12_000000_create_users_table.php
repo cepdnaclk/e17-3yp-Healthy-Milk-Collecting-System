@@ -21,6 +21,12 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('address');
+            $table->string('contact');
+            $table->string('type');
+            $table->string('businesstype');
 
 
             $table->unsignedBigInteger('farmer_id')->nullable();

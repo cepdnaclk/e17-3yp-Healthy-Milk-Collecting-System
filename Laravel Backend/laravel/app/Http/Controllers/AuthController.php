@@ -8,6 +8,7 @@ use App\Models\SubRecord;
 
 use App\Models\User;
 use JWTAuth;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -20,7 +21,13 @@ class AuthController extends Controller
         $creds = [
             'email' => $request->input('email'),
             'name' => $request->input('name'),
-            'password' => bcrypt($request->input('password'))
+            'password' => bcrypt($request->input('password')),
+              'firstname' => $request->input('firstname'),
+            'lastname' => $request->input('lastname'),
+            'address' => $request->input('address'),
+            'contact' => $request->input('contact'),
+            'type' => $request->input('type'),
+            'businesstype' => $request->input('businesstype'),
         ];
         
         
@@ -31,19 +38,22 @@ class AuthController extends Controller
                 [
                     
                     'message' => $th,
+                    'success' => false
                     
                 ],
                 
             );
         }
         
+        event(new Registered($user));
         $token = JWTAuth::fromUser($user);
         
         return response(
             [
                 'user' => $user,
                 'message' => 'register success',
-                'token' => $token
+                'token' => $token,
+                'success' => true
             ],
             201
         );
@@ -69,7 +79,8 @@ public function login(Request $request){
      if(!Auth()->attempt($creds)){
 
 return response([
-    'message' => 'login faild!'
+    'message' => 'login faild!',
+    'success' => false
 ]);
 
      }
@@ -84,7 +95,8 @@ $token = JWTAuth::fromUser($user);
 return response(
     [
         'user' => $user,
-        'token' => $token
+        'token' => $token,
+        'success' => true
     ],
     201
     );
@@ -96,9 +108,26 @@ return response(
         
 public function logout()
     {
-        auth()->logout();
+    
+     try {
+               auth()->logout();
+          return response()->json(['message' => 'Successfully logged out',
+                                   'success' => true
+                                  ]);
+        } catch (\Throwable $th) {
+            return response(
+                [
+                    
+                    'message' => $th,
+                    'success' => false
+                    
+                ],
+                
+            );
+        }
+     
 
-        return response()->json(['message' => 'Successfully logged out']);
+       
     }
 
 

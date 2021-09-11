@@ -15,6 +15,12 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+    TextEditingController _passwordConfirmController = TextEditingController();
+
+   
+
 
   Widget _buildEmailTF() {
     return Column(
@@ -31,6 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: 60.0,
           child: TextField(
             keyboardType: TextInputType.emailAddress,
+            controller: _emailController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -66,6 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: 60.0,
           child: TextField(
             obscureText: true,
+            controller: _passwordController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -101,6 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: 60.0,
           child: TextField(
             obscureText: true,
+            controller: _passwordConfirmController,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -128,7 +137,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen()));
+         
+         validate();
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -136,7 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         color: Colors.white,
         child: Text(
-          'SIGN UP',
+          'NEXT',
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 1.5,
@@ -335,4 +345,47 @@ Widget _buildTypeSelector() {
       ),
     );
   }
+
+  void validate() {
+
+if(_emailController.text.isEmpty){
+showSnack("Please enter the email");
+}else if(_passwordController.text.isEmpty){
+showSnack("Please enter the password");
+}else if(_passwordConfirmController.text.isEmpty){
+showSnack("Please confirm the password");
+}else if(
+  _passwordController.text != _passwordConfirmController.text
+){
+showSnack("Password not match!");
+
+}else{
+ Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(_emailController.text,
+  _passwordController.text,
+  selectedUser
+  )));
+}
+
+
+  }
+
+void showSnack(String message) {
+
+     final snackBar = SnackBar(
+            content:  Text(message),
+            backgroundColor: (Colors.black.withOpacity(0.6)),
+            action: SnackBarAction(
+              label: 'dismiss',
+              onPressed: () {
+              },
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+
+  }
+
+
+
 }
