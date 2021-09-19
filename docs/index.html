@@ -23,7 +23,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
 </head>
 
 <body>
@@ -775,6 +776,179 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
               
           }
         }
+
+        
+        .design-process-section .text-align-center {
+            line-height: 25px;
+            margin-bottom: 12px;
+        }
+        .design-process-content {
+            
+            position: relative;
+            height: auto;
+            
+        }
+        
+        .design-process-content h3 {
+            margin-bottom: 16px;
+        }
+        .design-process-content p {
+            line-height: 26px;
+            margin-bottom: 12px;
+        }
+        .design-process-content img{
+            width: 250px;
+        }
+        .process-model {
+            list-style: none;
+            padding: 0;
+            position: relative;
+            max-width: 600px;
+            margin: 10px auto 16px;
+            border: none;
+            z-index: 0;
+        }
+        .process-model li::after {
+            background: #e5e5e5 none repeat scroll 0 0;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 4px;
+            margin: 0 auto;
+            position: absolute;
+            right: 105px;
+            top: 23px;
+            width: 70%;
+            z-index: -1;
+        }
+        .process-model li.visited::after {
+            background: rgb(243, 32, 148);
+        }
+        .process-model li:last-child::after {
+            width: 0;
+        }
+        .process-model li {
+            display: inline-block;
+            width: 18%;
+            text-align: center;
+            float: none;
+        }
+        .nav-tabs.process-model > li.active > a, .nav-tabs.process-model > li.active > a:hover, .nav-tabs.process-model > li.active > a:focus, .process-model li a:hover, .process-model li a:focus {
+            border: none;
+            background: transparent;
+
+        }
+        .process-model li a {
+            padding: 0;
+            border: none;
+            color: #606060;
+        }
+        .process-model li.active,
+        .process-model li.visited {
+            color: rgb(243, 32, 148);
+        }
+        .process-model li.active a,
+        .process-model li.active a:hover,
+        .process-model li.active a:focus,
+        .process-model li.visited a,
+        .process-model li.visited a:hover,
+        .process-model li.visited a:focus {
+            color: rgb(243, 32, 148);
+        }
+        .process-model li.active p,
+        .process-model li.visited p {
+            font-weight: 600;
+            color: rgb(243, 32, 148);
+        }
+        .process-model li i {
+            display: block;
+            height: 48px;
+            width: 48px;
+            text-align: center;
+            margin: 0 auto;
+            background: #f5f6f7;
+            border: 2px solid #e5e5e5;
+            line-height: 48px;
+            font-size: 20px;
+            border-radius: 50%;
+        }
+        .process-model li.active i, .process-model li.visited i  {
+            background: #fff;
+            border-color: rgb(243, 32, 148);
+        }
+        .process-model li p {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        .process-model.contact-us-tab li.visited a, .process-model.contact-us-tab li.visited p {
+            color: #606060!important;
+            font-weight: normal
+        }
+        .process-model.contact-us-tab li::after  {
+            display: none; 
+        }
+        .process-model.contact-us-tab li.visited i {
+            border-color: #e5e5e5; 
+        }
+
+
+
+        @media screen and (max-width: 560px) {
+          .more-icon-preocess.process-model li span {
+                font-size: 23px;
+                height: 50px;
+                line-height: 46px;
+                width: 50px;
+            }
+            .more-icon-preocess.process-model li::after {
+                top: 24px;
+            }
+        }
+        @media screen and (max-width: 380px) { 
+            .process-model.more-icon-preocess li {
+                width: 16%;
+            }
+            .more-icon-preocess.process-model li span {
+                font-size: 16px;
+                height: 35px;
+                line-height: 32px;
+                width: 35px;
+            }
+            .more-icon-preocess.process-model li p {
+                font-size: 8px;
+            }
+            .more-icon-preocess.process-model li::after {
+                top: 18px;
+            }
+            .process-model.more-icon-preocess {
+                text-align: center;
+            }
+            .process-model li i {
+                
+                height: 28px;
+                width: 28px;
+                text-align: center;
+                margin: 0 auto;
+                background: #f5f6f7;
+                border: 2px solid #e5e5e5;
+                line-height: 28px;
+                font-size: 10px;
+                border-radius: 50%;
+            }
+            .process-model li::after {
+                background: #e5e5e5 none repeat scroll 0 0;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                margin: 0 auto;
+                position: absolute;
+                right: 40px;
+                top: 13px!important;
+                width: 70%;
+                z-index: -1;
+            }
+        }
     </style>
 
 
@@ -806,7 +980,7 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
             </div>
           </li>
           <li class="nav__link"><a class="text-white " href="#testing">Testing</a></li>
-          <li class="nav__link d-xs-block d-md-none"><a class="text-white " href="#design">Others</a></li>
+          <li class="nav__link d-xs-block d-md-none"><a class="text-white " href="#ui-design">Others</a></li>
 
           <li class="nav__link dropdown ">
             <a class="text-white  dropdown-toggle" href="#timeline" id="navbarDropdown" role="button"
@@ -929,19 +1103,19 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
     Good-quality milk products can be produced only from good-quality raw milk.
     Milk testing and quality control should be carried out at all stages of the dairy chain</p>
     <div class="container">
-      <section class="ftco-section p-2 text-white " style="background: rgba(253, 90, 112, 0.986);">
+      <section class="ftco-section p-2 text-white " style="background: rgba(26, 98, 252, 0.986);">
         <div class="container">
           <div class="row d-flex no-gutters">
             <h2 class="col-12 text-center mt-3">Milk Adulterants</h2>
-            <p class="container">There are many milk adulterants that are added to raw milk by farmers on behalf on financial beneficts.
+            <p class="container">There are many milk adulterants that are added to raw milk by supplier on behalf on financial benefits.
             </p>
         
-            <p class="container">Milk powder is the second most likely food item being in
+            <!-- <p class="container">Milk powder is the second most likely food item being in
               the risk of adulteration after olive oil. Addition of vegetable
               protein, milk from different species, addition of whey and
               watering which are known as economically motivated
               adulteration. These adulterations do not pose
-              any severe health risk.</p>
+              any severe health risk.</p> -->
             <p class="container">Some of the major adulterants
               in milk having serious adverse health effect are urea, formalin, 
               detergents, ammonium sulphate, boric acid, caustic
@@ -951,11 +1125,11 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
             <p>Preservatives are special adulterants which increase the shelf life of milk.
             <br>Eg: Formalin, Salicylic acid, Boric acid, Hydrogen Peroxide</p>
               <ul class="container">
-                <li>water:
+                <li class="p-2 bg-info text-dark" style=" border-radius: 8px;">water:
                   <p class="container">water is added to raw milk to increae milk volume.
-                    this is a common adulterant.</p>
+                    this is a common adulterant which is not harmful but decreases milk quality</p>
                 </li>
-                <li>Urea:
+                <li class="p-2 bg-info text-dark" style=" border-radius: 8px; margin-top: 15px;">Urea:
                   <p class="container">Urea, being a natural constituent of milk, constitutes the
                     major portion of non-protein nitrogen in milk.
                     maximum allowable limit for urea in milk is 70 mg/100 mL</p>
@@ -973,7 +1147,7 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
     
     
     <div class="container py-4">
-      <section class="ftco-section p-3 text-grey-darker" style="background: rgb(252, 90, 252);">
+      <section class="ftco-section p-3 text-white" style="background: rgb(252, 90, 252);">
         <div class="container">
           <div class="row d-flex no-gutters">
             <div class="icons_foods d-flex justify-content-center">
@@ -1172,6 +1346,7 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
         <div class="container">
             <img src="images/diagrams/fullchart.PNG" class="img img-fluid "  alt="data_flow">
             <img src="images/diagrams/architecture.jpg" class="img img-fluid pt-4" alt="architecture">
+            <img src="images/diagrams/main.png" alt=""  class="img img-fluid pt-4 col-md-10">
             <img src="images/diagrams/Data_flow.jpg" class="img img-fluid pt-4"  alt="data_flow">
             
         </div>
@@ -1210,10 +1385,10 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
             A high intensity LED is used as a light source.
             A LDR is placed to detect the amount of light passing through milk.
             The more the fat content in the milk, more will be the amount of light scattered by milk.
-            The circuit  is  calibrated  using  standards  with  sample  of  known  fat  values
+            <!-- The circuit  is  calibrated  using  standards  with  sample  of  known  fat  values -->
             <div class="d-flex">
-              <img src="images/assets/items/161-504.jpg" class="col-6 col-md-3 m-2">
-              <img src="images/assets/items/LDR-Resistor.png" class="col-6 col-md-3 m-2 ">
+              <!-- <img src="images/assets/items/161-504.jpg" class="col-6 col-md-3 m-2">
+              <img src="images/assets/items/LDR-Resistor.png" class="col-6 col-md-3 m-2 "> -->
             
               
             </div>
@@ -1239,9 +1414,16 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
         <div class="container">
           <div class="row d-flex">
             <h3>Data communication</h3>
-            <img src="images/assets/items/module-bluetooth-hc05.jpg" class="col-3 col-md-3 m-2 h-50">
-            <br>
-            <img src="images/diagrams/InterfacingofBluetoothwithATmegacrop.png" class="col-6 m-2">
+            <img src="images/technologies/bluetooth_PNG50.png" alt="" class="col-3 col-md-2 m-2 h-50">
+            <img src="images/assets/items/module-bluetooth-hc05.jpg" class="col-5 col-md-3 m-2 h-50">
+            
+            <!-- <img src="images/diagrams/InterfacingofBluetoothwithATmegacrop.png" class="col-6 m-2"> -->
+            
+            <img src="images/diagrams/communi.png" class="col-12 col-md-6 m-2">
+            <p class="bg-primary p-2 text-white">Bluetooth is a half-duplex communication method which is a popular communication method.
+              <br>The reason behind choosing bluetooth is the portable behaviour of the system.
+            </p>
+            
           </div>
         </div>  
         <div class="container">
@@ -1262,12 +1444,14 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
               <p>The grading system gives not only a grade for milk. This system is very usefull 
                 to manage storing milk. It is recommanded to store only milk with same grade to reduce the possible wastages.
               </p>
-              <img src="images/assets/outputs/A.png" class="col-6 my-2">
+              <img src="images/assets/outputs/gifmaker.gif" class="col-6 my-2">
               <h5>Future improvements</h5>
               <p>This system can be improved so as to get a approximate values for fat percentage of milk, SNF value.
                 Since buyers do not interest in that type of parameters proposed grading system is sufficient for the targeted problem
               </p>
+              
             </div>
+            <img src="images/assets/backgrounds/concept-of-data-analysis-and-maintenance.png" alt="" class="col-12 col-md-6 offset-md-3">
             <div class="container row shadow-bg bg-white d-flex justify-content-center p-2">
               <h5 class="col-12">Background Mechanism of Grading</h5>
               <p>SNF - Solid Non Fat , CLR - Corrected Lactometer Reading </p>
@@ -1287,7 +1471,7 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
                 </p>
                 <img src="images/technologies/jupyter.png" class="col-12 col-md-2">
               </div>
-              
+              <img src="images/assets/backgrounds/innovation-technology-1751390.png" alt="" class="col-12 col-md-5">
             </div>
             <img src="images/AppUi/change_price_rate.png" class="p-3 col-12 col-md-4 ">
             <div class="col-12 col-md-8 py-2">
@@ -1298,7 +1482,7 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
                 
               </p>
               <p class="container">History record of how the values varied is also displayed.</p>
-              <img src="images/AppUi/price_graph.png" class="p-3 col-12 col-md-8">
+              <img src="images/assets/outputs/graph.png" class="p-3 col-12 col-md-8 bg-white">
             </div>
           </div>
         </div>
@@ -1399,8 +1583,8 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
 
 
     	<div id="design" class="section">
-        <h2 class="container">Hardware & Software Designs</h2>
-        	<h4 class="container section" id="ui-design">Mobile Application User interfaces</h4>
+        
+        	<h4 class="section container" id="ui-design">Mobile Application User interfaces</h4>
           <div id="carouselExampleIndicators" class="carousel slide container mb-5" data-bs-ride="carousel">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active indicator" aria-current="true" aria-label="Slide 1"></button>
@@ -1440,6 +1624,8 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
           </div>
 
 
+          
+          
 
             <h4 class="container d-flex justify-content-center section" id="h-design">3D Designs of model</h4>
             
@@ -1468,6 +1654,292 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
             </div>
             
     	</div><br>
+      <div class="container">
+        <div class="container">
+        <div class="row">
+              <div class="col-xs-12"> 
+              <!-- design process steps--> 
+              <!-- Nav tabs -->
+              <ul class=" process-model more-icon-preocess" role="tablist">
+                <li role="presentation" class="active"><a href="#discover" aria-controls="discover" role="tab" data-toggle="tab"><i class="fas fa-info-circle"></i>
+                  <p>Register</p>
+                  </a></li>
+                <li role="presentation"><a href="#strategy" aria-controls="strategy" role="tab" data-toggle="tab"><i class="fas fa-sign-in-alt"></i>
+                  <p>Login</p>
+                  </a></li>
+                <li role="presentation"><a href="#optimization" aria-controls="optimization" role="tab" data-toggle="tab"><i class="fas fa-signal"></i>
+                  <p>Connect</p>
+                  </a></li>
+                <li role="presentation"><a href="#content" aria-controls="content" role="tab" data-toggle="tab"><i class="fas fa-chart-bar"></i>
+                  <p>Report</p>
+                  </a></li>
+                <li role="presentation"><a href="#reporting" aria-controls="reporting" role="tab" data-toggle="tab"><i class="fas fa-cart-plus"></i>
+                  <p>Buy</p>
+                  </a></li>
+              </ul>
+              <!-- end design process steps--> 
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="discover">
+                  <div class="design-process-content row d-flex bg-info">
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/signup_screen.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/signup_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/1-32x32-36018.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select as collector</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/2-32x32-36019.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Enter a valid Email address</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/3-32x32-36021.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a strong password and re-type</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/4-32x32-36017.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Click next to proceed</b>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/details_screen.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/details_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/5-32x32-36024.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a valid mobile number</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/6-32x32-36022.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Type your address</b>
+                      </div>
+                      <div class="bg-info h-25">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/7-32x32-36023.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select your role</b>
+                        <ul>
+                          <li>Milk collector</li>
+                          <li>Small scale proceesor</li>
+                          <li>liquid outlet</li>
+                          <li>Hotel/Restaurent</li>
+                        </ul>
+                      </div>
+                      <div class="bg-info h-25 py-5">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/8-32x32-36025.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Sumbit your details</b>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="strategy">
+                  <div class="design-process-content row d-flex bg-info">
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/signin_screen.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/signup_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/1-32x32-36018.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Enter your email & password</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/2-32x32-36019.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">If you don't remember password, there is an option to reset it.</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/3-32x32-36021.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">If you still do not have an account, you can use guest mode</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/4-32x32-36017.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Sign in to get the experience</b>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/profile.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/details_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/5-32x32-36024.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">You can use this page to manage your profile</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/6-32x32-36022.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Your basic details are displayed here</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/7-32x32-36023.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Use edit options to change them if you want</b>
+                        
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/8-32x32-36025.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Use change price rate option to handle your deals</b>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="optimization">
+                  <div class="design-process-content row d-flex bg-info">
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/signup_screen.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/signup_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/1-32x32-36018.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select as collector</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/2-32x32-36019.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Enter a valid Email address</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/3-32x32-36021.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a strong password and re-type</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/4-32x32-36017.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Click next to proceed</b>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/details_screen.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/details_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/5-32x32-36024.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a valid mobile number</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/6-32x32-36022.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Type your address</b>
+                      </div>
+                      <div class="bg-info h-25">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/7-32x32-36023.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select your role</b>
+                        <ul>
+                          <li>Milk collector</li>
+                          <li>Small scale proceesor</li>
+                          <li>liquid outlet</li>
+                          <li>Hotel/Restaurent</li>
+                        </ul>
+                      </div>
+                      <div class="bg-info h-25 py-5">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/8-32x32-36025.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Sumbit your details</b>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="content">
+                  <div class="design-process-content row d-flex bg-info">
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/home_screen.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/signup_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/1-32x32-36018.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select as collector</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/2-32x32-36019.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Enter a valid Email address</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/3-32x32-36021.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a strong password and re-type</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/4-32x32-36017.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Click next to proceed</b>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/graphs.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/details_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/5-32x32-36024.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a valid mobile number</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/6-32x32-36022.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Type your address</b>
+                      </div>
+                      <div class="bg-info h-25">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/7-32x32-36023.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select your role</b>
+                        <ul>
+                          <li>Milk collector</li>
+                          <li>Small scale proceesor</li>
+                          <li>liquid outlet</li>
+                          <li>Hotel/Restaurent</li>
+                        </ul>
+                      </div>
+                      <div class="bg-info h-25 py-5">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/8-32x32-36025.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Sumbit your details</b>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="reporting">
+                  <div class="design-process-content row d-flex bg-info">
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/history.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/signup_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/1-32x32-36018.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select as collector</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/2-32x32-36019.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Enter a valid Email address</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/3-32x32-36021.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a strong password and re-type</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/4-32x32-36017.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Click next to proceed</b>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-3 "><img src="../MobileApp_UI/change_price_rate.PNG"></div>
+                    <!-- <img src="../MobileApp_UI/details_screen.PNG"> -->
+                    <div class="col-12 col-md-3">
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/5-32x32-36024.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Enter a valid mobile number</b>
+                      </div>
+                      <div class="bg-info h-25 py-3">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/6-32x32-36022.png" style="width: 32px;height: 32px;">
+                        <b class="px-2">Type your address</b>
+                      </div>
+                      <div class="bg-info h-25">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/7-32x32-36023.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Select your role</b>
+                        <ul>
+                          <li>Milk collector</li>
+                          <li>Small scale proceesor</li>
+                          <li>liquid outlet</li>
+                          <li>Hotel/Restaurent</li>
+                        </ul>
+                      </div>
+                      <div class="bg-info h-25 py-5">
+                        <img src="images/assets/icons/characters-and-numbers/png-32/8-32x32-36025.png" style="width: 32px;height: 32px; ">
+                        <b class="px-2">Sumbit your details</b>
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
       <div id="features" class="section">
         <h3 class="container">Feautures</h3>
         <div class="section-14">
@@ -1693,7 +2165,7 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
         <div class="row d-flex justify-content-center">
           <div id="budget" class="section">
             <h3 class="container text-center">Estimated budget</h3>
-            <div class="container col-8 col-offset-2">
+            <div class="container col-sm-6  col-md-8 col-md-offset-2">
             <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
                 <thead class="thead-light">
                     <tr>
@@ -1883,10 +2355,11 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
         </div>
 
     </div>
-    <div class="pt-4 pb-4" style="background: #4B79A1;  /* fallback for old browsers */
-	background: -webkit-linear-gradient(to left, #283E51, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to left, #283E51, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    <div class="pt-4 pb-4" style="background: #4B79A1;  
+	background: -webkit-linear-gradient(to left, #283E51, #4B79A1);  
+	background: linear-gradient(to left, #283E51, #4B79A1); 
 	">
+    
     	<style type="text/css">
     		/* .icon-img{
     			width: 20px;
@@ -2041,7 +2514,9 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
 		            <li class="mt-3">
 		            	<img src="images/favicon.png" style="width: 10%">
 		            	<a href="https://projects.ce.pdn.ac.lk/" target="_blank" style="color: white; text-decoration: none;">Department Projects</a></li>
-                <li class="mt-3"><p class="text-white">Copyright © 2021 All rights reserved | MilkTab</p></li>
+                <li class="mt-3"><p class="text-white">Copyright © 2021 All rights reserved | MilkTab
+                
+                </p></li>
 		        </ul>
             
         	</div>
@@ -2112,6 +2587,18 @@ background: linear-gradient(to top, #71a8df, #bdc3c7); /* W3C, IE 10+/ Edge, Fir
               }
               
             }
+            // script for tab steps
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+var href = $(e.target).attr('href');
+var $curr = $(".process-model  a[href='" + href + "']").parent();
+
+$('.process-model li').removeClass();
+
+$curr.addClass("active");
+$curr.prevAll().addClass("visited");
+});
+// end  script for tab steps
 
         </script>
 </body>
