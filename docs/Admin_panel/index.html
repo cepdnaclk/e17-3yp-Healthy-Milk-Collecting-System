@@ -37,7 +37,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
@@ -165,7 +165,7 @@
 
 
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="" class="brand-link">
       <img src="../images/Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
       <span class="brand-text font-weight-light">Admin Panel</span>
     </a>
@@ -200,7 +200,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="dashboard.html" target="ifram_main" class="nav-link nav-items active" onclick="nav_toogle(0);">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -210,7 +210,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="links.html" target="ifram_main" class="nav-link">
+            <a href="links.html" target="ifram_main" class="nav-link nav-items" onclick="nav_toogle(1);">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Links
@@ -229,25 +229,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="subpages/collector.html" class="nav-link nav-items" onclick="nav_toogle(2);" target="ifram_main">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Collectors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                <a href="subpages/farmer.html" class="nav-link nav-items" target="ifram_main" onclick="nav_toogle(3);">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Farmers</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
+                <a href="" class="nav-link nav-items" target="ifram_main" onclick="nav_toogle(4);">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Admins</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                <a href="subpages/device.html" class="nav-link nav-items" target="ifram_main" onclick="nav_toogle(5);">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Devices</p>
                 </a>
@@ -316,7 +316,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content" style="min-height: 450px;position: relative;overflow-x: hidden;">
+    <section class="content" style="min-height: 75vh;position: relative;overflow-x: hidden;">
       
         <!-- Small boxes (Stat box) -->
         <iframe src="dashboard.html" name="ifram_main" width="95%" style="position: absolute; height: 100%; border: none;"></iframe>
@@ -364,5 +364,17 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script type="text/javascript">
+  var nav_items = document.getElementsByClassName('nav-items');
+  console.log(nav_items[0]);
+  var i,k;
+  function nav_toogle(i){
+    
+    for(k=0; k<nav_items.length;++k){
+      nav_items[k].classList.remove('active');
+    }
+    nav_items[i].classList.add('active');
+  }
+</script>
 </body>
 </html>
