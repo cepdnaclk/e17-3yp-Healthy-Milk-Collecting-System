@@ -24,11 +24,13 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 ## Solution Architecture
 <img src="docs/images/diagrams/overall.png">
 <img src="./Diagrams/architecture.jpg">
-<img src="./Diagrams/Data_flow.jpg">
+
 
 ## Team Members
 1. E/17/012 Amarasinghe R A A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17012@eng.pdn.ac.lk)]
+
 2. E/17/038 Chandrasekara C M A [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17038@eng.pdn.ac.lk)]
+
 3. E/17/101 Gunathilaka S P A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17101@eng.pdn.ac.lk)]
 
 
@@ -50,3 +52,7 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 3. [Semester 8 report](https://cepdnaclk.github.io/e15-4yp-minimal-template)
 4. [Semester 8 slides](https://cepdnaclk.github.io/e15-4yp-minimal-template)
 5. Author1, Author2 and Author2 "Research paper title" in Conference name 2021. [Download PDF ](https://cepdnaclk.github.io/e15-4yp-minimal-template)
+
+<div style="display:flex;justify-content:center;"><img src="./docs/images/team/012v3.png" style="width: 100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;">
+<img src="./docs/images/team/038v1.jpg" style="width:100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;">
+<img src="./docs/images/team/101v1.jpg" style="width:100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;"></div>
