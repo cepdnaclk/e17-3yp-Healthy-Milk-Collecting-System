@@ -326,6 +326,7 @@ try {
     sharedPreferences.setString("name", body_["user"]["name"]);
     sharedPreferences.setString("email", body_["user"]["email"]);
     sharedPreferences.setInt("id", body_["user"]["id"]);
+    sharedPreferences.setInt("type", body_["user"]["type"]);
     sharedPreferences.setString("token", body_["token"]);
 
     var tokn  =sharedPreferences.getString("token");
