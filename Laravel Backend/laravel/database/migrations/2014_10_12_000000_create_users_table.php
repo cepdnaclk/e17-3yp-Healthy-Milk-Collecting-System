@@ -17,6 +17,9 @@ class CreateUsersTable extends Migration
             $table->id('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('location')->nullable();
+            $table->bigInteger('latitude')->nullable();
+            $table->bigInteger('longitude')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -29,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('businesstype');
 
 
-            $table->unsignedBigInteger('farmer_id')->nullable();
+           // $table->unsignedBigInteger('farmer_id')->nullable();
            // $table->foreign('farmer_id')->references('farmer_id')->on('farmers');
 
         });

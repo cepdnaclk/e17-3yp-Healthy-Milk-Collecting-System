@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Collector;
 
 class Farmer extends Model
 {
     use HasFactory;
 
-    public function users(){
-        return $this->belongsToMany(User::class);
+    public function collectors(){ 
+        return $this->belongsToMany(Collector::class);
     }
 }
