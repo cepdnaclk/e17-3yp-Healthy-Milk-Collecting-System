@@ -20,11 +20,12 @@ class CreateFarmersTable extends Migration
             $table->string('email');
             $table->string('passoword');
             $table->string('address_id');
-
+            $table->string('businesstype');
 
 
             $table->unsignedBigInteger('user_id');
-            //$table->foreign('user_id')->references('user_id')->on('users');
+            $table->unsignedBigInteger('collector_id');
+            //$table->foreign('collector_id')->references('id')->on('collectors');
 
 
 
