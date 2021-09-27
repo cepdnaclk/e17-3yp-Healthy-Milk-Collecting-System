@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MilkTab | Dashboard</title>
-  
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
@@ -212,9 +212,7 @@
     <section class="content">
         <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-        <div class="row d-flex justify-content-center">
-            <h4>Successfully edited {{$user}}</h4>
-        </div>
+        
         </div>
     </section>
 </div>
@@ -224,8 +222,17 @@
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button)
+  window.onload = function(){
+    Swal.fire(
+  'Good job!',
+  'You changed {{$user}}',
+  'success',
+    ).then(function() {
+            window.location.href = "main";
+        })
+  }
 </script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->

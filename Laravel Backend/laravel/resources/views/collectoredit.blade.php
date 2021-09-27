@@ -214,7 +214,7 @@
                 <!-- Small boxes (Stat box) -->
         <div class="row d-flex justify-content-center">
         <form id="chart-form" class="form col-12" action="{{url('collector-save')}}" method="put" >
-        <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
+        <table class="table table-bordered " style="background-color: white">
                       <thead class="thead-light">
                           <tr>
                             <th scope="col" class="bg-primary">ID</th>
@@ -227,9 +227,9 @@
                           
                           <tr>
                           <td >{{ $user->id }}</td>
-                          <td><input name="name" value="{{ $user->name }}"></input></td>
-                          <td><input name="email" value="{{ $user->email }}"></input></td>
-                          <td><input name="email" value="{{ $user->email }}"></input></td>
+                          <td><input name="name" value="{{ $user->name }}" style="border:none;outline:0;"></input></td>
+                          <td><input name="email" value="{{ $user->email }}" style="border:none;outline:0;"></input></td>
+                          <td><input name="email" value="{{ $user->email }}" style="border:none;outline:0;"></input></td>
                           </tr>
                           
                       </tbody>
