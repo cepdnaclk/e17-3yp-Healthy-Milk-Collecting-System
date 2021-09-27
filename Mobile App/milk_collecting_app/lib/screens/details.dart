@@ -289,6 +289,8 @@ bool isLoading = false;
   final List<String> user_types = ["Farmer","Collector"];
   String selectedUser = "Collector";
 
+String _chosenValue = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -347,7 +349,43 @@ bool isLoading = false;
                       ),
                       _buildAddressTF(),
                       SizedBox(height: 30,),
-                      _buildBusinessTF(),
+                     // _buildBusinessTF(),
+
+                     Center(
+        child: Container(
+          padding: const EdgeInsets.all(0.0),
+          child: DropdownButton<String>(
+            value: _chosenValue,
+            //elevation: 5,
+            style: TextStyle(color: Colors.black),
+
+            items: <String>[
+              'Android',
+              'IOS',
+              'Flutter',
+              'Node',
+              'Java',
+              'Python',
+              'PHP',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            hint: Text(
+              "Please choose a langauage",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600),
+            ),
+            onChanged: null,
+          ),
+        ),
+      ),
+
+
                       _buildSubmitBtn(),
                      
                     ],
@@ -455,7 +493,9 @@ try {
     var tokn  =sharedPreferences.getString("type");
     print(tokn);
     Timer(Duration(seconds: 2), () {
- Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
 });
     
 
