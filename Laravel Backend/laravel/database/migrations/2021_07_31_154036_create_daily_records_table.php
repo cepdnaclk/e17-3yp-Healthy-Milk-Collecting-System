@@ -18,13 +18,13 @@ class CreateDailyRecordsTable extends Migration
             $table->timestamps();
             $table->float('ph_value');
             $table->float('density');
-            $table->float('volume');
+            $table->float('total_volume');
             $table->integer('fat_rate');
             $table->float('temperature');
             $table->dateTime('added_date');
-            $table->string('grade');  //
-            $table->float('price_rate'); //total
-                                            //deviceid
+            $table->float('total_price');
+            $table->unsignedBigInteger('device_id');
+
             $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('farmer_id');
         });
