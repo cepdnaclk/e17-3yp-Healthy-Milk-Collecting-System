@@ -11,20 +11,26 @@ Currently diary collectors measure only few parameters using technology while sm
 Our Healthy Milk Collecting System can be used to measure important quality parameters of milk when the deal happens between diary collector and farmer to ensure the milk is healthy and also it can be used to calculate financial value of milk according to those parameters and manage the financial system in a cloud based system.
 
 ## Our solution
-<img src="./docs/images/logo.png">
+<img src="./docs/images/logo.png" style="width:100px;">
+<br>
+<img src="./docs/images/3d_design/can_with_main.PNG" style="width:300px;">
+
 ```
 - Easy usage
 - portable
-- Low cost
+- User friendly
 - Reachargable & Low power consumption
 ```
 ## Solution Architecture
+<img src="docs/images/diagrams/overall.png">
 <img src="./Diagrams/architecture.jpg">
-<img src="./Diagrams/Data_flow.jpg">
+
 
 ## Team Members
 1. E/17/012 Amarasinghe R A A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17012@eng.pdn.ac.lk)]
+
 2. E/17/038 Chandrasekara C M A [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17038@eng.pdn.ac.lk)]
+
 3. E/17/101 Gunathilaka S P A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17101@eng.pdn.ac.lk)]
 
 
@@ -46,3 +52,7 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 3. [Semester 8 report](https://cepdnaclk.github.io/e15-4yp-minimal-template)
 4. [Semester 8 slides](https://cepdnaclk.github.io/e15-4yp-minimal-template)
 5. Author1, Author2 and Author2 "Research paper title" in Conference name 2021. [Download PDF ](https://cepdnaclk.github.io/e15-4yp-minimal-template)
+
+<div style="display:flex;justify-content:center;"><img src="./docs/images/team/012v3.png" style="width: 100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;">
+<img src="./docs/images/team/038v1.jpg" style="width:100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;">
+<img src="./docs/images/team/101v1.jpg" style="width:100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;"></div>
