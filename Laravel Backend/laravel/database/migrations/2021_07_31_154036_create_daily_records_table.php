@@ -22,9 +22,9 @@ class CreateDailyRecordsTable extends Migration
             $table->integer('fat_rate');
             $table->float('temperature');
             $table->dateTime('added_date');
-            $table->string('grade');
-            $table->float('price_rate');
-
+            $table->string('grade');  //
+            $table->float('price_rate'); //total
+                                            //deviceid
             $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('farmer_id');
         });
