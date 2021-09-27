@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
+import 'package:milk_collecting_app/screens/signUpScreen.dart';
 import 'screens/signInScreen.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
      return new SplashScreen(
       seconds: 4,
   
-     navigateAfterSeconds: new SignInScreen(),
+     navigateAfterSeconds: new HomeScreen(),
      /* title: new Text('Healty Milk Collector',
       style: new TextStyle(
         fontWeight: FontWeight.bold,

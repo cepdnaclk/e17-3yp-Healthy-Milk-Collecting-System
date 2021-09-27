@@ -26,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
    String name = "Loading....";
    String email = "Loading....";
    String contact = "Loading....";
+   bool isFarmer = false;
  
 
    
@@ -41,6 +42,9 @@ setState(() {
   name = sharedPreferences.getString("name").toString();
   email = sharedPreferences.getString("email").toString();
    contact = sharedPreferences.getString("contact").toString();
+   if(sharedPreferences.getString("type") == "Farmer"){
+     isFarmer = true;
+   }
 });
 
 
@@ -77,7 +81,7 @@ setState(() {
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNameScreen()));
                 },
-                child: Icon(Icons.edit,color: white,size: 35,)),
+                child: Icon(Icons.edit,color: white,size: 25,)),
             )
 
               ],
@@ -123,7 +127,7 @@ Widget _buildEmailTF() {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNameScreen()));
               },
-              child: Icon(Icons.edit,color: white,size: 40,))
+              child: Icon(Icons.edit,color: white,size: 25,))
 
               ],
             ),
@@ -170,7 +174,7 @@ Widget _buildEmailTF() {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNameScreen()));
               },
-              child: Icon(Icons.edit,color: white,size: 40,))
+              child: Icon(Icons.edit,color: white,size: 25,))
 
               ],
             ),
@@ -192,46 +196,47 @@ Widget _buildEmailTF() {
 
 
    Widget _buildPasswordTF() {
-    return Container(
-      decoration: BoxDecoration(color: black.withOpacity(0.2)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(height: 15,),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              children: [
-       Text(
-              'Change Password',
-              style: TextStyle(
-                 color: Colors.white,
-                 fontWeight: FontWeight.bold,
-                 fontFamily: 'OpenSans',
-                 fontSize: 20
+    return GestureDetector(
+      onTap: (){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()));
+
+      },
+      child: Container(
+        decoration: BoxDecoration(color: black.withOpacity(0.2)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 15,),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: [
+         Text(
+                'Change Password',
+                style: TextStyle(
+                   color: Colors.white,
+                   fontWeight: FontWeight.bold,
+                   fontFamily: 'OpenSans',
+                   fontSize: 20
+                ),
+              ),
+             
+    
+                ],
               ),
             ),
-            Spacer(),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()));
-              },
-              child: Icon(Icons.edit,color: white,size: 40,))
-
-              ],
-            ),
-          ),
-          SizedBox(height: 15,),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Container(
-              width: double.infinity,
-              height: 2,
-              color: Colors.grey
-            ),
-          )
-         
-        ],
+            SizedBox(height: 15,),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Container(
+                width: double.infinity,
+                height: 2,
+                color: Colors.grey
+              ),
+            )
+           
+          ],
+        ),
       ),
     );
   }
@@ -264,7 +269,7 @@ Widget _buildEmailTF() {
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePriceScreen()));
               },
-              child: Icon(Icons.edit,color: white,size: 40,)
+              child: Icon(Icons.edit,color: white,size: 25,)
               )
 
               ],
@@ -288,14 +293,15 @@ Widget _buildEmailTF() {
 
     Widget _buildLogOutBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 10.0),
       width: 200,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: (){
-         // Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen()));
-
-          logout();
+        onPressed: (){    
+          
+         setState(() {
+           isLogOutPress = true;
+         });
 
 
 
@@ -324,6 +330,8 @@ Widget _buildEmailTF() {
 
   final List<String> user_types = ["Farmer","Collector"];
   String selectedUser = "Collector";
+
+  bool isLogOutPress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -359,6 +367,7 @@ Widget _buildEmailTF() {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      SizedBox(height: 20,),
                       Text(
                         'Profile',
                         style: TextStyle(
@@ -368,10 +377,19 @@ Widget _buildEmailTF() {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 25.0),
+                      SizedBox(height: 15.0),
 
-                      Icon(Icons.account_circle,size: 70,color: Colors.white,),
- 
+                     // Icon(Icons.account_circle,size: 70,color: Colors.white,),
+                      Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: red
+                          ),
+                        width: 60,
+                        child: Image.asset("images/google.jpg",fit: BoxFit.cover,),
+                      ),
+                            
                        SizedBox(
                         height: 25.0,
                       ),
@@ -379,8 +397,9 @@ Widget _buildEmailTF() {
                       _buildEmailTF(),
                       _buildContactTF(),
                       _buildPasswordTF(),
-                      _buildPriceTF(),
-                      SizedBox(height: 20,),
+                      !isFarmer ?
+                      _buildPriceTF():SizedBox.shrink(),
+                      SizedBox(height: 50,),
                       _buildLogOutBtn(),
                       SizedBox(
                         height: 30.0,
@@ -390,7 +409,53 @@ Widget _buildEmailTF() {
                     ],
                   ),
                 ),
-              )
+              ),
+              (isLogOutPress) ? Container(
+                height: 100,
+                width: 250,
+                decoration : BoxDecoration(
+                  color: white
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                       Text("Confirm logout",style: TextStyle(
+                         color : Colors.blue,fontSize: 18
+                       ),),
+                       Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                           GestureDetector(
+                             onTap: (){
+                               setState(() {
+                                 isLogOutPress = false;
+                               });
+                             },
+                             child: Text("Cancel",style: TextStyle(
+                                                    color : Colors.blue,fontWeight: FontWeight.bold
+                                                  ),),
+                           ),
+
+                          GestureDetector(
+                            onTap: (){
+                              print("object");
+                              logout();
+                            },
+                            child: Text("Confirm",style: TextStyle(
+                                                   color : Colors.blue,
+                                                   fontWeight: FontWeight.bold
+                                                 ),),
+                          ),
+                        ],
+                      )
+
+                    ],
+                  ),
+                ),
+
+              ) : SizedBox.shrink()
             ],
           ),
         ),

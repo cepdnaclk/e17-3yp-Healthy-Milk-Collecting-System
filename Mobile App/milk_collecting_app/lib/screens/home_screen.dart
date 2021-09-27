@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:milk_collecting_app/screens/current_collection.dart';
 import 'package:milk_collecting_app/screens/daily_page.dart';
-import 'package:milk_collecting_app/screens/map_page.dart';
+
 import 'package:milk_collecting_app/screens/profile_screen.dart';
 import 'package:milk_collecting_app/screens/stats_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'colors.dart';
 import 'google_map_screen.dart';
@@ -19,7 +20,7 @@ import 'home_page.dart';
 
 class HomeScreen extends StatefulWidget {
 
-
+ bool isConnected =false;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -28,13 +29,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isConnecting = false;
   bool isConnected = false;
+    bool isFarmer = false;
+
+   @override
+initState() {
+  super.initState();
+  loadData();
+
+}
+
+void loadData() async{
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+ 
+    sharedPreferences.setString("type","Collector");  
+    print(sharedPreferences.getString("type"));
+  if(sharedPreferences.getString("type") == "Farmer"){
+
+    setState(() {
+      isFarmer = true;
+    });
+    
+  }
+
+}
 
 
   int pageIndex = 0;
   List<Widget> pages = [
     HomePage(),
     DailyPage(),
-    MapPage(),
+    GoogleMapScreen(),
     ProfileScreen(),
     
   ];
@@ -96,9 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-                Text(isConnected ? "Connected" : "Not Connected",
+                Text(widget.isConnected ? "Connected" : "Not Connected",
                 style: TextStyle(
-                  color:isConnected ? Colors.green : Colors.red,
+                  color:widget.isConnected ? Colors.green : Colors.red,
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.bold
                 ),),
@@ -127,27 +151,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
         ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:(isFarmer) ? null : FloatingActionButton(
         onPressed: (){
           setState(() {
 
             isConnecting = true;
 
-            if(isConnected){
+            if(widget.isConnected){
               //disconnect
-              isConnected = false;
-            }else if(!isConnected){
+              widget.isConnected = false;
+            }else if(!widget.isConnected){
               //connect
-              isConnected = true;
+              widget.isConnected = true;
             }
 
             isConnecting = false;
           });
         },
         child: Icon(Icons.wifi),
-        backgroundColor: isConnected ? Colors.blue:Colors.red,
+        backgroundColor: widget.isConnected ? Colors.blue:Colors.red,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked
     );
   }
 
@@ -167,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
       inactiveColor: Colors.black.withOpacity(0.5),
       icons: iconItems,
       activeIndex: pageIndex,
-      gapLocation: GapLocation.center,
+      gapLocation:GapLocation.none,
       notchSmoothness: NotchSmoothness.softEdge,
       leftCornerRadius: 10,
       iconSize: 25,
