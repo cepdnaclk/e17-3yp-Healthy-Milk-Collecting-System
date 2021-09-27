@@ -34,3 +34,4 @@ Route::post('/add_daily_record',[RecordController::class,'addDailyRecord']);
 Route::post('/test1',[RecordController::class,'test1']); 
 
 Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
+Route::post('/new-password',[NewPasswordController::class,'forgotPassword']);
