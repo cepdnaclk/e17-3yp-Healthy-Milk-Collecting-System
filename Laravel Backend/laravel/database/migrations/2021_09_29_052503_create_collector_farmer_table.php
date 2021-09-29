@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDailyRecordsTable extends Migration
+class CreateCollectorFarmerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateDailyRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('daily_records', function (Blueprint $table) {
-            $table->id('id');
+        Schema::create('collector_farmer', function (Blueprint $table) {
+            $table->id();
+            //bigIncrements('id')
             $table->timestamps();
-            $table->float('ph_value');
-            $table->float('density');
-            $table->float('total_volume');
-            $table->integer('fat_rate');
-            $table->float('temperature');
-            $table->dateTime('added_date');
-            $table->float('total_price');
-            
-
+                    
             $table->unsignedBigInteger('collector_id');
+            $table->foreign('collector_id')
+              ->references('id')
+              ->on('collectors')->onDelete('cascade');
             $table->unsignedBigInteger('farmer_id');
+            $table->foreign('farmer_id')
+              ->references('id')
+              ->on('farmers')->onDelete('cascade');
         });
     }
 
@@ -37,6 +36,6 @@ class CreateDailyRecordsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daily_records');
+        Schema::dropIfExists('collector_farmer');
     }
 }

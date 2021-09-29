@@ -22,7 +22,7 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
-              'firstname' => $request->input('firstname'),
+            'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'address' => $request->input('address'),
             'contact' => $request->input('contact'),

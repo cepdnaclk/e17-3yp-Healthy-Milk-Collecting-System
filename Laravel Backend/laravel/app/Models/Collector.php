@@ -12,8 +12,16 @@ class Collector extends Model
 
 
 
-    public function farmers(){
+    // public function farmers(){
 
-        return $this->hasMany(Farmer::class);
+    //     return $this->hasMany(Farmer::class);
+    // }
+    public function farmers()
+    {
+        return $this->belongsToMany(
+            Farmer::class,
+            'collector_farmer',
+            'collector_id',
+            'farmer_id');
     }
 }

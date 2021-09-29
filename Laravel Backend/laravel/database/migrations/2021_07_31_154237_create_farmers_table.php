@@ -24,7 +24,7 @@ class CreateFarmersTable extends Migration
 
 
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('collector_id');
+            //$table->unsignedBigInteger('collector_id');
             //$table->foreign('collector_id')->references('id')->on('collectors');
 
 

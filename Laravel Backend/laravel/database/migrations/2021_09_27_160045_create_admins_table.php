@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCollectorsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,13 @@ class CreateCollectorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('collectors', function (Blueprint $table) {
-            
-            $table->id('id');
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
             $table->string('name');
             $table->string('email');
             $table->string('passoword');
-            $table->string('address_id');
-            $table->string('businesstype');
-
-
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('device_id')->nullable();
-
-            $table->foreign('device_id')->references('id')->on('devices');
-            
- 
+            $table->string('contact');
 
         });
     }
@@ -41,6 +31,6 @@ class CreateCollectorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collectors');
+        Schema::dropIfExists('admins');
     }
 }

@@ -12,6 +12,12 @@ class Farmer extends Model
     use HasFactory;
 
     public function collectors(){ 
-        return $this->belongsToMany(Collector::class);
+        //return $this->belongsToMany(Collector::class);
+        return $this->belongsToMany(
+             collector::class,
+            'collector_farmer',
+            'farmer_id',
+            'collector_id');
+    
     }
 }
