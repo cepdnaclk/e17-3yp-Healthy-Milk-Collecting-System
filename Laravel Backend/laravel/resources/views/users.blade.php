@@ -23,7 +23,7 @@
                           <td>{{ $user->businesstype }}</td>
                           <td><a href="{{url('get-collectors') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-success">Collectors</a>
                               <a href="{{url('farmer-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a>
-                              <a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->user_id])}}"  class="btn btn-danger">Delete</a></td>
+                              <a href="{{url('user-remove') . '?' . http_build_query(['user_id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>

@@ -79,8 +79,11 @@ public function getJWTIdentifier()
 
     $this->notify(new ResetPasswordNotification($url));
 }
-
-
+    
+    // public function farmers()
+    // {
+    //     return $this->hasOne(Farmer::class, 'id', 'user_id');
+    // }
     
 
 

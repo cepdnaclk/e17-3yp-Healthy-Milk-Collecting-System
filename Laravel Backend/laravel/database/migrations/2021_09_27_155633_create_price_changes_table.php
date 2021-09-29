@@ -14,7 +14,7 @@ class CreatePriceChangesTable extends Migration
     public function up()
     {
         Schema::create('price_changes', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
 
             $table->unsignedBigInteger('collector_id');

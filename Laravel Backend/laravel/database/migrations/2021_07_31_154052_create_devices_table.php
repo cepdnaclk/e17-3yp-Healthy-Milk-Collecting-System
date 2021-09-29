@@ -14,7 +14,7 @@ class CreateDevicesTable extends Migration
     public function up()
     {
         Schema::create('devices', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->timestamps();
         });
     }

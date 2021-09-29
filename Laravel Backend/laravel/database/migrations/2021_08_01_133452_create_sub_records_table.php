@@ -14,7 +14,7 @@ class CreateSubRecordsTable extends Migration
     public function up()
     {
         Schema::create('sub_records', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->timestamps();
             $table->float('ph_value');
             $table->float('density');

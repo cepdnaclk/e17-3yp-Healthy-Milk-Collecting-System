@@ -24,8 +24,8 @@
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->businesstype }}</td>
                           <td><a href="{{url('get-farmers') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-success">Farmers</a>
-                          <a href="{{url('collector-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a>
-                          <a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
+                          <a href="{{url('collector-edit') . '?' . http_build_query(['id' => $user->user_id])}}" class="btn btn-primary">Edit</a>
+                          <a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->user_id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>

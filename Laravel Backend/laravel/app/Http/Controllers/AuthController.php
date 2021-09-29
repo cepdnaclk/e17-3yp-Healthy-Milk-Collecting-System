@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;
 use App\Models\SubRecord;
-
+use App\Models\Collector;
+use App\Models\Farmer;
 use App\Models\User;
 use JWTAuth;
 use Illuminate\Auth\Events\Registered;
@@ -33,6 +34,41 @@ class AuthController extends Controller
         
         try {
             $user = User::create($creds);
+            dd($user);
+            //
+            // if($creds['type']=="collector"){
+            //    $collector_creds=[
+            //     'email' => $request->input('email'),
+            //     'name' => $request->input('name'),
+            //     'password' => bcrypt($request->input('password')),
+            //     'contact' => $request->input('contact'),
+            //     'address' => $request->input('address'),
+            //     'businesstype' => $request->input('businesstype'),
+            //     'user_id' => $user->id,
+            //    ]; 
+            //    try{
+            //         $collector = Collector::create($collector_creds);
+            //    }catch(\Throwable $th){
+
+            //    }
+            // }
+            // else if($creds['type']=="farmer"){
+            //     $farmer_creds=[
+            //      'email' => $request->input('email'),
+            //      'name' => $request->input('name'),
+            //      'password' => bcrypt($request->input('password')),
+            //      'address' => $request->input('address'),
+            //      'contact' => $request->input('contact'),
+            //      'businesstype' => $request->input('businesstype'),
+            //      'user_id' => $user->id,
+            //     ]; 
+            //     try{
+            //          $farmer = CollecFarmer::create($farmer_creds);
+            //     }catch(\Throwable $th){
+ 
+            //     }
+            //  }
+            //  //
         } catch (\Throwable $th) {
             return response(
                 [
