@@ -18,13 +18,14 @@ class CreatePriceChangesTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('collector_id');
-            $table->string('collector_email');
-            $table->dateTime('added_date');
+            $table->string('collector_email')->nullable();
+            //$table->dateTime('added_date');
 
             $table->float('a');
             $table->float('b');
             $table->float('c');
             $table->float('d');
+            $table->foreign('collector_id')->references('id')->on('collectors')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

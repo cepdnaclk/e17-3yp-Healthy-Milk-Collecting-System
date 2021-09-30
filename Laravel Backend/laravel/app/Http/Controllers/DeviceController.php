@@ -24,4 +24,10 @@ class DeviceController extends Controller
             );
         }
     }
+    public function addDevice(Request $req){
+        $device_id = $req->input('device_id');
+        $collector_id = $req->input('collector_id');
+        
+        
+    }
 }

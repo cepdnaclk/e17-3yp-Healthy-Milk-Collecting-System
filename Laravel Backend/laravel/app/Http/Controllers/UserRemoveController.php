@@ -12,7 +12,7 @@ class UserRemoveController extends Controller
 {
     public function remove(Request $req){
         try{
-        $id = $req->input('user_id');
+        $id = $req->input('id');
         $user = DB::table('users')->select('*')->where('id','=', $id)->get();
         return view('UserRemove',['user'=>$user[0]]);
         } catch (\Throwable $th) {

@@ -4,13 +4,13 @@ $dataPointsA = array();
 $dataPointsB = array();
 $dataPointsC = array();
 $dataPointsD = array();
-$id;
+
 foreach($arr as $key=> $value){
   array_push($dataPointsA,array("y"=>$value[0],"label"=>$key));
   array_push($dataPointsB,array("y"=>$value[1],"label"=>$key));
   array_push($dataPointsC,array("y"=>$value[2],"label"=>$key));
   array_push($dataPointsD,array("y"=>$value[3],"label"=>$key));
-  $id = $value[3];
+
 }
 ?>
 <!DOCTYPE HTML>

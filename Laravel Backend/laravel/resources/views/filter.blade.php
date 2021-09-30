@@ -6,8 +6,8 @@
             <form id="chart-form" class="form col-12" action="{{url('get-price')}}" method="get" >
             <div class="col-6 m-4">
             <div class="form-group m-4">
-                <label for="email" class="text-gray">Email:</label><br>
-                <input type="text" name="email" id="email" class="form-control">
+                <label for="id" class="text-gray">Email:</label><br>
+                <input type="text" name="id" id="id" class="form-control">
             </div>
             <div class="form-group m-4">
                 

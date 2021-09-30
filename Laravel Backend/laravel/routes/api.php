@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\PriceChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,8 @@ Route::post('/test1',[RecordController::class,'test1']);
 
 Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
 Route::post('/new-password',[NewPasswordController::class,'forgotPassword']);
+
+
+Route::post('/set-device',[CollectorController::class,'setDevice']);
+Route::post('/price-save',[PriceChartController::class, 'save']);
+Route::get('/get-price', [PriceChartController::class, 'index']);

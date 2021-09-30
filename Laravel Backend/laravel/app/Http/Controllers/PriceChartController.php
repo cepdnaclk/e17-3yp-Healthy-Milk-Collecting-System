@@ -8,26 +8,83 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 class PriceChartController extends Controller
 {
-    //
+    
     public function index(Request $req)
     {
-    
-        $email = $req->input('email');
-        $items = DB::table('price_changes')->select('*')->where('collector_email', $email)->orderBy("added_date")->get();
-        $day=array();
-        $valuesA =array();
-        if(count($items)>0){
-            foreach ($items as $item) {
-                //  $value = DB::table('price_changes')->where('added_date', $date)->value('a');
-                  array_push($day,$item->added_date);
-                  array_push($valuesA,array($item->a,$item->b,$item->c,$item->d,$item->collector_id));
-              }
-              $arr=array_combine($day, $valuesA);
-              return view('price')->with(compact('arr'));
-              //dd(count($items));
-              ///return view('price')->with('days',$day)->with('valuesA',$valuesA);
-        }else{
-            return view('Notfound',['user'=>$email]);
+        try{
+            $id = $req->input('id');
+            $items = DB::table('price_changes')->select('*')->where('collector_id', $id)
+            ->orderBy('created_at')->get();
+            $day=array();
+            $values =array();
+            if(count($items)>0){
+                foreach ($items as $item) {
+                    //  $value = DB::table('price_changes')->where('added_date', $date)->value('a');
+                    array_push($day,$item->created_at);
+                    array_push($values,array($item->a,$item->b,$item->c,$item->d));
+                }
+                $arr=array_combine($day, $values);
+                return view('price')->with(compact('arr'))->with(compact('id'));
+                //dd(count($items));
+                dd(count($items));
+                ///return view('price')->with('days',$day)->with('valuesA',$valuesA);
+            }else{
+                return view('Notfound',['user'=>$id]);
+            }
+        }catch (\Throwable $th) {
+            return response(
+                [
+                    
+                    'error_message' => $th,
+                    
+                ],
+                
+            );
         }
+    }
+    public function save(Request $req){
+        
+            $creds=[
+                'collector_id'=>$req->input('id'),
+                'a'=>$req->input('a'),
+                'b'=>$req->input('b'),
+                'c'=>$req->input('c'),
+                'd'=>$req->input('d')
+            ];
+            try{
+                $collector=DB::table('collectors')->where('id',$req->input('id'))->first();
+                //dd($collector);
+                if($collector!=null){
+                    PriceChange::create($creds);
+                }else{
+                    return response(
+                        [
+                            
+                            'error_message' => 'no collector with id '.$req->input('id'),
+                            
+                        ],
+                        
+                    );
+                }
+                //
+            // //DB::table('price_changes')->insert([
+            //     'collector_id' => $req->input('id'),
+            //     'a'=>$req->input('a'),
+            //     'b'=>$req->input('b'),
+            //     'c'=>$req->input('c'),
+            //     'd'=>$req->input('d')
+            // ]);
+            //dd($creds);
+        //insert
+            }catch (\Throwable $th) {
+                return response(
+                    [
+                        
+                        'error_message' => $th,
+                        
+                    ],
+                    
+                );
+            }
     }
 }
