@@ -10,8 +10,8 @@
                             <th scope="col" class="bg-primary">Username</th>
                             <th scope="col" class="bg-primary">Email</th>
                             <th scope="col" class="bg-primary">Type</th>
-                            
-                            <th scope="col" class="bg-danger">Options</th>
+                            <th scope="col" class="bg-primary">Edit</th>
+                            <th scope="col" class="bg-danger">Delete</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -21,9 +21,8 @@
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->businesstype }}</td>
-                          <td><a href="{{url('get-collectors') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-success">Collectors</a>
-                              <a href="{{url('farmer-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a>
-                              <a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->user_id])}}"  class="btn btn-danger">Delete</a></td>
+                          <td><a href="{{url('collector-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a></td>
+                          <td><a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>

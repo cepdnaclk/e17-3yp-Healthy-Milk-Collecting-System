@@ -17,12 +17,12 @@ public function addDailyRecord(Request $request){
         'collector_id' => $request->input('collector_id'),
         'farmer_id' => $request->input('farmer_id'),
         'ph_value' => $request->input('ph_value'),
-        'density' => $request->input('collector_id'),
-        'volume' => $request->input('volume'),
+        'density' => $request->input('density'),
+        'total_volume' => $request->input('volume'),
         'fat_rate' => $request->input('fat_rate'),
         'temperature' => $request->input('temperature'),
-        'grade' => $request->input('grade'),
-        'price_rate' => $request->input('price_rate'),
+        'device_id' => $request->input('device_id'),
+        'total_price' => $request->input('total_price'),
     ];
     
     

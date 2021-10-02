@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\SubRecord;
+use App\Models\DailyRecord;
 use App\Models\Device;
 
 class SubRecord extends Model
@@ -13,13 +13,13 @@ class SubRecord extends Model
 
     public function dailyRecord()
     {
-        return $this->belongsTo(SubRecord::class);
-    }
+        return $this->belongsTo(DailyRecord::class);
+    }//m-1
 
-    public function device()
-    {
-        return $this->belongsTo(Device::class);
-    }
+    // public function device()
+    // {
+    //     return $this->belongsTo(Device::class);
+    // }
 
     
 }

@@ -2,7 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\PriceChartController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CollectorController;
+use App\Http\Controllers\FarmerController;
+use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserRemoveController;
+use App\Models\Collector;
+use App\Models\Farmer;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,9 +36,7 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('index');
 // });
-Route::get('/main', function () {
-    return view('index');
-});
+Route::get('/main', [MainController::class, 'index']);
 Route::get('/links', function () {
     return view('links');
 });
@@ -35,55 +44,45 @@ Route::get('/login', function () {
     return view('login');
 });
 
-//012
-Route::get('/collectors',function (){
-    $users = DB::select('select * from users');
-    return view('collector',['users'=>$users]);
-});
-Route::get('/farmers',function (){
-    $users = DB::select('select * from users');
-    return view('farmer',['users'=>$users]);
-});
-Route::get('/devices',function (){
-    $users = DB::select('select * from users');
-    return view('device',['users'=>$users]);
-});
-Route::get('/admins',function (){
-    $users = DB::select('select * from users');
-    return view('admin',['users'=>$users]);
-});
-Route::get('/collector-edit',function (){
-    
-    return view('collectorfilter');
-});
-Route::get('/edit-collectors',function (Request $req){
-    $email = $req->input('email');
-    $user = DB::table('users')->select('*')->where('email','=', $email)->get();
-    return view('collectoredit',['user'=>$user[0]]);
-    //return $user[0];
-});
+Route::get('/collectors',[CollectorController::class, 'show']);
+Route::get('/farmers',[FarmerController::class, 'show']);
+Route::get('/devices',[DeviceController::class, 'show']);
+Route::get('/admins',[AdminController::class, 'show']);
+Route::get('/get-farmers',[FarmerController::class, 'get']);
+Route::get('/get-collectors',[CollectorController::class, 'get']);
+Route::get('/collector-edit',[CollectorController::class, 'find']);
+Route::get('/farmer-edit',[FarmerController::class, 'find']);
+Route::get('/user-remove',[UserRemoveController::class,'remove']);
+Route::get('/user-remove-confirm',[UserRemoveController::class,'removeConfirm']);
+Route::get('/farmer-join',[ConnectController::class,'connect']);
 Route::get('/pricerate',function (){
     
     return view('filter');
 });
-Route::get('/collector-save',function (Request $req){
-    $email = $req->input('email');
-    return view('success',['user'=>$email]);
+Route::post('/price-save',[PriceChartController::class, 'save']);
+Route::get('/collector-save', [CollectorController::class, 'save']);
+Route::get('/farmer-save',[FarmerController::class, 'save']);
+Route::get('/get-price', [PriceChartController::class, 'index']);
+Route::get('/collector-price', [PriceChartController::class, 'get']);
+
+
+Route::get('/login',[AuthController::class,'login']);
+Route::get('/register',[AuthController::class,'register']);
+
+Route::get('/users',function(){
+    try{
+        $users = DB::select('select * from users');
+        return view('users',['users'=>$users]);
+    } catch (\Throwable $th) {
+        return response(
+            [
+                
+                'error_message' => $th,
+                
+            ],
+            
+        );
+    }
 });
-Route::get('/get-price',function (Request $req){
-    $email = $req->input('email');
-    //if($email){
-       $post = DB::table('users')->select('*')->where('email','=', $email)->get();
-    //   foreach($post as $row)
-    //    {
-    //       $data[] = array
-    //        (
-    //         'label'=>$row->$id,
-    //         'y'=>$row
-    //        ); 
-    //    }
-      //return view('price',['data' => $data]);
-        return $post;
-    
-    
-});
+
+Route::post('/set-device',[CollectorController::class,'setDevice']);

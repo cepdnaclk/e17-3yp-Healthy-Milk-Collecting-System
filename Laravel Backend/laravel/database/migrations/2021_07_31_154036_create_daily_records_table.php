@@ -14,7 +14,7 @@ class CreateDailyRecordsTable extends Migration
     public function up()
     {
         Schema::create('daily_records', function (Blueprint $table) {
-            $table->id('id');
+            $table->bigIncrements('id');
             $table->timestamps();
             $table->float('ph_value');
             $table->float('density');
@@ -23,10 +23,22 @@ class CreateDailyRecordsTable extends Migration
             $table->float('temperature');
             $table->dateTime('added_date');
             $table->float('total_price');
-            $table->unsignedBigInteger('device_id');
+            
 
             $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('farmer_id');
+            $table->unsignedBigInteger('device_id');
+            $table->foreign('device_id')
+                ->references('id')
+                ->on('devices')
+                ->onDelete('set null');
+            $table->foreign('farmer_id')
+              ->references('id')
+              ->on('farmers')->onDelete('set null');
+              $table->unsignedBigInteger('collector_id');
+              $table->foreign('collector_id')
+                ->references('id')
+                ->on('collectors')->onDelete('set null');
         });
     }
 

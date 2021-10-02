@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\NewPasswordController;
-
+use App\Http\Controllers\PriceChartController;
+use App\Http\Controllers\CollectorController;
+use App\Http\Controllers\FarmerController;
+use App\Http\Controllers\ConnectController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,3 +38,15 @@ Route::post('/test1',[RecordController::class,'test1']);
 
 Route::post('/forgot-password',[NewPasswordController::class,'forgotPassword']);
 Route::post('/new-password',[NewPasswordController::class,'forgotPassword']);
+
+
+Route::post('/set-device',[CollectorController::class,'setDevice']);
+Route::post('/price-save',[PriceChartController::class, 'save']);
+Route::get('/get-price', [PriceChartController::class, 'index']);
+Route::get('/collector-price', [PriceChartController::class, 'get']);
+Route::get('/connect', [ConnectController::class, 'connect']);
+
+Route::get('/collectors',[CollectorController::class, 'show']);
+
+Route::get('/get-farmers',[FarmerController::class, 'get']);
+Route::get('/get-collectors',[CollectorController::class, 'get']);
