@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Farmer;
+use App\Models\Collector;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Notifications\ResetPasswordNotification;
 
@@ -79,8 +80,11 @@ public function getJWTIdentifier()
 
     $this->notify(new ResetPasswordNotification($url));
 }
-
-
+    
+    // public function farmers()
+    // {
+    //     return $this->hasOne(Farmer::class, 'id', 'user_id');
+    // }
     
 
 

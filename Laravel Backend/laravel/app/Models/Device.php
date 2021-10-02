@@ -4,13 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\SubRecord;
+use App\Models\DailyRecord;
+use App\Models\Collector;
 
 class Device extends Model
 {
     use HasFactory;
 
-    public function subRecords(){
-        return $this->hasMany(SubRecord::class);
-    }
+    public function dailyRecords(){
+        return $this->hasMany(DailyRecord::class);
+    }//1-m
+    public function collector(){
+        return $this->belongsTo(Collector::class);
+    }//1-1
 }

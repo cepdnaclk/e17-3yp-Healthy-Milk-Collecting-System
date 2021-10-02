@@ -93,7 +93,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="main"  class="nav-link nav-items active" >
+            <a href="main"  class="nav-link nav-items active" onclick="nav_toogle(0);">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -103,7 +103,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="links" class="nav-link nav-items" >
+            <a href="links" class="nav-link nav-items"  onclick="nav_toogle(1);">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Links
@@ -122,25 +122,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="collectors" class="nav-link nav-items">
+                <a href="collectors" class="nav-link nav-items" onclick="nav_toogle(2)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Collectors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="farmers" class="nav-link nav-items">
+                <a href="farmers" class="nav-link nav-items" onclick="nav_toogle(3)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Farmers</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admins" class="nav-link nav-items">
+                <a href="admins" class="nav-link nav-items" onclick="nav_toogle(4)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Admins</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="devices" class="nav-link nav-items">
+                <a href="devices" class="nav-link nav-items" onclick="nav_toogle(5)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Devices</p>
                 </a>
@@ -148,7 +148,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link nav-items"  onclick="nav_toogle(6)">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Charts
@@ -210,27 +210,19 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
-                <!-- Small boxes (Stat box) -->
-        <div class="row d-flex justify-content-center">
-            <form id="collector-form" class="form col-12" action="{{url('edit-collectors')}}" method="get" >
-            <div class="col-6 m-4">
-            <div class="form-group m-4">
-                <label for="email" class="text-gray">Email:</label><br>
-                <input type="text" name="email" id="email" class="form-control">
-            </div>
-            <div class="form-group m-4">
-                
-                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-            </div>
-            </div>
-            </form>
-            
-        </div>
-        </div>
+      
+        <!-- Small boxes (Stat box) -->
+        <!-- <iframe src="/dashboard/main" name="ifram_main" width="95%" style="position: absolute; height: 100%; border: none;"></iframe> -->
+      <!-- /.container-fluid -->
+        <!-- /.row (main row) -->
+        @yield('content')
+     
+     
     </section>
-</div>
-</div>
+    <!-- /.content -->
+  </div>
+  
+<!-- jQuery -->
 <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
@@ -264,5 +256,20 @@
 <script src="{{ asset('dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
+
+
+
+<script type="text/javascript">
+  var nav_items = document.getElementsByClassName('nav-items');
+  
+  var i,k;
+  function nav_toogle(i){
+    
+    for(k=0; k<nav_items.length;++k){
+      nav_items[k].classList.remove('active');
+    }
+    nav_items[i].classList.add('active');
+  }
+</script>
 </body>
 </html>

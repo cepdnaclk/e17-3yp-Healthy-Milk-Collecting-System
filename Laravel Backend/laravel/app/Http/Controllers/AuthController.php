@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;
 use App\Models\SubRecord;
-
+use App\Models\Collector;
+use App\Models\Farmer;
 use App\Models\User;
 use JWTAuth;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +23,7 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'name' => $request->input('name'),
             'password' => bcrypt($request->input('password')),
-              'firstname' => $request->input('firstname'),
+            'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'address' => $request->input('address'),
             'contact' => $request->input('contact'),
@@ -33,6 +34,48 @@ class AuthController extends Controller
         
         try {
             $user = User::create($creds);
+            
+            
+            // if($user->type=='collector'){
+            
+            //    $collector_creds=[
+            //     'user_id' => $user->id
+            //    ]; 
+            //    try{
+            //         $collector=Collector::create($collector_creds);
+            //         return response(
+            //             [
+                            
+            //                 'message' => 'Successfully created',
+            //                 'success' => true
+                            
+            //             ],
+                        
+            //         );
+            //    }catch(\Throwable $th){
+
+            //    }
+            // }
+            // else if($creds['type']=='farmer'){
+            //     $farmer_creds=[
+            //      'user_id' => $user->id
+            //     ]; 
+            //     try{
+            //          $farmer = Farmer::create($farmer_creds);
+            //          return response(
+            //             [
+                            
+            //                 'message' => 'Successfully created',
+            //                 'success' => true
+                            
+            //             ],
+                        
+            //         );
+            //     }catch(\Throwable $th){
+ 
+            //     }
+            //  }
+             //
         } catch (\Throwable $th) {
             return response(
                 [
