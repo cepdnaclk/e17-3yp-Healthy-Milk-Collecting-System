@@ -63,6 +63,7 @@ Route::post('/price-save',[PriceChartController::class, 'save']);
 Route::get('/collector-save', [CollectorController::class, 'save']);
 Route::get('/farmer-save',[FarmerController::class, 'save']);
 Route::get('/get-price', [PriceChartController::class, 'index']);
+Route::get('/collector-price', [PriceChartController::class, 'get']);
 
 
 Route::get('/login',[AuthController::class,'login']);

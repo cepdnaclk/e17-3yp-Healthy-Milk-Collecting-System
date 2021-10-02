@@ -87,4 +87,10 @@ class PriceChartController extends Controller
                 );
             }
     }
+    public function get(Request $req){
+        $id = $req->input('id');
+        $item = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
+        
+        return $item;
+    }
 }

@@ -48,20 +48,7 @@
           </a>
           </div>
           <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <a href="https://github.com/" target="_blank">
-            <div class="info-box shadow-lg">
-              <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">93,139</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </a>
-          </div>
+         
           <!-- /.col -->
         </div>
         <!-- /.row -->

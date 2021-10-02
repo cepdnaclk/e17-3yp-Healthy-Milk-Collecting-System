@@ -29,8 +29,7 @@ class CreateSubRecordsTable extends Migration
             $table->foreign('daily_record_id')->references('id')->on('daily_records');
 
 
-            $table->unsignedBigInteger('device_id');
-            $table->foreign('device_id')->references('id')->on('devices');
+            
 
         });
     }

@@ -15,14 +15,9 @@ class CreateCollectorsTable extends Migration
     {
         Schema::create('collectors', function (Blueprint $table) {
             
-            $table->bigIncrements('id');
+            $table->id();
             $table->timestamps();
-            // $table->string('name');
-            // $table->string('email');
-            // $table->string('passoword');
-            // $table->string('address_id');
-            // $table->string('businesstype');
-            // $table->string('contact');
+            
 
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('device_id')->nullable();

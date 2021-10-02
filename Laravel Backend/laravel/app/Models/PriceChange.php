@@ -20,6 +20,6 @@ class PriceChange extends Model
     ];
     public function collector()
     {
-        return $this->hasOne(collector::class, 'id', 'collector_id');
-    }
+        return $this->belongsTo(collector::class, 'id', 'collector_id');
+    }//m-1
 }

@@ -19,10 +19,10 @@
                           </tr>
                       </thead>
                       <tbody>
-                          @foreach ($users as $user)
+                          @foreach ($collectors as $user)
                           <tr>
                           <?php $user_id= $user['user_id'];
-                          $collector_id=$user["collector_id"]?>
+                          $collector_id=$user['collector_id']?>
                           <td>{{ $user["user_id"] }}</td>
                           <td>{{ $user["collector_id"] }}</td>
                           <td>{{ $user["name"] }}</td>

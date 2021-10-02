@@ -24,4 +24,9 @@ class Farmer extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function dailyRecords()
+    {
+        return $this->hasMany(DailyRecord::class);
+    }//1-m
 }

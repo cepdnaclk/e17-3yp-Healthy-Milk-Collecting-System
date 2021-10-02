@@ -36,28 +36,46 @@ class AuthController extends Controller
             $user = User::create($creds);
             
             
-            // if($user->type=="collector"){
-            //     dd($user->type);
+            // if($user->type=='collector'){
+            
             //    $collector_creds=[
             //     'user_id' => $user->id
             //    ]; 
             //    try{
-            //         $collector=DB::table('collectors')->insert($collector_creds);
+            //         $collector=Collector::create($collector_creds);
+            //         return response(
+            //             [
+                            
+            //                 'message' => 'Successfully created',
+            //                 'success' => true
+                            
+            //             ],
+                        
+            //         );
             //    }catch(\Throwable $th){
 
             //    }
             // }
-            // else if($creds['type']=="farmer"){
+            // else if($creds['type']=='farmer'){
             //     $farmer_creds=[
             //      'user_id' => $user->id
             //     ]; 
             //     try{
-            //          $farmer = CollecFarmer::create($farmer_creds);
+            //          $farmer = Farmer::create($farmer_creds);
+            //          return response(
+            //             [
+                            
+            //                 'message' => 'Successfully created',
+            //                 'success' => true
+                            
+            //             ],
+                        
+            //         );
             //     }catch(\Throwable $th){
  
             //     }
             //  }
-            //  //
+             //
         } catch (\Throwable $th) {
             return response(
                 [

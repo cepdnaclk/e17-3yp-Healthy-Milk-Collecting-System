@@ -27,6 +27,18 @@ class CreateDailyRecordsTable extends Migration
 
             $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('farmer_id');
+            $table->unsignedBigInteger('device_id');
+            $table->foreign('device_id')
+                ->references('id')
+                ->on('devices')
+                ->onDelete('set null');
+            $table->foreign('farmer_id')
+              ->references('id')
+              ->on('farmers')->onDelete('set null');
+              $table->unsignedBigInteger('collector_id');
+              $table->foreign('collector_id')
+                ->references('id')
+                ->on('collectors')->onDelete('set null');
         });
     }
 

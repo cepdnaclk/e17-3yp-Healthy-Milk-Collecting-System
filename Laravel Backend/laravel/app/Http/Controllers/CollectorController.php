@@ -28,8 +28,6 @@ class CollectorController extends Controller
                         "latitude"=>$user->latitude,
                         "longitude"=>$user->longitude,
                         "email_verified_at"=>$user->email_verified_at,
-                        "password"=>$user->password,
-                        "remember_token"=>$user->remember_token,
                         "created_at"=>$user->created_at,
                         "updated_at"=>$user->updated_at,
                         "firstname"=>$user->firstname,
@@ -48,9 +46,8 @@ class CollectorController extends Controller
                 //array_merge($tmp,$user);
                 //return $new_array;
             }
-            //dd(collect($collectors));
-            //dd($users);
-            return view('collector',['users'=>collect($collectors)]);
+            $collectors =collect($collectors);
+            return $collectors;
             
         } catch (\Throwable $th) {
             return response(
@@ -65,13 +62,16 @@ class CollectorController extends Controller
     }
     public function save(Request $req){
         try{
-        $email = $req->input('email');
-        $id = $req->input('id');
-        $name = $req->input('name');
-        $business_type = $req->input('businesstype');
-        
-        DB::update('update users set name = ?,email = ?, businesstype = ? where id = ?',[$name, $email,$business_type,$id]);
-        return view('success',['user'=>$email]);
+            $id = $req->input('user_id');
+            
+            DB::update('update users set name = ?,email = ?,
+            location=?,latitude=?,longitude=?,firstname=?,
+            lastname=?,contact=?,address=?, businesstype = ? where id = ?',
+            [$req->input('name'),$req->input('email'),$req->input('location'),
+            $req->input('latitude'),$req->input('longitude'),$req->input('firstname'),
+            $req->input('lastname'),$req->input('contact'),
+            $req->input('address'),$req->input('businesstype'),$id]);
+            return view('success',['user'=>$id]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -89,34 +89,43 @@ class CollectorController extends Controller
             $users = DB::table('collector_farmer')->select('*')->where('farmer_id','=', $id)->get();
             //return view('collector',['users'=>$users]);
             $collectors = [];
-            
-            foreach ($users as $user) {
-                
-                $user_id=DB::table('collectors')->where('id','=', $user->collector_id)->value('user_id');
-                $user = DB::table('users')->select('*')->where('id','=', $user_id)->first();
-                $user_data = ["user_id"=>$user->id,
-                        "device_id"=>$device_id,
-                        "collector_id"=>$collector_id,
-                        "name"=>$user->name,
-                        "email"=>$user->email,
-                        "location"=>$user->location,
-                        "latitude"=>$user->latitude,
-                        "longitude"=>$user->longitude,
-                        "email_verified_at"=>$user->email_verified_at,
-                        "password"=>$user->password,
-                        "remember_token"=>$user->remember_token,
-                        "created_at"=>$user->created_at,
-                        "updated_at"=>$user->updated_at,
-                        "firstname"=>$user->firstname,
-                        "lastname"=>$user->lastname,
-                        "contact"=>$user->contact,
-                        "address"=>$user->address,
-                        "businesstype"=>$user->businesstype,
-                        "type"=>$user->type];
-                        array_push($collectors,$user_data);
+            if(count($users)){
+                foreach ($users as $collector) {
+                    
+                    $device_id=DB::table('collectors')->where('id','=', $collector->collector_id)->value('device_id');
+                    $user_id=DB::table('collectors')->where('id','=', $collector->collector_id)->value('user_id');
+                    $user = DB::table('users')->select('*')->where('id','=',  $user_id)->first();
+                    $user_data = ["user_id"=>$user->id,
+                            "device_id"=>$device_id,
+                            "collector_id"=>$collector->collector_id,
+                            "name"=>$user->name,
+                            "email"=>$user->email,
+                            "location"=>$user->location,
+                            "latitude"=>$user->latitude,
+                            "longitude"=>$user->longitude,
+                            "email_verified_at"=>$user->email_verified_at,
+                            "created_at"=>$user->created_at,
+                            "updated_at"=>$user->updated_at,
+                            "firstname"=>$user->firstname,
+                            "lastname"=>$user->lastname,
+                            "contact"=>$user->contact,
+                            "address"=>$user->address,
+                            "businesstype"=>$user->businesstype,
+                            "type"=>$user->type];
+                            array_push($collectors,$user_data);
+                }
+            }else{
+                return response(
+                    [
+                        
+                        'error_message' => "not found",
+                        
+                    ],
+                    
+                );
             }
-            //dd($arr);
-            return view('collector',['users'=>collect($collectors)]);
+            $collectors =colllect($collectors);
+            return $collectors;
         } catch (\Throwable $th) {
             return response(
                 [
@@ -169,9 +178,7 @@ class CollectorController extends Controller
     public function setDevice(Request $req){
         $device_id = $req->input('device_id');
         $collector_id = $req->input('collector_id');
-        $creds=[
-            'id'=>$device_id
-        ];
+        
         DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
     }
     
