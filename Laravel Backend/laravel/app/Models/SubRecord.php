@@ -10,7 +10,22 @@ use App\Models\Device;
 class SubRecord extends Model
 {
     use HasFactory;
+      /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
 
+    protected $fillable = [
+        'ph_value',
+        'density',
+        'volume',
+        'fat_rate',
+        'temperature',
+        'grade',
+        'price_rate',
+        'daily_record_id'
+    ];
     public function dailyRecord()
     {
         return $this->belongsTo(DailyRecord::class);

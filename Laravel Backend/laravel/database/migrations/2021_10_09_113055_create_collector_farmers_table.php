@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCollectorFarmerTable extends Migration
+class CreateCollectorFarmersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateCollectorFarmerTable extends Migration
      */
     public function up()
     {
-        Schema::create('collector_farmer', function (Blueprint $table) {
+        Schema::create('collector_farmers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //bigIncrements('id')
             $table->timestamps();
                     
             $table->unsignedBigInteger('collector_id');
@@ -36,6 +35,6 @@ class CreateCollectorFarmerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collector_farmer');
+        Schema::dropIfExists('collector_farmers');
     }
 }

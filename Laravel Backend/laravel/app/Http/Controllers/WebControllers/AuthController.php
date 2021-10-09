@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\AppControllers\Controllers;
+namespace App\Http\Controllers\WebControllers;
 
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;

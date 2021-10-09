@@ -15,7 +15,7 @@ class CreateCollectorsTable extends Migration
     {
         Schema::create('collectors', function (Blueprint $table) {
             
-            $table->id();
+            $table->bigIncrements('id');
             $table->timestamps();
             
 
