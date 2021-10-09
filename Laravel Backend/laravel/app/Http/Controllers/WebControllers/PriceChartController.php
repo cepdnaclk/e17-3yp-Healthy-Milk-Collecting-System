@@ -56,6 +56,11 @@ class PriceChartController extends Controller
                 //dd($collector);
                 if($collector!=null){
                     PriceChange::create($creds);
+                    return response(
+                        [
+                        'message'=>'successfully saved new prices'
+                        ],
+                    );
                 }else{
                     return response(
                         [

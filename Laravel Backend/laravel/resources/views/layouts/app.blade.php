@@ -191,6 +191,7 @@
   </aside>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <img src="{{ asset('dist/img/backgrounds/bg3.jpg')}}" style="position:absolute; width:100%">
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -209,7 +210,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" >
       
         <!-- Small boxes (Stat box) -->
         <!-- <iframe src="/dashboard/main" name="ifram_main" width="95%" style="position: absolute; height: 100%; border: none;"></iframe> -->
