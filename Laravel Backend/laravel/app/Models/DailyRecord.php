@@ -13,6 +13,24 @@ class DailyRecord extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'ph_value',
+        'density',
+        'total_volume',
+        'fat_rate',
+        'temperature',
+        'added_date',
+        'total_price',
+        'note',
+        'farmer_id',
+        'collector_id',
+        'device_id'
+    ];
     public function subRecord()
     {
         return $this->hasMany(SubRecord::class);
@@ -27,6 +45,10 @@ class DailyRecord extends Model
     {
         return $this->belongsTo(Collector::class);
     }//m-1
+    // public function collectorFarmer()
+    // {
+    //     return $this->belongsTo(CollectorFarmer::class);
+    // }//m-1
 
     public function device()
     {

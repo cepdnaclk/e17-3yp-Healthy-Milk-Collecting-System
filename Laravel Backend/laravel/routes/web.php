@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WebControllers\AuthController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\WebControllers\PriceChartController;
 use App\Http\Controllers\WebControllers\AdminController;
@@ -66,7 +66,7 @@ Route::get('/get-price', [PriceChartController::class, 'index']);
 Route::get('/collector-price', [PriceChartController::class, 'get']);
 
 
-
+Route::get('/register',[AuthController::class,'register']);
 
 Route::get('/users',function(){
     try{

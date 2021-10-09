@@ -26,20 +26,21 @@ class CreateDailyRecordsTable extends Migration
             $table->string('note');
             
 
-            $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('farmer_id');
+            $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('device_id');
+
             $table->foreign('device_id')
                 ->references('id')
-                ->on('devices')
-                ->onDelete('set null');
+                ->on('devices');
+                
             $table->foreign('farmer_id')
               ->references('id')
-              ->on('farmers')->onDelete('set null');
-              $table->unsignedBigInteger('collector_id');
-              $table->foreign('collector_id')
-                ->references('id')
-                ->on('collectors')->onDelete('set null');
+              ->on('farmers');
+            $table->foreign('collector_id')
+              ->references('id')
+              ->on('collectors');
+            
         });
     }
 
