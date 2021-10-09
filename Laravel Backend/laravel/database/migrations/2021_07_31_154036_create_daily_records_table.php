@@ -23,6 +23,7 @@ class CreateDailyRecordsTable extends Migration
             $table->float('temperature');
             $table->dateTime('added_date');
             $table->float('total_price');
+            $table->string('note');
             
 
             $table->unsignedBigInteger('collector_id');

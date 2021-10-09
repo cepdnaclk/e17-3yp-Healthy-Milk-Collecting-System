@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 class CollectorController extends Controller
 {
+    //show all registered collectors
     public function show(){
         try{
             $users = DB::table('users')->select('*')->where('type','=', 'collector')->get();
@@ -60,6 +61,7 @@ class CollectorController extends Controller
             );
         }
     }
+    //save collector data after editing
     public function save(Request $req){
         try{
             $id = $req->input('user_id');
@@ -83,6 +85,7 @@ class CollectorController extends Controller
             );
         }
     }
+    //get collectors list for a given farmer
     public function get(Request $req){
         try{
             $id = $req->input('id');
@@ -137,6 +140,7 @@ class CollectorController extends Controller
             );
         }
     }
+    //find collector details for a given collector id
     public function find(Request $req){
         try{
         $id = $req->input('id');
@@ -175,6 +179,7 @@ class CollectorController extends Controller
             );
         }
     }
+    //set device
     public function setDevice(Request $req){
         $device_id = $req->input('device_id');
         $collector_id = $req->input('collector_id');

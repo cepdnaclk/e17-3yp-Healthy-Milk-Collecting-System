@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\PriceChartController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CollectorController;
-use App\Http\Controllers\FarmerController;
-use App\Http\Controllers\DeviceController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\UserRemoveController;
+use App\Http\Controllers\WebControllers\PriceChartController;
+use App\Http\Controllers\WebControllers\AdminController;
+use App\Http\Controllers\WebControllers\CollectorController;
+use App\Http\Controllers\WebControllers\FarmerController;
+use App\Http\Controllers\WebControllers\DeviceController;
+use App\Http\Controllers\WebControllers\MainController;
+use App\Http\Controllers\WebControllers\UserRemoveController;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
@@ -66,8 +66,7 @@ Route::get('/get-price', [PriceChartController::class, 'index']);
 Route::get('/collector-price', [PriceChartController::class, 'get']);
 
 
-Route::get('/login',[AuthController::class,'login']);
-Route::get('/register',[AuthController::class,'register']);
+
 
 Route::get('/users',function(){
     try{
