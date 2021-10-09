@@ -37,8 +37,8 @@ class Collector extends Model
 
     public function device()
     {
-        return $this->hasOne(Device::class);
-    }//1-1
+        return $this->belongsTo(Device::class);
+    }//m-1
 
     public function dailyRecords()
     {

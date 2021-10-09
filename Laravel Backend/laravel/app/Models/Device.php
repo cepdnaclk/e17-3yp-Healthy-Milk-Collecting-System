@@ -14,7 +14,8 @@ class Device extends Model
     public function dailyRecords(){
         return $this->hasMany(DailyRecord::class);
     }//1-m
+    
     public function collector(){
-        return $this->belongsTo(Collector::class);
-    }//1-1
+        return $this->hasMany(Collector::class);
+    }//1-m
 }
