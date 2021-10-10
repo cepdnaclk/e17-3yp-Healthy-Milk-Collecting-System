@@ -60,6 +60,7 @@ Route::get('/pricerate',function (){
     return view('filter');
 });
 Route::get('/price-save',[PriceChartController::class, 'save']);
+Route::get('/price-all',[PriceChartController::class, 'getAll']);
 Route::get('/collector-save', [CollectorController::class, 'save']);
 Route::get('/farmer-save',[FarmerController::class, 'save']);
 Route::get('/get-price', [PriceChartController::class, 'index']);
