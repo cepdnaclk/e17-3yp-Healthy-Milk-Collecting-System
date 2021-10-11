@@ -24,7 +24,7 @@ class DailyRecord extends Model
         'total_volume',
         'fat_rate',
         'temperature',
-        'added_date',
+        'farmer_name',
         'total_price',
         'note',
         'farmer_id',

@@ -40,9 +40,9 @@ class CollectorController extends Controller
                         "businesstype"=>$user->businesstype,
                         "type"=>$user->type,
                         "a"=>$price->a,
-                        "b"=>$price->a,
-                        "c"=>$price->a,
-                        "d"=>$price->a];    
+                        "b"=>$price->b,
+                        "c"=>$price->c,
+                        "d"=>$price->d];    
                 //$user->'device_id'=$device_id;
                 //$user['collector_id']=$collector_id;
                 //$arr1=json_decode($user);

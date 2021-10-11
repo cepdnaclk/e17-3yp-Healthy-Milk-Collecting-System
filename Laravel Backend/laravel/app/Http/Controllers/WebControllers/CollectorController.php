@@ -68,10 +68,12 @@ class CollectorController extends Controller
             DB::update('update users set name = ?,email = ?,
             location=?,latitude=?,longitude=?,firstname=?,
             lastname=?,contact=?,address=?, businesstype = ? where id = ?',
-            [$req->input('name'),$req->input('email'),$req->input('location'),
+            [
+            $req->input('firstname')." ".$req->input('lastname'),$req->input('email'),$req->input('location'),
             $req->input('latitude'),$req->input('longitude'),$req->input('firstname'),
             $req->input('lastname'),$req->input('contact'),
-            $req->input('address'),$req->input('businesstype'),$id]);
+            $req->input('address'),$req->input('businesstype'),$id
+            ]);
             return view('success',['user'=>$id]);
         } catch (\Throwable $th) {
             return response(
@@ -167,9 +169,9 @@ class CollectorController extends Controller
                         "businesstype"=>$user->businesstype,
                         "type"=>$user->type,
                         "a"=>$price->a,
-                        "b"=>$price->a,
-                        "c"=>$price->a,
-                        "d"=>$price->a];     
+                        "b"=>$price->b,
+                        "c"=>$price->c,
+                        "d"=>$price->d];     
         return view('collectoredit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {

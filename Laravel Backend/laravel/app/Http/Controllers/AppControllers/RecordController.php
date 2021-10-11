@@ -12,19 +12,39 @@ class RecordController extends Controller
 
 
 public function addDailyRecord(Request $request){
-
-    $data = [
-        'farmer_id' => $request->input('farmer_id'),
-        'collector_id' => $request->input('collector_id'),
-        'ph_value' => $request->input('ph_value'),
-        'density' => $request->input('density'),
-        'total_volume' => $request->input('volume'),
-        'fat_rate' => $request->input('fat_rate'),
-        'temperature' => $request->input('temperature'),
-        'device_id' => $request->input('device_id'),
-        'total_price' => $request->input('total_price'),
-        'note'=>$request->input('note')
-    ];
+    if($request->input('farmer_id')!=null){
+        $user_id = $value = DB::table('farmers')->where('id',  $request->input('farmer_id'))->value('user_id'); 
+        $farmer_name = $value = DB::table('users')->where('id', $user_id)->value('name'); 
+        $data = [
+            'farmer_id' => $request->input('farmer_id'),
+            'farmer_name'=> $farmer_name,
+            'collector_id' => $request->input('collector_id'),
+            'ph_value' => $request->input('ph_value'),
+            'density' => $request->input('density'),
+            'total_volume' => $request->input('volume'),
+            'fat_rate' => $request->input('fat_rate'),
+            'temperature' => $request->input('temperature'),
+            'device_id' => $request->input('device_id'),
+            'total_price' => $request->input('total_price'),
+            'note'=>$request->input('note')
+        ];
+    }else{
+ 
+        $data = [
+            
+            'farmer_name'=> $request->input('farmer_name'),
+            'collector_id' => $request->input('collector_id'),
+            'ph_value' => $request->input('ph_value'),
+            'density' => $request->input('density'),
+            'total_volume' => $request->input('volume'),
+            'fat_rate' => $request->input('fat_rate'),
+            'temperature' => $request->input('temperature'),
+            'device_id' => $request->input('device_id'),
+            'total_price' => $request->input('total_price'),
+            'note'=>$request->input('note')
+        ];
+    }
+    
     
     
     try {
@@ -81,12 +101,6 @@ public function addDailyRecord(Request $request){
 
 }
 
-
-public function test1(){
-    return response([
-        "test" => "test1"
-    ]);
-}
 
 
 }

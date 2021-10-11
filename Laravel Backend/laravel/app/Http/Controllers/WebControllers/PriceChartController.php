@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WebControllers;
 use Illuminate\Http\Request;
 use App\Models\PriceChange;
 use Illuminate\Support\Facades\DB;
+use App\Models\Collector;
 use Carbon\Carbon;
 class PriceChartController extends Controller
 {
@@ -56,6 +57,11 @@ class PriceChartController extends Controller
                 //dd($collector);
                 if($collector!=null){
                     PriceChange::create($creds);
+                    return response(
+                        [
+                        'message'=>'successfully saved new prices'
+                        ],
+                    );
                 }else{
                     return response(
                         [
@@ -90,7 +96,21 @@ class PriceChartController extends Controller
     public function get(Request $req){
         $id = $req->input('id');
         $item = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
-        
-        return $item;
+        if($item!=null){
+            return $item;
+        }
+    }
+    public function getAll(){
+        $collector_id_arr=Collector::all()->modelKeys();
+        $priceArr=[];
+        foreach($collector_id_arr as $collector_id){
+            $item = DB::table('price_changes')->select('*')->where('collector_id', $collector_id)->orderBy('created_at','DESC')->first();
+            if($item!=null){
+                array_push($priceArr,array($item->collector_id,$item->a,$item->b,$item->c,$item->d));
+            }
+            
+            
+        }
+        return view('price_bar',compact('priceArr'));
     }
 }
