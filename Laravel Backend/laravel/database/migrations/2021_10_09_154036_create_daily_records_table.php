@@ -21,12 +21,12 @@ class CreateDailyRecordsTable extends Migration
             $table->float('total_volume');
             $table->integer('fat_rate');
             $table->float('temperature');
-            $table->dateTime('added_date');
+            //$table->dateTime('added_date');
             $table->float('total_price');
-            $table->string('note');
-            
+            $table->string('note')->nullable();
+            $table->string('farmer_name')->nullable();
 
-            $table->unsignedBigInteger('farmer_id');
+            $table->unsignedBigInteger('farmer_id')->nullable();
             $table->unsignedBigInteger('collector_id');
             $table->unsignedBigInteger('device_id');
 
