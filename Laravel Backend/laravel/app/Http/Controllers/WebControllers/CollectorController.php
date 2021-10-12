@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WebControllers;
 
 use Illuminate\Http\Request;
 use App\Models\Collector;
@@ -48,7 +47,7 @@ class CollectorController extends Controller
                 //return $new_array;
             }
             $collectors =collect($collectors);
-            return $collectors;
+            return view('collector',['collectors'=>$collectors]);
             
         } catch (\Throwable $th) {
             return response(
@@ -69,10 +68,12 @@ class CollectorController extends Controller
             DB::update('update users set name = ?,email = ?,
             location=?,latitude=?,longitude=?,firstname=?,
             lastname=?,contact=?,address=?, businesstype = ? where id = ?',
-            [$req->input('name'),$req->input('email'),$req->input('location'),
+            [
+            $req->input('firstname')." ".$req->input('lastname'),$req->input('email'),$req->input('location'),
             $req->input('latitude'),$req->input('longitude'),$req->input('firstname'),
             $req->input('lastname'),$req->input('contact'),
-            $req->input('address'),$req->input('businesstype'),$id]);
+            $req->input('address'),$req->input('businesstype'),$id
+            ]);
             return view('success',['user'=>$id]);
         } catch (\Throwable $th) {
             return response(
@@ -128,7 +129,7 @@ class CollectorController extends Controller
                 );
             }
             $collectors =colllect($collectors);
-            return $collectors;
+            return view('collector',['collectors'=>$collectors]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -147,6 +148,7 @@ class CollectorController extends Controller
         $user = DB::table('users')->select('*')->where('id','=', $id)->first();
         $device_id=DB::table('collectors')->where('user_id','=', $id)->value('device_id');
         $collector_id=DB::table('collectors')->where('user_id','=', $id)->value('id');
+        $price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
         $user_data = ["user_id"=>$user->id,
                         "device_id"=>$device_id,
                         "collector_id"=>$collector_id,
@@ -165,7 +167,11 @@ class CollectorController extends Controller
                         "contact"=>$user->contact,
                         "address"=>$user->address,
                         "businesstype"=>$user->businesstype,
-                        "type"=>$user->type];     
+                        "type"=>$user->type,
+                        "a"=>$price->a,
+                        "b"=>$price->b,
+                        "c"=>$price->c,
+                        "d"=>$price->d];     
         return view('collectoredit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {

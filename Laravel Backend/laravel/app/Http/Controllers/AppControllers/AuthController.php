@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\AppControllers\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;
@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $creds = [
             'email' => $request->input('email'),
-            'name' => $request->input('name'),
+            'name' => $request->input('firstname')." ".$request->input('lastname'),
             'password' => bcrypt($request->input('password')),
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
@@ -36,46 +36,46 @@ class AuthController extends Controller
             $user = User::create($creds);
             
             
-            // if($user->type=='collector'){
+            if($user->type=='collector'){
             
-            //    $collector_creds=[
-            //     'user_id' => $user->id
-            //    ]; 
-            //    try{
-            //         $collector=Collector::create($collector_creds);
-            //         return response(
-            //             [
+               $collector_creds=[
+                'user_id' => $user->id
+               ]; 
+               try{
+                    $collector=Collector::create($collector_creds);
+                    return response(
+                        [
                             
-            //                 'message' => 'Successfully created',
-            //                 'success' => true
+                            'message' => 'Successfully created',
+                            'success' => true
                             
-            //             ],
+                        ],
                         
-            //         );
-            //    }catch(\Throwable $th){
+                    );
+               }catch(\Throwable $th){
 
-            //    }
-            // }
-            // else if($creds['type']=='farmer'){
-            //     $farmer_creds=[
-            //      'user_id' => $user->id
-            //     ]; 
-            //     try{
-            //          $farmer = Farmer::create($farmer_creds);
-            //          return response(
-            //             [
+               }
+            }
+            else if($creds['type']=='farmer'){
+                $farmer_creds=[
+                 'user_id' => $user->id
+                ]; 
+                try{
+                     $farmer = Farmer::create($farmer_creds);
+                     return response(
+                        [
                             
-            //                 'message' => 'Successfully created',
-            //                 'success' => true
+                            'message' => 'Successfully created',
+                            'success' => true
                             
-            //             ],
+                        ],
                         
-            //         );
-            //     }catch(\Throwable $th){
+                    );
+                }catch(\Throwable $th){
  
-            //     }
-            //  }
-             //
+                }
+             }
+             
         } catch (\Throwable $th) {
             return response(
                 [

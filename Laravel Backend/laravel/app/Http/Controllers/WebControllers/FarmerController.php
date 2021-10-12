@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WebControllers;
 
 use Illuminate\Http\Request;
 use App\Models\Collector;
@@ -43,7 +43,7 @@ class FarmerController extends Controller
                 //array_merge($tmp,$user);
                 //return $new_array;
             }
-            dd($farmers);
+            //dd(collect($farmers));
             //dd($users);
             return view('farmer',['users'=>collect($farmers)]);
             
@@ -140,8 +140,8 @@ class FarmerController extends Controller
                     
                 );
             }
-            dd($farmers);
-            return view('collector',['users'=>collect($farmers)]);
+            //dd($farmers);
+            return view('farmer',['users'=>collect($farmers)]);
         
         } catch (\Throwable $th) {
             return response(

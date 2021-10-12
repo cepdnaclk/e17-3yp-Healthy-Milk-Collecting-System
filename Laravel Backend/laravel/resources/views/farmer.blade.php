@@ -16,14 +16,16 @@
                       </thead>
                       <tbody>
                           @foreach ($users as $user)
+                          <?php $user_id= $user['user_id'];
+                          $farmer_id=$user['farmer_id']?>
                           <tr>
-                          <td>{{ $user->id }}</td>
-                          <td>{{ $user->name }}</td>
-                          <td>{{ $user->email }}</td>
-                          <td>{{ $user->businesstype }}</td>
-                          <td><a href="{{url('get-collectors') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-success">Collectors</a>
-                              <a href="{{url('farmer-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a>
-                              <a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->user_id])}}"  class="btn btn-danger">Delete</a></td>
+                          <td>{{ $user["farmer_id"] }}</td>
+                          <td>{{ $user["farmer_id"] }}</td>
+                          <td>{{ $user["farmer_id"] }}</td>
+                          <td>{{ $user["farmer_id"] }}</td>
+                          <td><a href="{{url('get-collectors') . '?' . http_build_query(['id' => $farmer_id])}}"  class="btn btn-success">Collectors</a>
+                              <a href="{{url('farmer-edit') . '?' . http_build_query(['id' => $user_id])}}" class="btn btn-primary">Edit</a>
+                              <a href="{{url('user-remove') . '?' . http_build_query(['id' => $user_id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>

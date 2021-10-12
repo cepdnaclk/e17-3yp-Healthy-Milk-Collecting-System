@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WebControllers\AuthController;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\WebControllers\PriceChartController;
 use App\Http\Controllers\WebControllers\AdminController;
@@ -59,14 +59,15 @@ Route::get('/pricerate',function (){
     
     return view('filter');
 });
-Route::post('/price-save',[PriceChartController::class, 'save']);
+Route::get('/price-save',[PriceChartController::class, 'save']);
+Route::get('/price-all',[PriceChartController::class, 'getAll']);
 Route::get('/collector-save', [CollectorController::class, 'save']);
 Route::get('/farmer-save',[FarmerController::class, 'save']);
 Route::get('/get-price', [PriceChartController::class, 'index']);
 Route::get('/collector-price', [PriceChartController::class, 'get']);
 
 
-
+Route::get('/register',[AuthController::class,'register']);
 
 Route::get('/users',function(){
     try{
