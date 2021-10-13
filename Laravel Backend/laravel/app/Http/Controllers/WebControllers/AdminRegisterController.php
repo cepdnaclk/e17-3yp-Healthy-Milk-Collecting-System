@@ -9,8 +9,12 @@ use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Registered;
-use JWTAuth;
-class AdminController extends Controller
+use Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+
+class AdminRegisterController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -19,7 +23,11 @@ class AdminController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:admins');
+       
+            $this->middleware('guest');
+            $this->middleware('guest:admins');
+            
+        
     }
     /**
      * show dashboard.
@@ -35,11 +43,11 @@ class AdminController extends Controller
     }
     public function register(Request $request){
 
-
+        //$this->validator($request->all())->validate();
         $creds = [
             'email' => $request->input('email'),
             'name' => $request->input('name'),
-            'password' => bcrypt($request->input('password')),
+            'password' => Hash::make($request['password']),
             'contact' => $request->input('contact'),
 
         ];
@@ -62,14 +70,11 @@ class AdminController extends Controller
             );
         }
         
-        event(new Registered($admin));
-        $token = JWTAuth::fromUser($admin);
         
         return response(
             [
                 'user' => $admin,
                 'message' => 'register success',
-                'token' => $token,
                 'success' => true
             ],
             201

@@ -149,6 +149,29 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link nav-items"  onclick="nav_toogle(6)">
+              <i class="fas fa-sticky-note nav-icon"></i>
+              <p>
+                Records
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="daily_records" class="nav-link" class="nav-link nav-items">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Daily Records</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="sub_records" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sub Records</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link nav-items"  onclick="nav_toogle(7)">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Charts
@@ -171,13 +194,13 @@
               <li class="nav-item">
                 <a href="pages/charts/inline.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
+                  <p>Quality Variation</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/charts/uplot.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
+                  <p>Volume Variation</p>
                 </a>
               </li>
             </ul>
@@ -228,9 +251,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
@@ -267,9 +288,9 @@
   function nav_toogle(i){
     
     for(k=0; k<nav_items.length;++k){
-      nav_items[k].classList.remove('active');
+      nav_items[k].classList.replace('active','');
     }
-    nav_items[i].classList.add('active');
+    nav_items[i].classList.replace('','active');
   }
 </script>
 </body>

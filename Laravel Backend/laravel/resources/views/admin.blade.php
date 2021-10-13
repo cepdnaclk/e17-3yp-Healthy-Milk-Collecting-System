@@ -7,22 +7,22 @@
                       <thead class="thead-light">
                           <tr>
                             <th scope="col" class="bg-primary">ID</th>
-                            <th scope="col" class="bg-primary">Username</th>
+                            <th scope="col" class="bg-primary">name</th>
                             <th scope="col" class="bg-primary">Email</th>
-                            <th scope="col" class="bg-primary">Type</th>
+                            <th scope="col" class="bg-primary">Contact</th>
                             <th scope="col" class="bg-primary">Edit</th>
                             <th scope="col" class="bg-danger">Delete</th>
                           </tr>
                       </thead>
                       <tbody>
-                          @foreach ($users as $user)
+                          @foreach ($admins as $user)
                           <tr>
                           <td>{{ $user->id }}</td>
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
-                          <td>{{ $user->businesstype }}</td>
-                          <td><a href="{{url('collector-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a></td>
-                          <td><a href="{{url('user-remove') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
+                          <td>{{ $user->contact }}</td>
+                          <td><a href="{{url('admin-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a></td>
+                          <td><a href="{{url('admin-remove') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>
