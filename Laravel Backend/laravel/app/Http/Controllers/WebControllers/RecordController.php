@@ -5,7 +5,7 @@ namespace App\Http\Controllers\WebControllers;;
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;
 use App\Models\SubRecord;
-
+use Illuminate\Support\Facades\DB;
 class RecordController extends Controller
 {
     
@@ -112,10 +112,35 @@ public function addDailyRecord(Request $request){
             return view('sub_records',['records'=>$records]);
         }else{
             
-            $records = SubRecord::all()->where('daily_record_id',$req->daily_record);
+            $records = SubRecord::where('daily_record_id',$req->daily_record);
             return view('sub_records',['records'=>$records]);
         }
         
+
+    }
+    public function dailyVolumeFilter(){
+        return view('filter');
+    }
+    public function dailyVolume(Request $req){
+        $id= $req->id;
+        $items = DailyRecord::select(
+            DB::raw("sum(total_volume) as total"),
+            DB::raw("day as day"))
+            ->orderBy('day')
+            ->groupBy(DB::raw("day"))->where('collector_id',$req->id)
+            ->get();
+        $day=array();
+        $values =array();
+        
+            if(count($items)>0){
+                foreach ($items as $item) {
+                   
+                    array_push($day,$item['day']);
+                    array_push($values,$item['total']);
+                }
+                $arr=array_combine($day, $values);
+                return view('volume')->with(compact('arr'))->with(compact('id'));
+            }
     }
 
 }

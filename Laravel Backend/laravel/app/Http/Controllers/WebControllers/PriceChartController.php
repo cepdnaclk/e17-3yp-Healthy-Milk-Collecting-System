@@ -27,7 +27,7 @@ class PriceChartController extends Controller
                 $arr=array_combine($day, $values);
                 return view('price')->with(compact('arr'))->with(compact('id'));
                 //dd(count($items));
-                dd(count($items));
+                //dd(count($items));
                 ///return view('price')->with('days',$day)->with('valuesA',$valuesA);
             }else{
                 return view('Notfound',['user'=>$id]);
@@ -112,5 +112,8 @@ class PriceChartController extends Controller
             
         }
         return view('price_bar',compact('priceArr'));
+    }
+    public function filter(Request $req){
+        return view('filter');
     }
 }

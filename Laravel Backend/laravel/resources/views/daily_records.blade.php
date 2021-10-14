@@ -54,7 +54,7 @@
                           <td>{{ $record['temperature'] }}</td>
                           <td>{{ $record['ph_value'] }}</td>
                           <td>{{ $record['fat_rate'] }}</td>
-                          <td><a href="{{url('sub_records') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-success">sub records</a>
+                          <td><a href="{{route('admin.dashboard.sub_records') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-success">sub records</a>
                           <a href="" class="btn btn-primary">Edit</a>
                           <a href=""  class="btn btn-danger">Delete</a></td> 
                           </tr>

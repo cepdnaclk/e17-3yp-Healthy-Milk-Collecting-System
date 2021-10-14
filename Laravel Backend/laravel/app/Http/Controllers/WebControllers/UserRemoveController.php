@@ -82,7 +82,7 @@ class UserRemoveController extends Controller
         $fcount = Farmer::count(); 
         $ucount = User::count(); 
         $arr = [$ccount,$fcount,$ucount];
-        return view('index',['user'=>$user,'userscount'=>$arr]);
+        return view('index',['userscount'=>$arr]);
         } catch (\Throwable $th) {
             return response(
                 [

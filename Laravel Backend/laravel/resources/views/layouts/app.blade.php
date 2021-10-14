@@ -47,6 +47,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
+        <a class="nav-link"  href="{{route('admin.logout')}}" role="button">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
@@ -59,8 +64,8 @@
 
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTElogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
-      <span class="brand-text font-weight-light">Admin Panel</span>
+      <!-- <img src="{{ asset('dist/img/AdminLTElogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1"> -->
+      <span class="brand-text font-weight-light pl-2">MilkTab Dashboard</span>
     </a>
 
     <!-- Sidebar -->
@@ -68,10 +73,13 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/team/012v3.png')}}" class="img" alt="User Image">
+          <img src="{{ asset('dist/img/team/profile.png')}}" class="img" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Aminda Amarasinghe</a>
+          <a href="#" class="d-block">
+            <?php $username = session()->get('user');?>
+            {{$username}}
+          </a>
         </div>
       </div>
 
@@ -93,7 +101,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="main"  class="nav-link nav-items active" onclick="nav_toogle(0);">
+            <a href="{{ route('admin.dashboard')}}"  class="nav-link nav-items active" onclick="nav_toogle(0);">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -103,7 +111,7 @@
             
           </li>
           <li class="nav-item">
-            <a href="links" class="nav-link nav-items"  onclick="nav_toogle(1);">
+            <a href="{{ route('admin.dashboard.links')}} " class="nav-link nav-items"  onclick="nav_toogle(1);">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Links
@@ -122,25 +130,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="collectors" class="nav-link nav-items" onclick="nav_toogle(2)">
+                <a href="{{ route('admin.dashboard.collectors')}} " class="nav-link nav-items" onclick="nav_toogle(2)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Collectors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="farmers" class="nav-link nav-items" onclick="nav_toogle(3)">
+                <a href="{{ route('admin.dashboard.farmers')}} " class="nav-link nav-items" onclick="nav_toogle(3)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Farmers</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admins" class="nav-link nav-items" onclick="nav_toogle(4)">
+                <a href="{{ route('admin.dashboard.admins')}} " class="nav-link nav-items" onclick="nav_toogle(4)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Admins</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="devices" class="nav-link nav-items" onclick="nav_toogle(5)">
+                <a href="{{ route('admin.dashboard.devices')}} " class="nav-link nav-items" onclick="nav_toogle(5)">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Devices</p>
                 </a>
@@ -157,13 +165,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="daily_records" class="nav-link" class="nav-link nav-items">
+                <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daily Records</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="sub_records" class="nav-link">
+                <a href="{{ route('admin.dashboard.sub_records')}} " class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sub Records</p>
                 </a>
@@ -198,7 +206,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
+                <a href="{{ route('admin.get-volume-filter') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Volume Variation</p>
                 </a>
@@ -233,7 +241,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content" >
+    <section class="content">
       
         <!-- Small boxes (Stat box) -->
         <!-- <iframe src="/dashboard/main" name="ifram_main" width="95%" style="position: absolute; height: 100%; border: none;"></iframe> -->

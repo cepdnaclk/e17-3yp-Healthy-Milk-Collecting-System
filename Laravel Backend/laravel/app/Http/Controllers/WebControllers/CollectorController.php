@@ -46,8 +46,11 @@ class CollectorController extends Controller
                 //array_merge($tmp,$user);
                 //return $new_array;
             }
-            $collectors =collect($collectors);
-            return view('collector',['collectors'=>$collectors]);
+
+            $collectors = $this->paginate($collectors,8);
+            $collectors = collect($collectors);
+            //dd($collectors);
+            return view('collector',['collectors'=>$collectors['data'],'page_data'=>$collectors]);
             
         } catch (\Throwable $th) {
             return response(
@@ -60,6 +63,7 @@ class CollectorController extends Controller
             );
         }
     }
+    
     //save collector data after editing
     public function save(Request $req){
         try{
@@ -172,7 +176,7 @@ class CollectorController extends Controller
                         "b"=>$price->b,
                         "c"=>$price->c,
                         "d"=>$price->d];     
-        return view('collectoredit',['user'=>collect($user_data)]);
+        return view('collector_edit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {
             return response(

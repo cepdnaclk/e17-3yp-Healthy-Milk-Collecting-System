@@ -3,7 +3,14 @@
         <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
         <div class="row d-flex justify-content-center">
-            <form id="chart-form" class="form col-12" action="{{url('get-price')}}" method="get" >
+        @if (request()->is('main/pricerate'))
+            <form id="chart-form" class="form col-12" action="{{ route('get-price')}}" method="get" >  
+        @endif
+        @if (request()->is('main/get-volume-filter'))
+            <form id="chart-form" class="form col-12" action="{{ route('get-volume')}}" method="get" >  
+        @endif
+
+            
             <div class="col-6 m-4">
             <div class="form-group m-4">
                 <label for="id" class="text-gray">Collector ID:</label><br>

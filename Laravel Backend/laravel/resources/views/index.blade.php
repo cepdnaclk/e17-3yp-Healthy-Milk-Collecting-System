@@ -18,20 +18,20 @@
             </div>
           </div>
           <!-- ./col -->
-          <!-- <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6">
           
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>10</h3>
 
-                <p>Bounce Rate</p>
+                <p>Device In Use</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+              <i class="fab fa-creative-commons-sampling"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div> -->
+          </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->

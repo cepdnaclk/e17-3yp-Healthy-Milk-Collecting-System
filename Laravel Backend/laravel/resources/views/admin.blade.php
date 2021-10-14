@@ -21,12 +21,13 @@
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
                           <td>{{ $user->contact }}</td>
-                          <td><a href="{{url('admin-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a></td>
-                          <td><a href="{{url('admin-remove') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
+                          <td><a href="{{route('admin-edit') . '?' . http_build_query(['id' => $user->id])}}" class="btn btn-primary">Edit</a></td>
+                          <td><a href="{{route('admin-remove') . '?' . http_build_query(['id' => $user->id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>
                   </table>
+                  {{ $admins->links() }}
               </div>
         </div>
    

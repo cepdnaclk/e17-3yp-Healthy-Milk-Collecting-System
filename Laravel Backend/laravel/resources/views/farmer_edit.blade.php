@@ -3,7 +3,7 @@
         <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
         <div class="row d-flex justify-content-center">
-        <form id="chart-form" class="form col-12" action="{{url('farmer-save')}}" method="put" >
+        <form id="chart-form" class="form col-12" action="{{route('farmer-save')}}" method="put" >
         <table class="table table-bordered " style="background-color: white">
                       <thead class="thead-light">
                           <tr>

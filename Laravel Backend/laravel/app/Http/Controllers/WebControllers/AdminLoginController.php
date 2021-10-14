@@ -7,6 +7,8 @@ use App\Http\Controllers\WebControllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Auth;
 use Route;
+use Illuminate\Support\Facades\DB;
+
 class AdminLoginController extends Controller
 {
    use AuthenticatesUsers;
@@ -41,13 +43,14 @@ class AdminLoginController extends Controller
       // Validate the form data
       $this->validate($request, [
         'email'   => 'required|email',
-        'password' => 'required|min:6'
+        'password' => 'required|min:8'
       ]);
       
       // Attempt to log the user in
       if (Auth::guard('admins')->attempt(['email' => $request->email, 'password' => $request->password])) {
         // if successful, then redirect to their intended location
-        
+        $admin = DB::table('admins')->where('email', $request->email)->first();
+        $request->session()->put('user', $admin->name);
         return redirect()->intended(route('admin.dashboard'));
       } 
       // if unsuccessful, then redirect back to the login with the form data

@@ -45,7 +45,10 @@ class FarmerController extends Controller
             }
             //dd(collect($farmers));
             //dd($users);
-            return view('farmer',['users'=>collect($farmers)]);
+            $farmers = $this->paginate($farmers,2);
+            $farmers = collect($farmers);
+            
+            return view('farmer',['users'=>$farmers['data'],'page_data'=>$farmers]);
             
         } catch (\Throwable $th) {
             return response(

@@ -2,16 +2,16 @@
 @section('content')
         <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
-        <form id="chart-form" class="form" action="{{ route('admin-save')}}" method="put">
+        <form id="chart-form" class="form" action="{{ route('device-save')}}" method="put">
         <div class="container col-sm-6  col-md-11 col-md-offset-1">
         <label for="id" class="text-gray">ID:</label>
-        <input name="id" readonly value="{{ $user['id'] }}" style="border:none;outline:0;"></input>
+        <input name="id" readonly value="{{ $device->id}}" style="border:none;outline:0;"></input>
         <table class="table table-bordered " style="background-color: white;">
                       <thead class="thead-light">
                           <tr>
                            
-                            <th class="bg-primary">name</th>
-                            <th class="bg-primary">Contact</th>
+                            <th class="bg-primary">Batch</th>
+                            <th class="bg-primary">Desciption</th>
 
                             
                           </tr>
@@ -19,8 +19,8 @@
                       <tbody>
                           
                           <tr>
-                          <td><input name="name" value="{{ $user['name'] }}" style="border:none;outline:0;"></input></td>
-                          <td><input name="contact" value="{{ $user['contact'] }}"  style="border:none;outline:0;"></input></td>
+                          <td><input name="batch" value="{{ $device->batch }}" style="border:none;outline:0;"></input></td>
+                          <td><input name="description" value="{{ $device->description }}"  style="border:none;outline:0;"></input></td>
                           </tr>
                           
                       </tbody>

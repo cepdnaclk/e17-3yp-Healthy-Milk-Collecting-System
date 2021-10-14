@@ -43,7 +43,7 @@ class AdminRegisterController extends Controller
     }
     public function register(Request $request){
 
-        //$this->validator($request->all())->validate();
+        
         $creds = [
             'email' => $request->input('email'),
             'name' => $request->input('name'),
@@ -52,7 +52,10 @@ class AdminRegisterController extends Controller
 
         ];
         
-        
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:8'
+          ]);
         try {
             $admin = Admin::create($creds);
             
@@ -71,107 +74,11 @@ class AdminRegisterController extends Controller
         }
         
         
-        return response(
-            [
-                'user' => $admin,
-                'message' => 'register success',
-                'success' => true
-            ],
-            201
-        );
+        return view('adminLogin');
         
         
         
         }
 
-    public function login(Request $request){
 
-            $creds = [
-                'email' => $request->input('email'),
-                'password' => $request->input('password')
-            ];
-        
-             if(!Auth()->attempt($creds)){
-        
-                return response([
-                    'message' => 'login faild!',
-                    'success' => false
-                ]);
-        
-             }
-        
-             
-        $admin = Auth()->user();
-        
-        
-        
-        $token = JWTAuth::fromUser($admin);
-        
-        return response(
-            [
-                'user' => $admin,
-                'token' => $token,
-                'success' => true
-            ],
-            201
-            );
-        
-        
-        
-        
-    }
-        
-
-    public function show(){
-        try{
-            $admins = DB::select('select * from admins');
-            return view('admin',['admins'=>$admins]);
-        } catch (\Throwable $th) {
-            return response(
-                [
-                    
-                    'error_message' => $th,
-                    
-                ],
-                
-            );
-        }
-    }
-    public function find(Request $req){
-        try{
-            $id = $req->input('id');
-            $admin = DB::table('admins')->select('*')->where('id','=', $id)->first();
-            return view('admin_edit',['user'=>collect($admin)]);
-        
-        } catch (\Throwable $th) {
-            return response(
-                [
-                    
-                    'error_message' => $th,
-                    
-                ],
-                
-            );
-        }
-    }
-    public function save(Request $req){
-        try{
-            $email = $req->input('email');
-            $id = $req->input('id');
-            $name = $req->input('name');
-            $contact = $req->input('contact');
-            
-            DB::update('update admins set name = ?,email = ?, contact = ? where id = ?',[$name, $email,$contact,$id]);
-            return view('success',['user'=>$email]);
-        } catch (\Throwable $th) {
-            return response(
-                [
-                    
-                    'error_message' => $th,
-                    
-                ],
-                
-            );
-        }
-    }
 }
