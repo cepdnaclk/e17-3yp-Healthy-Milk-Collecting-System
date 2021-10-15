@@ -9,7 +9,7 @@ use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
 use JWTAuth;
-use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Registered; ////
 
 class AuthController extends Controller
 {

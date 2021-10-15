@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;///
 
 class ConnectController extends Controller
 {

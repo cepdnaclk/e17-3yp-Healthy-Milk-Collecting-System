@@ -6,7 +6,7 @@ use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\Device;
 use Illuminate\Support\Facades\DB;
-class DeviceController extends Controller
+class DeviceController extends Controller////
 {
     public function show(){
         try{

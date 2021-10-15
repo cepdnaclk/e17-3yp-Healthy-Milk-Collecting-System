@@ -4,7 +4,7 @@ namespace App\Http\AppControllers\Controllers;
 
 use Illuminate\Http\Request;
 
-class NewPasswordController extends Controller
+class NewPasswordController extends Controller//
 {
     
 

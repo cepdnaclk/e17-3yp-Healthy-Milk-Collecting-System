@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
-use App\Models\PriceChange;
+use App\Models\PriceChange;///
 
 use Illuminate\Support\Facades\DB;
 class CollectorController extends Controller

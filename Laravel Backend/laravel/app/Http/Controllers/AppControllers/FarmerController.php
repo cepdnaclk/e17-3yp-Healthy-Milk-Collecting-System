@@ -7,7 +7,7 @@ use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-class FarmerController extends Controller
+class FarmerController extends Controller///
 {
     public function show(){
         try{
