@@ -45,7 +45,8 @@ class DeviceController extends Controller
         ];
         try{
             Device::create($creds);
-            return view('device',['devices'=>Device::all()]);
+            $devices = DB::table('devices')->simplePaginate(8);
+            return view('device',['devices'=>$devices]);
         }catch(\Throwable $th) {
             return response(
                 [
@@ -62,7 +63,8 @@ class DeviceController extends Controller
     public function remove(Request $req){
         try{
             DB::table('devices')->delete( $req->input('id'));
-            return view('device',['device'=> $req->input('id')]);
+            $devices = DB::table('devices')->simplePaginate(8);
+            return view('device',['devices'=>$devices]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -79,7 +81,8 @@ class DeviceController extends Controller
             $id = $req->input('id');
             
             DB::update('update devices set description = ?,batch=? where id = ?',[$req->description,$req->batch,$id]);
-            return view('device',['devices'=>Device::all()]);
+            $devices = DB::table('devices')->simplePaginate(8);
+            return view('device',['devices'=>$devices]);
         } catch (\Throwable $th) {
             return response(
                 [

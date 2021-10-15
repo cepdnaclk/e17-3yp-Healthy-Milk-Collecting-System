@@ -1,3 +1,17 @@
+<style type='text/css'>
+    #myInput {
+        
+        background-position: 10px 12px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 100%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+    
+
+</style>
 @extends('layouts.app')
 @section('content')
         <div class="container-fluid">
@@ -20,7 +34,8 @@
                             </div>
                             
                         </form>
-                  <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
+                  <input type="text" id="myInput"  onkeyup="myfilter()" placeholder="Search for desc..">
+                  <table class="table table-bordered table-hover" style="background-color: deepskyblue;"  id="myTable">
                       <thead class="thead-light">
                           <tr>
                             <th scope="col" class="bg-primary">ID</th>
@@ -48,3 +63,26 @@
         </div>
    
 @endsection   
+<script>
+function myfilter() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>

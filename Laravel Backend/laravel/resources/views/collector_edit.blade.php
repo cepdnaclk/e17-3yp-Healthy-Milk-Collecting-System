@@ -5,9 +5,9 @@
         <form id="chart-form" class="form" action="{{ route('collector-save')}}" method="put">
         <div class="container col-sm-6  col-md-11 col-md-offset-1">
         <label for="user_id" class="text-gray">User ID:</label>
-        <input name="user_id" readonly value="{{ $user['user_id'] }}" style="border:none;outline:0;"></input>
+        <input name="user_id" readonly value="{{ $user['user_id'] }}" class="text-center" style="border:none;outline:0;"></input>
         <label for="id" class="text-gray">Collector ID:</label>
-        <input name="id" readonly value="{{ $user['collector_id'] }}" style="border:none;outline:0;"></input>
+        <input name="id" readonly value="{{ $user['collector_id'] }}" class="text-center" style="border:none;outline:0;"></input>
         <table class="table table-bordered " style="background-color: white;">
                       <thead class="thead-light">
                           <tr>

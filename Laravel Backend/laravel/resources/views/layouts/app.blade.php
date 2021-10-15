@@ -25,6 +25,13 @@
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+    <!-- Ion Slider -->
+  <link rel="stylesheet" href="{{asset('plugins/ion-rangeslider/css/ion.rangeSlider.min.css')}}">
+  <!-- bootstrap slider -->
+  <link rel="stylesheet" href="{{asset('plugins/bootstrap-slider/css/bootstrap-slider.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -101,8 +108,13 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard')}}"  class="nav-link nav-items active" onclick="nav_toogle(0);">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          @if (request()->is('main'))
+            <a href="{{ route('admin.dashboard')}}"  class="nav-link nav-items active">
+           
+          @else
+          <a href="{{ route('admin.dashboard')}}"  class="nav-link nav-items" >  
+          @endif 
+          <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
                 
@@ -111,15 +123,23 @@
             
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin.dashboard.links')}} " class="nav-link nav-items"  onclick="nav_toogle(1);">
-              <i class="nav-icon fas fa-th"></i>
+          @if (request()->is('main/links'))
+            <a href="{{ route('admin.dashboard.links')}} " class="nav-link nav-items active">
+          @else 
+            <a href="{{ route('admin.dashboard.links')}} " class="nav-link nav-items">  
+          @endif  
+            <i class="nav-icon fas fa-th"></i>
               <p>
                 Links
                 <!--<span class="right badge badge-danger">New</span>-->
               </p>
             </a>
           </li>
+          @if (request()->is('main/collectors') || request()->is('main/farmers') || request()->is('main/admins') || request()->is('main/devices'))
+          <li class="nav-item menu-open">
+          @else   
           <li class="nav-item">
+          @endif 
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -130,33 +150,53 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard.collectors')}} " class="nav-link nav-items" onclick="nav_toogle(2)">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/collectors'))
+                <a href="{{ route('admin.dashboard.collectors')}} " class="nav-link nav-items active">
+              @else 
+                <a href="{{ route('admin.dashboard.collectors')}} " class="nav-link nav-items ">
+              @endif  
+                <i class="far fa-circle nav-icon"></i>
                   <p>Collectors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard.farmers')}} " class="nav-link nav-items" onclick="nav_toogle(3)">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/farmers'))
+                <a href="{{ route('admin.dashboard.farmers')}} " class="nav-link nav-items active">
+              @else 
+                <a href="{{ route('admin.dashboard.farmers')}} " class="nav-link nav-items">  
+              @endif 
+                <i class="far fa-circle nav-icon"></i>
                   <p>Farmers</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard.admins')}} " class="nav-link nav-items" onclick="nav_toogle(4)">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/admins'))
+                <a href="{{ route('admin.dashboard.admins')}} " class="nav-link nav-items" >
+              @else
+                <a href="{{ route('admin.dashboard.admins')}} " class="nav-link nav-items" > 
+              @endif  
+              <i class="far fa-circle nav-icon"></i>
                   <p>Admins</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard.devices')}} " class="nav-link nav-items" onclick="nav_toogle(5)">
+              @if (request()->is('main/devices'))
+                <a href="{{ route('admin.dashboard.devices')}} " class="nav-link nav-items active">
+              @else
+              <a href="{{ route('admin.dashboard.devices')}} " class="nav-link nav-items">
+              @endif 
                   <i class="far fa-circle nav-icon"></i>
                   <p>Devices</p>
                 </a>
               </li>
             </ul>
           </li>
+          @if (request()->is('main/daily_records') || request()->is('main/sub_records'))
+          <li class="nav-item menu-open">
+          @else
           <li class="nav-item">
-            <a href="#" class="nav-link nav-items"  onclick="nav_toogle(6)">
+          @endif
+            <a href="#" class="nav-link nav-items" >
               <i class="fas fa-sticky-note nav-icon"></i>
               <p>
                 Records
@@ -165,21 +205,33 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/daily_records'))
+                <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items active">
+              @else
+              <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items">
+              @endif
+                <i class="far fa-circle nav-icon"></i>
                   <p>Daily Records</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('admin.dashboard.sub_records')}} " class="nav-link">
+              @if (request()->is('main/sub_records'))
+              <a href="{{ route('admin.dashboard.sub_records')}} " class="nav-link active">
+              @else
+              <a href="{{ route('admin.dashboard.sub_records')}} " class="nav-link">
+              @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Sub Records</p>
                 </a>
               </li>
             </ul>
           </li>
+          @if (request()->is('main/pricerate') ||request()->is('main/get-volume-filter')|| request()->is('main/price-all')||request()->is('main/quality-chart-filter'))
+          <li class="nav-item menu-open">
+          @else
           <li class="nav-item">
-            <a href="#" class="nav-link nav-items"  onclick="nav_toogle(7)">
+          @endif
+            <a href="#" class="nav-link nav-items" >
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Charts
@@ -188,25 +240,41 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pricerate" class="nav-link" class="nav-link nav-items">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/pricerate'))
+                <a href="{{ route('admin.get-price-filter') }}" class="nav-link active">
+              @else  
+              <a href="{{ route('admin.get-price-filter') }}" class="nav-link">
+              @endif
+              <i class="far fa-circle nav-icon"></i>
                   <p>PriceRate</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="price-all" class="nav-link">
+              @if (request()->is('main/price-all'))
+                <a href="{{ route('admin.get-price-bar') }}" class="nav-link active">
+                @else  
+                <a href="{{ route('admin.get-price-bar') }}" class="nav-link">
+                @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Price All</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+              @if (request()->is('main/quality-chart-filter'))
+                <a href="{{ route('admin.get-chart-filter') }}" class="nav-link active">
+                @else  
+                <a href="{{ route('admin.get-chart-filter') }}" class="nav-link">
+                @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quality Variation</p>
                 </a>
               </li>
               <li class="nav-item">
+              @if (request()->is('main/get-volume-filter'))
+                <a href="{{ route('admin.get-volume-filter') }}" class="nav-link active">
+                @else 
                 <a href="{{ route('admin.get-volume-filter') }}" class="nav-link">
+                @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Volume Variation</p>
                 </a>
@@ -231,7 +299,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
           </div><!-- /.col -->
@@ -290,16 +358,6 @@
 
 
 <script type="text/javascript">
-  var nav_items = document.getElementsByClassName('nav-items');
-  
-  var i,k;
-  function nav_toogle(i){
-    
-    for(k=0; k<nav_items.length;++k){
-      nav_items[k].classList.replace('active','');
-    }
-    nav_items[i].classList.replace('','active');
-  }
 </script>
 </body>
 </html>

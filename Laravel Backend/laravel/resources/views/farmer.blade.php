@@ -19,7 +19,7 @@
                 <h5 class="mb-2">Registered Farmers</h5>
                 <input type="text" id="myInput" onkeyup="myfilter()" placeholder="Search for names..">
 
-                  <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
+                  <table class="table table-bordered table-hover" style="background-color: deepskyblue;" id="myTable">
                       <thead class="thead-light">
                           <tr>
                             <th scope="col" class="bg-primary">User ID</th>

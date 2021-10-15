@@ -5,7 +5,7 @@
         <form id="chart-form" class="form" action="{{ route('device-save')}}" method="put">
         <div class="container col-sm-6  col-md-11 col-md-offset-1">
         <label for="id" class="text-gray">ID:</label>
-        <input name="id" readonly value="{{ $device->id}}" style="border:none;outline:0;"></input>
+        <input name="id" readonly value="{{ $device->id}}" class="text-center" style="border:none;outline:0;"></input>
         <table class="table table-bordered " style="background-color: white;">
                       <thead class="thead-light">
                           <tr>

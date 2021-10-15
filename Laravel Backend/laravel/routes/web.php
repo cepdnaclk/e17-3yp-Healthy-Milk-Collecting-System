@@ -49,11 +49,13 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/farmer-edit',[FarmerController::class, 'find'])->name('farmer-edit');
     Route::get('/admin-edit',[AdminController::class, 'find'])->name('admin-edit');
     Route::get('/device-edit',[DeviceController::class, 'find'])->name('device-edit');
+    Route::get('/record-edit',[RecordController::class, 'sub_find'])->name('sub_record_edit');
 
     Route::get('/collector-save', [CollectorController::class, 'save'])->name('collector-save');
     Route::get('/farmer-save',[FarmerController::class, 'save'])->name('farmer-save');
     Route::get('/admin-save',[AdminController::class, 'save'])->name('admin-save');
     Route::get('/device-save',[DeviceController::class, 'save'])->name('device-save');
+    Route::get('/record-save',[RecordController::class, 'update'])->name('record-save');
 
     Route::get('/get-farmers',[FarmerController::class, 'get'])->name('get-farmers');
     Route::get('/get-collectors',[CollectorController::class, 'get'])->name('get-collectors');
@@ -68,14 +70,16 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/admin-remove',[UserRemoveController::class,'removeAdmin'])->name('admin-remove');
     Route::get('/device-remove',[DeviceController::class,'remove'])->name('device-remove');
 
-    Route::get('/pricerate',[PriceChartController::class, 'filter'])->name('admin.get-filter');
+    Route::get('/pricerate',[PriceChartController::class, 'filter'])->name('admin.get-price-filter');
     Route::get('/price-save',[PriceChartController::class, 'save'])->name('price-save');
-    Route::get('/price-all',[PriceChartController::class, 'getAll'])->name('price-all');
+    Route::get('/price-all',[PriceChartController::class, 'getAll'])->name('admin.get-price-bar');
     Route::get('/get-price', [PriceChartController::class, 'index'])->name('get-price');
     Route::get('/collector-price', [PriceChartController::class, 'get'])->name('collector-price');
 
     Route::get('/get-volume-filter',[RecordController::class, 'dailyVolumeFilter'])->name('admin.get-volume-filter');
     Route::get('/get-volume', [RecordController::class, 'dailyVolume'])->name('get-volume');
+    Route::get('/quality-chart', [RecordController::class, 'qualityChart'])->name('quality-chart');
+    Route::get('/quality-chart-filter',[RecordController::class, 'chartfilter'])->name('admin.get-chart-filter');
 
 });
 

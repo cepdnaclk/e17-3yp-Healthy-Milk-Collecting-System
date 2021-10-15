@@ -23,7 +23,7 @@
                 
                 <div class="container col-sm-6  col-md-10 col-md-offset-1">
                 <h5 class="mb-2 text-dark">Sub Records</h5>
-                <input type="text" id="myInput" onkeyup="myfilter()" placeholder="Search for names..">
+                <input type="text" id="myInput" onkeyup="myfilter()" placeholder="Search for daily record ID..">
                   <table class="table table-bordered table-hover" style="background-color: deepskyblue;" id="myTable">
                       <thead class="thead-light">
                           <tr>
@@ -54,12 +54,18 @@
                           <td>{{ $record['grade'] }}</td>
                           <td>{{ $record['price_rate'] }}</td>
                           <td>
-                          <a href="" class="btn btn-primary">Edit</a>
-                          <a href=""  class="btn btn-danger">Delete</a></td> 
+                          <a href="{{route('sub_record_edit') . '?' . http_build_query(['id' => $record['id']])}}" class="btn btn-primary">Edit</a>
+                         
                           </tr>
                         @endforeach
                       </tbody>
                   </table>
+                  @if ($page_data['current_page']>1)
+                  <a href="{{route('admin.dashboard.sub_records'). '?' . http_build_query(['page' => $page_data['current_page']-1])}}" class="btn btn-info"><i class="fas fa-angle-double-left"></i></a>
+                  @endif
+                  @if ($page_data['next_page_url']!=null)
+                  <a href="{{route('admin.dashboard.sub_records'). '?' . http_build_query(['page' => $page_data['current_page']+1])}}" class="btn btn-info"><i class="fas fa-angle-double-right"></i></a>
+                  @endif
               </div>
         </div>
    
@@ -75,7 +81,7 @@ function myfilter() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

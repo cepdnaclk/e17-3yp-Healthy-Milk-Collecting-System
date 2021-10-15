@@ -22,7 +22,7 @@
         <div class="container-fluid">
                 
                 <div class="container col-sm-6  col-md-10 col-md-offset-1"><h5 class="mb-2">Daily Records</h5>
-                <input type="text" id="myInput" onkeyup="myfilter()" placeholder="Search for names..">
+                <input type="text" id="myInput" onkeyup="myfilter()" placeholder="Search for collector_id..">
                   <table class="table table-bordered table-hover" style="background-color: deepskyblue;" id="myTable">
                       <thead class="thead-light">
                           <tr>
@@ -35,7 +35,7 @@
                             <th scope="col" class="bg-primary">Avg temp</th>
                             <th scope="col" class="bg-primary">Avg pH</th>
                             <th scope="col" class="bg-primary">Avg fatrate</th>
-                            
+                            <th scope="col" class="bg-primary">Total price</th>
                             <th scope="col" class="bg-danger">Options</th>
                           </tr>
                       </thead>
@@ -54,13 +54,19 @@
                           <td>{{ $record['temperature'] }}</td>
                           <td>{{ $record['ph_value'] }}</td>
                           <td>{{ $record['fat_rate'] }}</td>
+                          <td>{{ $record['total_price'] }}</td>
                           <td><a href="{{route('admin.dashboard.sub_records') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-success">sub records</a>
-                          <a href="" class="btn btn-primary">Edit</a>
-                          <a href=""  class="btn btn-danger">Delete</a></td> 
+                          
                           </tr>
                         @endforeach
                       </tbody>
                   </table>
+                  @if ($page_data['current_page']>1)
+                  <a href="{{route('admin.dashboard.daily_records'). '?' . http_build_query(['page' => $page_data['current_page']-1])}}" class="btn btn-info"><i class="fas fa-angle-double-left"></i></a>
+                  @endif
+                  @if ($page_data['next_page_url']!=null)
+                  <a href="{{route('admin.dashboard.daily_records'). '?' . http_build_query(['page' => $page_data['current_page']+1])}}" class="btn btn-info"><i class="fas fa-angle-double-right"></i></a>
+                  @endif
               </div>
         </div>
    

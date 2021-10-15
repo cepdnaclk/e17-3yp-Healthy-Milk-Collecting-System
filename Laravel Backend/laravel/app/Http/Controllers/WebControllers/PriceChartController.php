@@ -113,7 +113,7 @@ class PriceChartController extends Controller
         }
         return view('price_bar',compact('priceArr'));
     }
-    public function filter(Request $req){
+    public function filter(){
         return view('filter');
     }
 }

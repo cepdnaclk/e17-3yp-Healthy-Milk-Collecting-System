@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container-fluid">
-        <h5 class="mb-2">Info Box</h5>
+        
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <a href="https://cepdnaclk.github.io/e17-3yp-Milk-Testing-and-Collecting-System/" target="_blank">
