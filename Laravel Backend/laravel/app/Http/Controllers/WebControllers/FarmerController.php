@@ -45,7 +45,10 @@ class FarmerController extends Controller
             }
             //dd(collect($farmers));
             //dd($users);
-            return view('farmer',['users'=>collect($farmers)]);
+            $farmers = $this->paginate($farmers,8);
+            $farmers = collect($farmers);
+            
+            return view('farmer',['users'=>$farmers['data'],'page_data'=>$farmers]);
             
         } catch (\Throwable $th) {
             return response(
@@ -86,9 +89,25 @@ class FarmerController extends Controller
 
     public function find(Request $req){
         try{
-        $id = $req->input('user_id');
-        $user = DB::table('users')->select('*')->where('id','=', $id)->first();
-        return view('farmer_edit',['user'=>$user]);
+            $id = $req->input('id');
+            $user = DB::table('users')->select('*')->where('id','=', $id)->first();
+            $farmer_id = DB::table('farmers')->select('id')->where('user_id','=', $user->id)->first();
+            $user_data = ["user_id"=>$user->id,
+                        "farmer_id"=>$farmer_id,
+                        "name"=>$user->name,
+                        "email"=>$user->email,
+                        "location"=>$user->location,
+                        "latitude"=>$user->latitude,
+                        "longitude"=>$user->longitude,
+                        "created_at"=>$user->created_at,
+                        "updated_at"=>$user->updated_at,
+                        "firstname"=>$user->firstname,
+                        "lastname"=>$user->lastname,
+                        "contact"=>$user->contact,
+                        "address"=>$user->address,
+                        "businesstype"=>$user->businesstype];
+        
+        return view('farmer_edit',['user'=>collect($user_data)]);
         //return $user[0];
         } catch (\Throwable $th) {
             return response(
@@ -104,7 +123,7 @@ class FarmerController extends Controller
     public function get(Request $req){
         try{
             $id = $req->input('id');
-            $users = DB::table('collector_farmer')->select('*')->where('collector_id','=', $id)->get();
+            $users = DB::table('collector_farmers')->select('*')->where('collector_id','=', $id)->get();
             //return view('collector',['users'=>$users]);
             $farmers = [];
             if(count($users)){

@@ -25,6 +25,13 @@
   <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
   <!-- summernote -->
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
+
+    <!-- Ion Slider -->
+  <link rel="stylesheet" href="{{asset('plugins/ion-rangeslider/css/ion.rangeSlider.min.css')}}">
+  <!-- bootstrap slider -->
+  <link rel="stylesheet" href="{{asset('plugins/bootstrap-slider/css/bootstrap-slider.min.css')}}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -47,6 +54,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
+        <a class="nav-link"  href="{{route('admin.logout')}}" role="button">
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
@@ -59,8 +71,8 @@
 
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-      <img src="{{ asset('dist/img/AdminLTElogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1">
-      <span class="brand-text font-weight-light">Admin Panel</span>
+      <!-- <img src="{{ asset('dist/img/AdminLTElogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1"> -->
+      <span class="brand-text font-weight-light pl-2">MilkTab Dashboard</span>
     </a>
 
     <!-- Sidebar -->
@@ -68,10 +80,13 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('dist/img/team/012v3.png')}}" class="img" alt="User Image">
+          <img src="{{ asset('dist/img/team/profile.png')}}" class="img" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Aminda Amarasinghe</a>
+          <a href="#" class="d-block">
+            <?php $username = session()->get('user');?>
+            {{$username}}
+          </a>
         </div>
       </div>
 
@@ -93,8 +108,13 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="main"  class="nav-link nav-items active" onclick="nav_toogle(0);">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          @if (request()->is('main'))
+            <a href="{{ route('admin.dashboard')}}"  class="nav-link nav-items active">
+           
+          @else
+          <a href="{{ route('admin.dashboard')}}"  class="nav-link nav-items" >  
+          @endif 
+          <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
                 
@@ -103,15 +123,23 @@
             
           </li>
           <li class="nav-item">
-            <a href="links" class="nav-link nav-items"  onclick="nav_toogle(1);">
-              <i class="nav-icon fas fa-th"></i>
+          @if (request()->is('main/links'))
+            <a href="{{ route('admin.dashboard.links')}} " class="nav-link nav-items active">
+          @else 
+            <a href="{{ route('admin.dashboard.links')}} " class="nav-link nav-items">  
+          @endif  
+            <i class="nav-icon fas fa-th"></i>
               <p>
                 Links
                 <!--<span class="right badge badge-danger">New</span>-->
               </p>
             </a>
           </li>
+          @if (request()->is('main/collectors') || request()->is('main/farmers') || request()->is('main/admins') || request()->is('main/devices'))
+          <li class="nav-item menu-open">
+          @else   
           <li class="nav-item">
+          @endif 
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -122,33 +150,88 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="collectors" class="nav-link nav-items" onclick="nav_toogle(2)">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/collectors'))
+                <a href="{{ route('admin.dashboard.collectors')}} " class="nav-link nav-items active">
+              @else 
+                <a href="{{ route('admin.dashboard.collectors')}} " class="nav-link nav-items ">
+              @endif  
+                <i class="far fa-circle nav-icon"></i>
                   <p>Collectors</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="farmers" class="nav-link nav-items" onclick="nav_toogle(3)">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/farmers'))
+                <a href="{{ route('admin.dashboard.farmers')}} " class="nav-link nav-items active">
+              @else 
+                <a href="{{ route('admin.dashboard.farmers')}} " class="nav-link nav-items">  
+              @endif 
+                <i class="far fa-circle nav-icon"></i>
                   <p>Farmers</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="admins" class="nav-link nav-items" onclick="nav_toogle(4)">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/admins'))
+                <a href="{{ route('admin.dashboard.admins')}} " class="nav-link nav-items" >
+              @else
+                <a href="{{ route('admin.dashboard.admins')}} " class="nav-link nav-items" > 
+              @endif  
+              <i class="far fa-circle nav-icon"></i>
                   <p>Admins</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="devices" class="nav-link nav-items" onclick="nav_toogle(5)">
+              @if (request()->is('main/devices'))
+                <a href="{{ route('admin.dashboard.devices')}} " class="nav-link nav-items active">
+              @else
+              <a href="{{ route('admin.dashboard.devices')}} " class="nav-link nav-items">
+              @endif 
                   <i class="far fa-circle nav-icon"></i>
                   <p>Devices</p>
                 </a>
               </li>
             </ul>
           </li>
+          @if (request()->is('main/daily_records') || request()->is('main/sub_records'))
+          <li class="nav-item menu-open">
+          @else
           <li class="nav-item">
-            <a href="#" class="nav-link nav-items"  onclick="nav_toogle(6)">
+          @endif
+            <a href="#" class="nav-link nav-items" >
+              <i class="fas fa-sticky-note nav-icon"></i>
+              <p>
+                Records
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+              @if (request()->is('main/daily_records'))
+                <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items active">
+              @else
+              <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items">
+              @endif
+                <i class="far fa-circle nav-icon"></i>
+                  <p>Daily Records</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              @if (request()->is('main/sub_records'))
+              <a href="{{ route('admin.dashboard.sub_records')}} " class="nav-link active">
+              @else
+              <a href="{{ route('admin.dashboard.sub_records')}} " class="nav-link">
+              @endif
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Sub Records</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          @if (request()->is('main/pricerate') ||request()->is('main/get-volume-filter')|| request()->is('main/price-all')||request()->is('main/quality-chart-filter'))
+          <li class="nav-item menu-open">
+          @else
+          <li class="nav-item">
+          @endif
+            <a href="#" class="nav-link nav-items" >
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Charts
@@ -157,27 +240,43 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pricerate" class="nav-link" class="nav-link nav-items">
-                  <i class="far fa-circle nav-icon"></i>
+              @if (request()->is('main/pricerate'))
+                <a href="{{ route('admin.get-price-filter') }}" class="nav-link active">
+              @else  
+              <a href="{{ route('admin.get-price-filter') }}" class="nav-link">
+              @endif
+              <i class="far fa-circle nav-icon"></i>
                   <p>PriceRate</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="price-all" class="nav-link">
+              @if (request()->is('main/price-all'))
+                <a href="{{ route('admin.get-price-bar') }}" class="nav-link active">
+                @else  
+                <a href="{{ route('admin.get-price-bar') }}" class="nav-link">
+                @endif
                   <i class="far fa-circle nav-icon"></i>
                   <p>Price All</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+              @if (request()->is('main/quality-chart-filter'))
+                <a href="{{ route('admin.get-chart-filter') }}" class="nav-link active">
+                @else  
+                <a href="{{ route('admin.get-chart-filter') }}" class="nav-link">
+                @endif
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
+                  <p>Quality Variation</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
+              @if (request()->is('main/get-volume-filter'))
+                <a href="{{ route('admin.get-volume-filter') }}" class="nav-link active">
+                @else 
+                <a href="{{ route('admin.get-volume-filter') }}" class="nav-link">
+                @endif
                   <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
+                  <p>Volume Variation</p>
                 </a>
               </li>
             </ul>
@@ -200,7 +299,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol>
           </div><!-- /.col -->
@@ -210,7 +309,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content" >
+    <section class="content">
       
         <!-- Small boxes (Stat box) -->
         <!-- <iframe src="/dashboard/main" name="ifram_main" width="95%" style="position: absolute; height: 100%; border: none;"></iframe> -->
@@ -228,9 +327,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
@@ -261,16 +358,6 @@
 
 
 <script type="text/javascript">
-  var nav_items = document.getElementsByClassName('nav-items');
-  
-  var i,k;
-  function nav_toogle(i){
-    
-    for(k=0; k<nav_items.length;++k){
-      nav_items[k].classList.remove('active');
-    }
-    nav_items[i].classList.add('active');
-  }
 </script>
 </body>
 </html>

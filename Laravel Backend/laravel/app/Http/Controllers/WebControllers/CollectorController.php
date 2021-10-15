@@ -46,8 +46,11 @@ class CollectorController extends Controller
                 //array_merge($tmp,$user);
                 //return $new_array;
             }
-            $collectors =collect($collectors);
-            return view('collector',['collectors'=>$collectors]);
+
+            $collectors = $this->paginate($collectors,8);
+            $collectors = collect($collectors);
+            //dd($collectors);
+            return view('collector',['collectors'=>$collectors['data'],'page_data'=>$collectors]);
             
         } catch (\Throwable $th) {
             return response(
@@ -60,6 +63,7 @@ class CollectorController extends Controller
             );
         }
     }
+    
     //save collector data after editing
     public function save(Request $req){
         try{
@@ -90,7 +94,7 @@ class CollectorController extends Controller
     public function get(Request $req){
         try{
             $id = $req->input('id');
-            $users = DB::table('collector_farmer')->select('*')->where('farmer_id','=', $id)->get();
+            $users = DB::table('collector_farmers')->select('*')->where('farmer_id','=', $id)->get();
             //return view('collector',['users'=>$users]);
             $collectors = [];
             if(count($users)){
@@ -157,9 +161,6 @@ class CollectorController extends Controller
                         "location"=>$user->location,
                         "latitude"=>$user->latitude,
                         "longitude"=>$user->longitude,
-                        "email_verified_at"=>$user->email_verified_at,
-                        "password"=>$user->password,
-                        "remember_token"=>$user->remember_token,
                         "created_at"=>$user->created_at,
                         "updated_at"=>$user->updated_at,
                         "firstname"=>$user->firstname,
@@ -172,7 +173,7 @@ class CollectorController extends Controller
                         "b"=>$price->b,
                         "c"=>$price->c,
                         "d"=>$price->d];     
-        return view('collectoredit',['user'=>collect($user_data)]);
+        return view('collector_edit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {
             return response(

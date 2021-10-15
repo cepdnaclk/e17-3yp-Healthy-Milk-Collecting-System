@@ -8,7 +8,7 @@
   'There is no record {{$user}}',
   'warning',
     ).then(function() {
-            window.location.href = "main";
+            window.location.href = "{{ route('admin.dashboard')}}";
         })
   }
 </script>

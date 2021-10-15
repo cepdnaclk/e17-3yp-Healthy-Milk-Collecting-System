@@ -6,13 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Events\Registered;
+use JWTAuth;
 class AdminController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth:admins');
+    }
+    /**
+     * show dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    
+        
+
     public function show(){
         try{
-            $users = DB::select('select * from admins');
-            return view('admin',['users'=>$users]);
+            $admins = DB::table('admins')->simplePaginate(8);
+            return view('admin',['admins'=>$admins]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -26,10 +46,10 @@ class AdminController extends Controller
     }
     public function find(Request $req){
         try{
-        $id = $req->input('id');
-        $user = DB::table('collectors')->select('*')->where('id','=', $id)->get();
-        return view('collectoredit',['user'=>$user[0]]);
-        //return $user[0];
+            $id = $req->input('id');
+            $admin = DB::table('admins')->select('*')->where('id','=', $id)->first();
+            return view('admin_edit',['user'=>collect($admin)]);
+        
         } catch (\Throwable $th) {
             return response(
                 [
@@ -43,13 +63,13 @@ class AdminController extends Controller
     }
     public function save(Request $req){
         try{
-        $email = $req->input('email');
-        $id = $req->input('id');
-        $name = $req->input('name');
-        $business_type = $req->input('businesstype');
-        
-        DB::update('update collectors set name = ?,email = ?, businesstype = ? where id = ?',[$name, $email,$business_type,$id]);
-        return view('success',['user'=>$email]);
+            
+            $id = $req->input('id');
+            $name = $req->input('name');
+            $contact = $req->input('contact');
+            
+            DB::update('update admins set name = ? ,contact = ? where id = ?',[$name, $contact,$id]);
+            return view('success',['user'=>$name]);
         } catch (\Throwable $th) {
             return response(
                 [
