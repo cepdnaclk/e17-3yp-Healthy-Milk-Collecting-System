@@ -2,13 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AppControllers\AuthController;
-use App\Http\Controllers\AppControllers\RecordController;
-use App\Http\Controllers\AppControllers\NewPasswordController;
-use App\Http\Controllers\AppControllers\PriceChartController;
-use App\Http\Controllers\AppControllers\CollectorController;
-use App\Http\Controllers\AppControllers\FarmerController;
-use App\Http\Controllers\AppControllers\ConnectController;
+use App\Http\Controllers\App_Controllers\AuthController;
+use App\Http\Controllers\App_Controllers\RecordController;
+use App\Http\Controllers\App_Controllers\NewPasswordController;
+use App\Http\Controllers\App_Controllers\PriceChartController;
+use App\Http\Controllers\App_Controllers\CollectorController;
+use App\Http\Controllers\App_Controllers\FarmerController;
+use App\Http\Controllers\App_Controllers\ConnectController;
 /*
 |--------------------------------------------------------------------------
 | API Routes

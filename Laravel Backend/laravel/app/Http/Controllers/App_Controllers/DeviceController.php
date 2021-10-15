@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\AppControllers\Controllers;
+namespace App\Http\Controllers\App_Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Collector;
