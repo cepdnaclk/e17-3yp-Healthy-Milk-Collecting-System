@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\AppControllers\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;
@@ -36,25 +36,19 @@ class AuthController extends Controller
             $user = User::create($creds);
             
             
-            if($user->type=='collector'){
+            if($user -> type == 'collector'){
             
                $collector_creds=[
                 'user_id' => $user->id
                ]; 
                try{
                     $collector=Collector::create($collector_creds);
-                    return response(
-                        [
-                            
-                            'message' => 'Successfully created',
-                            'success' => true
-                            
-                        ],
-                        
-                    );
+                  
                }catch(\Throwable $th){
-
+               
                }
+
+              
             }
             else if($creds['type']=='farmer'){
                 $farmer_creds=[
@@ -62,15 +56,7 @@ class AuthController extends Controller
                 ]; 
                 try{
                      $farmer = Farmer::create($farmer_creds);
-                     return response(
-                        [
-                            
-                            'message' => 'Successfully created',
-                            'success' => true
-                            
-                        ],
-                        
-                    );
+                 
                 }catch(\Throwable $th){
  
                 }
@@ -88,7 +74,7 @@ class AuthController extends Controller
             );
         }
         
-        event(new Registered($user));
+       
         $token = JWTAuth::fromUser($user);
         
         return response(

@@ -1,10 +1,11 @@
 <?php
-namespace App\Http\AppControllers\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
+use App\Models\PriceChange;
 
 use Illuminate\Support\Facades\DB;
 class CollectorController extends Controller
@@ -14,13 +15,26 @@ class CollectorController extends Controller
         try{
             $users = DB::table('users')->select('*')->where('type','=', 'collector')->get();
             $collectors = [];
+           // $collectors = $users;
+            
             foreach($users as $user){
                 
                 
                 $device_id=DB::table('collectors')->where('user_id','=', $user->id)->value('device_id');
+
                 $collector_id=DB::table('collectors')->where('user_id','=', $user->id)->value('id');
-                $price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
-                $user_data = ["user_id"=>$user->id,
+
+              
+                $a = DB::table('price_changes')->where('collector_id', $user->id)->value('a');
+                $b = DB::table('price_changes')->where('collector_id', $user->id)->value('b');
+                $c = DB::table('price_changes')->where('collector_id', $user->id)->value('c');
+                $d = DB::table('price_changes')->where('collector_id', $user->id)->value('d');
+
+
+
+                $user_data = [
+
+                        "user_id"=>$user->id,
                         "device_id"=>$device_id,
                         "collector_id"=>$collector_id,
                         "name"=>$user->name,
@@ -39,34 +53,40 @@ class CollectorController extends Controller
                         "address"=>$user->address,
                         "businesstype"=>$user->businesstype,
                         "type"=>$user->type,
-                        "a"=>$price->a,
-                        "b"=>$price->b,
-                        "c"=>$price->c,
-                        "d"=>$price->d];    
-                //$user->'device_id'=$device_id;
-                //$user['collector_id']=$collector_id;
-                //$arr1=json_decode($user);
-                //$arr2=json_decode($tmp);
-                //$arr3=[$arr1,$arr2];
+                       
+                        "a"=>$a,
+                        "b"=>$b,
+                        "c"=>$c,
+                        "d"=>$d
+                    ];    
+              
                 array_push($collectors,$user_data);
-                //array_push($new_array,$user);
-                //array_merge($tmp,$user);
-                //return $new_array;
-            }
-            $collectors =collect($collectors);
-            return view('collector',['collectors'=>$collectors]);
+              
+            }  
+           
+            return response(
+                [
+                    
+                    'collectors' => $collectors,
+                    'success' => true
+                    
+                ],
+                
+            );
             
         } catch (\Throwable $th) {
             return response(
                 [
                     
                     'error_message' => $th,
+                    'success' => false
                     
                 ],
                 
             );
         }
     }
+
     //save collector data after editing
     public function save(Request $req){
         try{
@@ -191,6 +211,11 @@ class CollectorController extends Controller
         $collector_id = $req->input('collector_id');
         
         DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+    }
+
+
+    public function test(){
+        return 'testcollectror';
     }
     
 }

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:milk_collecting_app/screens/colors.dart';
+
+import 'package:http/http.dart' as http;
 
 
 
@@ -11,15 +15,80 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
+
+var collectorList = [];
+
+  @override
+initState() {
+  super.initState();
+  loadData();
+}
+
+loadData() async{
+
+ var client = http.Client();
+
+try {
+ 
+  var uriResponse = await client.get( Uri.parse('http://192.168.1.101:80/api/collectors') );
+
+  var jsonString = uriResponse.body;
+ 
+  var body_ = jsonDecode(jsonString);
+
+  if(body_["success"]){
+  
+  setState(() {
+    isLoading = false;
+    collectorList = body_["collectors"];
+  });
+
+
+
+for (var item in body_["collectors"]) {
+
+  print(item);
+
+}
+
+  }
+  else{
+
+
+  }
+
+
+
+  }finally {
+  client.close();
+}
+
+
+}
+int selectedCollector = -1;
+
+bool isLoading = true;
+
+
   @override
   Widget build(BuildContext context) {
 
-  int selectedCollector = -1;
+  
   
 
 
     return Scaffold(
-       body: Container(
+       body: isLoading ? Center(child: CircularProgressIndicator(color: Colors.purple,)) : getBody(),
+
+       backgroundColor: white,
+       
+    );
+  }
+
+  getBody(){
+
+
+return Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
          padding:EdgeInsets.symmetric(
@@ -27,7 +96,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
          ),
          
          child: ListView.builder(
-           itemCount: 10,
+           itemCount: collectorList.length,
            itemBuilder: (context,index){
 
              return Padding(
@@ -63,7 +132,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                             ),
                           ),
                           SizedBox(width: 3,),
-                          Text("Chandrasekara cma",style:TextStyle(color:white,fontFamily: "OpenSans")),
+                          Text(collectorList[index]['name'],style:TextStyle(color:white,fontFamily: "OpenSans")),
                           
 
                         ],
@@ -78,7 +147,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                         children: [
 
                           Icon(Icons.place,size: 40,color: blue,),
-                          Text("Anuradhapura",style:TextStyle(color:white,fontFamily: "OpenSans")),
+                          Text(collectorList[index]['address'],style:TextStyle(color:white,fontFamily: "OpenSans")),
                           
 
                         ],
@@ -116,11 +185,13 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
                          Row(
                            mainAxisAlignment:MainAxisAlignment.spaceBetween,
                            children: [
-                                Text("Grade A - 100 |",style:TextStyle(fontWeight: FontWeight.bold)),
-                                Text("Grade B - 90 |",style:TextStyle(fontWeight: FontWeight.bold)),
-                                Text("Grade C - 80 |",style:TextStyle(fontWeight: FontWeight.bold)),
-                                Text("Grade D - 70",style:TextStyle(fontWeight: FontWeight.bold))
-                         ],
+
+                                Text(( collectorList[index]['a'] != null) ?"GradeA - ${ collectorList[index]['a']} |":"--",style:TextStyle(fontWeight: FontWeight.bold,fontSize: 14)),
+                                Text(( collectorList[index]['b'] != null) ?"GradeB - ${ collectorList[index]['b']} |":"--",style:TextStyle(fontWeight: FontWeight.bold,fontSize: 14)),
+                                Text(( collectorList[index]['c'] != null) ?"GradeC - ${ collectorList[index]['c']} |":"--",style:TextStyle(fontWeight: FontWeight.bold,fontSize: 14)),
+                                Text(( collectorList[index]['d'] != null) ?"GradeD - ${ collectorList[index]['d']} ":"--",style:TextStyle(fontWeight: FontWeight.bold,fontSize: 14)),
+
+                                    ],
                          )
 
 
@@ -131,10 +202,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
 
          })
-       ),
-       backgroundColor: white,
-       
-    );
+       );
+
+
+
+
+
   }
 
  
