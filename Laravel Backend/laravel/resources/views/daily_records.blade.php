@@ -56,7 +56,7 @@
                           <td>{{ $record['fat_rate'] }}</td>
                           <td>{{ $record['total_price'] }}</td>
                           <td><a href="{{route('admin.dashboard.sub_records') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-success">sub records</a>
-                          
+                          <a href="{{route('remove-record') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                         @endforeach
                       </tbody>

@@ -83,7 +83,7 @@
           <img src="{{ asset('dist/img/team/profile.png')}}" class="img" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">
+          <a href="{{ route('admin.edit_self')}}" class="d-block">
             <?php $username = session()->get('user');?>
             {{$username}}
           </a>

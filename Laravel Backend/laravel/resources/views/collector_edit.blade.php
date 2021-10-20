@@ -3,6 +3,7 @@
         <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
         <form id="chart-form" class="form" action="{{ route('collector-save')}}" method="put">
+        @CSRF
         <div class="container col-sm-6  col-md-11 col-md-offset-1">
         <label for="user_id" class="text-gray">User ID:</label>
         <input name="user_id" readonly value="{{ $user['user_id'] }}" class="text-center" style="border:none;outline:0;"></input>

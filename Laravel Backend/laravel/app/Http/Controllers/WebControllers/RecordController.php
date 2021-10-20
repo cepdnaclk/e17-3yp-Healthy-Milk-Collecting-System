@@ -230,4 +230,8 @@ public function addDailyRecord(Request $request){
             );
         }
     }
+    public function delete(Request $req){
+        DB::table('daily_records')->delete($req->daily_record_id);
+        return redirect()->intended(route('admin.dashboard'));
+    }
 }

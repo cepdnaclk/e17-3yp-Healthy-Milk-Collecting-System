@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $creds = [
             'email' => $request->input('email'),
-            'name' => $request->input('name'),
+            'name' => $request->input('firstname')." ".$request->input('lastname'),
             'password' => bcrypt($request->input('password')),
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),

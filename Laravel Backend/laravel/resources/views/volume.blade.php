@@ -22,7 +22,7 @@ window.onload = function () {
 	animationEnabled: true,
 	theme: "light2",
 	title:{
-		text: "MilkTab Current Price Values for each grade All in one"
+		text: "volume changes"
 	},
 	axisY:{
 		includeZero: true

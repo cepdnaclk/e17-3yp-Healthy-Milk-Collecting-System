@@ -7,6 +7,8 @@ use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
 use App\Models\Admin;
+use Illuminate\Support\Str;
+use App\Models\Invite;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Registered;
 use Auth;
@@ -38,8 +40,10 @@ class AdminRegisterController extends Controller
     {
         return view('index');
     }
-    public function registerForm(){
-        return view('admin_register');
+    public function registerForm($token){
+        $invite = Invite::where('token', $token)->first();
+        return view('admin_register',['invite' => $invite]);
+       
     }
     public function register(Request $request){
 
@@ -79,6 +83,7 @@ class AdminRegisterController extends Controller
         
         
         }
+        
 
 
 }

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
         <div class="container-fluid">
-                <h5 class="mb-2">Registered collectors</h5>
+                
                 <div class="container col-sm-6  col-md-10 col-md-offset-1">
+                <h5 class="mb-2">Registered Admins</h5>
+                <a class="btn btn-success m-3" href="{{route('invite')}}" style="float:right">Invite</a>
                   <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
                       <thead class="thead-light">
                           <tr>

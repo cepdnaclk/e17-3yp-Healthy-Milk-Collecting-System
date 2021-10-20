@@ -3,6 +3,7 @@
         <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
         <form id="chart-form" class="form" action="{{ route('device-save')}}" method="put">
+        @CSRF
         <div class="container col-sm-6  col-md-11 col-md-offset-1">
         <label for="id" class="text-gray">ID:</label>
         <input name="id" readonly value="{{ $device->id}}" class="text-center" style="border:none;outline:0;"></input>
