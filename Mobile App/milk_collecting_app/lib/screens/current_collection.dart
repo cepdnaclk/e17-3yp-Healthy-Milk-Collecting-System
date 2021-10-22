@@ -49,7 +49,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Overall details",
+                      Text("Average details",
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -178,7 +178,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("Fat rate(%)",
+                              Text("Average Fat rate(%)",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -247,7 +247,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("PH",
+                              Text("Average pH",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -316,7 +316,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("Density(gcm-3)",
+                              Text("Average Density(gcm-3)",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -385,7 +385,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("Volume(Litre)",
+                              Text("Total Volume(Litre)",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,

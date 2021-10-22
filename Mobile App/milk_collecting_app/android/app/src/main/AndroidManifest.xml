@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.milk_collecting_app">
+
+
+
+    
    <application
         android:label="milk_collecting_app"
         android:icon="@mipmap/ic_launcher">

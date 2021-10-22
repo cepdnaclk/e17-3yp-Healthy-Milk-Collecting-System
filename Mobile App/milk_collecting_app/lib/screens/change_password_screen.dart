@@ -23,7 +23,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
     return Scaffold(
       body: getBody(),
-      backgroundColor: grey.withOpacity(.3),
+      backgroundColor: white,
       
     
     );
@@ -37,7 +37,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
           Container(
             decoration: BoxDecoration(
-                color: Colors.purpleAccent,
+                color: Colors.grey,
                 boxShadow: [
                   BoxShadow(
                       color: grey.withOpacity(0.01),
