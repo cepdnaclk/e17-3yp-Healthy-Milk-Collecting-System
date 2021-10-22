@@ -78,7 +78,7 @@ class CollectorController extends Controller
             $req->input('lastname'),$req->input('contact'),
             $req->input('address'),$req->input('businesstype'),$id
             ]);
-            return view('success',['user'=>$id]);
+            return view('success',['message'=>'successfully updated '.$id]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -152,7 +152,7 @@ class CollectorController extends Controller
         $user = DB::table('users')->select('*')->where('id','=', $id)->first();
         $device_id=DB::table('collectors')->where('user_id','=', $id)->value('device_id');
         $collector_id=DB::table('collectors')->where('user_id','=', $id)->value('id');
-        $price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
+        //$price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
         $user_data = ["user_id"=>$user->id,
                         "device_id"=>$device_id,
                         "collector_id"=>$collector_id,
@@ -169,10 +169,11 @@ class CollectorController extends Controller
                         "address"=>$user->address,
                         "businesstype"=>$user->businesstype,
                         "type"=>$user->type,
-                        "a"=>$price->a,
-                        "b"=>$price->b,
-                        "c"=>$price->c,
-                        "d"=>$price->d];     
+                        //"a"=>$price->a,
+                        //"b"=>$price->b,
+                        //"c"=>$price->c,
+                        //"d"=>$price->d
+                    ];     
         return view('collector_edit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {
@@ -192,6 +193,7 @@ class CollectorController extends Controller
         $collector_id = $req->input('collector_id');
         
         DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+        return view('success',['message'=>'successfully updated device for '.$collector_id]);
     }
     
 }

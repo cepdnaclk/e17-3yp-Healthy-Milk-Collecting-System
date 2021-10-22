@@ -47,7 +47,12 @@
                           ?>
                           <td>{{ $record['id'] }}</td>
                           <td>{{ $record['collector_id'] }}</td>
+                          @if ($record['farmer_id']!=null)
                           <td>{{ $record['farmer_id'] }}</td>
+                          @endif
+                          @if ($record['farmer_id']==null)
+                          <td>{{ $record['farmer_name'] }}</td>
+                          @endif
                           <td>{{ $record['device_id'] }}</td>
                           <td>{{ $record['created_at'] }}</td>
                           <td>{{ $record['total_volume'] }}</td>
@@ -56,7 +61,7 @@
                           <td>{{ $record['fat_rate'] }}</td>
                           <td>{{ $record['total_price'] }}</td>
                           <td><a href="{{route('admin.dashboard.sub_records') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-success">sub records</a>
-                          
+                          <a href="{{route('remove-record-verify') . '?' . http_build_query(['daily_record_id' => $daily_record])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                         @endforeach
                       </tbody>

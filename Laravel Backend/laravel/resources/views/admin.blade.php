@@ -1,8 +1,10 @@
 @extends('layouts.app')
 @section('content')
         <div class="container-fluid">
-                <h5 class="mb-2">Registered collectors</h5>
+                
                 <div class="container col-sm-6  col-md-10 col-md-offset-1">
+                <h5 class="mb-2">Registered Admins</h5>
+                <a class="btn btn-success m-3" href="{{route('invite')}}" style="float:right">Invite</a>
                   <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
                       <thead class="thead-light">
                           <tr>
@@ -28,6 +30,25 @@
                       </tbody>
                   </table>
                   {{ $admins->links() }}
+                  <h4>Invitations</h4>
+                  <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
+                      <thead class="thead-light">
+                          <tr>
+                            <th scope="col" class="bg-primary">ID</th>
+                            <th scope="col" class="bg-primary">Email</th>
+                            <th scope="col" class="bg-danger">Delete</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($invites as $invite)
+                          <tr>
+                          <td>{{ $invite->id }}</td>
+                          <td>{{ $invite->email }}</td>
+                          <td><a href="{{route('invite-remove-verify') . '?' . http_build_query(['id' => $invite->id])}}"  class="btn btn-danger">Delete</a></td>
+                          </tr>
+                          @endforeach
+                      </tbody>
+                  </table>
               </div>
         </div>
    

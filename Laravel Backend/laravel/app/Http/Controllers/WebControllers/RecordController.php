@@ -218,7 +218,7 @@ public function addDailyRecord(Request $request){
             $old_total_price = $daily_record->total_price;
             
             DB::update('update daily_records set total_price = ?,total_volume=? where id = ?',[$old_total_price+$p_change, $old_total_volume+$v_change, $req->daily_record_id]);
-            return view('success',['user'=>$req->id]);
+            return view('success',['message'=>'successfully updated record']);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -229,5 +229,13 @@ public function addDailyRecord(Request $request){
                 
             );
         }
+    }
+    public function delete_verify(Request $req){
+        
+        return view('remove_verify',['daily_record_id'=>$req->daily_record_id]);
+    }
+    public function delete(Request $req){
+        DB::table('daily_records')->delete($req->daily_record_id);
+        return view('success',['message'=>'successfully removed record']);
     }
 }

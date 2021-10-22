@@ -74,7 +74,7 @@ class FarmerController extends Controller
             $req->input('lastname'),$req->input('contact'),
             $req->input('address'),$req->input('businesstype'),$id]);
             
-            return view('success',['user'=>$id]);
+            return view('success',['message'=>'successfully updated user data for '.$id]);
         } catch (\Throwable $th) {
             return response(
                 [

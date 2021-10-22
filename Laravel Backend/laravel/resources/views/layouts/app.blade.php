@@ -83,7 +83,7 @@
           <img src="{{ asset('dist/img/team/profile.png')}}" class="img" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">
+          <a href="{{ route('admin.edit_self')}}" class="d-block">
             <?php $username = session()->get('user');?>
             {{$username}}
           </a>
@@ -206,9 +206,9 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
               @if (request()->is('main/daily_records'))
-                <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items active">
+                <a href="{{ route('admin.dashboard.daily_records')}} "  class="nav-link  active">
               @else
-              <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link" class="nav-link nav-items">
+              <a href="{{ route('admin.dashboard.daily_records')}} " class="nav-link ">
               @endif
                 <i class="far fa-circle nav-icon"></i>
                   <p>Daily Records</p>
