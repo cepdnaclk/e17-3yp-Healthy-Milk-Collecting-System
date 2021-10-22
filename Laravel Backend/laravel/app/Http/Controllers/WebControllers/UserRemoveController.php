@@ -56,11 +56,7 @@ class UserRemoveController extends Controller
         }
         $user = DB::table('users')->delete($id);
         //
-        $ccount = Collector::count();  
-        $fcount = Farmer::count(); 
-        $ucount = User::count(); 
-        $arr = [$ccount,$fcount,$ucount];
-        return view('index',['user'=>$user,'userscount'=>$arr]);
+        return view('success',['message'=>'successfully removed user']);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -78,11 +74,7 @@ class UserRemoveController extends Controller
         
         $user = DB::table('admins')->delete($id);
         //
-        $ccount = Collector::count();  
-        $fcount = Farmer::count(); 
-        $ucount = User::count(); 
-        $arr = [$ccount,$fcount,$ucount];
-        return view('index',['userscount'=>$arr]);
+        return view('success',['message'=>'successfully removed admin']);
         } catch (\Throwable $th) {
             return response(
                 [

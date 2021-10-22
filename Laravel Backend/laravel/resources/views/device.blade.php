@@ -53,7 +53,7 @@
                           <td>{{ $device->description }}</td>
                           
                           <td><a href="{{route('device-edit') . '?' . http_build_query(['id' => $device->id])}}" class="btn btn-primary">Edit</a>
-                          <a href="{{route('device-remove') . '?' . http_build_query(['id' => $device->id])}}"  class="btn btn-danger">Delete</a></td>
+                          <a href="{{route('device-remove-verify') . '?' . http_build_query(['id' => $device->id])}}"  class="btn btn-danger">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>

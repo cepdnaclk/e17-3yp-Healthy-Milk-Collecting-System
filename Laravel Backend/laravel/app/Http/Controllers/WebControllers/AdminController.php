@@ -7,10 +7,12 @@ use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
 use App\Models\Admin;
+use App\Mail\MilkTabMail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Registered;
 use JWTAuth;
 use URL;
+use Mail;
 use App\Notifications\InviteNotification;
 use Illuminate\Notifications\Notifiable;
 use Notification;
@@ -47,7 +49,8 @@ class AdminController extends Controller
     public function show(){
         try{
             $admins = DB::table('admins')->simplePaginate(8);
-            return view('admin',['admins'=>$admins]);
+            $admins_invites = DB::table('invites')->simplePaginate(8);
+            return view('admin',['admins'=>$admins,'invites'=>$admins_invites]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -102,7 +105,7 @@ class AdminController extends Controller
             $contact = $req->input('contact');
             
             DB::update('update admins set name = ? ,contact = ? where id = ?',[$name, $contact,$id]);
-            return view('success',['user'=>$name]);
+            return view('success',['message'=>'successfully updated '.$name]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -127,7 +130,7 @@ class AdminController extends Controller
             ]);
             if (Auth::guard('admins')->attempt(['email' => $req->email, 'password' => $req->c_password])){
                 DB::update('update admins set password = ?  where email = ?',[bcrypt($pwd),$req->email]);
-                return view('success',['user'=>$name]);
+                return redirect(route('success'))->with(['message'=>'password changed for '.$name]);
             }else{
                 $validator->errors()->add('email','current password or email is not valid!');
                 return redirect(route('admin.edit_self'))
@@ -173,7 +176,37 @@ class AdminController extends Controller
         
                 'registration', now()->addMinutes(300), ['token' => $token]
             );
-            Notification::route('mail', $request->input('email'))->notify(new InviteNotification($url));
-            return redirect('/main')->with('success', 'The Invite has been sent successfully');
+            $details = [
+                'title' => 'Invitation from MilkTab',
+                'body' => 'Use this link to register at MilkTab Admin panel. This link will expire after 5 hours ',
+                'link' => $url
+            ];
+            //dd($details);
+            \Mail::to($request->input('email'))->send(new \App\Mail\MilkTabMail($details));
+            
+            //Notification::route('mail', $request->input('email'))->notify(new InviteNotification($url));
+            return redirect('/main/success')->with('message', 'The Invite has been sent successfully to '.$request->input('email'));
+        }
+
+        public function remove_invites_verify(Request $req){
+            return view('remove_verify',['id'=>$req->id]);
+        }
+
+        public function remove_invites(Request $req){
+            try{
+                DB::table('invites')->delete( $req->input('id'));
+                $admins = DB::table('admins')->simplePaginate(8);
+                $admins_invites = DB::table('invites')->simplePaginate(8);
+                return view('success',['message'=>'Invitation was removed']);
+            } catch (\Throwable $th) {
+                return response(
+                    [
+                        
+                        'error_message' => $th,
+                        
+                    ],
+                    
+                );
+            }
         }
 }

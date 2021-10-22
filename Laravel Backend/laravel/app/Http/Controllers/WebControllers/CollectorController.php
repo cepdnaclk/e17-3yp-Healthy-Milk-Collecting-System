@@ -78,7 +78,7 @@ class CollectorController extends Controller
             $req->input('lastname'),$req->input('contact'),
             $req->input('address'),$req->input('businesstype'),$id
             ]);
-            return view('success',['user'=>$id]);
+            return view('success',['message'=>'successfully updated '.$id]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -193,6 +193,7 @@ class CollectorController extends Controller
         $collector_id = $req->input('collector_id');
         
         DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+        return view('success',['message'=>'successfully updated device for '.$collector_id]);
     }
     
 }

@@ -30,6 +30,25 @@
                       </tbody>
                   </table>
                   {{ $admins->links() }}
+                  <h4>Invitations</h4>
+                  <table class="table table-bordered table-hover" style="background-color: deepskyblue;">
+                      <thead class="thead-light">
+                          <tr>
+                            <th scope="col" class="bg-primary">ID</th>
+                            <th scope="col" class="bg-primary">Email</th>
+                            <th scope="col" class="bg-danger">Delete</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($invites as $invite)
+                          <tr>
+                          <td>{{ $invite->id }}</td>
+                          <td>{{ $invite->email }}</td>
+                          <td><a href="{{route('invite-remove-verify') . '?' . http_build_query(['id' => $invite->id])}}"  class="btn btn-danger">Delete</a></td>
+                          </tr>
+                          @endforeach
+                      </tbody>
+                  </table>
               </div>
         </div>
    

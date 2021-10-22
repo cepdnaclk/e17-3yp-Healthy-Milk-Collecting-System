@@ -37,7 +37,7 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     
     Route::get('', [MainController::class, 'index'])->name('admin.dashboard');
     Route::get('/edit_my_details', [AdminController::class, 'profile'])->name('admin.edit_self');
-    Route::get('/changed', [AdminController::class, 'pwd_change'])->name('admin.edit.submit');
+    Route::post('/changed', [AdminController::class, 'pwd_change'])->name('admin.edit.submit');
     Route::get('/links',[MainController::class, 'links'])->name('admin.dashboard.links');
 
     Route::get('/sub_records',[RecordController::class, 'subView'])->name('admin.dashboard.sub_records');
@@ -81,6 +81,7 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
 
     Route::get('/admins-create-invite', [AdminController::class,'inviteForm'])->name('invite');
     Route::post('/admins-invite', [AdminController::class,'process_invites'])->name('process_invite');
+    Route::get('/invite-remove', [AdminController::class,'remove_invites'])->name('invite-remove');
 
     Route::get('/get-volume-filter',[RecordController::class, 'dailyVolumeFilter'])->name('admin.get-volume-filter');
     Route::get('/get-volume', [RecordController::class, 'dailyVolume'])->name('get-volume');
@@ -88,7 +89,30 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/quality-chart-filter',[RecordController::class, 'chartfilter'])->name('admin.get-chart-filter');
     Route::get('/remove-record', [RecordController::class, 'delete'])->name('remove-record');
     
+    Route::get('/remove-record-verify', [RecordController::class, 'delete_verify'])->name('remove-record-verify');
+    Route::get('/invite-remove-verify', [AdminController::class,'remove_invites_verify'])->name('invite-remove-verify');
+    Route::get('/device-remove-verify',[DeviceController::class,'remove_verify'])->name('device-remove-verify');
+
+    Route::get('/success', function(){
+            return view('success');
+    })->name('success');
+
     Route::get('/register',[AuthController::class,'register']);
+    Route::get('/users',function(){
+        try{
+            $users = DB::select('select * from users');
+            return view('users',['users'=>$users]);
+        } catch (\Throwable $th) {
+            return response(
+                [
+                    
+                    'error_message' => $th,
+                    
+                ],
+                
+            );
+        }
+    });
 });
 
 Route::prefix('admin')->group(function() {
@@ -96,27 +120,13 @@ Route::prefix('admin')->group(function() {
     Route::post('/login', 'AdminLoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
     Route::get('/registerAdmin/{token}', 'AdminRegisterController@registerForm')->name('registration');
-    Route::post('/register', 'AdminRegisterController@register')->name('admin.register');	
+    Route::get('/register', 'AdminRegisterController@register')->name('admin.register');	
     
 });
 
 
 
-Route::get('/users',function(){
-    try{
-        $users = DB::select('select * from users');
-        return view('users',['users'=>$users]);
-    } catch (\Throwable $th) {
-        return response(
-            [
-                
-                'error_message' => $th,
-                
-            ],
-            
-        );
-    }
-});
+
 
 
 

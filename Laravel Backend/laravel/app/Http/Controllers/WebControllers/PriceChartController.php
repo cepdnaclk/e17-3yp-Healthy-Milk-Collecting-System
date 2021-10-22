@@ -57,11 +57,7 @@ class PriceChartController extends Controller
                 //dd($collector);
                 if($collector!=null){
                     PriceChange::create($creds);
-                    return response(
-                        [
-                        'message'=>'successfully saved new prices'
-                        ],
-                    );
+                    return view('success',['message'=>'successfully updated prices for '.$req->input('id')]);
                 }else{
                     return response(
                         [
