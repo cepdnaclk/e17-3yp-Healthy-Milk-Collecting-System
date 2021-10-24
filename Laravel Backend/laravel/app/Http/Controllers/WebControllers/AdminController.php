@@ -183,9 +183,9 @@ class AdminController extends Controller
             ];
             //dd($details);
             \Mail::to($request->input('email'))->send(new \App\Mail\MilkTabMail($details));
-            
+            $message = 'The Invite has been sent successfully to '.$request->input('email');
             //Notification::route('mail', $request->input('email'))->notify(new InviteNotification($url));
-            return redirect('/main/success')->with('message', 'The Invite has been sent successfully to '.$request->input('email'));
+            return view('success',['message'=>$message]);
         }
 
         public function remove_invites_verify(Request $req){

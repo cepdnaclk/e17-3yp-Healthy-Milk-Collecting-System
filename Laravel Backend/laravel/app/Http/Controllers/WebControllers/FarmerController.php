@@ -150,14 +150,7 @@ class FarmerController extends Controller
                             array_push($farmers,$user_data);
                 }
             }else{
-                return response(
-                    [
-                        
-                        'error_message' => "not found",
-                        
-                    ],
-                    
-                );
+                return view('Notfound',['user'=>$id]);
             }
             //dd($farmers);
             return view('farmer',['users'=>collect($farmers)]);
