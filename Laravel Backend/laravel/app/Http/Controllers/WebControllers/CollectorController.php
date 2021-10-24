@@ -123,14 +123,7 @@ class CollectorController extends Controller
                             array_push($collectors,$user_data);
                 }
             }else{
-                return response(
-                    [
-                        
-                        'error_message' => "not found",
-                        
-                    ],
-                    
-                );
+                return view('Notfound',['user'=>$id]);
             }
             $collectors =colllect($collectors);
             return view('collector',['collectors'=>$collectors]);
@@ -152,8 +145,9 @@ class CollectorController extends Controller
         $user = DB::table('users')->select('*')->where('id','=', $id)->first();
         $device_id=DB::table('collectors')->where('user_id','=', $id)->value('device_id');
         $collector_id=DB::table('collectors')->where('user_id','=', $id)->value('id');
-        //$price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
-        $user_data = ["user_id"=>$user->id,
+        $price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
+        if($price != null){
+            $user_data = ["user_id"=>$user->id,
                         "device_id"=>$device_id,
                         "collector_id"=>$collector_id,
                         "name"=>$user->name,
@@ -169,11 +163,35 @@ class CollectorController extends Controller
                         "address"=>$user->address,
                         "businesstype"=>$user->businesstype,
                         "type"=>$user->type,
-                        //"a"=>$price->a,
-                        //"b"=>$price->b,
-                        //"c"=>$price->c,
-                        //"d"=>$price->d
-                    ];     
+                        "a"=>$price->a,
+                        "b"=>$price->b,
+                        "c"=>$price->c,
+                        "d"=>$price->d
+                    ];  
+        }else{
+            $user_data = ["user_id"=>$user->id,
+                        "device_id"=>$device_id,
+                        "collector_id"=>$collector_id,
+                        "name"=>$user->name,
+                        "email"=>$user->email,
+                        "location"=>$user->location,
+                        "latitude"=>$user->latitude,
+                        "longitude"=>$user->longitude,
+                        "created_at"=>$user->created_at,
+                        "updated_at"=>$user->updated_at,
+                        "firstname"=>$user->firstname,
+                        "lastname"=>$user->lastname,
+                        "contact"=>$user->contact,
+                        "address"=>$user->address,
+                        "businesstype"=>$user->businesstype,
+                        "type"=>$user->type,
+                        "a"=>null,
+                        "b"=>null,
+                        "c"=>null,
+                        "d"=>null
+                    ];  
+        }
+          
         return view('collector_edit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {
@@ -191,9 +209,15 @@ class CollectorController extends Controller
     public function setDevice(Request $req){
         $device_id = $req->input('device_id');
         $collector_id = $req->input('collector_id');
+        $device = DB::table('devices')->select('*')->where('id','=', $device_id)->first();
         
-        DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
-        return view('success',['message'=>'successfully updated device for '.$collector_id]);
+        if($device != null){
+            DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+            return view('success',['message'=>'successfully updated device for '.$collector_id]);
+        }else{
+            return view('Notfound',['user'=>$device_id]);
+        }
+        
     }
     
 }

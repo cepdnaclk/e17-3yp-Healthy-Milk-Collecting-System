@@ -60,6 +60,13 @@ class AdminRegisterController extends Controller
             'email'   => 'required|email',
             'password' => 'required|min:8'
           ]);
+        $verify = DB::table('invites')->select('*')->where('email','=', $request->input('email'))->value('id');
+        if($verify == null){
+            return response([
+                'message' => $request->input('email').' is not in invited list',
+                'success' => false
+            ]);
+        }
         try {
             $admin = Admin::create($creds);
             
@@ -84,6 +91,8 @@ class AdminRegisterController extends Controller
         
         }
         
-
+    public function verify_email(){
+        return view('verify-email');
+    }
 
 }

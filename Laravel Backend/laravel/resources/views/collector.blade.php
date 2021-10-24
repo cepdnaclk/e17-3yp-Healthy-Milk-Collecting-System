@@ -30,6 +30,7 @@
                             <th scope="col" class="bg-primary">Email</th>
                             <th scope="col" class="bg-primary">Contact</th>
                             <th scope="col" class="bg-primary">Address</th>
+                            <th scope="col" class="bg-primary">device ID</th>
                             <th scope="col" class="bg-primary">businesstype</th>
                             
                             <th scope="col" class="bg-danger">Options</th>
@@ -46,6 +47,7 @@
                           <td>{{ $user["email"] }}</td>
                           <td>{{ $user["contact"] }}</td>
                           <td>{{ $user["address"] }}</td>
+                          <td>{{ $user["device_id"] }}</td>
                           <td>{{ $user["businesstype"] }}</td>
                           <td><a href="{{route('get-farmers') . '?' . http_build_query(['id' => $collector_id])}}"  class="btn btn-success">Farmers</a>
                           <a href="{{route('collector-edit') . '?' . http_build_query(['id' => $user_id])}}" class="btn btn-primary">Edit</a>
