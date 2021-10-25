@@ -21,6 +21,7 @@ class CreateAdminsTable extends Migration
             $table->string('password');
             $table->string('contact');
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
 
         });
     }

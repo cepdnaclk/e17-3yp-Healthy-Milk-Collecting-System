@@ -17,7 +17,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form method="post" action="{{route('process_invite')}}">
+                        <form method="get" action="{{route('process_invite')}}">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>

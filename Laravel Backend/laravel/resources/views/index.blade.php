@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-        <div class="container-fluid">
+
+      <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-lg-3 col-6">
@@ -91,9 +92,24 @@
             </div>
           </div>
           <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>6 x 4</h3>
+                <p><a href="{{ route('ranges')}}" class="small-box-footer text-white">Ranges</a></p>
+              </div>
+              <div class="icon">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              </div>
+              <a href="{{ route('ranges_edit')}}" class="small-box-footer">Edit <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          
         </div>
-        <!-- /.row -->
+        
+
+ 
 
       </div><!-- /.container-fluid -->
 @endsection   
-    

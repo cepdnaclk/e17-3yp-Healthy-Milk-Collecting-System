@@ -14,9 +14,11 @@ use App\Http\Controllers\WebControllers\AdminRegisterController;
 use App\Http\Controllers\WebControllers\MainController;
 use App\Http\Controllers\WebControllers\UserRemoveController;
 use App\Http\Controllers\WebControllers\RecordController;
+use App\Http\Controllers\WebControllers\RangeController;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,7 +66,7 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/get-collectors',[CollectorController::class, 'get'])->name('get-collectors');
     
     Route::get('/farmer-join',[ConnectController::class,'connect'])->name('farmer-join');
-    Route::post('/set-device',[CollectorController::class,'setDevice'])->name('set-device');
+    Route::get('/set-device',[CollectorController::class,'setDevice'])->name('set-device');
     Route::get('/device-add',[DeviceController::class, 'create'])->name('device.add');
     
     Route::get('/user-remove',[UserRemoveController::class,'remove'])->name('user-remove');
@@ -80,7 +82,7 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/collector-price', [PriceChartController::class, 'get'])->name('collector-price');
 
     Route::get('/admins-create-invite', [AdminController::class,'inviteForm'])->name('invite');
-    Route::post('/admins-invite', [AdminController::class,'process_invites'])->name('process_invite');
+    Route::get('/admins-invite', [AdminController::class,'process_invites'])->name('process_invite');
     Route::get('/invite-remove', [AdminController::class,'remove_invites'])->name('invite-remove');
 
     Route::get('/get-volume-filter',[RecordController::class, 'dailyVolumeFilter'])->name('admin.get-volume-filter');
@@ -98,6 +100,11 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     })->name('success');
 
     Route::get('/register',[AuthController::class,'register']);
+
+    Route::get('/ranges',[RangeController::class,'show'])->name('ranges');
+    Route::get('/ranges_edit',[RangeController::class,'show_edit'])->name('ranges_edit');
+    Route::get('/ranges_save',[RangeController::class,'save'])->name('ranges_save');
+
     Route::get('/users',function(){
         try{
             $users = DB::select('select * from users');
@@ -121,7 +128,12 @@ Route::prefix('admin')->group(function() {
     Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
     Route::get('/registerAdmin/{token}', 'AdminRegisterController@registerForm')->name('registration');
     Route::get('/register', 'AdminRegisterController@register')->name('admin.register');	
+    // Route::get('/email/verify', 'AdminRegisterController@verify_email')->name('verification.notice');
+    // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    //     $request->fulfill();
     
+    //     return redirect('/main');
+    // })->name('verification.verify');
 });
 
 
