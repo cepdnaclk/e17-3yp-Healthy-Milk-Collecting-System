@@ -14,6 +14,7 @@ use App\Http\Controllers\WebControllers\AdminRegisterController;
 use App\Http\Controllers\WebControllers\MainController;
 use App\Http\Controllers\WebControllers\UserRemoveController;
 use App\Http\Controllers\WebControllers\RecordController;
+use App\Http\Controllers\WebControllers\RangeController;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
@@ -99,6 +100,11 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     })->name('success');
 
     Route::get('/register',[AuthController::class,'register']);
+
+    Route::get('/ranges',[RangeController::class,'show'])->name('ranges');
+    Route::get('/ranges_edit',[RangeController::class,'show_edit'])->name('ranges_edit');
+    Route::get('/ranges_save',[RangeController::class,'save'])->name('ranges_save');
+
     Route::get('/users',function(){
         try{
             $users = DB::select('select * from users');

@@ -18,6 +18,7 @@ class CreateDevicesTable extends Migration
             $table->timestamps();
             $table->string('description')->nullable();
             $table->string('batch');
+            $table->string('status');
         });
     }
 
