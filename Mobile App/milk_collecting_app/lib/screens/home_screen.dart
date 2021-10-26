@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isConnecting = false;
   static bool isConnected = false;
-    bool isFarmer = false;
+  bool isFarmer = false;
 
    @override
 initState() {
@@ -181,9 +181,9 @@ void loadData() async{
 
 
     List<IconData> iconItems = [
+      Ionicons.md_home,
       Ionicons.md_calendar,
-      Ionicons.md_stats,
-      Ionicons.md_wallet,
+      Ionicons.md_person_add,
       Ionicons.ios_person,
     ];
     return AnimatedBottomNavigationBar(

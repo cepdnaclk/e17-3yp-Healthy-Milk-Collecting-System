@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:milk_collecting_app/screens/colors.dart';
+import 'package:milk_collecting_app/screens/email_verification.dart';
 import 'package:milk_collecting_app/screens/signInScreen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -349,9 +350,9 @@ String _chosenValue = "";
                       ),
                       _buildAddressTF(),
                       SizedBox(height: 30,),
-                     // _buildBusinessTF(),
+                      _buildBusinessTF(),
 
-                     Center(
+               /*      Center(
         child: Container(
           padding: const EdgeInsets.all(0.0),
           child: DropdownButton<String>(
@@ -383,7 +384,7 @@ String _chosenValue = "";
             onChanged: null,
           ),
         ),
-      ),
+      ),  */
 
 
                       _buildSubmitBtn(),
@@ -450,7 +451,7 @@ showSnack("Please enter the business type");
    var client = http.Client();
 
 try {
-  var uriResponse = await client.post(Uri.parse('http://192.168.1.101:80/api/register'),
+  var uriResponse = await client.post(Uri.parse('http://192.168.1.102:80/api/register'),
       body: { 
         "name" : _fnameController.text + " "+ _lnameController.text,
         "email" : widget.email,
@@ -494,7 +495,7 @@ try {
     print(tokn);
     Timer(Duration(seconds: 2), () {
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => EmailVerificationScreen()));
 
 });
     
