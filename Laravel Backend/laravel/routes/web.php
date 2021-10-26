@@ -9,11 +9,17 @@ use App\Http\Controllers\WebControllers\AdminController;
 use App\Http\Controllers\WebControllers\CollectorController;
 use App\Http\Controllers\WebControllers\FarmerController;
 use App\Http\Controllers\WebControllers\DeviceController;
+use App\Http\Controllers\WebControllers\AdminLoginController;
+use App\Http\Controllers\WebControllers\AdminRegisterController;
 use App\Http\Controllers\WebControllers\MainController;
 use App\Http\Controllers\WebControllers\UserRemoveController;
+use App\Http\Controllers\WebControllers\RecordController;
+use App\Http\Controllers\WebControllers\RangeController;
+use App\Http\Controllers\WebControllers\ConnectController;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,64 +31,127 @@ use App\Models\User;
 |
 */
 
+Auth::routes(['verify' => true],['register' => false]);
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('https://cepdnaclk.github.io/e17-3yp-Milk-Testing-and-Collecting-System');
 });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-// Route::get('/dashboard', function () {
-//     return view('index');
-// });
-Route::get('/main', [MainController::class, 'index']);
-Route::get('/links', function () {
-    return view('links');
-});
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::get('/collectors',[CollectorController::class, 'show']);
-Route::get('/farmers',[FarmerController::class, 'show']);
-Route::get('/devices',[DeviceController::class, 'show']);
-Route::get('/admins',[AdminController::class, 'show']);
-Route::get('/get-farmers',[FarmerController::class, 'get']);
-Route::get('/get-collectors',[CollectorController::class, 'get']);
-Route::get('/collector-edit',[CollectorController::class, 'find']);
-Route::get('/farmer-edit',[FarmerController::class, 'find']);
-Route::get('/user-remove',[UserRemoveController::class,'remove']);
-Route::get('/user-remove-confirm',[UserRemoveController::class,'removeConfirm']);
-Route::get('/farmer-join',[ConnectController::class,'connect']);
-Route::get('/pricerate',function (){
+Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     
-    return view('filter');
-});
-Route::get('/price-save',[PriceChartController::class, 'save']);
-Route::get('/price-all',[PriceChartController::class, 'getAll']);
-Route::get('/collector-save', [CollectorController::class, 'save']);
-Route::get('/farmer-save',[FarmerController::class, 'save']);
-Route::get('/get-price', [PriceChartController::class, 'index']);
-Route::get('/collector-price', [PriceChartController::class, 'get']);
+    Route::get('', [MainController::class, 'index'])->name('admin.dashboard');
+    Route::get('/edit_my_details', [AdminController::class, 'profile'])->name('admin.edit_self');
+    Route::post('/changed', [AdminController::class, 'pwd_change'])->name('admin.edit.submit');
+    Route::get('/links',[MainController::class, 'links'])->name('admin.dashboard.links');
 
+    Route::get('/sub_records',[RecordController::class, 'subView'])->name('admin.dashboard.sub_records');
+    Route::get('/daily_records',[RecordController::class, 'View'])->name('admin.dashboard.daily_records');
 
-Route::get('/register',[AuthController::class,'register']);
+    Route::get('/collectors',[CollectorController::class, 'show'])->name('admin.dashboard.collectors');
+    Route::get('/farmers',[FarmerController::class, 'show'])->name('admin.dashboard.farmers');
+    Route::get('/devices',[DeviceController::class, 'show'])->name('admin.dashboard.devices');
+    Route::get('/admins',[AdminController::class, 'show'])->name('admin.dashboard.admins');
 
-Route::get('/users',function(){
-    try{
-        $users = DB::select('select * from users');
-        return view('users',['users'=>$users]);
-    } catch (\Throwable $th) {
-        return response(
-            [
+    Route::get('/collector-edit',[CollectorController::class, 'find'])->name('collector-edit');
+    Route::get('/farmer-edit',[FarmerController::class, 'find'])->name('farmer-edit');
+    Route::get('/admin-edit',[AdminController::class, 'find'])->name('admin-edit');
+    Route::get('/device-edit',[DeviceController::class, 'find'])->name('device-edit');
+    Route::get('/record-edit',[RecordController::class, 'sub_find'])->name('sub_record_edit');
+
+    Route::get('/collector-save', [CollectorController::class, 'save'])->name('collector-save');
+    Route::get('/farmer-save',[FarmerController::class, 'save'])->name('farmer-save');
+    Route::get('/admin-save',[AdminController::class, 'save'])->name('admin-save');
+    Route::get('/device-save',[DeviceController::class, 'save'])->name('device-save');
+    Route::get('/record-save',[RecordController::class, 'update'])->name('record-save');
+
+    Route::get('/get-farmers',[FarmerController::class, 'get'])->name('get-farmers');
+    Route::get('/get-collectors',[CollectorController::class, 'get'])->name('get-collectors');
+    
+    
+    Route::get('/set-device',[CollectorController::class,'setDevice'])->name('set-device');
+    Route::get('/device-add',[DeviceController::class, 'create'])->name('device.add');
+    
+    Route::get('/user-remove',[UserRemoveController::class,'remove'])->name('user-remove');
+    Route::get('/user-remove-confirm',[UserRemoveController::class,'removeConfirm'])->name('user-remove-confirm');
+    Route::get('/admin-remove-confirm',[UserRemoveController::class,'removeConfirmAdmin'])->name('admin-remove-confirm');
+    Route::get('/admin-remove',[UserRemoveController::class,'removeAdmin'])->name('admin-remove');
+    Route::get('/device-remove',[DeviceController::class,'remove'])->name('device-remove');
+
+    Route::get('/pricerate',[PriceChartController::class, 'filter'])->name('admin.get-price-filter');
+    Route::get('/price-save',[PriceChartController::class, 'save'])->name('price-save');
+    Route::get('/price-all',[PriceChartController::class, 'getAll'])->name('admin.get-price-bar');
+    Route::get('/get-price', [PriceChartController::class, 'index'])->name('get-price');
+    Route::get('/collector-price', [PriceChartController::class, 'get'])->name('collector-price');
+
+    Route::get('/admins-create-invite', [AdminController::class,'inviteForm'])->name('invite');
+    Route::get('/admins-invite', [AdminController::class,'process_invites'])->name('process_invite');
+    Route::get('/invite-remove', [AdminController::class,'remove_invites'])->name('invite-remove');
+
+    Route::get('/get-volume-filter',[RecordController::class, 'dailyVolumeFilter'])->name('admin.get-volume-filter');
+    Route::get('/get-volume', [RecordController::class, 'dailyVolume'])->name('get-volume');
+    Route::get('/quality-chart', [RecordController::class, 'qualityChart'])->name('quality-chart');
+    Route::get('/quality-chart-filter',[RecordController::class, 'chartfilter'])->name('admin.get-chart-filter');
+    Route::get('/remove-record', [RecordController::class, 'delete'])->name('remove-record');
+    
+    Route::get('/remove-record-verify', [RecordController::class, 'delete_verify'])->name('remove-record-verify');
+    Route::get('/invite-remove-verify', [AdminController::class,'remove_invites_verify'])->name('invite-remove-verify');
+    Route::get('/device-remove-verify',[DeviceController::class,'remove_verify'])->name('device-remove-verify');
+
+    Route::get('/pending_collectors', [ConnectController::class, 'pendingCollectors'])->name('pending_collectors');
+    Route::get('/pending_farmers', [ConnectController::class,'pendingFarmers'])->name('pending_farmers');
+    Route::get('/active_collectors',[ConnectController::class,'activeCollectors'])->name('active_collectors');
+    Route::get('/active_farmers',[ConnectController::class,'activeFarmers'])->name('active_farmers');
+    Route::get('/inactive_collectors',[ConnectController::class,'inactiveCollectors'])->name('inactive_collectors');
+    Route::get('/inactive_farmers',[ConnectController::class,'inactiveFarmers'])->name('inactive_farmers');
+    Route::get('/farmer-join',[ConnectController::class,'connect'])->name('farmer_join');
+    Route::get('/collector-accept',[ConnectController::class,'accept'])->name('collector_accept');
+
+    Route::get('/success', function(){
+            return view('success');
+    })->name('success');
+
+    Route::get('/register',[AuthController::class,'register']);
+
+    Route::get('/ranges',[RangeController::class,'show'])->name('ranges');
+    Route::get('/ranges_edit',[RangeController::class,'show_edit'])->name('ranges_edit');
+    Route::get('/ranges_save',[RangeController::class,'save'])->name('ranges_save');
+
+    Route::get('/users',function(){
+        try{
+            $users = DB::select('select * from users');
+            return view('users',['users'=>$users]);
+        } catch (\Throwable $th) {
+            return response(
+                [
+                    
+                    'error_message' => $th,
+                    
+                ],
                 
-                'error_message' => $th,
-                
-            ],
-            
-        );
-    }
+            );
+        }
+    });
 });
 
-Route::post('/set-device',[CollectorController::class,'setDevice']);
+Route::prefix('admin')->group(function() {
+    Route::get('/login','AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/logout', 'AdminLoginController@logout')->name('admin.logout');
+    Route::get('/registerAdmin/{token}', 'AdminRegisterController@registerForm')->name('registration');
+    Route::get('/register', 'AdminRegisterController@register')->name('admin.register');	
+    // Route::get('/email/verify', 'AdminRegisterController@verify_email')->name('verification.notice');
+    // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    //     $request->fulfill();
+    
+    //     return redirect('/main');
+    // })->name('verification.verify');
+});
+
+
+
+
+
+
+
+
+
+   

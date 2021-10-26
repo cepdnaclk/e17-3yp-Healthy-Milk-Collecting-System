@@ -10,7 +10,15 @@ use App\Models\Collector;
 class Device extends Model
 {
     use HasFactory;
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'description',
+        'batch'
+    ];
     public function dailyRecord(){
         return $this->hasMany(DailyRecord::class);
     }//1-m

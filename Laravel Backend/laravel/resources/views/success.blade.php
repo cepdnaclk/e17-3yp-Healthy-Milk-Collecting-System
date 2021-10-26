@@ -8,10 +8,10 @@
   window.onload = function(){
     Swal.fire(
   'Good job!',
-  'You changed {{$user}}',
+  '{{$message}}',
   'success',
     ).then(function() {
-            window.location.href = "main";
+            window.location.href = "{{route('admin.dashboard')}}";
         })
   }
 </script>

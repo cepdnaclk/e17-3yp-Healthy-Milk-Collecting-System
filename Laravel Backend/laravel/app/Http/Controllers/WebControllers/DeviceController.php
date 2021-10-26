@@ -8,9 +8,10 @@ use App\Models\Device;
 use Illuminate\Support\Facades\DB;
 class DeviceController extends Controller
 {
+    
     public function show(){
         try{
-            $devices = DB::select('select * from devices');
+            $devices = DB::table('devices')->simplePaginate(8);
             return view('device',['devices'=>$devices]);
         } catch (\Throwable $th) {
             return response(
@@ -25,8 +26,8 @@ class DeviceController extends Controller
     }
     public function find(Request $req){
         try{
-            $devices = DB::select('select * from devices')->where('id',$req->input('id'));
-            return view('device',['users'=>$devices]);
+            $device = DB::table('devices')->select('*')->where('id','=', $req->id)->first();
+            return view('device_edit',['device'=>$device]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -38,16 +39,34 @@ class DeviceController extends Controller
             );
         }
     }
-    public function createDevice(Request $req){
-        $creds=["description" => $req->input('description')];
-        Device::create($creds);
+    public function create(Request $req){
+        $creds=["description" => $req->input('description'),
+        "batch" => $req->input('batch')
+        ];
+        try{
+            Device::create($creds);
+            $devices = DB::table('devices')->simplePaginate(8);
+            return view('success',['message'=>'successfully created device ']);
+        }catch(\Throwable $th) {
+            return response(
+                [
+                    
+                    'error_message' => $th,
+                    
+                ],
+                
+            );
+        }
         
         
+    }
+    public function remove_verify(Request $req){
+        return view('remove_verify',['id'=>$req->id]);
     }
     public function remove(Request $req){
         try{
-            DB::table('devices')->delete( $req->input('device_id'));
-            return view('device',['users'=> $req->input('device_id')]);
+            DB::table('devices')->delete($req->id);
+            return view('success',['message'=>'successfully removed device']);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -59,11 +78,12 @@ class DeviceController extends Controller
             );
         }
     }
-    public function deviceEdit(Request $req){
+    public function save(Request $req){
         try{
-            $id = $req->input('device_id');
+            $id = $req->input('id');
             
-            DB::update('update devices set description = ? where id = ?',[$req->description,$id]);
+            DB::update('update devices set description = ?,batch=? where id = ?',[$req->description,$req->batch,$id]);
+            return view('success',['message'=>'successfully updated device']);
         } catch (\Throwable $th) {
             return response(
                 [

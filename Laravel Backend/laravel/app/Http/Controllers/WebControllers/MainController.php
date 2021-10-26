@@ -30,4 +30,7 @@ class MainController extends Controller
             );
         }
     }
+    public function links(){
+        return view('links');
+    }
 }

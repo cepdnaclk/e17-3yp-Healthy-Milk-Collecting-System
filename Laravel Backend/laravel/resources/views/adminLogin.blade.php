@@ -29,19 +29,20 @@
             <div id="login-row" class="row d-flex justify-content-center align-items-center">
                 <div id="login-column" class="col-md-4">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
+                        <form id="login-form" class="form" action="{{ route('admin.login.submit') }}" method="post">
+                        @csrf
                             <h3 class="text-center text-gray">Login</h3>
                             <div class="form-group m-4">
-                                <label for="username" class="text-gray">Email:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
+                                <label for="email" class="text-gray">Email:</label><br>
+                                <input type="text" name="email" id="email" class="form-control" required>
                             </div>
                             <div class="form-group m-4">
                                 <label for="password" class="text-gray">Password:</label><br>
-                                <input type="password" name="password" id="password" class="form-control">
+                                <input type="password" name="password" id="password" class="form-control" required>
                             </div>
                             <div class="form-group m-4">
                                 
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                <button  type="submit" class="btn btn-info btn-md">Submit</button>
                             </div>
                             
                         </form>

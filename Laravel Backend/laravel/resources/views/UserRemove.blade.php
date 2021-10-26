@@ -12,7 +12,7 @@
   confirmButtonText: 'Yes',
    }).then(function() {
        
-            window.location.href = "{{url('user-remove-confirm') . '?' . http_build_query(['id' => $user->id])}}";
+            window.location.href = "{{route('user-remove-confirm') . '?' . http_build_query(['id' => $user->id])}}";
     })
   }
 </script>

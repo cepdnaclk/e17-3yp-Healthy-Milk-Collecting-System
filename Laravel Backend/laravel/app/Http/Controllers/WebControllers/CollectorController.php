@@ -46,8 +46,11 @@ class CollectorController extends Controller
                 //array_merge($tmp,$user);
                 //return $new_array;
             }
-            $collectors =collect($collectors);
-            return view('collector',['collectors'=>$collectors]);
+
+            $collectors = $this->paginate($collectors,8);
+            $collectors = collect($collectors);
+            //dd($collectors);
+            return view('collector',['collectors'=>$collectors['data'],'page_data'=>$collectors]);
             
         } catch (\Throwable $th) {
             return response(
@@ -60,6 +63,7 @@ class CollectorController extends Controller
             );
         }
     }
+    
     //save collector data after editing
     public function save(Request $req){
         try{
@@ -74,7 +78,7 @@ class CollectorController extends Controller
             $req->input('lastname'),$req->input('contact'),
             $req->input('address'),$req->input('businesstype'),$id
             ]);
-            return view('success',['user'=>$id]);
+            return view('success',['message'=>'successfully updated '.$id]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -90,7 +94,7 @@ class CollectorController extends Controller
     public function get(Request $req){
         try{
             $id = $req->input('id');
-            $users = DB::table('collector_farmer')->select('*')->where('farmer_id','=', $id)->get();
+            $users = DB::table('collector_farmers')->select('*')->where([['farmer_id','=', $id],['status','active']])->get();
             //return view('collector',['users'=>$users]);
             $collectors = [];
             if(count($users)){
@@ -119,14 +123,7 @@ class CollectorController extends Controller
                             array_push($collectors,$user_data);
                 }
             }else{
-                return response(
-                    [
-                        
-                        'error_message' => "not found",
-                        
-                    ],
-                    
-                );
+                return view('Notfound',['user'=>$id]);
             }
             $collectors =colllect($collectors);
             return view('collector',['collectors'=>$collectors]);
@@ -149,7 +146,8 @@ class CollectorController extends Controller
         $device_id=DB::table('collectors')->where('user_id','=', $id)->value('device_id');
         $collector_id=DB::table('collectors')->where('user_id','=', $id)->value('id');
         $price = DB::table('price_changes')->select('*')->where('collector_id', $id)->orderBy('created_at','DESC')->first();
-        $user_data = ["user_id"=>$user->id,
+        if($price != null){
+            $user_data = ["user_id"=>$user->id,
                         "device_id"=>$device_id,
                         "collector_id"=>$collector_id,
                         "name"=>$user->name,
@@ -157,9 +155,6 @@ class CollectorController extends Controller
                         "location"=>$user->location,
                         "latitude"=>$user->latitude,
                         "longitude"=>$user->longitude,
-                        "email_verified_at"=>$user->email_verified_at,
-                        "password"=>$user->password,
-                        "remember_token"=>$user->remember_token,
                         "created_at"=>$user->created_at,
                         "updated_at"=>$user->updated_at,
                         "firstname"=>$user->firstname,
@@ -171,8 +166,33 @@ class CollectorController extends Controller
                         "a"=>$price->a,
                         "b"=>$price->b,
                         "c"=>$price->c,
-                        "d"=>$price->d];     
-        return view('collectoredit',['user'=>collect($user_data)]);
+                        "d"=>$price->d
+                    ];  
+        }else{
+            $user_data = ["user_id"=>$user->id,
+                        "device_id"=>$device_id,
+                        "collector_id"=>$collector_id,
+                        "name"=>$user->name,
+                        "email"=>$user->email,
+                        "location"=>$user->location,
+                        "latitude"=>$user->latitude,
+                        "longitude"=>$user->longitude,
+                        "created_at"=>$user->created_at,
+                        "updated_at"=>$user->updated_at,
+                        "firstname"=>$user->firstname,
+                        "lastname"=>$user->lastname,
+                        "contact"=>$user->contact,
+                        "address"=>$user->address,
+                        "businesstype"=>$user->businesstype,
+                        "type"=>$user->type,
+                        "a"=>null,
+                        "b"=>null,
+                        "c"=>null,
+                        "d"=>null
+                    ];  
+        }
+          
+        return view('collector_edit',['user'=>collect($user_data)]);
         //dd(collect($user_data));
         } catch (\Throwable $th) {
             return response(
@@ -189,8 +209,15 @@ class CollectorController extends Controller
     public function setDevice(Request $req){
         $device_id = $req->input('device_id');
         $collector_id = $req->input('collector_id');
+        $device = DB::table('devices')->select('*')->where('id','=', $device_id)->first();
         
-        DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+        if($device != null){
+            DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+            return view('success',['message'=>'successfully updated device for '.$collector_id]);
+        }else{
+            return view('Notfound',['user'=>$device_id]);
+        }
+        
     }
     
 }

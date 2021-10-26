@@ -25,7 +25,7 @@ class CreateSubRecordsTable extends Migration
             $table->float('price_rate');
 
             $table->unsignedBigInteger('daily_record_id');
-            $table->foreign('daily_record_id')->references('id')->on('daily_records');
+            $table->foreign('daily_record_id')->references('id')->on('daily_records')->onDelete('cascade');
 
 
             

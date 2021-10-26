@@ -1,13 +1,14 @@
 @extends('layouts.app')
 @section('content')
-        <div class="container-fluid">
+
+      <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>5</h3>
 
                 <p>Device Orders</p>
               </div>
@@ -18,20 +19,20 @@
             </div>
           </div>
           <!-- ./col -->
-          <!-- <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6">
           
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
+                <h3>10</h3>
 
-                <p>Bounce Rate</p>
+                <p>Device In Use</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+              <i class="fab fa-creative-commons-sampling"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div> -->
+          </div>
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -91,9 +92,24 @@
             </div>
           </div>
           <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3>6 x 4</h3>
+                <p><a href="{{ route('ranges')}}" class="small-box-footer text-white">Ranges</a></p>
+              </div>
+              <div class="icon">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              </div>
+              <a href="{{ route('ranges_edit')}}" class="small-box-footer">Edit <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          
         </div>
-        <!-- /.row -->
+        
+
+ 
 
       </div><!-- /.container-fluid -->
 @endsection   
-    

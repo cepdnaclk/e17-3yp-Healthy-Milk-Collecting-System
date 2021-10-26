@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $creds = [
             'email' => $request->input('email'),
-            'name' => $request->input('name'),
+            'name' => $request->input('firstname')." ".$request->input('lastname'),
             'password' => bcrypt($request->input('password')),
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
@@ -43,15 +43,7 @@ class AuthController extends Controller
                ]; 
                try{
                     $collector=Collector::create($collector_creds);
-                    return response(
-                        [
-                            
-                            'message' => 'Successfully created',
-                            'success' => true
-                            
-                        ],
-                        
-                    );
+                    
                }catch(\Throwable $th){
 
                }
@@ -62,15 +54,7 @@ class AuthController extends Controller
                 ]; 
                 try{
                      $farmer = Farmer::create($farmer_creds);
-                     return response(
-                        [
-                            
-                            'message' => 'Successfully created',
-                            'success' => true
-                            
-                        ],
-                        
-                    );
+                     
                 }catch(\Throwable $th){
  
                 }

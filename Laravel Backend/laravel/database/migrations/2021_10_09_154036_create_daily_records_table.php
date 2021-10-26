@@ -15,7 +15,8 @@ class CreateDailyRecordsTable extends Migration
     {
         Schema::create('daily_records', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->timestamps(); 
+            $table->date('day');
             $table->float('ph_value');
             $table->float('density');
             $table->float('total_volume');
