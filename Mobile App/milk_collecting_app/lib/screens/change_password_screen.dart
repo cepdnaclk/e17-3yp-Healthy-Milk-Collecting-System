@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'colors.dart';
 
 
@@ -17,6 +18,16 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+
+
+           TextEditingController _oldPasswordController = TextEditingController();
+           TextEditingController _newPasswordController = TextEditingController();
+           TextEditingController _newPasswordConfirmController = TextEditingController();
+
+
+     bool _isLoading = false;
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -104,6 +115,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               decoration: kBoxDecorationStyle_HomePage,
               height: 60.0,
               child: TextField(
+                controller:_oldPasswordController,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'OpenSans',
@@ -148,6 +160,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               decoration: kBoxDecorationStyle_HomePage,
               height: 60.0,
               child: TextField(
+                controller: _newPasswordConfirmController,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'OpenSans',
@@ -190,6 +203,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               decoration: kBoxDecorationStyle_HomePage,
               height: 60.0,
               child: TextField(
+                controller: _newPasswordConfirmController,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'OpenSans',
@@ -221,26 +235,31 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
              Padding(
                padding: const EdgeInsets.only(left: 20,right: 20),
-               child: Container(
-                 height: 50,
-                 width: MediaQuery.of(context).size.width*0.45,
-                 decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(10.0),
-                   gradient: LinearGradient(
-                       colors: [
-                         primary,
-                         Colors.purple,
-                       ]
+               child: GestureDetector(
+                 onTap: (){
+                   _changePassword();
+                 },
+                 child: Container(
+                   height: 50,
+                   width: MediaQuery.of(context).size.width*0.45,
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(10.0),
+                     gradient: LinearGradient(
+                         colors: [
+                           primary,
+                           Colors.purple,
+                         ]
+                     ),
                    ),
-                 ),
-                 child: Center(
-                   child: Text(
-                     "Change Password",
-                     style: TextStyle(
-                         color: Colors.white,
-                         fontSize: 20,
-                         fontFamily: "OpenSans",
-                         fontWeight: FontWeight.bold
+                   child: Center(
+                     child: Text(
+                       "Change Password",
+                       style: TextStyle(
+                           color: Colors.white,
+                           fontSize: 20,
+                           fontFamily: "OpenSans",
+                           fontWeight: FontWeight.bold
+                       ),
                      ),
                    ),
                  ),
@@ -261,4 +280,138 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     );
 
   }
+
+
+
+
+getBodyWithProgressBar(){
+
+return Stack(
+  children: [
+
+   getBody(),
+
+  _isLoading ? Align(
+     alignment: Alignment.center,
+     child: Container(
+       padding: EdgeInsets.all(20),
+       width: 80,
+       height: 80,
+       decoration: BoxDecoration(
+         color: white,
+         borderRadius: BorderRadius.circular(10)
+       ),
+       child: CircularProgressIndicator(backgroundColor: Colors.purple,)),
+   ) : SizedBox.shrink()
+
+
+
+  ],
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+  void _changePassword() async{
+
+  if(false){}
+/*
+  if(_oldPasswordController.text.isEmpty){
+    showSnack("please enter the old password");
+  }
+  else if(_newPasswordController.text.isEmpty){
+     showSnack("please enter the new password");
+  }
+  else if(_newPasswordConfirmController.text.isEmpty){
+     showSnack("please enter valid email");
+  }
+  else if(_newPasswordConfirmController.text != _newPasswordController){
+     showSnack("password does not match");
+  }*/else{
+
+setState(() {
+      _isLoading = true;
+    });
+
+
+
+var client = http.Client();
+
+try {
+  var uriResponse = await client.post(Uri.parse('http://192.168.1.100:80/api/changePassword'),
+      body: {
+          'user_id': "1", //give the authenticated user id
+         'password': _newPasswordConfirmController.text
+       
+        });
+
+  var jsonString = uriResponse.body;
+ 
+  var body_ = jsonDecode(jsonString);
+
+  if(body_['success']){
+
+
+setState(() {
+    _isLoading = false;
+  });
+
+  showSnack("Password changed successfully");
+
+  Navigator.pop(context);
+
+
+
+  }
+
+  }finally{
+    client.close();
+  }
+
+
+
+
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+  }
+
+
+  
+  void showSnack(String message) {
+
+     final snackBar = SnackBar(
+            content:  Text(message),
+            backgroundColor: (Colors.black.withOpacity(0.6)),
+            action: SnackBarAction(
+              label: 'dismiss',
+              onPressed: () {
+              },
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+
+  }
+
 }

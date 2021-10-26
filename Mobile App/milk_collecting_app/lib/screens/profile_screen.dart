@@ -249,50 +249,55 @@ Widget _buildEmailTF() {
 
   
    Widget _buildPriceTF() {
-    return Container(
-      decoration: BoxDecoration(color: black.withOpacity(0.2)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(height: 15,),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              children: [
-       Text(
-              'Change Price Per Liter',
-              style: TextStyle(
-                 color: Colors.white,
-                 fontWeight: FontWeight.bold,
-                 fontFamily: 'OpenSans',
-                 fontSize: 20
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePriceScreen()));
+      },
+      child: Container(
+        decoration: BoxDecoration(color: black.withOpacity(0.2)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 15,),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: [
+         Text(
+                'Change Price Per Liter',
+                style: TextStyle(
+                   color: Colors.white,
+                   fontWeight: FontWeight.bold,
+                   fontFamily: 'OpenSans',
+                   fontSize: 20
+                ),
+              ),
+             /* Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: GestureDetector(
+                  onTap: (){
+                    
+                  },
+                  child: Icon(Icons.edit,color: white,size: 25,)
+                  ),
+              ) */
+    
+                ],
               ),
             ),
-            Spacer(),
+            SizedBox(height: 15,),
             Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePriceScreen()));
-                },
-                child: Icon(Icons.edit,color: white,size: 25,)
-                ),
+              padding: const EdgeInsets.only(left: 20),
+              child: Container(
+                width: double.infinity,
+                height: 2,
+                color: Colors.grey
+              ),
             )
-
-              ],
-            ),
-          ),
-          SizedBox(height: 15,),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Container(
-              width: double.infinity,
-              height: 2,
-              color: Colors.grey
-            ),
-          )
-         
-        ],
+           
+          ],
+        ),
       ),
     );
   }
@@ -387,15 +392,14 @@ Widget _buildEmailTF() {
                       SizedBox(height: 15.0),
 
                      // Icon(Icons.account_circle,size: 70,color: Colors.white,),
-                      Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: red
+                     Container(
+                            width: 65,
+                            height:80,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(image: AssetImage("images/pro_img.jpg"))
+                            ),
                           ),
-                        width: 60,
-                        child: Image.asset("images/google.jpg",fit: BoxFit.cover,),
-                      ),
                             
                        SizedBox(
                         height: 25.0,

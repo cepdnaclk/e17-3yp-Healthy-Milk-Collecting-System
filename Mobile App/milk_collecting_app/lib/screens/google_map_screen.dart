@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:milk_collecting_app/screens/colors.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -18,19 +19,68 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
 var collectorList = [];
 
+bool isFarmer = false;
+
   @override
 initState() {
   super.initState();
-  loadData();
+    
+    getUserType();
+  
+
+ if(isFarmer){
+   loadCollectorsList();
+ }else{
+   loadRequestList();
+ }  
+  
+  
 }
 
-loadData() async{
+
+getUserType () async{
+
+  setState(() {
+      isFarmer = false;
+    });
+    
+
+ /* SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+ 
+    
+    print(sharedPreferences.getString("type"));
+  if(sharedPreferences.getString("type") == "Farmer"){
+
+    setState(() {
+      isFarmer = true;
+    });
+    
+  }  */
+
+}
+
+
+loadRequestList(){
+  //send a request with collector id to get the request list (pending farmers)
+
+setState(() {
+  isLoading = false;
+});
+
+
+}
+
+
+
+
+
+loadCollectorsList() async{
 
  var client = http.Client();
 
 try {
  
-  var uriResponse = await client.get( Uri.parse('http://192.168.1.101:80/api/collectors') );
+  var uriResponse = await client.get( Uri.parse('http://192.168.1.102:80/api/collectors') );
 
   var jsonString = uriResponse.body;
  
@@ -65,6 +115,11 @@ for (var item in body_["collectors"]) {
 
 
 }
+
+
+
+
+
 int selectedCollector = -1;
 
 bool isLoading = true;
@@ -85,10 +140,17 @@ bool isLoading = true;
     );
   }
 
-  getBody(){
+List<int> acceptedFarmersIndexes = [];
+
+  getBody(){        
 
 
-return Container(
+    //for collector side
+
+    
+
+if(isFarmer) {
+  return Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
          padding:EdgeInsets.symmetric(
@@ -203,11 +265,138 @@ return Container(
 
          })
        );
+}
+
+else{
+
+
+ return Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+         padding:EdgeInsets.symmetric(
+          horizontal:15,
+         ),
+         
+         child: ListView.builder(
+           itemCount: 5,
+           itemBuilder: (context,index){
+
+             return Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Container(
+                       height: 150,
+                       padding: EdgeInsets.symmetric(
+                         horizontal: 20,
+                         vertical: 15
+                       ),
+                       decoration: BoxDecoration(
+                         color: Colors.white,
+                         borderRadius:BorderRadius.circular(20),
+                         gradient: LinearGradient(
+                           colors: [
+                             Colors.purpleAccent,
+                             Colors.pink
+                         ])
+                       ),
+                      child: Column(
+                        children: [
+
+
+                          Row(
+                        children: [
+                           
+                          Container(
+                            width: 40,
+                            height:50,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(image: AssetImage("images/pro_img.jpg"))
+                            ),
+                          ),
+                          SizedBox(width: 3,),
+                          Text('name',style:TextStyle(color:white,fontFamily: "OpenSans")),
+                          
+
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                           
+
+                               Row(
+                        children: [
+
+                          Icon(Icons.place,size: 40,color: blue,),
+                          Text('address',style:TextStyle(color:white,fontFamily: "OpenSans")),
+                          
+
+                        ],
+                      ),
+
+                              GestureDetector(
+                                onTap:(){
+                                  setState(() {
+                                    acceptedFarmersIndexes.add(index);
+                                  });
+                                },
+                                child: Container(
+                                                          width:100,
+                                                          height:30,
+                                                          decoration: BoxDecoration(
+                                                           borderRadius: BorderRadius.circular(20),
+                                                           color:isAcceptedReq(index) ? grey : blue,
+                                                          ),
+                                                          child: Center(
+                                                           child: Text(
+                                !isAcceptedReq(index) ? "Accept" : "Accepted",
+                                 style: TextStyle(color: white,fontFamily: "OpenSans"),
+                                                           )
+                                                          ),
+                                                        ),
+                              )
+
+                        ],
+                      ),
+
+
+                      
+                        SizedBox(height:5),
+                    
+                       
+
+
+
+                      ],)
+                     ),
+                   );
+
+
+         })
+       );
+
+
+
+}
 
 
 
 
+  }
 
+
+  bool isAcceptedReq(int index){
+    bool isAccepted = false;
+    acceptedFarmersIndexes.forEach((element) {
+      
+      if(element == index){
+        isAccepted = true;
+      }
+
+    });
+
+    return isAccepted;
   }
 
  
