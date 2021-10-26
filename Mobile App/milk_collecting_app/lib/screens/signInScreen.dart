@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:milk_collecting_app/screens/colors.dart';
 import 'package:milk_collecting_app/screens/home_page.dart';
 import 'package:milk_collecting_app/screens/signUpScreen.dart';
+import 'package:milk_collecting_app/screens/verificationforforgotpassword_screen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -184,6 +185,36 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
+Widget _buildForgotPasswordBtn() {
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+          builder: (BuildContext context) => VerifyForForgotPasswordScreen()
+        ));
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(left:180),
+        child: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Forgot password? ',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -245,6 +276,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         height: 30.0,
                       ),
                       _buildPasswordTF(),
+                      SizedBox(height: 10,),
+                      _buildForgotPasswordBtn(),
                       _buildLoginBtn(),
                       _buildSignupBtn(),
                       _buildLoginAsGuestBtn()
@@ -308,7 +341,7 @@ class _SignInScreenState extends State<SignInScreen> {
    var client = http.Client();
 
 try {
-  var uriResponse = await client.post(Uri.parse('http://192.168.1.101:80/api/login'),
+  var uriResponse = await client.post(Uri.parse('http://192.168.1.102:80/api/login'),
       body: {'email': _emailController.text, 'password': _passwordController.text});
 
   var jsonString = uriResponse.body;
@@ -320,6 +353,7 @@ try {
     });
 
      showSnack('Login Success');
+     Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
   
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setBool("isLoggedIn", true);

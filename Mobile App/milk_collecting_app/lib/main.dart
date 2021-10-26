@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:milk_collecting_app/screens/email_verification.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
 import 'package:milk_collecting_app/screens/signUpScreen.dart';
 import 'screens/signInScreen.dart';
@@ -24,7 +25,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
      return new SplashScreen(
       seconds: 4,
-  
      navigateAfterSeconds: new HomeScreen(),
      /* title: new Text('Healty Milk Collector',
       style: new TextStyle(
@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
       ),), */
       image: new Image.asset("images/logo.png",alignment: Alignment.center,),
       backgroundColor: Colors.blue,
+      
       styleTextUnderTheLoader: new TextStyle(),
        photoSize: 50,
       onClick: ()=>print("Flutter splash"),

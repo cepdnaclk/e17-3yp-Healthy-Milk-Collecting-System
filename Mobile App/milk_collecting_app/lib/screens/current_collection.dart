@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:get/get.dart';
+import 'package:milk_collecting_app/Models/sub_record.dart';
+import 'package:milk_collecting_app/controllers/record_controller.dart';
 import 'package:milk_collecting_app/screens/home_page.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'colors.dart';
 
@@ -14,6 +20,9 @@ class CurrentCollection extends StatefulWidget {
 }
 
 class _CurrentCollectionState extends State<CurrentCollection> {
+
+   final RecordController _recordController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +113,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                                 fontSize: 15
                             ),),
                           SizedBox(height: 10,),
-                          Text("1000.00lkr",
+                          Text("${_recordController.price} lkr",
                             style: TextStyle(
                                 color: black,
                                 fontWeight: FontWeight.w500,
@@ -185,7 +194,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text("91",
+                              Text(_recordController.fat_rate.toStringAsFixed(0),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -254,7 +263,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text("6.6",
+                              Text(_recordController.ph_value.toStringAsFixed(2),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -323,7 +332,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text("1.01",
+                              Text(_recordController.density.toStringAsFixed(2),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -392,7 +401,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text("10",
+                              Text(_recordController.volume.toString(),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -419,27 +428,32 @@ class _CurrentCollectionState extends State<CurrentCollection> {
 
 
 
-          Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: Container(
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                gradient: LinearGradient(
-                    colors: [
-                      primary,
-                      Colors.purple,
-                    ]
+          GestureDetector(
+            onTap: (){
+              _uploadData();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  gradient: LinearGradient(
+                      colors: [
+                        primary,
+                        Colors.purple,
+                      ]
+                  ),
                 ),
-              ),
-              child: Center(
-                child: Text(
-                  "Upload Data",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: "OpenSans",
-                      fontWeight: FontWeight.bold
+                child: Center(
+                  child: Text(
+                    "Upload Data",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: "OpenSans",
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
               ),
@@ -478,4 +492,141 @@ class _CurrentCollectionState extends State<CurrentCollection> {
 
 
   }
+
+
+
+  void _uploadData() async{
+    
+    var _subRecordList = [];
+     List<SubRecord> _subRecords = _recordController.subRecords;
+
+     for (var subrecord in _subRecords) {
+
+       double ph = subrecord.ph_value;
+       double fat = subrecord.fat_rate;
+       double den = subrecord.density;
+       int vol = subrecord.volume;
+       int price = subrecord.price;
+       double temp = subrecord.temperature;
+       String grade = subrecord.grade;
+
+
+      var _record = {
+          "ph_value" : ph.toString(),
+          "fat_rate" : fat.toString(),
+          "density": den.toString(),
+          "volume": vol.toString(),
+          "price_rate": price.toString(),
+          "temperature": temp.toString(),
+          "grade": grade
+       };
+
+      _subRecordList.add(_record);
+
+
+     }
+     
+    
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    
+    
+    //var collector_id = sharedPreferences.getInt("id");
+
+    var user_id =  1; //authenticated user id(collector)
+    var farmer_id = 1; //connected farmer iod
+    
+    double ph_value = _recordController.ph_value;
+    double density = _recordController.density;
+    int fat_value = _recordController.fat_rate.toInt();
+    var total_volume = _recordController.volume;
+    var total_price = _recordController.price;
+    double temperature = _recordController.average_temperature;
+    int device_id = 1;
+    String note = "test note";
+    
+
+   var data = {
+             
+            "farmer_id": farmer_id.toString(),
+            'user_id': user_id.toString(),
+            'ph_value': ph_value.toString(),
+            'density' : density.toString(),
+            'total_volume': total_volume.toString(),
+            'fat_rate': fat_value.toString(),
+            'temperature': temperature.toString(),
+            'device_id': device_id.toString(),
+            'total_price': total_price.toString(),
+            'note': note,
+            
+          
+             };
+
+
+
+var client = http.Client();
+
+try {
+
+   //upload daily record
+        var uriResponse = await client.post(Uri.parse('http://192.168.1.100:80/api/addDaily'),
+      body: data);
+
+  var jsonString = uriResponse.body;
+ 
+  var body_ = jsonDecode(jsonString);
+  print(body_);
+  
+  
+//upload sub records
+ for(int i=0;i<_subRecordList.length;i++){
+  
+ var sub_record = {
+          "ph_value" : _subRecordList[i]['ph_value'].toString(),
+          "fat_rate" : _subRecordList[i]['ph_value'].toString(),
+          "density": _subRecordList[i]['ph_value'].toString(),
+          "volume": _subRecordList[i]['ph_value'].toString(),
+          "price_rate": _subRecordList[i]['ph_value'].toString(),
+          "temperature": _subRecordList[i]['ph_value'].toString(),
+          "grade": _subRecordList[i]['ph_value'].toString(),
+          'id' : body_['id'].toString(),
+       };
+
+
+
+    try{
+    var uriResponse = await client.post(Uri.parse('http://192.168.1.100:80/api/addSub'),
+      body: sub_record);
+       var jsonString = uriResponse.body;
+ 
+      var body_ = jsonDecode(jsonString);
+  
+         print(body_);
+
+    
+    }finally{
+
+
+    }
+
+  
+
+ }  
+
+
+
+
+}finally{
+client.close;
+
+
+}
+
+  }
+
+
+
+
+
+
 }
