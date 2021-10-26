@@ -47,7 +47,7 @@
 }
 </style>
 </head>
-<body style="background: white;">
+<body>
 <div class="container-fluid">
         <!-- /.row -->
         <?php

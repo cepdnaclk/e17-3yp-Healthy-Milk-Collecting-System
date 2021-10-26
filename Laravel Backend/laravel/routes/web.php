@@ -15,6 +15,7 @@ use App\Http\Controllers\WebControllers\MainController;
 use App\Http\Controllers\WebControllers\UserRemoveController;
 use App\Http\Controllers\WebControllers\RecordController;
 use App\Http\Controllers\WebControllers\RangeController;
+use App\Http\Controllers\WebControllers\ConnectController;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
@@ -65,7 +66,7 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/get-farmers',[FarmerController::class, 'get'])->name('get-farmers');
     Route::get('/get-collectors',[CollectorController::class, 'get'])->name('get-collectors');
     
-    Route::get('/farmer-join',[ConnectController::class,'connect'])->name('farmer-join');
+    
     Route::get('/set-device',[CollectorController::class,'setDevice'])->name('set-device');
     Route::get('/device-add',[DeviceController::class, 'create'])->name('device.add');
     
@@ -94,6 +95,15 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/remove-record-verify', [RecordController::class, 'delete_verify'])->name('remove-record-verify');
     Route::get('/invite-remove-verify', [AdminController::class,'remove_invites_verify'])->name('invite-remove-verify');
     Route::get('/device-remove-verify',[DeviceController::class,'remove_verify'])->name('device-remove-verify');
+
+    Route::get('/pending_collectors', [ConnectController::class, 'pendingCollectors'])->name('pending_collectors');
+    Route::get('/pending_farmers', [ConnectController::class,'pendingFarmers'])->name('pending_farmers');
+    Route::get('/active_collectors',[ConnectController::class,'activeCollectors'])->name('active_collectors');
+    Route::get('/active_farmers',[ConnectController::class,'activeFarmers'])->name('active_farmers');
+    Route::get('/inactive_collectors',[ConnectController::class,'inactiveCollectors'])->name('inactive_collectors');
+    Route::get('/inactive_farmers',[ConnectController::class,'inactiveFarmers'])->name('inactive_farmers');
+    Route::get('/farmer-join',[ConnectController::class,'connect'])->name('farmer_join');
+    Route::get('/collector-accept',[ConnectController::class,'accept'])->name('collector_accept');
 
     Route::get('/success', function(){
             return view('success');

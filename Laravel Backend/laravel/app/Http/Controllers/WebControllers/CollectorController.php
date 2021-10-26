@@ -94,7 +94,7 @@ class CollectorController extends Controller
     public function get(Request $req){
         try{
             $id = $req->input('id');
-            $users = DB::table('collector_farmers')->select('*')->where('farmer_id','=', $id)->get();
+            $users = DB::table('collector_farmers')->select('*')->where([['farmer_id','=', $id],['status','active']])->get();
             //return view('collector',['users'=>$users]);
             $collectors = [];
             if(count($users)){
