@@ -123,7 +123,7 @@ class FarmerController extends Controller
     public function get(Request $req){
         try{
             $id = $req->input('id');
-            $users = DB::table('collector_farmers')->select('*')->where('collector_id','=', $id)->get();
+            $users = DB::table('collector_farmers')->select('*')->where([['collector_id','=', $id],['status','active']])->get();
             //return view('collector',['users'=>$users]);
             $farmers = [];
             if(count($users)){

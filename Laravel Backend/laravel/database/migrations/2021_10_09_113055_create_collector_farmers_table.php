@@ -16,7 +16,7 @@ class CreateCollectorFarmersTable extends Migration
         Schema::create('collector_farmers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-                    
+            $table->string('status');        
             $table->unsignedBigInteger('collector_id');
             $table->foreign('collector_id')
               ->references('id')
