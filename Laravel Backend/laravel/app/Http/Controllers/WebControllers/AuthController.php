@@ -48,7 +48,7 @@ class AuthController extends Controller
 
                }
             }
-            else if($creds['type']=='farmer'){
+            else if($user->type=='farmer'){
                 $farmer_creds=[
                  'user_id' => $user->id
                 ]; 

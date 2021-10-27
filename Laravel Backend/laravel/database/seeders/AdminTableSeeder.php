@@ -15,10 +15,10 @@ class AdminTableSeeder extends Seeder
     {
         //
         $admin =[
-            'name'=>'Aminda Amarasinghe',
+            'name'=>'admin@milktab',
             'email'=>'e17012@eng.pdn.ac.lk',
             'contact'=>'0714177300',
-            'password'=>bcrypt('aminda12@milktab'),
+            'password'=>bcrypt('admin_pwd@milktab'),
         ];
         Admin::create($admin);
     }

@@ -15,7 +15,7 @@ public function addDailyRecord(Request $request){
     if($request->input('farmer_id')!=null){
         $user_id = DB::table('farmers')->where('id',  $request->input('farmer_id'))->value('user_id'); 
         $farmer_name = DB::table('users')->where('id', $user_id)->value('name'); 
-        $device_id = DB::table('collectors')->where('id', $request->input('collector_id'))->value('device_id'); 
+        //$device_id = DB::table('collectors')->where('id', $request->input('collector_id'))->value('device_id'); 
         $data = [
             'farmer_id' => $request->input('farmer_id'),
             'farmer_name'=> $farmer_name,
@@ -25,7 +25,7 @@ public function addDailyRecord(Request $request){
             'total_volume' => $request->input('volume'),
             'fat_rate' => $request->input('fat_rate'),
             'temperature' => $request->input('temperature'),
-            'device_id' => $device_id,
+            'device_id' => $request->input('device_id'),
             'total_price' => $request->input('total_price'),
             'note'=>$request->input('note')
         ];
@@ -40,7 +40,7 @@ public function addDailyRecord(Request $request){
             'total_volume' => $request->input('volume'),
             'fat_rate' => $request->input('fat_rate'),
             'temperature' => $request->input('temperature'),
-            'device_id' => $device_id,
+            'device_id' => $request->input('device_id'),
             'total_price' => $request->input('total_price'),
             'note'=>$request->input('note')
         ];
@@ -51,32 +51,32 @@ public function addDailyRecord(Request $request){
     try {
         $dailyRecord = DailyRecord::create($data); 
         $daily_record_id = $dailyRecord->id;
-        $daily_record->day = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $daily_record->created_at)->format('Y-m-d');
-        foreach ($subrecords as $subrecord){
-            $sub_data = [
-                'ph_value'=>$subrecord,
-                'density'=>$subrecord,
-                'volume'=>$subrecord,
-                'fat_rate'=>$subrecord,
-                'temperature'=>$subrecord,
-                'grade'=>$subrecord,
-                'price_rate'=>$subrecord,
-                'daily_record_id'=> $daily_record_id
-            ];
-            try{
-                $subrecord_instance = SubRecord::create($sub_data);
-            } catch (\Throwable $th) {
-                return response(
-                    [
+        // $daily_record->day = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $daily_record->created_at)->format('Y-m-d');
+        // foreach ($subrecords as $subrecord){
+        //     $sub_data = [
+        //         'ph_value'=>$subrecord,
+        //         'density'=>$subrecord,
+        //         'volume'=>$subrecord,
+        //         'fat_rate'=>$subrecord,
+        //         'temperature'=>$subrecord,
+        //         'grade'=>$subrecord,
+        //         'price_rate'=>$subrecord,
+        //         'daily_record_id'=> $daily_record_id
+        //     ];
+        //     try{
+        //         $subrecord_instance = SubRecord::create($sub_data);
+        //     } catch (\Throwable $th) {
+        //         return response(
+        //             [
                         
-                        'error_message' => $th,
+        //                 'error_message' => $th,
                         
-                    ],
+        //             ],
                     
-                );
-            }
+        //         );
+        //     }
             
-        }
+        //}
     } catch (\Throwable $th) {
         return response(
             [

@@ -12,7 +12,9 @@ class DeviceController extends Controller
     public function show(){
         try{
             $devices = DB::table('devices')->simplePaginate(8);
+            //dd($devices);
             return view('device',['devices'=>$devices]);
+
         } catch (\Throwable $th) {
             return response(
                 [
@@ -40,8 +42,11 @@ class DeviceController extends Controller
         }
     }
     public function create(Request $req){
-        $creds=["description" => $req->input('description'),
-        "batch" => $req->input('batch')
+        
+        $creds=[
+        'description' => $req->input('description'),
+        'batch' => $req->input('batch'),
+        'status' => $req->input('status')
         ];
         try{
             Device::create($creds);
@@ -82,7 +87,7 @@ class DeviceController extends Controller
         try{
             $id = $req->input('id');
             
-            DB::update('update devices set description = ?,batch=? where id = ?',[$req->description,$req->batch,$id]);
+            DB::update('update devices set description = ?,batch=?,status=? where id = ?',[$req->description,$req->batch,$req->status,$id]);
             return view('success',['message'=>'successfully updated device']);
         } catch (\Throwable $th) {
             return response(
