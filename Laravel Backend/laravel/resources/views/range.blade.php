@@ -11,7 +11,7 @@
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
+  width: 95%; /* Full-width */
   height: 15px;
   border-radius: 5px;
   background: #d3d3d3; /* Grey background */
@@ -48,7 +48,7 @@
 </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid bg-gray">
         <!-- /.row -->
         <?php
         $PH3_low = $item['pH3_low'];

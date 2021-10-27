@@ -17,7 +17,8 @@ class Device extends Model
      */
     protected $fillable = [
         'description',
-        'batch'
+        'batch',
+        'status'
     ];
     public function dailyRecord(){
         return $this->hasMany(DailyRecord::class);

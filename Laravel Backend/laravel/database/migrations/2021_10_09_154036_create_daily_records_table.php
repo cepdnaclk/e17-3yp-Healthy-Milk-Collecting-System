@@ -33,14 +33,14 @@ class CreateDailyRecordsTable extends Migration
 
             $table->foreign('device_id')
                 ->references('id')
-                ->on('devices');
+                ->on('devices')->onDelete('cascade');
                 
             $table->foreign('farmer_id')
               ->references('id')
-              ->on('farmers');
+              ->on('farmers')->onDelete('set null');
             $table->foreign('collector_id')
               ->references('id')
-              ->on('collectors');
+              ->on('collectors')->onDelete('cascade');
             
         });
     }

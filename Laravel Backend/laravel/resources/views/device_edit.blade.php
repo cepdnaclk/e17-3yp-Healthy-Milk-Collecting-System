@@ -13,7 +13,7 @@
                            
                             <th class="bg-primary">Batch</th>
                             <th class="bg-primary">Desciption</th>
-
+                            <th class="bg-primary">Status</th>
                             
                           </tr>
                       </thead>
@@ -22,6 +22,7 @@
                           <tr>
                           <td><input name="batch" value="{{ $device->batch }}" style="border:none;outline:0;"></input></td>
                           <td><input name="description" value="{{ $device->description }}"  style="border:none;outline:0;"></input></td>
+                          <td><input name="status" value="{{ $device->status }}"  style="border:none;outline:0;"></input></td>
                           </tr>
                           
                       </tbody>

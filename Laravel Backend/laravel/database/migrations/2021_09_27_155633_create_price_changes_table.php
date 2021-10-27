@@ -26,7 +26,7 @@ class CreatePriceChangesTable extends Migration
             $table->float('c');
             $table->float('d');
             $table->foreign('collector_id')->references('id')
-                ->on('collectors');
+                ->on('collectors')->onDelete('cascade');
         });
     }
 
