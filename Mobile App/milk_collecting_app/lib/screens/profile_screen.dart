@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
 import 'package:milk_collecting_app/screens/change_contact.dart';
 import 'package:milk_collecting_app/screens/change_name.dart';
 import 'package:milk_collecting_app/screens/change_password_screen.dart';
@@ -488,7 +489,7 @@ SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 var client = http.Client();
     
 try {
-  var uriResponse = await client.get(Uri.parse('http://192.168.1.101:80/api/logout'),
+  var uriResponse = await client.get(Uri.parse(ApiUrl.LOGOUT_URL),
       headers: headers);
 
   var jsonString = uriResponse.body;
