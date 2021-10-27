@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
      return new SplashScreen(
       seconds: 4,
-     navigateAfterSeconds: new HomeScreen(),
+     navigateAfterSeconds: new SignInScreen(),
      /* title: new Text('Healty Milk Collector',
       style: new TextStyle(
         fontWeight: FontWeight.bold,

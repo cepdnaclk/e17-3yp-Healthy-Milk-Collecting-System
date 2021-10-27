@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
-use App\Models\PriceChange;///
+use App\Models\PriceChange;
 
 use Illuminate\Support\Facades\DB;
 class CollectorController extends Controller
@@ -99,6 +99,7 @@ class CollectorController extends Controller
             $req->input('latitude'),$req->input('longitude'),$req->input('firstname'),
             $req->input('lastname'),$req->input('contact'),
             $req->input('address'),$req->input('businesstype'),$id]);
+            
             return view('success',['user'=>$id]);
         } catch (\Throwable $th) {
             return response(

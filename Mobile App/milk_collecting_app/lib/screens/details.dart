@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
 import 'package:milk_collecting_app/screens/colors.dart';
 import 'package:milk_collecting_app/screens/email_verification.dart';
 import 'package:milk_collecting_app/screens/signInScreen.dart';
@@ -451,7 +452,7 @@ showSnack("Please enter the business type");
    var client = http.Client();
 
 try {
-  var uriResponse = await client.post(Uri.parse('http://192.168.1.102:80/api/register'),
+  var uriResponse = await client.post(Uri.parse(ApiUrl.REGISTER_URL),
       body: { 
         "name" : _fnameController.text + " "+ _lnameController.text,
         "email" : widget.email,
