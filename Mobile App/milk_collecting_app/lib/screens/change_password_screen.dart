@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
 import 'package:milk_collecting_app/utilities/constants.dart';
 import 'package:http/http.dart' as http;
@@ -347,7 +348,7 @@ setState(() {
 var client = http.Client();
 
 try {
-  var uriResponse = await client.post(Uri.parse('http://192.168.1.100:80/api/changePassword'),
+  var uriResponse = await client.post(Uri.parse(ApiUrl.CHANGE_PASSWORD_URL),
       body: {
           'user_id': "1", //give the authenticated user id
          'password': _newPasswordConfirmController.text

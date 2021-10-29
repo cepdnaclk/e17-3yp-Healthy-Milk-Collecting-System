@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
 import 'package:milk_collecting_app/Models/sub_record.dart';
+import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
 import 'package:milk_collecting_app/controllers/record_controller.dart';
 import 'package:milk_collecting_app/screens/home_page.dart';
 import 'package:milk_collecting_app/screens/home_screen.dart';
@@ -569,7 +570,7 @@ var client = http.Client();
 try {
 
    //upload daily record
-        var uriResponse = await client.post(Uri.parse('http://192.168.1.100:80/api/addDaily'),
+        var uriResponse = await client.post(Uri.parse(ApiUrl.ADD_DAILY_URL),
       body: data);
 
   var jsonString = uriResponse.body;
@@ -595,7 +596,7 @@ try {
 
 
     try{
-    var uriResponse = await client.post(Uri.parse('http://192.168.1.100:80/api/addSub'),
+    var uriResponse = await client.post(Uri.parse(ApiUrl.ADD_SUB_URL),
       body: sub_record);
        var jsonString = uriResponse.body;
  
