@@ -2,7 +2,7 @@
 [//]: # (Please refer the instructions in below URL for the configurations)
 [//]: # (https://projects.ce.pdn.ac.lk/docs/how-to-add-a-project)
 
-# Healthy-Milk-Collecting-System
+# Milk-Testing-and-Collecting-System
 
 ## Description
 
@@ -25,6 +25,10 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 <img src="docs/images/diagrams/overall.png">
 <img src="./Diagrams/architecture.jpg">
 
+## Technologies
+
+<img src="docs/images/diagrams/cloud.jpg">
+<img src="docs/images/diagrams/frontend.jpg">
 
 ## Team Members
 1. E/17/012 Amarasinghe R A A U [[Website](http://www.ce.pdn.ac.lk/e17-batch/), [Email](mailto:e17012@eng.pdn.ac.lk)]
@@ -41,9 +45,10 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 
 ## Links
 
-1. [Project page](https://cepdnaclk.github.io/e17-3yp-Healthy-Milk-Collecting-System/)
-2. [Github repo](https://github.com/cepdnaclk/e17-3yp-Healthy-Milk-Collecting-System)
-3. [Department of computer engineering](http://ce.pdn.ac.lk)
+1. [Project page](https://cepdnaclk.github.io/e17-3yp-Milk-Testing-and-Collecting-System/)
+2. [Admin panel](http://ec2-54-164-100-187.compute-1.amazonaws.com/main)
+3. [Github repo](https://github.com/cepdnaclk/e17-3yp-Milk-Testing-and-Collecting-System)
+4. [Department of computer engineering](http://ce.pdn.ac.lk)
 
 
 ## Publications
@@ -53,6 +58,6 @@ Our Healthy Milk Collecting System can be used to measure important quality para
 4. [Semester 8 slides](https://cepdnaclk.github.io/e15-4yp-minimal-template)
 5. Author1, Author2 and Author2 "Research paper title" in Conference name 2021. [Download PDF ](https://cepdnaclk.github.io/e15-4yp-minimal-template)
 
-<div style="display:flex;justify-content:center;"><img src="./docs/images/team/012v3.png" style="width: 100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;">
-<img src="./docs/images/team/038v1.jpg" style="width:100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;">
-<img src="./docs/images/team/101v1.jpg" style="width:100px;height:100px;object-fit:cover; border-radius: 50%;padding:30px;"></div>
+<div style="display:flex;justify-content:center;"><img src="./docs/images/team/012v3.png" style="width: 120px;height:150px;object-fit:cover; border-radius: 50%;padding:60px;">
+<img src="./docs/images/team/038v1.jpg" style="width:120px;height:150px;object-fit:cover; border-radius: 50%;padding:60px;">
+<img src="./docs/images/team/101v1.jpg" style="width:120px;height:150px;object-fit:cover; border-radius: 50%;padding:60px;"></div>
