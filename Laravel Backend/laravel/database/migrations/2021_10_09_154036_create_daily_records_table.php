@@ -15,14 +15,14 @@ class CreateDailyRecordsTable extends Migration
     {
         Schema::create('daily_records', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps(); 
-            $table->date('day');
+            $table->timestamps();
             $table->float('ph_value');
             $table->float('density');
             $table->float('total_volume');
             $table->integer('fat_rate');
             $table->float('temperature');
             //$table->dateTime('added_date');
+            $table->date('day');
             $table->float('total_price');
             $table->string('note')->nullable();
             $table->string('farmer_name')->nullable();

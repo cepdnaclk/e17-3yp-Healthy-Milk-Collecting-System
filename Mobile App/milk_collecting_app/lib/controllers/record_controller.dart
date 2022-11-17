@@ -1,6 +1,5 @@
 import 'dart:ffi';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:milk_collecting_app/Models/sub_record.dart';
@@ -29,7 +28,6 @@ var ph_array = [];
 var density_array = [];
 var fat_array = [];
 var temperature_array = [];
-
 List<SubRecord> subRecords = [];
 
 bool isDefaultFarmer = false;

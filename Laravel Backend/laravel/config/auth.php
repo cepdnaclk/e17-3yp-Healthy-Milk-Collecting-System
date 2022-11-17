@@ -1,5 +1,5 @@
 <?php
-use App\Models\Admin;
+
 return [
 
     /*
@@ -46,14 +46,6 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        'admins' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-        'admin-api' => [
-            'driver' => 'jwt',
-            'provider' => 'admins',
-        ],
     ],
 
     /*
@@ -83,10 +75,6 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
     ],
 
     /*
@@ -110,11 +98,6 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
-        ],
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_resets',
-            'expire' => 60,
         ],
     ],
 

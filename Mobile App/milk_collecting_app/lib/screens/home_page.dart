@@ -265,7 +265,7 @@ void loadData() async{
 
   List<String> farmers_list = [
     "H K Perera",
-    "C M Chandrasena",
+    "C M Chandrasekara",
     "H M Saman",
     "Kamal",
     "Namal"
@@ -463,7 +463,7 @@ Widget _buildConnectWithDefaultFarmerBtn() {
                 )
               ),
             ),
-
+              SizedBox(width: 6,),
             GestureDetector(
               onTap: (){
                    setState(() {
@@ -526,7 +526,7 @@ Widget _buildConnectWithDefaultFarmerBtn() {
 
 if(!isFarmer){
 
-if(isDeviceConnected){ /////changet to not
+if(!isDeviceConnected){ /////changet to not
     if(isStart){
 
       return SingleChildScrollView(
