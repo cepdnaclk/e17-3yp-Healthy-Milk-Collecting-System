@@ -30,7 +30,7 @@
                             <th scope="col" class="bg-primary">Address</th>
                             <th scope="col" class="bg-primary">businesstype</th>
                             
-                            <th scope="col" class="bg-danger">Options</th>
+                            <th scope="col" class="bg-success">Options</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -45,9 +45,10 @@
                           <td>{{ $user["contact"] }}</td>
                           <td>{{ $user["address"] }}</td>
                           <td>{{ $user["businesstype"] }}</td>
-                          <td><a href="{{route('get-collectors') . '?' . http_build_query(['id' => $farmer_id])}}"  class="btn btn-success">Collectors</a>
-                              <a href="{{route('farmer-edit') . '?' . http_build_query(['id' => $user_id])}}" class="btn btn-primary">Edit</a>
-                              <a href="{{route('user-remove') . '?' . http_build_query(['id' => $user_id])}}"  class="btn btn-danger">Delete</a></td>
+                          <td class="row"><a href="{{route('get-collectors') . '?' . http_build_query(['id' => $farmer_id])}}"  class="btn btn-success col-12">Collectors</a>
+                          <a href="{{route('pending_collectors') . '?' . http_build_query(['farmer_id' => $farmer_id])}}"  class="btn btn-warning col-12">Pending</a>    
+                          <a href="{{route('farmer-edit') . '?' . http_build_query(['id' => $user_id])}}" class="btn btn-primary col-12">Edit</a>
+                          <a href="{{route('user-remove') . '?' . http_build_query(['id' => $user_id])}}"  class="btn btn-danger col-12">Delete</a></td>
                           </tr>
                           @endforeach
                       </tbody>

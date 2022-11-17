@@ -8,9 +8,9 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>5</h3>
+                <h3>{{ $userscount['3'] }}</h3>
 
-                <p>Device Orders</p>
+                <p>Device orders</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -23,7 +23,7 @@
           
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>10</h3>
+                <h3>{{ $userscount['4'] }}</h3>
 
                 <p>Device In Use</p>
               </div>
