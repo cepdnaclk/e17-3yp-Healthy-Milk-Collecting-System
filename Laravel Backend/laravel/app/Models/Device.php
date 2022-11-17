@@ -10,7 +10,6 @@ use App\Models\Collector;
 class Device extends Model
 {
     use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -21,7 +20,6 @@ class Device extends Model
         'batch',
         'status'
     ];
-
     public function dailyRecord(){
         return $this->hasMany(DailyRecord::class);
     }//1-m
