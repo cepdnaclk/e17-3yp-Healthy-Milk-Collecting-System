@@ -19,7 +19,8 @@ class Collector extends Model
     protected $fillable = [
         'user_id',
         'device_id',
-    ];
+       
+    ];  
 
 
 
