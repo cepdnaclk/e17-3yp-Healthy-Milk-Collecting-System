@@ -49,12 +49,12 @@ initState() {
 
 getUserType () async{
 
-  /*setState(() {
+  setState(() {
       isFarmer = true;
-    });*/
+    });
     
 
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+ /* SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
  
     
     print(sharedPreferences.getString("type"));
@@ -64,7 +64,7 @@ getUserType () async{
       isFarmer = true;
     });
     
-  }  
+  }  */
 
 }
 
@@ -76,7 +76,7 @@ var client = http.Client();
 
 try {
  
-  var uriResponse = await client.post( Uri.parse(ApiUrl.FARMER_REQUEST_URL),body: {'collector_id' : "5"} );
+  var uriResponse = await client.post( Uri.parse(ApiUrl.FARMER_REQUEST_URL),body: {'collector_id' : "2"} );
   var jsonString = uriResponse.body;
  
   var body_ = jsonDecode(jsonString);
@@ -122,7 +122,7 @@ var client = http.Client();
 
 try {
  
-  var uriResponse = await client.post( Uri.parse(ApiUrl.CONNECTED_FARMERS_WITH_COLLECTOR_URL),body: {'collector_id' : "5"} );
+  var uriResponse = await client.post( Uri.parse(ApiUrl.CONNECTED_FARMERS_WITH_COLLECTOR_URL),body: {'collector_id' : "2"} );
 
   var jsonString = uriResponse.body;
  
@@ -213,7 +213,7 @@ var client = http.Client();
 
 try {
  
-  var uriResponse = await client.post( Uri.parse(ApiUrl.ACTIVE_COLLECTORS_URL),body: {'farmer_id' : "1"} );
+  var uriResponse = await client.post( Uri.parse(ApiUrl.ACTIVE_COLLECTORS_URL),body: {'farmer_id' : "6"} );
 
   var jsonString = uriResponse.body;
  

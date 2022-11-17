@@ -19,6 +19,7 @@ class DailyRecord extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'ph_value',
         'density',
         'total_volume',
@@ -27,15 +28,10 @@ class DailyRecord extends Model
         'farmer_name',
         'total_price',
         'note',
-        'day',
         'farmer_id',
         'collector_id',
         'device_id'
     ];
-    // public function getCreatedAtAttribute($date)
-    // {
-    // return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
-    // }
     public function subRecord()
     {
         return $this->hasMany(SubRecord::class);

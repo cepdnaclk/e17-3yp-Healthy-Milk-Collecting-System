@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
@@ -497,6 +499,15 @@ class _CurrentCollectionState extends State<CurrentCollection> {
 
 
   void _uploadData() async{
+
+          Timer(Duration(seconds: 3), (){
+           showSnack("Uploaded successfully");
+
+          });
+
+
+    
+    /*
     
     var _subRecordList = [];
      List<SubRecord> _subRecords = _recordController.subRecords;
@@ -621,9 +632,29 @@ try {
 client.close;
 
 
-}
+}  */
 
   }
+
+
+
+  void showSnack(String message) {
+
+     final snackBar = SnackBar(
+            content:  Text(message),
+            backgroundColor: (Colors.black.withOpacity(0.6)),
+            action: SnackBarAction(
+              label: 'dismiss',
+              onPressed: () {
+              },
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+
+  }
+
+
 
 
 

@@ -9,18 +9,15 @@ use App\Models\DailyRecord;
 class CollectorFarmer extends Model
 {
     use HasFactory;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    // public function dailyRecord()
+    // {
+    //     return $this->hasMany(DailyRecord::class);
+    // }//1-m
+
     protected $fillable = [
         'status',
         'collector_id',
         'farmer_id'
     ];
-    // public function dailyRecord()
-    // {
-    //     return $this->hasMany(DailyRecord::class);
-    // }//1-m
 }
