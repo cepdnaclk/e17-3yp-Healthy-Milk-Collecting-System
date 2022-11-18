@@ -32,7 +32,10 @@ class DailyRecord extends Model
         'collector_id',
         'device_id'
     ];
-  
+    // public function getCreatedAtAttribute($date)
+    // {
+    // return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    // }
     public function subRecord()
     {
         return $this->hasMany(SubRecord::class);
@@ -52,8 +55,8 @@ class DailyRecord extends Model
     //     return $this->belongsTo(CollectorFarmer::class);
     // }//m-1
 
-  /*  public function device()
+    public function device()
     {
         return $this->belongsTo(Device::class);
-    }//m-1  */
+    }//m-1
 }
