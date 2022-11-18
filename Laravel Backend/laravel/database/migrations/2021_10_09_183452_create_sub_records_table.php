@@ -12,7 +12,7 @@ class CreateSubRecordsTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   Schema::dropIfExists('sub_records');
         Schema::create('sub_records', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();

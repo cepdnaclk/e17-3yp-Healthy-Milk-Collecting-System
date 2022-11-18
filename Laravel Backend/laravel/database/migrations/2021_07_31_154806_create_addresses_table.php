@@ -12,7 +12,7 @@ class CreateAddressesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   Schema::dropIfExists('addresses');
         Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
