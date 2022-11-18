@@ -11,6 +11,11 @@ class Device extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'device_id',
+        'description',
+    ];
+
     public function dailyRecord(){
         return $this->hasMany(DailyRecord::class);
     }//1-m

@@ -6,6 +6,7 @@ use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
 use App\Models\PriceChange;
+use App\Models\Device;
 
 use Illuminate\Support\Facades\DB;
 class CollectorController extends Controller
@@ -212,6 +213,21 @@ class CollectorController extends Controller
         $collector_id = $req->input('collector_id');
         
         DB::update('update collectors set device_id = ? where id = ?',[$device_id, $collector_id]);
+    }
+
+
+    public function addDevice(Request $req){
+        $device_id = $req->input('device_id');
+        $description = $req->input('description');
+
+        $creds = [
+          'id' => $device_id,
+          'description' => $description,
+        ];
+
+        $device = Device::create($creds);
+
+        return $device;
     }
 
 
