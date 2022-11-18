@@ -13,6 +13,7 @@ class CreatePriceChangesTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('price_changes');
         Schema::create('price_changes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();

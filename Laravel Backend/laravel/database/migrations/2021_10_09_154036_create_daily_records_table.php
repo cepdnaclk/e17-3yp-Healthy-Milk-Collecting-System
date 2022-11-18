@@ -12,11 +12,11 @@ class CreateDailyRecordsTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   Schema::dropIfExists('daily_records');
         Schema::create('daily_records', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps(); 
-            $table->date('day');
+            $table->date('day')->nullable();
             $table->float('ph_value');
             $table->float('density');
             $table->float('total_volume');

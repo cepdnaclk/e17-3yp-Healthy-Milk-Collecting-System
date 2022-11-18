@@ -91,6 +91,7 @@ Route::group(['prefix'=>'/main','middleware' => 'auth:admins'], function () {
     Route::get('/quality-chart', [RecordController::class, 'qualityChart'])->name('quality-chart');
     Route::get('/quality-chart-filter',[RecordController::class, 'chartfilter'])->name('admin.get-chart-filter');
     Route::get('/remove-record', [RecordController::class, 'delete'])->name('remove-record');
+    Route::get('/add-record', [RecordController::class, 'addDailyRecord'])->name('add-record');
     
     Route::get('/remove-record-verify', [RecordController::class, 'delete_verify'])->name('remove-record-verify');
     Route::get('/invite-remove-verify', [AdminController::class,'remove_invites_verify'])->name('invite-remove-verify');

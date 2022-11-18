@@ -8,9 +8,6 @@ use App\Models\SubRecord;
 use Illuminate\Support\Facades\DB;
 class RecordController extends Controller
 {
-    
-
-
 public function addDailyRecord(Request $request){
     if($request->input('farmer_id')!=null){
         $user_id = DB::table('farmers')->where('id',  $request->input('farmer_id'))->value('user_id'); 
@@ -29,6 +26,7 @@ public function addDailyRecord(Request $request){
             'total_price' => $request->input('total_price'),
             'note'=>$request->input('note')
         ];
+	
     }else{
  
         $data = [
@@ -42,41 +40,16 @@ public function addDailyRecord(Request $request){
             'temperature' => $request->input('temperature'),
             'device_id' => $request->input('device_id'),
             'total_price' => $request->input('total_price'),
-            'note'=>$request->input('note')
+            'note'=>$request->input('note')			
         ];
-    }
-    
+    }   
     
     
     try {
         $dailyRecord = DailyRecord::create($data); 
         $daily_record_id = $dailyRecord->id;
-        // $daily_record->day = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $daily_record->created_at)->format('Y-m-d');
-        // foreach ($subrecords as $subrecord){
-        //     $sub_data = [
-        //         'ph_value'=>$subrecord,
-        //         'density'=>$subrecord,
-        //         'volume'=>$subrecord,
-        //         'fat_rate'=>$subrecord,
-        //         'temperature'=>$subrecord,
-        //         'grade'=>$subrecord,
-        //         'price_rate'=>$subrecord,
-        //         'daily_record_id'=> $daily_record_id
-        //     ];
-        //     try{
-        //         $subrecord_instance = SubRecord::create($sub_data);
-        //     } catch (\Throwable $th) {
-        //         return response(
-        //             [
-                        
-        //                 'error_message' => $th,
-                        
-        //             ],
-                    
-        //         );
-        //     }
-            
-        //}
+        //$daily_record->day = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $daily_record->created_at)->format('Y-m-d');     
+        
     } catch (\Throwable $th) {
         return response(
             [

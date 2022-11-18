@@ -16,8 +16,9 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'description',
-        'device_id',
+	'description',
+        'batch',
+        'status'
     ];
 
     public function dailyRecord(){

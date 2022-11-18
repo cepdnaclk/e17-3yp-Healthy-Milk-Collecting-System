@@ -40,7 +40,7 @@ class DeviceController extends Controller////
     }
     public function createDevice(Request $req){
         $creds=["description" => $req->input('description')];
-       return Device::create($creds);
+        return Device::create($creds);
         
         
     }

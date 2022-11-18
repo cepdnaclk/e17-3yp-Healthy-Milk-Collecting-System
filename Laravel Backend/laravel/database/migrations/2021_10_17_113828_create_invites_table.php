@@ -12,7 +12,7 @@ class CreateInvitesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   Schema::dropIfExists('invites');
         Schema::create('invites', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('email')->unique();

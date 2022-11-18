@@ -12,7 +12,7 @@ class CreateRangeVariablesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   Schema::dropIfExists('range_variables');
         Schema::create('range_variables', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
