@@ -11,11 +11,11 @@ class Device extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
+
     protected $fillable = [
         'device_id',
         'description',
-=======
+
     /**
      * The attributes that are mass assignable.
      *
