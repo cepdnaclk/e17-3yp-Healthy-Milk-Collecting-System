@@ -15,12 +15,12 @@
             <div class="col-8 m-4">
             <div class="form-group m-4">
                 <label for="id" class="text-gray">Collector ID:</label><br>
-                <input type="text" name="id" id="id" class="form-control">
+                <input type="text" name="id" id="id" class="form-control" required>
             </div>
             @if (request()->is('main/quality-chart-filter'))
             <div class="form-group m-4">
                 <label for="farmer_id" class="text-gray">Farmer ID:</label><br>
-                <input type="text" name="farmer_id" id="farmer_id" class="form-control">
+                <input type="text" name="farmer_id" id="farmer_id" class="form-control" required>
             </div>
             @endif
             <div class="form-group m-4">

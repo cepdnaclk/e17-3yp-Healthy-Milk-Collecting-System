@@ -11,9 +11,21 @@ class Device extends Model
 {
     use HasFactory;
 
+<<<<<<< HEAD
     protected $fillable = [
         'device_id',
         'description',
+=======
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'description',
+        'batch',
+        'status'
+>>>>>>> e379faff510bdbbdebf7e4b40fb0aa6e7b456b0e
     ];
 
     public function dailyRecord(){

@@ -34,7 +34,7 @@
           </div>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
-            <a href="https://github.com/" target="_blank">
+            <a href="https://aws.com/" target="_blank">
             <div class="info-box shadow-lg">
               <span class="info-box-icon bg-warning"><i class="fab fa-aws"></i></span>
 

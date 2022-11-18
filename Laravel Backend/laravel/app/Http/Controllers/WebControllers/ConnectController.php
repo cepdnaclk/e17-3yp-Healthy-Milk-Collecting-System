@@ -24,14 +24,8 @@ class ConnectController extends Controller
                 'status' => 'pending'
             ];
             $record = CollectorFarmer::create($creds);
-            return response(
-                [
-                    
-                    'message' => $farmer_id. " is connected with (pending)" .$collector_id,
-                    
-                ],
-                
-            );
+            return view('success',['message'=>$farmer_id. " is connected with (pending)" .$collector_id]);
+            
         }else{
             return response(
                 [
@@ -66,14 +60,8 @@ class ConnectController extends Controller
         $record_id = DB::table('collector_farmers')->where([['farmer_id','=', $farmer_id],['collector_id','=', $collector_id],['status','pending']])->value('id');
         if($record_id != null){
             DB::update('update collector_farmers set status = ? where id = ?',['active',$record_id]);
-            return response(
-                [
-                    
-                    'message' => $farmer_id. " is connected with " .$collector_id,
-                    
-                ],
-                
-            );
+            return view('success',['message'=>$farmer_id. " is connected with" .$collector_id]);
+            
         }else{
             return response(
                 [
@@ -106,6 +94,7 @@ class ConnectController extends Controller
         if(count($users)){
         foreach ($users   as $user_) {
             $collector_id   = $user_->collector_id;
+            $device_id=DB::table('collectors')->where('id','=', $collector_id)->value('device_id');
             $user_id = DB::table('collectors')->where('id','=', $collector_id)->value('user_id');
             $user = DB::table('users')->select('*')->where('id','=', $user_id)->first();
                 $a = DB::table('price_changes')->where('collector_id', $collector_id)->value('a');
@@ -113,7 +102,7 @@ class ConnectController extends Controller
                 $c = DB::table('price_changes')->where('collector_id', $collector_id)->value('c');
                 $d = DB::table('price_changes')->where('collector_id', $collector_id)->value('d');
                 $user_data = [
-
+                        "device_id"=>$device_id,
                         "user_id"=>$user->id,
                         "collector_id"=>$collector_id,
                         "name"=>$user->name,
@@ -137,16 +126,11 @@ class ConnectController extends Controller
                     ];  
                     array_push($collectors,$user_data); 
         }}
-        dd($collectors);
-        return response(
-                [
-                    
-                    'pcollectors' => $collectors,
-                    'success' => true
-                    
-                ],
-                
-            );
+       
+            $collectors = $this->paginate($collectors,8);
+            $collectors = collect($collectors);
+            //dd($collectors);
+            return view('collector',['collectors'=>$collectors['data'],'page_data'=>$collectors]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -172,7 +156,7 @@ class ConnectController extends Controller
         if(count($users)){
         foreach ($users   as $user_) {
             $collector_id   = $user_->collector_id;
-            
+            $device_id=DB::table('collectors')->where('id','=', $collector_id)->value('device_id');
             $user_id = DB::table('collectors')->where('id','=', $collector_id)->value('user_id');
             
             $user = DB::table('users')->select('*')->where('id','=', $user_id)->first();
@@ -181,7 +165,7 @@ class ConnectController extends Controller
                 $c = DB::table('price_changes')->where('collector_id', $collector_id)->value('c');
                 $d = DB::table('price_changes')->where('collector_id', $collector_id)->value('d');
                 $user_data = [
-
+                        "device_id"=>$device_id,
                         "user_id"=>$user->id,
                         "collector_id"=>$collector_id,
                         "name"=>$user->name,
@@ -205,16 +189,10 @@ class ConnectController extends Controller
                     ];  
                     array_push($collectors,$user_data); 
         }}
-        dd($collectors);
-        return response(
-                [
-                    
-                    'acollectors' => $collectors,
-                    'success' => true
-                    
-                ],
-                
-            );
+            $collectors = $this->paginate($collectors,8);
+            $collectors = collect($collectors);
+            //dd($collectors);
+            return view('collector',['collectors'=>$collectors['data'],'page_data'=>$collectors]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -264,16 +242,10 @@ class ConnectController extends Controller
                     ];  
                     array_push($farmers,$user_data); 
         }}
-        dd($farmers);
-        return response(
-                [
-                    
-                    'pfarmers' => $farmers,
-                    'success' => true
-                    
-                ],
-                
-            );
+            $farmers = $this->paginate($farmers,8);
+            $farmers = collect($farmers);
+            //dd($collectors);
+            return view('farmer',['users'=>$farmers['data'],'page_data'=>$farmers]);
         } catch (\Throwable $th) {
             return response(
                 [
@@ -293,7 +265,7 @@ class ConnectController extends Controller
         $collector_id = $req->input('collector_id');
         $users = DB::table('collector_farmers')->select('*')->where([['collector_id','=', $collector_id],['status','active']])->get();
         $farmers = [];
-        dd($users);
+       
         if(count($users)){
         foreach ($users   as $user_) {
             $farmer_id   = $user_->farmer_id;
@@ -322,16 +294,10 @@ class ConnectController extends Controller
                     ];  
                     array_push($farmers,$user_data); 
         }}
-        dd($farmers);
-        return response(
-                [
-                    
-                    'afarmers' => $farmers,
-                    'success' => true
-                    
-                ],
-                
-            );
+            $farmers = $this->paginate($farmers,8);
+            $farmers = collect($farmers);
+            //dd($collectors);
+            return view('farmer',['users'=>$farmers['data'],'page_data'=>$farmers]);
         } catch (\Throwable $th) {
             return response(
                 [

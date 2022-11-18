@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Collector;
 use App\Models\Farmer;
 use App\Models\User;
+use App\Models\Device;
 use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
@@ -16,7 +17,9 @@ class MainController extends Controller
         $ccount = Collector::count();  
         $fcount = Farmer::count(); 
         $ucount = User::count(); 
-        $arr = [$ccount,$fcount,$ucount];
+        $dcount1 = Device::where('status','ordered')->count(); 
+        $dcount2 = Device::where('status','using')->count();
+        $arr = [$ccount,$fcount,$ucount,$dcount1,$dcount2];
         //dd($arr);
         return view('index',['userscount'=>$arr]);
         }   catch (\Throwable $th) {
