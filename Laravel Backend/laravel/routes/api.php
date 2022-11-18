@@ -37,17 +37,19 @@ Route::get('/logout',[AuthController::class,'logout']);
 Route::get('/test',[CollectorController::class,'test']);
 
 
-// Route::post('/set-device',[CollectorController::class,'setDevice']);
-// Route::post('/price-save',[PriceChartController::class, 'save']);
-// Route::get('/get-price', [PriceChartController::class, 'index']);
-// Route::get('/collector-price', [PriceChartController::class, 'get']);
-// Route::get('/connect', [ConnectController::class, 'connect']);
+ Route::post('/set-device',[CollectorController::class,'setDevice']);
+ Route::post('/price-save',[PriceChartController::class, 'save']);
+ Route::get('/get-price', [PriceChartController::class, 'index']);
+ Route::get('/collector-price', [PriceChartController::class, 'get']);
+ Route::get('/connect', [ConnectController::class, 'connect']);
 
- //Route::get('/collectors',[CollectorController::class, 'show']);
+ Route::get('/collectors',[CollectorController::class, 'show']);
 
  Route::post('/addDaily',[RecordController::class, 'addDailyRecord']);
 
  Route::post('/addSub',[RecordController::class, 'addSubRecord']);
+
+ Route::post('/addDevice',[CollectorController::class,'addDevice']);
 
  //Route::post('/test1',[RecordController::class, 'test1']);
 

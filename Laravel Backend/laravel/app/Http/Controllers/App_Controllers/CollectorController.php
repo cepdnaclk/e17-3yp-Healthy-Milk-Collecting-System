@@ -218,5 +218,20 @@ class CollectorController extends Controller
     public function test(){
         return 'testcollectror';
     }
+
+
+    public function addDevice(Request $req){
+        $device_id = $req->input('device_id');
+        $description = $req->input('description');
+
+        $creds = [
+          'id' => $device_id,
+          'description' => $description,
+        ];
+
+        $device = Device::create($creds);
+
+        return $device;
+    }
     
 }
