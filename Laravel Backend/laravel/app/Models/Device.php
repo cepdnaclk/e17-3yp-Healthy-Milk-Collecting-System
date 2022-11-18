@@ -19,7 +19,9 @@ class Device extends Model
         'description',
         'device_id',
     ];
+
     public function dailyRecord(){
+
         return $this->hasMany(DailyRecord::class);
     }//1-m
 
