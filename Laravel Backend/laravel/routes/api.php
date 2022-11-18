@@ -43,15 +43,15 @@ Route::get('/test',[CollectorController::class,'test']);
  Route::get('/collector-price', [PriceChartController::class, 'get']);
  Route::get('/connect', [ConnectController::class, 'connect']);
 
- Route::get('/collectors',[CollectorController::class, 'show']);
+ Route::post('/addDevice',[DeviceController::class, 'createDevice']);
 
  Route::post('/addDaily',[RecordController::class, 'addDailyRecord']);
 
  Route::post('/addSub',[RecordController::class, 'addSubRecord']);
 
- Route::post('/addDevice',[CollectorController::class,'addDevice']);
+ Route::get('/allDevices',[DeviceController::class, 'show']);
 
- //Route::post('/test1',[RecordController::class, 'test1']);
+ Route::get('/allCollectors',[CollectorController::class, 'show']);
 
 
 
