@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App_Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DailyRecord;
@@ -17,7 +17,7 @@ class RecordController extends Controller
 
 public function addDailyRecord(Request $request){
 
-    $collector_id = $value = DB::table('collectors')->where('user_id',  $request->input('user_id'))->value('id'); 
+   // $collector_id = $value = DB::table('collectors')->where('user_id',  $request->input('user_id'))->value('id'); 
 
     if($request->input('farmer_id')!=null){
 
@@ -29,7 +29,7 @@ public function addDailyRecord(Request $request){
         $data = [
             'farmer_id' => $request->input('farmer_id'),
             'farmer_name'=> $farmer_name,
-            'collector_id' => $collector_id,
+            'collector_id' => $request->input('user_id'),
             'ph_value' => $request->input('ph_value'),
             'density' => $request->input('density'),
             'total_volume' => $request->input('volume'),
@@ -45,7 +45,7 @@ public function addDailyRecord(Request $request){
         $data = [
             
             'farmer_name'=> $request->input('farmer_name'),
-            'collector_id' => $collector_id,
+            'collector_id' => $request->input('user_id'),
             'ph_value' => $request->input('ph_value'),
             'density' => $request->input('density'),
             'total_volume' => $request->input('volume'),

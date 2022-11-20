@@ -11,7 +11,7 @@ class DeviceController extends Controller////
     public function show(){
         try{
             $devices = DB::select('select * from devices');
-            return view('device',['devices'=>$devices]);
+            return $devices;
         } catch (\Throwable $th) {
             return response(
                 [
@@ -40,7 +40,7 @@ class DeviceController extends Controller////
     }
     public function createDevice(Request $req){
         $creds=["description" => $req->input('description')];
-        Device::create($creds);
+        return Device::create($creds);
         
         
     }

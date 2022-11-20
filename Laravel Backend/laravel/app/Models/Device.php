@@ -16,11 +16,13 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'description',
+	'description',
         'batch',
         'status'
     ];
+
     public function dailyRecord(){
+
         return $this->hasMany(DailyRecord::class);
     }//1-m
 

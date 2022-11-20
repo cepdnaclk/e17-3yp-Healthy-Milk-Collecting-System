@@ -2,7 +2,7 @@
 
 class ApiUrl{
 
-static String WEB_SERVICE_URL = 'http://192.168.1.103:80/api';
+static String WEB_SERVICE_URL = 'http://192.168.1.101:80/api';
 
 static String REGISTER_URL = WEB_SERVICE_URL + '/register';
 static String LOGIN_URL = WEB_SERVICE_URL + '/login';

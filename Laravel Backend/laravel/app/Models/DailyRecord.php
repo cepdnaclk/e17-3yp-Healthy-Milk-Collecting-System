@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use App\Models\SubRecord;
 use App\Models\Farmer;
 use App\Models\Collector;
@@ -12,7 +13,6 @@ use App\Models\Device;
 class DailyRecord extends Model
 {
     use HasFactory;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -27,11 +27,11 @@ class DailyRecord extends Model
         'farmer_name',
         'total_price',
         'note',
-        'day',
         'farmer_id',
         'collector_id',
         'device_id'
     ];
+
     // public function getCreatedAtAttribute($date)
     // {
     // return Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
