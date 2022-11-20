@@ -6,8 +6,8 @@
 
 ## Description
 
-Quality is very important in diary related products.
-Currently diary collectors measure only few parameters using technology while small scale manufacturers just use organoleptic tests for checking the milk quality. Also the financial deals are happening in a traditional way.
+Quality is very important in dairy related products.
+Currently dairy collectors measure only few parameters using technology while small scale manufacturers just use organoleptic tests for checking the milk quality. Also the financial deals are happening in a traditional way.
 Our Healthy Milk Collecting System can be used to measure important quality parameters of milk when the deal happens between diary collector and farmer to ensure the milk is healthy and also it can be used to calculate financial value of milk according to those parameters and manage the financial system in a cloud based system.
 
 ## Our solution
