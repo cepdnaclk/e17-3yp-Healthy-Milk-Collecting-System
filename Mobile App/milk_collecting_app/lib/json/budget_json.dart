@@ -2,7 +2,8 @@
 
 
 
-import 'package:milk_collecting_app/screens/colors.dart';
+
+import '../screens/colors.dart';
 
 const List budget_json = [
   {

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:milk_collecting_app/screens/colors.dart';
-import 'package:milk_collecting_app/screens/signInScreen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:milkapp/screens/signInScreen.dart';
 
+import '../utilities/constants.dart';
 import 'details.dart';
-import 'home_screen.dart';
+import 'root_screen.dart';
 
 
 class SignUpScreen extends StatefulWidget {

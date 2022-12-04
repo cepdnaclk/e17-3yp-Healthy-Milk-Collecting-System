@@ -3,15 +3,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
-import 'package:milk_collecting_app/screens/colors.dart';
-import 'package:milk_collecting_app/screens/home_page.dart';
-import 'package:milk_collecting_app/screens/signUpScreen.dart';
-import 'package:milk_collecting_app/screens/verificationforforgotpassword_screen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:milkapp/screens/signUpScreen.dart';
+import 'package:milkapp/screens/verificationforforgotpassword_screen.dart';
+import 'package:milkapp/utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'home_screen.dart';
+import '../api_urls/ApiUrl.dart';
+import 'root_screen.dart';
 
 
 class SignInScreen extends StatefulWidget {
@@ -231,18 +229,11 @@ Widget _buildForgotPasswordBtn() {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
+                decoration:const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      //Color(0xFF73AEF5),
-                      //Color(0xFF61A4F1),
-                     // Color(0xFF478DE0),
-                     // Color(0xFF398AE5),
-                     // Colors.pink.withOpacity(0.8),
-                     // Colors.purpleAccent.withOpacity(0.7),
-                     // Colors.purpleAccent,
                       Colors.purple,
                       Colors.pinkAccent
                     ],
@@ -251,18 +242,18 @@ Widget _buildForgotPasswordBtn() {
                 ),
               ),
              
-              Container(
+               Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
+                  physics:const AlwaysScrollableScrollPhysics(),
+                  padding:const EdgeInsets.symmetric(
                     horizontal: 40.0,
                     vertical: 120.0,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
+                     const Text(
                         'Sign In',
                         style: TextStyle(
                           color: Colors.white,
@@ -271,17 +262,17 @@ Widget _buildForgotPasswordBtn() {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                     const SizedBox(height: 30.0),
                       _buildEmailTF(),
-                      SizedBox(
+                     const SizedBox(
                         height: 30.0,
                       ),
                       _buildPasswordTF(),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       _buildForgotPasswordBtn(),
                       _buildLoginBtn(),
                       _buildSignupBtn(),
-                      _buildLoginAsGuestBtn()
+                     // _buildLoginAsGuestBtn()
                     ],
                   ),
                 ),
@@ -302,13 +293,13 @@ Widget _buildForgotPasswordBtn() {
                       //  color: Colors.white,
                          borderRadius: BorderRadius.circular(8)
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                      child:const Padding(
+                        padding: EdgeInsets.all(10.0),
                         child: CircularProgressIndicator(color: Colors.white,),
                       )),
                   ),
                 )
-                ) : SizedBox.shrink(),
+                ) :const SizedBox.shrink(),
 
 
 
@@ -343,12 +334,16 @@ Widget _buildForgotPasswordBtn() {
 
 try {
   var uriResponse = await client.post(Uri.parse(ApiUrl.LOGIN_URL),
+
       body: {'email': _emailController.text, 'password': _passwordController.text});
 
   var jsonString = uriResponse.body;
  
   var body_ = jsonDecode(jsonString);
+
   if(body_["success"]){
+
+
     setState(() {
       isLoading = false;
     });
@@ -408,10 +403,10 @@ try {
             ),
           );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-
-
-
   }
+
+
+
 
 
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:milk_collecting_app/screens/home_screen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:milkapp/utilities/constants.dart';
 
 import 'colors.dart';
 

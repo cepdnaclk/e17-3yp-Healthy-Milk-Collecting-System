@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:milk_collecting_app/screens/colors.dart';
-import 'package:milk_collecting_app/screens/home_screen.dart';
+import 'package:milkapp/screens/colors.dart';
+import 'package:milkapp/screens/root_screen.dart';
 
 
 

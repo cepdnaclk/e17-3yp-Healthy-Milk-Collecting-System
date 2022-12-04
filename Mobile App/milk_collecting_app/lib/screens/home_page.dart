@@ -2,20 +2,23 @@ import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:milk_collecting_app/controllers/record_controller.dart';
-import 'package:milk_collecting_app/screens/BluetoothConScreen.dart';
-import 'package:milk_collecting_app/screens/change_price_screen.dart';
-import 'package:milk_collecting_app/screens/home_screen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:milkapp/screens/change_price_screen.dart';
+import 'package:milkapp/screens/current_collection.dart';
+import 'package:milkapp/screens/popup.dart';
+import 'package:milkapp/screens/root_screen.dart';
+import 'package:milkapp/test/led.dart';
+import 'package:popup_window/popup_window.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import '../controllers/record_controller.dart';
+import '../test/connection.dart';
+import '../utilities/constants.dart';
 import 'colors.dart';
 
 
@@ -24,6 +27,17 @@ import 'colors.dart';
 class HomePage extends StatefulWidget {
 
 
+bool hc05Connected;
+bool isStart;
+List<double> parameterList;
+
+bool getShowStatus(){
+  return this.isStart;
+}
+
+
+HomePage({required this.hc05Connected,required this.isStart,required this.parameterList});
+
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -31,25 +45,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  bool isStart = true;
+ 
   int selectedFarmerIndex = -1;
   String selectedFarmer = "";
-    String defaultFarmer = "";
-    String defaultFarmerName = "";
+  String defaultFarmer = "";
+  String defaultFarmerName = "";
 
    bool isdefaultFarmerSelected = false;
    bool isConnectedFarmerSelected = false;
 
 
-  bool isFarmer = false;
+  bool isFarmer = false; //////////////////////set to true for testing
 
-  bool isDefaultCow = false;
+  bool isDefaultCow = false; 
   bool isDefaultBuffalo = false;
 
   bool isConnected = false;
 
   bool isDeviceConnected = false;
   bool isGoBtnActive = false;
+
+  bool _isHc05Connected = false;
   
 
   // Initializing a global key, as it would help us in showing a SnackBar later
@@ -63,18 +79,25 @@ class _HomePageState extends State<HomePage> {
   bool _connected = false;
   bool _pressed = false;
 
+  bool _deviceFound = false;
+
   bool _isDataLoading = false;
 
    TextEditingController _defaultFarmerController = TextEditingController();
 
   final controller = Get.put(RecordController());
 
+  TextEditingController _priceController = TextEditingController();
+
+  TextEditingController _volumeController = TextEditingController();
+
+  String currentPrice = "";
+
   @override
 initState() {
   super.initState();
-  bluetoothConnectionState();
   loadData();
- 
+ // _getDataViaBlue();
 }
 
   double _pH = 0.0;
@@ -88,12 +111,12 @@ _getDataViaBlue(){
 
   //sleep(Duration(seconds: 20));
     
-  double pH = 6.7;
-	double fatrate = 80;
-	double density = 1.2;
+  double pH = widget.parameterList[0];
+	double fatrate = widget.parameterList[4];//not get yet
+	double density = (widget.parameterList[3])/(widget.parameterList[2]);
   String grade = calcGrade(pH,fatrate,density);
-  double temperature = 27.0;
-  double volume = 1.0;
+  double temperature = widget.parameterList[1];
+  double volume = widget.parameterList[2];
 
 
 
@@ -186,53 +209,6 @@ String calcGrade(pH,fatrate,density){
 
 
 
- // We are using async callback for using await
-  Future<void> bluetoothConnectionState() async {
-    List<BluetoothDevice> devices = [];
-
-    // To get the list of paired devices
-    try {
-      devices = await bluetooth.getBondedDevices();
-    } on PlatformException {
-      print("Errorxxxx");
-    }
-
-    // For knowing when bluetooth is connected and when disconnected
-    bluetooth.onStateChanged().listen((state) {
-      switch (state) {
-        case FlutterBluetoothSerial.CONNECTED:
-          setState(() {
-            _connected = true;
-            _pressed = false;
-          });
-
-          break;
-
-        case FlutterBluetoothSerial.DISCONNECTED:
-          setState(() {
-            _connected = false;
-            _pressed = false;
-          });
-          break;
-
-        default:
-          print(state);
-          break;
-      }
-    });
-
-    // It is an error to call [setState] unless [mounted] is true.
-    if (!mounted) {
-      return;
-    }
-
-    // Store the [devices] list in the [_devicesList] for accessing
-    // the list outside this class
-    setState(() {
-      _devicesList = devices;
-    });
-  }
-
 void loadData() async{
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
  
@@ -240,7 +216,7 @@ void loadData() async{
     print(sharedPreferences.getString("type"));
   if(sharedPreferences.getString("type") == "Farmer"){
 
-    setState(() {
+    setState(() {  
       isFarmer = true;
     });
     
@@ -255,7 +231,33 @@ void loadData() async{
 
 
     return Scaffold(
-      body: getBody(),
+      body: widget.hc05Connected ?
+      
+       FutureBuilder(
+        future: FlutterBluetoothSerial.instance.requestEnable(),
+        builder: (context, future) {
+          if (future.connectionState == ConnectionState.waiting) {
+            return Scaffold(
+              body: Container(
+                height: double.infinity,
+                child: Center(
+                  child: Icon(
+                    Icons.bluetooth_disabled,
+                    size: 200.0,
+                    color: Colors.blue,
+                  ),
+                ),
+              ),
+            );
+          } else if (future.connectionState == ConnectionState.done) {
+            // return MyHomePage(title: 'Flutter Demo Home Page');
+            return connectDeviceScreen();
+          } else {
+            return connectDeviceScreen();
+          }
+        },
+        // child: MyHomePage(title: 'Flutter Demo Home Page'),
+      ): getBody(),
       backgroundColor: grey.withOpacity(.3),
      
       
@@ -264,12 +266,12 @@ void loadData() async{
   }
 
   List<String> farmers_list = [
-    "H K Perera",
+   
     "C M Chandrasekara",
-    "H M Saman",
-    "Kamal",
-    "Namal"
-    
+    "Piyal",
+    "Poorna",
+    "Aminda"
+    "Ishara"
   ];
 
 
@@ -306,7 +308,7 @@ void loadData() async{
   }
 
   
-
+ double windowHeight = 200;
 
 
   Widget _buildConnectWithFarmerBtn() {
@@ -317,8 +319,11 @@ void loadData() async{
         elevation: 5.0,
         onPressed: (){
          setState(() {
-           
-           isStart = false;
+
+           //make the device connection
+             //_isHc05Connected = true;
+             widget.hc05Connected = true;
+       /*    isStart = false;
            _isDataLoading = true;
 
           _getDataViaBlue();
@@ -328,7 +333,7 @@ void loadData() async{
                      setState(() {
                        _isDataLoading = false;
                      });
-                   });
+                   });  */
 
          
 
@@ -353,10 +358,11 @@ void loadData() async{
     );
   }
 
-
+final _formKey = GlobalKey<FormState>();
+    //pop up screen
 Widget _buildConnectWithDefaultFarmerBtn() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15.0),
+      padding: EdgeInsets.symmetric(vertical: 8.0),
       width: double.infinity,
       child: Container(
         decoration:BoxDecoration(
@@ -402,7 +408,7 @@ Widget _buildConnectWithDefaultFarmerBtn() {
                 Icons.person_add_alt_sharp,
                 color: Colors.white,
               ),
-              hintText: 'Enter your a quick farmer',
+              hintText: 'Enter a farmer name',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -452,7 +458,7 @@ Widget _buildConnectWithDefaultFarmerBtn() {
 
               },
               child: Container(
-                width: 80,
+                width: 50,
                 height: 35,
                 decoration: BoxDecoration(
                   color: (isdefaultFarmerSelected) && (isDefaultCow) ? Colors.lightBlue : Colors.grey,
@@ -485,7 +491,7 @@ Widget _buildConnectWithDefaultFarmerBtn() {
 
               },
               child: Container(
-                width: 80,
+                width: 60,
                 height: 35,
                 decoration: BoxDecoration(
                   color: (isdefaultFarmerSelected) && (isDefaultBuffalo) ? Colors.lightBlue : Colors.grey,
@@ -527,7 +533,7 @@ Widget _buildConnectWithDefaultFarmerBtn() {
 if(!isFarmer){
 
 if(!isDeviceConnected){ /////changet to not
-    if(isStart){
+    if(widget.isStart){
 
       return SingleChildScrollView(
         child: Column(
@@ -611,7 +617,210 @@ if(!isDeviceConnected){ /////changet to not
 
       
        
-        _buildConnectWithDefaultFarmerBtn(),
+      //  _buildConnectWithDefaultFarmerBtn(),
+           /////////////////////////////////////pop up////////////////////////////////
+          RaisedButton(
+            color: Colors.blue,
+          
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          right: -40.0,
+                          top: -40.0,
+                          child: InkResponse(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: CircleAvatar(
+                              child: Icon(Icons.close),
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment:CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: TextFormField(),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: TextFormField(),
+                              ),
+                              Row(
+                                mainAxisAlignment:MainAxisAlignment.center,
+                                children: [
+                                   /*
+                                  GestureDetector(
+                                    onTap: (){
+                                      setState(() {
+                       isConnectedFarmerSelected = false;
+                       isdefaultFarmerSelected = true;
+                       defaultFarmer = "Cow";
+                       isDefaultCow = true;
+                       isDefaultBuffalo = false;
+                    });
+
+
+                controller.defaultFarmer = _defaultFarmerController.text;
+           setState(() {
+             defaultFarmerName = controller.defaultFarmer;
+           });
+                                    },
+                                    child: Padding(
+                                                                  padding: EdgeInsets.all(8.0),
+                                                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    decoration:BoxDecoration(
+                                      color: (isdefaultFarmerSelected) && (isDefaultCow) ? Colors.lightBlue : Colors.grey,
+                                      borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: Center(
+                                      child:Text("Cow")
+                                    ),
+                                                                  ),
+                                                                  
+                                                                ),
+                                  ),
+
+                              GestureDetector(
+                                onTap:(){
+
+
+                                  setState(() {
+                       isConnectedFarmerSelected = false;
+                       isdefaultFarmerSelected = true;
+                       defaultFarmer = "Buffalo";
+                       isDefaultBuffalo = true;
+                       isDefaultCow = false;
+                    });
+
+
+
+
+                  controller.defaultFarmer = _defaultFarmerController.text;
+           setState(() {
+             defaultFarmerName = controller.defaultFarmer;
+           });
+
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Container(
+                                    width: 80,
+                                    height: 40,
+                                    decoration:BoxDecoration(
+                                      color: (isdefaultFarmerSelected) && (isDefaultBuffalo) ? Colors.lightBlue : Colors.grey,
+                                      borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: Center(
+                                      child:Text("Buffalo")
+                                    ),
+                                  ),
+                                ),
+                              ) */
+
+                              
+
+                       Column(
+                        children: [
+                         Radio(  
+                     value: isDefaultCow,  
+                     groupValue: true,  
+                     onChanged: (value) {  
+                     setState(() { 
+
+                       setState(() {
+                       isConnectedFarmerSelected = false;
+                       isdefaultFarmerSelected = true;
+                       defaultFarmer = "Cow";
+                       isDefaultCow = true;
+                       isDefaultBuffalo = false;
+                    });
+
+
+               // controller.defaultFarmer = _defaultFarmerController.text;
+           setState(() {
+             defaultFarmerName = controller.defaultFarmer;
+           });
+
+
+                            });  
+                             },  
+                       ),
+                       Text("Cow")
+                        ],
+                       ),
+
+                       Column(
+                        children: [
+                         Radio(  
+                     value: isDefaultBuffalo,  
+                     groupValue: true,  
+                     toggleable: true,
+                     onChanged: (value) {  
+                     setState(() {  
+
+                       setState(() {
+                       isConnectedFarmerSelected = false;
+                       isdefaultFarmerSelected = true;
+                       defaultFarmer = "Buffalo";
+                       isDefaultBuffalo = true;
+                       isDefaultCow = false;
+                    });
+
+
+
+
+                //  controller.defaultFarmer = _defaultFarmerController.text;
+           setState(() {
+             defaultFarmerName = controller.defaultFarmer;
+           });
+
+
+                            });  
+                             },  
+                       ),
+                       Text("Buffalo")
+                        ],
+                       ),
+                       
+                                ],
+                              ),
+                               
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: Colors.blue,
+                                  child: Text("Submit"),
+                                  onPressed: () {
+                                   
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+          },
+          child: Text("Add another farmer"),
+        ),
+
+
           _buildConnectWithFarmerBtn(),
 
 
@@ -625,7 +834,7 @@ if(!isDeviceConnected){ /////changet to not
 
    return ;
       }  */
- 
+ /////////////////////////////////////////////////////////////details/////////////////////////////////////////////////////////
     return Stack(
       children: [
 
@@ -656,7 +865,7 @@ if(!isDeviceConnected){ /////changet to not
                     children: [
                       Text("Details of the sample",
                         style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.black
                         ),),
@@ -665,7 +874,16 @@ if(!isDeviceConnected){ /////changet to not
                           onTap: (){
                             setState(() {
                               
-                              isStart = true;
+                              widget.isStart = true;
+
+                              //Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(
+                               // hc05Connected: false, isStart: true)));
+
+                             /*  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context){
+                               return HomeScreen();
+                               }));  */
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentCollection()));;
 
                             });
                           },
@@ -674,15 +892,16 @@ if(!isDeviceConnected){ /////changet to not
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10)
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text("Switch farmer",
-                              style: TextStyle(
-                                color: Colors.purple,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold
-                              ),),
+                            child:Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: const Text("Collection",
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold
+                                ),),
                             ),
+                            
                           ),
                         )
 
@@ -702,7 +921,7 @@ if(!isDeviceConnected){ /////changet to not
 
 
         
-          SizedBox(height: 20,),
+         const SizedBox(height: 20,),
 
           Padding(
             padding: const EdgeInsets.only(left: 20,right: 20),
@@ -747,24 +966,81 @@ if(!isDeviceConnected){ /////changet to not
                      children: [
 
                       Container(
-                    width: 120,
+                    width: 100,
                     height: 60,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.lightBlue,
                       borderRadius: BorderRadius.circular(10)
                     ),
                     child:Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                        Text("100.00 lkr",style: TextStyle(color: white,fontSize: 15,fontWeight: FontWeight.bold),),
-                        Spacer(),
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePriceScreen()));
-                          },
-                          child: Icon(Icons.edit,color:white))
+                            Text("${_getPrice()} lkr",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
+
+                        /*  IconButton(onPressed: (){
+                            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          right: 0.0,
+                          top: 0.0,
+                          child: InkResponse(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: CircleAvatar(
+                              child: Icon(Icons.close),
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment:CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: TextFormField(
+                                  controller: _priceController,
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ),
+                              
+                            
+                               
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: Colors.blue,
+                                  child: Text("Add"),
+                                  onPressed: () {
+                                    
+                                    setState(() {
+                                      currentPrice = _priceController.text;
+                                    });
+
+                                    Navigator.pop(context);
+                                   
+
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+         
+                          }, icon: Icon(Icons.edit))  */
 
                         ],
                       ),
@@ -809,7 +1085,10 @@ if(!isDeviceConnected){ /////changet to not
                                    shape: BoxShape.circle
                                ),
                                child: Center(
-                                   child: Text( (_isDataLoading) ? "..":_grade,style: TextStyle(
+                                   child: Text( (_isDataLoading) ? "..":
+                                   calcGrade(widget.parameterList[0],
+                                    90,
+                                     (widget.parameterList[2] / widget.parameterList[3])),style: TextStyle(
                                        color: Colors.white,
                                        fontSize: 20,
                                        fontWeight: FontWeight.bold
@@ -900,7 +1179,7 @@ if(!isDeviceConnected){ /////changet to not
 
                                 ),),
                               SizedBox(height: 10,),
-                              Text((_isDataLoading) ? "Loading..." : _fatrate.toStringAsFixed(0),
+                              Text((_isDataLoading) ? "Loading..." : widget.parameterList[4].toString(),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -912,7 +1191,7 @@ if(!isDeviceConnected){ /////changet to not
 
                          //_IndicationBar(50,100)
 
-                         
+                        
 
 
 
@@ -966,22 +1245,22 @@ if(!isDeviceConnected){ /////changet to not
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("PH",
+                             const Text("PH",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15
                                 ),),
-                              SizedBox(height: 10,),
-                              Text((_isDataLoading) ? "Loading..." : _pH.toString(),
-                                style: TextStyle(
+                             const SizedBox(height: 10,),
+                              Text((_isDataLoading) ? "Loading..." : widget.parameterList[0].toString(),
+                                style:const TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 20
                                 ),),
                             ],
                           ),
-                           SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           // _IndicationBar(5,6.6)
 
 
@@ -1043,7 +1322,7 @@ if(!isDeviceConnected){ /////changet to not
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text((_isDataLoading) ? "Loading..." : _density.toString(),
+                              Text((_isDataLoading) ? "Loading..." : ( widget.parameterList[2]  / widget.parameterList[3] ).toStringAsFixed(2),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -1104,14 +1383,14 @@ if(!isDeviceConnected){ /////changet to not
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("Volume(Litres)",
+                              Text("Volume(CC)",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text((_isDataLoading) ? "Loading..." : _volume.toStringAsFixed(1),
+                              Text((_isDataLoading) ? "Loading..." : widget.parameterList[3].toString(),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -1187,7 +1466,7 @@ if(!isDeviceConnected){ /////changet to not
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text((_isDataLoading) ? "Loading..." : _temperature.toStringAsFixed(0),
+                              Text((_isDataLoading) ? "Loading..." : widget.parameterList[1].toString(),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -1213,13 +1492,14 @@ if(!isDeviceConnected){ /////changet to not
 
           SizedBox(height: 20,),
          
-          Padding(
+         Padding(
             padding: const EdgeInsets.only(left: 20,right: 20),
             child: Container(
               alignment: Alignment.centerLeft,
               decoration: kBoxDecorationStyle_HomePage,
               height: 60.0,
               child: TextField(
+                controller: _volumeController,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'OpenSans',
@@ -1237,11 +1517,11 @@ if(!isDeviceConnected){ /////changet to not
                 autofocus: false,
               ),
             ),
-          ),
+          ),  
             SizedBox(height:10),
 
            ////arcs
-           Text("Fat Rate",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
+           Text("Fat Rate",style: TextStyle(color: white,fontWeight: FontWeight.bold,fontSize:20,)),
            Container(
              height: 200,
              width: 200,
@@ -1269,10 +1549,10 @@ if(!isDeviceConnected){ /////changet to not
 annotations: [
    GaugeAnnotation(
  positionFactor: 0.1,
- angle: 90,
+ angle: widget.parameterList[4],
  widget: Text(
- "90%",
- style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,)
+ "${widget.parameterList[4].toString()}%",
+ style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: white)
  ))
 ]
                       )
@@ -1287,7 +1567,7 @@ annotations: [
 
 
 
-             Text("pH",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
+             Text("pH",style: TextStyle(color: white,fontWeight: FontWeight.bold,fontSize:20,)),
            Container(
              height: 200,
              width: 200,
@@ -1308,7 +1588,7 @@ annotations: [
                           thicknessUnit: GaugeSizeUnit.factor,
                        ),
                        pointers: <GaugePointer>[
-                   RangePointer(value: 6.6,
+                   RangePointer(value: widget.parameterList[0],
                    color: Colors.cyan ), 
                                       
 ],
@@ -1317,8 +1597,8 @@ annotations: [
  positionFactor: 0.1,
  angle: 90,
  widget: Text(
- "6.6",
- style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,)
+ widget.parameterList[0].toString(),
+ style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Colors.white)
  ))
 ]
                       )
@@ -1333,7 +1613,7 @@ annotations: [
       
 
       
-             Text("Density",style: TextStyle(color: black,fontWeight: FontWeight.bold,fontSize:20,)),
+             Text("Density",style: TextStyle(color: white,fontWeight: FontWeight.bold,fontSize:20,)),
            Container(
              height: 200,
              width: 200,
@@ -1354,7 +1634,7 @@ annotations: [
                           thicknessUnit: GaugeSizeUnit.factor,
                        ),
                        pointers: <GaugePointer>[
-                   RangePointer(value: 1.030,
+                   RangePointer(value: ( widget.parameterList[2] / widget.parameterList[3] ),
                    color: Colors.blue ), 
                                       
 ],
@@ -1363,8 +1643,8 @@ annotations: [
  positionFactor: 0.1,
  angle: 90,
  widget: Text(
- "1.030",
- style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,)
+ ( widget.parameterList[2] / widget.parameterList[3] ).toStringAsFixed(2),
+ style: TextStyle(fontSize: 20,fontWeight:FontWeight.bold,color: Colors.white)
  ))
 ]
                       )
@@ -1381,18 +1661,19 @@ annotations: [
           SizedBox(height: 20,),
 
          Row(
+          
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
 
              GestureDetector(
                onTap: (){
-                 _addSub();
+                 _addSub(); ////////////////////////adding  //////////////////////
                },
                child: Padding(
                  padding: const EdgeInsets.only(left: 20,right: 20),
                  child: Container(
                    height: 50,
-                   width: MediaQuery.of(context).size.width*0.4,
+                   width: MediaQuery.of(context).size.width*0.2,
                    decoration: BoxDecoration(
                      borderRadius: BorderRadius.circular(10.0),
                      gradient: LinearGradient(
@@ -1417,29 +1698,61 @@ annotations: [
                ),
              ),
 
-
-             Padding(
-               padding: const EdgeInsets.only(left: 20,right: 20),
-               child: Container(
-                 height: 50,
-                 width: MediaQuery.of(context).size.width*0.4,
-                 decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(10.0),
-                   gradient: LinearGradient(
-                       colors: [
-                         primary,
-                         Colors.purple,
-                       ]
+             GestureDetector(
+               onTap: (){
+                Navigator.pop(context);
+               },
+               child: Padding(
+                 padding: const EdgeInsets.only(left: 10,right: 10),
+                 child: Container(
+                   height: 50,
+                   width: MediaQuery.of(context).size.width*0.2,
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(10.0),
+                     gradient: LinearGradient(
+                         colors: [
+                           primary,
+                           Colors.purple,
+                         ]
+                     ),
+                   ),
+                   child: Center(
+                     child: Icon(Icons.add),
                    ),
                  ),
-                 child: Center(
-                   child: Text(
-                     "Reject",
-                     style: TextStyle(
-                         color: Colors.white,
-                         fontSize: 20,
-                         fontFamily: "OpenSans",
-                         fontWeight: FontWeight.bold
+               ),
+             ),
+
+
+             GestureDetector(
+              onTap: (){
+                 ////////////////////////////reject sub colletion/////////////////////////
+                 ///
+                 _rejectSample();
+              },
+               child: Padding(
+                 padding: const EdgeInsets.only(left: 20,right: 20),
+                 child: Container(
+                   height: 50,
+                   width: MediaQuery.of(context).size.width*0.3,
+                   decoration: BoxDecoration(
+                     borderRadius: BorderRadius.circular(10.0),
+                     gradient: LinearGradient(
+                         colors: [
+                           primary,
+                           Colors.purple,
+                         ]
+                     ),
+                   ),
+                   child: Center(
+                     child: Text(
+                       "Reject",
+                       style: TextStyle(
+                           color: Colors.white,
+                           fontSize: 20,
+                           fontFamily: "OpenSans",
+                           fontWeight: FontWeight.bold
+                       ),
                      ),
                    ),
                  ),
@@ -1533,17 +1846,7 @@ return Container(
                         },
                        // value: _device,
                       ),*/
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: RaisedButton(
-                          onPressed:
-                              // To be implemented : _disconnect and _connect
-                              _pressed ? null : _connected ? _disconnect : _connect, 
-                          child: Text(_connected ? 'Disconnect' : 'Connect'),
-                        ),
-                      ), 
+                   
                     ],
                   ),
                 ),
@@ -1864,231 +2167,9 @@ return Container(
   }
 
 
-  Container _buildBluetoothInterface() {
+  
 
 
-
-return Container(
-          // Defining a Column containing FOUR main Widgets wrapped with some padding:
-          // 1. Text
-          // 2. Row
-          // 3. Card
-          // 4. Text (wrapped with "Expanded" and "Padding")
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-          
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    "PAIRED DEVICES",
-                    style: TextStyle(fontSize: 24, color: Colors.blue),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-
-               
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  // Defining a Row containing THREE main Widgets:
-                  // 1. Text
-                  // 2. DropdownButton
-                  // 3. RaisedButton
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        'Device:',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      DropdownButton(
-                        // To be implemented : _getDeviceItems()
-                        items: _getDeviceItems(),
-                        onChanged: (value){
-                          setState(() {
-                           // _device = value;
-                          });
-                        },
-                        //value: _device,
-                      ),
-                      RaisedButton(
-                        onPressed:
-                            // To be implemented : _disconnect and _connect
-                            _pressed ? null : _connected ? _disconnect : _connect, 
-                        child: Text(_connected ? 'Disconnect' : 'Connect'),
-                      ),
-                       
-                    ],
-                  ),
-                ),
-          
-          
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Card(
-                    elevation: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      // Defining a Row containing THREE main Widgets:
-                      // 1. Text (wrapped with "Expanded")
-                      // 2. FlatButton
-                      // 3. FlatButton
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              "DEVICE 1",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.green,
-                              ),
-                            ),
-                          ),
-                          FlatButton(
-                            onPressed:
-                                // To be implemented : _sendOnMessageToBluetooth()
-                                _connected ? _sendOnMessageToBluetooth : null,
-                            child: Text("ON"),
-                          ),
-                          FlatButton(
-                            onPressed:
-                                // To be implemented : _sendOffMessageToBluetooth()
-                                _connected ? _sendOffMessageToBluetooth : null,
-                            child: Text("OFF"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-          
-                
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Center(
-                      child: Text(
-                        "NOTE: If you cannot find the device in the list, "
-                        "please turn on bluetooth and pair the device by "
-                        "going to the bluetooth settings",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
-                      ),
-                    ),
-                  ),
-                )  
-          
-          
-          
-              ],
-            ),
-          ),
-        );
-      
-
-
-
-
-
-
-  }
-
-
-
-   // Create the List of devices to be shown in Dropdown Menu
-  List<DropdownMenuItem<BluetoothDevice>> _getDeviceItems() {
-    List<DropdownMenuItem<BluetoothDevice>> items = [];
-    if (_devicesList.isEmpty) {
-      items.add(DropdownMenuItem(
-        child: Text('NONE'),
-      ));
-    } else {
-      _devicesList.forEach((device) {
-        items.add(DropdownMenuItem(
-          child: Text(device.name),
-          value: device,
-        ));
-      });
-    }
-    return items;
-}
-
-
-// Method to connect to bluetooth
-  void _connect() {
-    if (_device == null) {
-      show('No device selected');
-    } else {
-      bluetooth.isConnected.then((isConnected) {
-        if (!isConnected) {
-          bluetooth
-              .connect(_device)
-              .timeout(Duration(seconds: 10))
-              .catchError((error) {
-            setState(() => _pressed = false);
-          });
-         // setState(() =>   _pressed = true);
-
-          setState(() {
-            _pressed = true;
-            isGoBtnActive = true;
-          });
-          
-        }
-      });
-    }
-  }  
-
-  // Method to disconnect bluetooth
-  void _disconnect() {
-    bluetooth.disconnect();
-    setState(() => _pressed = true);
-  }
-   // Method to show a Snackbar,
-  // taking message as the text
-  Future show(
-    String message, {
-    Duration duration: const Duration(seconds: 3),
-  }) async {
-    await new Future.delayed(new Duration(milliseconds: 100));
-    _scaffoldKey.currentState!.showSnackBar(
-      new SnackBar(
-        content: new Text(
-          message,
-        ),
-        duration: duration,
-      ),
-    );
-  }
-
-
-
-  // Method to send message,
-  // for turning the bletooth device on
-  void _sendOnMessageToBluetooth() {
-    bluetooth.isConnected.then((isConnected) {
-      if (isConnected) {
-        bluetooth.write("1");
-        show('Device Turned On');
-      }
-    });
-  }
-
-  // Method to send message,
-  // for turning the bletooth device off
-  void _sendOffMessageToBluetooth() {
-    bluetooth.isConnected.then((isConnected) {
-      if (isConnected) {
-        bluetooth.write("0");
-        show('Device Turned Off');
-      }
-    });
-  }
 
 int selectedDeviceItem = -1;
 
@@ -2134,30 +2215,30 @@ int lenDevices  = _deviceListDetected.length;
                 );
   }
 
+  //add sample list ==============================================================add sub======================================
+
   void _addSub() {
 
-    var random = new Random();
+    var random =  Random();
  
- double ph = random.nextInt(100).toDouble();
- double den = random.nextInt(2).toDouble();
- double fat = random.nextInt(100).toDouble();
- double temp = random.nextInt(30).toDouble();
-
+ double ph = widget.parameterList[0];
+ double den = ( widget.parameterList[3] / widget.parameterList[2] );
+ double fat = widget.parameterList[4];
+ double temp = widget.parameterList[1];
+  print("donee");
   controller.updatePh(ph);
   controller.updateDensity(den);
   controller.updateFatRate(fat);
-  controller.updateVolume(1);
-  controller.updatePrice(90);
-   controller.updateVolume(1);
-  controller.updatePrice(90);
-   controller.updateTemperature(temp);
-
-  controller.addSubRecord(ph, fat, den, 1, 90,temp,"a");
+  controller.updateVolume(int.parse(_volumeController.text) * 1000);
+  controller.updatePrice(_getPrice());
+  controller.updateVolume(widget.parameterList[3].toInt());
+  controller.updateTemperature(temp);
+  
+  controller.addSubRecord(ph, fat, den, 1, _getPrice(),temp,calcGrade(widget.parameterList[0],
+                                                             90,
+                                                             (widget.parameterList[2] / widget.parameterList[3])));
   
 
-  print(controller.ph_value);
-  print(controller.density);
-  print(controller.fat_rate);
 
   for(int i = 0;i<controller.subRecords.length;i++){
     print(controller.subRecords[i].ph_value.toStringAsFixed(2));
@@ -2165,14 +2246,206 @@ int lenDevices  = _deviceListDetected.length;
     print(controller.subRecords[i].density.toStringAsFixed(2));
     print(controller.subRecords[i].volume.toStringAsFixed(0));
     print(controller.subRecords[i].price.toStringAsFixed(0));
-      print(controller.subRecords[i].temperature.toStringAsFixed(0));
+    print(controller.subRecords[i].temperature.toStringAsFixed(0));
     print(controller.subRecords[i].grade);
   }
 
+
+  showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Stack(
+                      children: <Widget>[
+                        
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment:CrossAxisAlignment.center,
+                            children: <Widget>[
+
+                            const  Text("Sample added",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+
+                               Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: Colors.blue,
+                                  child:const Text("Ok"),
+                                  onPressed: () {
+
+                                   
+
+
+                                     Navigator.pop(context);
+
+                                  },
+                                ),
+                              ),
+                              
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: Colors.blue,
+                                  child: Text("Go to current collection"),
+                                  onPressed: () {
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CurrentCollection()));
+                                  },
+                                ),
+                              ),
+
+                            
+
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+
+
+
+  
   
 
 
 
+  }
+
+  bool dataReceived = false;
+  
+  connectDeviceScreen() {
+
+    if(!dataReceived){
+    return SelectBondedDevicePage(
+        onCahtPage: (device1) {
+
+          try{
+           BluetoothDevice device = device1;
+           Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ChatPage(server: device);
+              },
+            ),
+          );
+
+          }on Exception catch (_) {
+    // make it explicit that a SocketException will be thrown if the network connection fails
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error')));
+    rethrow;
+  }
+          
+
+
+        },
+      );
+
+
+    }
+    else{
+  
+    
+
+   
+
+
+
+
+
+
+
+
+    }
+   
+
+  }
+  
+  void _rejectSample() {
+     
+
+
+      showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          right: 0.0,
+                          top: 0.0,
+                          child: InkResponse(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: CircleAvatar(
+                              child: Icon(Icons.close),
+                              backgroundColor: Colors.red,
+                            ),
+                          ),
+                        ),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment:CrossAxisAlignment.center,
+                            children: <Widget>[
+                              
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: Colors.blue,
+                                  child: Text("Add another sample"),
+                                  onPressed: () {
+                                     Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RaisedButton(
+                                  color: Colors.blue,
+                                  child: Text("Go to current collection"),
+                                  onPressed: () {
+                                     
+                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentCollection()));
+
+                                  },
+                                ),
+                              )
+
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                });
+
+
+  }
+  
+ int _getPrice() {
+
+    String g = calcGrade(widget.parameterList[0],
+                                    90,
+                                     (widget.parameterList[2] / widget.parameterList[3]));
+
+    int pr = 0;
+    if(g == "A"){
+       pr = 100;
+    }else if(g == "B"){
+     pr = 98;
+    }else if(g == "C"){
+       pr = 96;
+    }else{
+      pr=92;
+    }
+
+    return pr;
   }
 
 

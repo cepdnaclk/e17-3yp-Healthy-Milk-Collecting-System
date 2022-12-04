@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
-import 'package:milk_collecting_app/screens/colors.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:milkapp/screens/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../api_urls/ApiUrl.dart';
 
 
 

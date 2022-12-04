@@ -1,8 +1,8 @@
 import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:milk_collecting_app/screens/colors.dart';
-import 'package:milk_collecting_app/screens/forgotpassword_reset_screen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
+import 'package:milkapp/screens/colors.dart';
+import 'package:milkapp/screens/forgotpassword_reset_screen.dart';
+import 'package:milkapp/utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

@@ -2,10 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:milk_collecting_app/json/daily_json.dart';
-import 'package:milk_collecting_app/json/day_month.dart';
-import 'package:milk_collecting_app/screens/sub_details_screen.dart';
+import 'package:milkapp/screens/sub_details_screen.dart';
 
+import '../json/daily_json.dart';
+import '../json/day_month.dart';
 import 'colors.dart';
 
 class DailyPage extends StatefulWidget {
