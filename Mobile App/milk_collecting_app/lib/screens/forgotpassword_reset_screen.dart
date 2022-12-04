@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:milk_collecting_app/screens/colors.dart';
-import 'package:milk_collecting_app/screens/signInScreen.dart';
-import 'package:milk_collecting_app/screens/signUpScreen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:milkapp/screens/colors.dart';
+import 'package:milkapp/screens/signInScreen.dart';
+import 'package:milkapp/utilities/constants.dart';
 
 class ForgotPasswordResetScreen extends StatefulWidget {
 

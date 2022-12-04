@@ -2,9 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:milk_collecting_app/Models/sub_record.dart';
-
-
+import '../Models/sub_record.dart';
 
 
 

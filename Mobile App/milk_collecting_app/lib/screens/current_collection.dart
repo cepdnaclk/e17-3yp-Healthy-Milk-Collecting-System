@@ -3,17 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:get/get.dart';
-import 'package:milk_collecting_app/Models/sub_record.dart';
-import 'package:milk_collecting_app/api_urls/ApiUrl.dart';
-import 'package:milk_collecting_app/controllers/record_controller.dart';
-import 'package:milk_collecting_app/screens/home_page.dart';
-import 'package:milk_collecting_app/screens/home_screen.dart';
-import 'package:milk_collecting_app/utilities/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import '../Models/sub_record.dart';
+import '../api_urls/ApiUrl.dart';
+import '../controllers/record_controller.dart';
 import 'colors.dart';
+import 'root_screen.dart';
 
 
 
@@ -197,7 +195,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                                     fontSize: 15
                                 ),),
                               SizedBox(height: 10,),
-                              Text(_recordController.fat_rate.toStringAsFixed(0),
+                              Text(_recordController.fat_rate.toString(),
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -397,7 +395,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
 
-                              Text("Total Volume(Litre)",
+                              Text("Total Volume(ml)",
                                 style: TextStyle(
                                     color: black,
                                     fontWeight: FontWeight.w500,
@@ -500,14 +498,11 @@ class _CurrentCollectionState extends State<CurrentCollection> {
 
   void _uploadData() async{
 
-          Timer(Duration(seconds: 3), (){
-           showSnack("Uploaded successfully");
-
-          });
+         /////////////////////////////////////upload////////////////////////////////////////////////////////////
 
 
     
-    /*
+    
     
     var _subRecordList = [];
      List<SubRecord> _subRecords = _recordController.subRecords;
@@ -525,7 +520,7 @@ class _CurrentCollectionState extends State<CurrentCollection> {
 
       var _record = {
           "ph_value" : ph.toString(),
-          "fat_rate" : fat.toString(),
+          "fat_rate" : fat.toStringAsFixed(0),
           "density": den.toString(),
           "volume": vol.toString(),
           "price_rate": price.toString(),
@@ -543,7 +538,10 @@ class _CurrentCollectionState extends State<CurrentCollection> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     
     
-    //var collector_id = sharedPreferences.getInt("id");
+    var collector_id = sharedPreferences.getInt("id");
+    var name = sharedPreferences.getString("name");
+
+  
 
     var user_id =  1; //authenticated user id(collector)
     var farmer_id = 1; //connected farmer iod
@@ -554,8 +552,8 @@ class _CurrentCollectionState extends State<CurrentCollection> {
     var total_volume = _recordController.volume;
     var total_price = _recordController.price;
     double temperature = _recordController.average_temperature;
-    int device_id = 1;
-    String note = "test note";
+    int device_id = 3;
+    String note = "testing sample";
     
 
    var data = {
@@ -564,11 +562,11 @@ class _CurrentCollectionState extends State<CurrentCollection> {
             'user_id': user_id.toString(),
             'ph_value': ph_value.toString(),
             'density' : density.toString(),
-            'total_volume': total_volume.toString(),
+            'volume': (total_volume/1000).toStringAsFixed(0),
             'fat_rate': fat_value.toString(),
             'temperature': temperature.toString(),
             'device_id': device_id.toString(),
-            'total_price': total_price.toString(),
+            'total_price': ( (total_volume/1000)* 92 ).toString(),
             'note': note,
             
           
@@ -587,24 +585,31 @@ try {
   var jsonString = uriResponse.body;
  
   var body_ = jsonDecode(jsonString);
-  print(body_);
-  
-  
-//upload sub records
- for(int i=0;i<_subRecordList.length;i++){
+   
+
+if(body_['success']){ //daily record added
+
+int daily_id = body_['id'];  
+print(body_); 
+
+
+print(_subRecordList.length);
+
+
+for(int i=0;i<_subRecordList.length;i++){
   
  var sub_record = {
           "ph_value" : _subRecordList[i]['ph_value'].toString(),
-          "fat_rate" : _subRecordList[i]['ph_value'].toString(),
-          "density": _subRecordList[i]['ph_value'].toString(),
-          "volume": _subRecordList[i]['ph_value'].toString(),
-          "price_rate": _subRecordList[i]['ph_value'].toString(),
-          "temperature": _subRecordList[i]['ph_value'].toString(),
-          "grade": _subRecordList[i]['ph_value'].toString(),
-          'id' : body_['id'].toString(),
+          "fat_rate" : _subRecordList[i]['fat_rate'],
+          "density": _subRecordList[i]['density'].toString(),
+          "volume": (int.parse(_subRecordList[i]['volume'])/1000).toStringAsFixed(0),
+          "price_rate": _subRecordList[i]['price_rate'].toString(),
+          "temperature": _subRecordList[i]['temperature'].toString(),
+          "grade": _subRecordList[i]['grade'].toString(),
+          'id' : daily_id.toString(),
+          'note': "sub records testing",
+          "device_id":device_id.toString()
        };
-
-
 
     try{
     var uriResponse = await client.post(Uri.parse(ApiUrl.ADD_SUB_URL),
@@ -612,27 +617,38 @@ try {
        var jsonString = uriResponse.body;
  
       var body_ = jsonDecode(jsonString);
-  
-         print(body_);
+       print(body_);
+         if(body_['success']){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sub record ${i+1} added successfully")));
+
+         }
 
     
     }finally{
-
+  
 
     }
 
   
 
- }  
+ }
+
+
+
+
+
+}
+
+
 
 
 
 
 }finally{
 client.close;
+ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Upload success")));
 
-
-}  */
+}  
 
   }
 

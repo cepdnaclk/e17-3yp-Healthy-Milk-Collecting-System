@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:milk_collecting_app/screens/email_verification.dart';
-import 'package:milk_collecting_app/screens/home_screen.dart';
-import 'package:milk_collecting_app/screens/signUpScreen.dart';
+import 'package:milkapp/screens/current_collection.dart';
+import 'package:milkapp/screens/root_screen.dart';
 import 'screens/signInScreen.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -23,20 +22,20 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-     return new SplashScreen(
-      seconds: 4,
-     navigateAfterSeconds: new HomeScreen(),
+     return  SplashScreen(
+     seconds: 1,
+     navigateAfterSeconds: SignInScreen(),
      /* title: new Text('Healty Milk Collector',
       style: new TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 20.0,
         color : Colors.blue
       ),), */
-      image: new Image.asset("images/logo.png",alignment: Alignment.center,),
+      image: Image.asset("images/logo.png",alignment: Alignment.center,),
       backgroundColor: Colors.blue,
       
       styleTextUnderTheLoader: new TextStyle(),
-       photoSize: 50,
+      photoSize: 50,
       onClick: ()=>print("Flutter splash"),
       loaderColor: Colors.white
     );
